@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,32 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getById(Long id){
         return userRepository.findById(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User update(User newUser, Long id) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setFirstName(newUser.getFirstName());
+                    user.setLastName(newUser.getLastName());
+                    user.setUserRole(newUser.getUserRole());
+                    user.setActive(newUser.isActive());
+                    user.setContactNumber(newUser.getContactNumber());
+                    user.setEmail(newUser.getEmail());
+                    user.setDepartment(newUser.getDepartment());
+                    user.setPassword(newUser.getPassword());
+
+                    return userRepository.save(user);
+                }).orElseThrow();
+    }
+
+    @Override
+    public User create(User user) {
+        return userRepository.save(user);
     }
 }

@@ -26,9 +26,9 @@ public class User {
     private String lastName;
     private int workNumber;
     private String department;
-    private String registryDate;
-    private boolean isActive;
-    private UserRole userRole;
+    private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    private boolean isActive = true;
+    private UserRole userRole = UserRole.EMPLOYEE;
     private String email;
     private String contactNumber;
     private String password;

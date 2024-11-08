@@ -5,10 +5,7 @@ import com.netceed.management.management_app.exception.ResourceNotFoundException
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +32,27 @@ public class UserController {
             throw new ResourceNotFoundException("User with the id " + id + " not found ");
         }
         return ResponseEntity.ok(userService.getById(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        Optional<User> user = userService.getById(id);
+
+        if (user.isEmpty()){
+            throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
+        }
+
+        userService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public User update(@RequestBody User user, @PathVariable Long id){
+        return userService.update(user, id);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<User> create(@RequestBody User newUser){
+        return ResponseEntity.ok(userService.create(newUser));
     }
 
 

@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> genericException(Exception ex){
         ErrorResponse errorResponse = new ErrorResponse(
@@ -38,6 +38,7 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(NoSuchFieldException.class)
     public ResponseEntity<ErrorResponse> emailExistsException(RuntimeException ex){
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
