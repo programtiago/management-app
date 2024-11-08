@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.exception.ApiRequestException;
+import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +21,18 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<User>> getAllUsers() throws Exception {
+        List<User> usersFound = userService.getAllUsers();
+
+        if (usersFound.isEmpty())
+            throw new Exception("No users to retrieve");
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
         if (userService.getById(id).isEmpty()){
-            throw new ApiRequestException("User not found with id " + id);
+            throw new ResourceNotFoundException("User with the id " + id + " not found ");
         }
         return ResponseEntity.ok(userService.getById(id));
     }
