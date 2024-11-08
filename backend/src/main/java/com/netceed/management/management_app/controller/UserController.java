@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.exception.ApiRequestException;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
+        if (userService.getById(id).isEmpty()){
+            throw new ApiRequestException("User not found with id " + id);
+        }
         return ResponseEntity.ok(userService.getById(id));
     }
 
