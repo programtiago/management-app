@@ -12,5 +12,7 @@ public interface UserService {
     void delete(Long id);
     User update(User user, Long id);
     User create(User user);
+    boolean workNumberExists(int workNumber);
+    boolean emailAlreadyExists(String email);
 }
 

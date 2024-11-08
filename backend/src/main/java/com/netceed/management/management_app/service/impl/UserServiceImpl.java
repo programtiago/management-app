@@ -52,4 +52,14 @@ public class UserServiceImpl implements UserService {
     public User create(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public boolean workNumberExists(int workNumber) {
+        return userRepository.findByWorkNumber(workNumber).isPresent();
+    }
+
+    @Override
+    public boolean emailAlreadyExists(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
 }

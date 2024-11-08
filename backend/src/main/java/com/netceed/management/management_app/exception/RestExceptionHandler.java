@@ -2,13 +2,18 @@ package com.netceed.management.management_app.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
@@ -39,7 +44,8 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(NoSuchFieldException.class)
-    public ResponseEntity<ErrorResponse> emailExistsException(RuntimeException ex){
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> workNumberExistsException(NoSuchFieldException ex){
         ErrorResponse errorResponse = new ErrorResponse(
                 LocalDateTime.now(),
                 HttpStatus.CONFLICT.value(),
@@ -50,8 +56,7 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(HttpClientErrorException.BadRequest.class)
     public ResponseEntity<ErrorResponse> argumentNotValidException(MethodArgumentNotValidException ex) {
         List<String> errorList = ex.getBindingResult()
                 .getFieldErrors()
@@ -66,6 +71,20 @@ public class RestExceptionHandler {
         );
 
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
 

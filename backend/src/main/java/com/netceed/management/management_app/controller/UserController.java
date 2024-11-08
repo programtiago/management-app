@@ -1,8 +1,10 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +53,14 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<User> create(@RequestBody User newUser){
+    public ResponseEntity<User> create(@RequestBody @Valid User newUser) throws NoSuchFieldException {
+        boolean workNumberAlreadyExists = userService.workNumberExists(newUser.getWorkNumber());
+        boolean emailAlreadyExists = userService.emailAlreadyExists(newUser.getEmail());
+
+        if (workNumberAlreadyExists)
+            throw new NoSuchFieldException("Work Number " +  newUser.getWorkNumber() + " already registered");
+        else if (emailAlreadyExists)
+            throw new EmailAlreadyExistsException("Email " +  newUser.getEmail() + " already registered");
         return ResponseEntity.ok(userService.create(newUser));
     }
 
