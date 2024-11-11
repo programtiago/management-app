@@ -1,1 +1,56 @@
-<p>users-list works!</p>
+<table mat-table [dataSource]="users">
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let user"> {{ user.firstName }} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef> Last Name </th>
+      <td mat-cell *matCellDef="let user"> {{user.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="workNumber">
+      <th mat-header-cell *matHeaderCellDef> Work Number </th>
+      <td mat-cell *matCellDef="let user"> {{user.workNumber}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let user"> {{user.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="registryDate">
+        <th mat-header-cell *matHeaderCellDef> Registry Date </th>
+        <td mat-cell *matCellDef="let user"> {{user.registryDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <td mat-cell *matCellDef="let user"> {{user.isActive}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userRole">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let user"> {{user.userRole}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactNumber">
+        <th mat-header-cell *matHeaderCellDef> Contact </th>
+        <td mat-cell *matCellDef="let user"> {{user.contactNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> Updated At </th>
+        <td mat-cell *matCellDef="let user"> {{user.updatedAt}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+  
