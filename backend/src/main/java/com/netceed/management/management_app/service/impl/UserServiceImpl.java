@@ -38,33 +38,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User update(User newUser, Long id) {
         Optional<User> userOptional = userRepository.findById(id);
-        LocalDateTime dateTimeUpdate = LocalDateTime.now();
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        String dateFormatted = df.format(dateTimeUpdate);
 
         if (!userOptional.isPresent()){
             throw new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist.");
         }
-
-        /*
-
-        User userToUpdate = userOptional.get();
-        userToUpdate.setFirstName(newUser.getFirstName());
-        userToUpdate.setLastName(newUser.getLastName());
-        userToUpdate.setWorkNumber(newUser.getWorkNumber());
-        userToUpdate.setDepartment(newUser.getDepartment());
-        userToUpdate.setRegistryDate(userOptional.get().getRegistryDate());
-        userToUpdate.setActive(newUser.isActive());
-        userToUpdate.setUserRole(newUser.getUserRole());
-        userToUpdate.setEmail(newUser.getEmail());
-        userToUpdate.setContactNumber(newUser.getContactNumber());
-        userToUpdate.setPassword(newUser.getPassword());
-        userToUpdate.setUpdatedAt(dateFormatted);
-
-        return userRepository.save(userToUpdate);
-
-         */
-
 
         return userRepository.findById(id)
                 .map(user -> {
