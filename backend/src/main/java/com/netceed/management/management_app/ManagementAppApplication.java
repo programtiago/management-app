@@ -1,7 +1,5 @@
 package com.netceed.management.management_app;
 
-import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
