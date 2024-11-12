@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppMaterialModule } from './shared/app-material/app-material.module';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -13,9 +12,8 @@ import { MatTableModule } from '@angular/material/table';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    MatToolbarModule,
-    MatTableModule
+    AppMaterialModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

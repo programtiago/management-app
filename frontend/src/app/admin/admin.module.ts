@@ -5,7 +5,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { UsersListComponent } from './users-list/users-list.component';
 
-import { MatTableModule } from '@angular/material/table';
+import { AppRoutingModule } from '../app-routing.module';
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MatTableModule
+    AppMaterialModule
   ]
 })
 export class AdminModule { }
