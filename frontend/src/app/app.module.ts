@@ -3,8 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AppMaterialModule } from './shared/app-material/app-material.module';
 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { AppMaterialModule } from './shared/app-material/app-material.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,10 +15,10 @@ import { AppMaterialModule } from './shared/app-material/app-material.module';
   ],
   imports: [
     BrowserModule,
-    AppMaterialModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppMaterialModule
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
