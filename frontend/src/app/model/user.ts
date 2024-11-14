@@ -1,3 +1,5 @@
+import { UserRole } from "./userRole"
+
 export interface User {
     _id: string,
     firstName: string,
@@ -6,7 +8,7 @@ export interface User {
     department: string,
     registryDate: string,
     isActive: boolean,
-    userRole: string,
+    userRole: UserRole,
     email: string,
     contactNumber: string
     updatedAt: string

@@ -58,7 +58,7 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef>
               <button mat-mini-fab color="accent" aria-label="Add user">
-                <mat-icon>add</mat-icon>
+                <mat-icon (click)="onAdd()">add</mat-icon>
               </button>
             </mat-header-cell>
             
