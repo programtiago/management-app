@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
+import { MatGridList } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [],
@@ -32,7 +33,8 @@ import { MatSelect } from '@angular/material/select';
     MatInputModule,
     ReactiveFormsModule,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatGridList
   ],
   exports: [
     MatToolbarModule,
@@ -48,7 +50,8 @@ import { MatSelect } from '@angular/material/select';
     MatInputModule,
     ReactiveFormsModule,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatGridList
   ]
 })
 export class AppMaterialModule { }

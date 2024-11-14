@@ -1,0 +1,15 @@
+.full-width{
+    width: 100%;
+}
+
+mat-card{
+    max-width: 50%;
+    margin: 1em auto;
+    border-radius: 5px;
+    box-shadow: 10px;
+    display: flex;
+}
+
+form{
+    margin-top: 0.8em;
+}
