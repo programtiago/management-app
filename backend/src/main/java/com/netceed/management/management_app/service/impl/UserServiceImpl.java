@@ -17,7 +17,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
     public User update(User newUser, Long id) {
         Optional<User> userOptional = userRepository.findById(id);
 
-        if (!userOptional.isPresent()){
+        if (userOptional.isEmpty()){
             throw new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist.");
         }
 

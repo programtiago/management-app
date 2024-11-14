@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { UsersListComponent } from './users-list/users-list.component';
+import { UsersComponent } from './users/users.component';
+import { UserFormComponent } from './users/user-form/user-form.component';
 
 const routes: Routes = [
-  { path: '', component: UsersListComponent}
+  { path: '', component: UsersComponent},
+  { path: 'new', component: UserFormComponent}
 ];
 
 @NgModule({

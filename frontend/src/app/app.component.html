@@ -1,5 +1,12 @@
 <mat-toolbar color="primary">
   <span>Full Stack Application Spring and Angular</span>
 </mat-toolbar>
-<router-outlet></router-outlet>
-
+<button mat-button>
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
