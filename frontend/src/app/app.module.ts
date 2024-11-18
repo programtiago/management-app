@@ -8,11 +8,13 @@ import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { UserFormComponent } from './admin/users/user-form/user-form.component';
+import { MultiformsComponent } from './admin/users/multiforms/multiforms.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserFormComponent
+    UserFormComponent,
+    MultiformsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,15 +1,41 @@
 .full-width{
     width: 100%;
 }
-
+ 
+    
 mat-card{
-    max-width: 50%;
-    margin: 1em auto;
-    border-radius: 5px;
+    margin: 0.8em auto;
+    border: 0 none;
     box-shadow: 10px;
     display: flex;
+    align-items: center;
+    position: relative;
 }
 
-form{
-    margin-top: 0.8em;
+@media only screen and (min-width: 2000px) {
+    mat-card{
+        max-width: 70%;
+    }
+}
+
+@media only screen and (min-width: 400px) {
+    mat-card{
+        max-width: 35%;
+    }
+}
+
+
+mat-card-content{
+    margin: 5px;
+
+}
+
+mat-form-field{
+    height: 45px;
+    margin: 0.8em;
+}
+
+mat-toolbar{
+    justify-content: center;
+    align-items: center;
 }

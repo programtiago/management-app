@@ -8,15 +8,19 @@ import { delay, first, tap } from 'rxjs';
 })
 export class AdminService {
 
-  private readonly API = 'http://localhost:8080/api/v1/users/all'
+  private readonly API_USERS = 'http://localhost:8080/api/v1/users'
 
   constructor(private httpClient: HttpClient) { }
 
   list(){
-    return this.httpClient.get<User[]>(this.API)
+    return this.httpClient.get<User[]>(`${this.API_USERS}/all`)
       .pipe(
       first(),
       delay(5000)
     );
+  }
+
+  post(userData: User){
+    return this.httpClient.post<User>(`${this.API_USERS}/new`, userData)
   }
 }

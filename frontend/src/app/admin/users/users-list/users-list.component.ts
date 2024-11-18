@@ -9,7 +9,5 @@ export class UsersListComponent implements OnInit{
 
   ngOnInit(): void {}
 
-  onAdd(){
-    console.log("onAdd")
-  }
+
 }

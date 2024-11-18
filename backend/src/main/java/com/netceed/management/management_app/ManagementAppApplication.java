@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 @RequiredArgsConstructor
 public class ManagementAppApplication implements CommandLineRunner {
@@ -18,10 +19,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
-		User user = new User("Tiago", "Silva", "programtiago@gmail.com", "teste123", UserRole.EMPLOYEE);
-		userRepository.save(user);
 
-		 */
 	}
 }
