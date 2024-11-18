@@ -1,1 +1,97 @@
-<p>multiforms works!</p>
+<mat-stepper [linear]="isLinear" #stepper>
+    <form [formGroup]="employeeRegister">
+        <mat-step>
+            <div formGroupName="basic">
+                <ng-template matStepLabel>Fill out personal information</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Last Name" formControlName="lastName" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose Birthday Date</mat-label>
+                <input matInput placeholder="Birthday Date"[matDatepicker]="picker" formControlName="lastName">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <div formGroupName="contact">
+                <ng-template matStepLabel>Fill out contact information</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Contact Number</mat-label>
+                <input matInput placeholder="Contact Number" formControlName="contactNumber" required>
+                </mat-form-field>
+
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <div formGroupName="professionalData">
+                <ng-template matStepLabel>Fill out professional data</ng-template>
+                <mat-form-field appearance="fill">
+                    <mat-label>Work Number</mat-label>
+                <input matInput type="number" placeholder="Work Number" formControlName="workNumber" required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-select placeholder="Select a department">
+                    @for (department of departments; track department) {
+                        <mat-option [value]="department.viewValue">{{department.viewValue}}</mat-option>
+                    }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose Admission Date</mat-label>
+                <input matInput placeholder="Admission Date"[matDatepicker]="picker2" formControlName="admissionDate">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Recruitment Company</mat-label>
+                <input matInput placeholder="Recruitment Company" formControlName="recruitmentCompany" required>
+                </mat-form-field>
+
+                <mat-form-field class="full-width" appearance="outline">
+                    <mat-select placeholder="Select a shift type">
+                    @for (shiftType of shiftTypes; track shiftType) {
+                        <mat-option [value]="shiftType.viewValue">{{shiftType.viewValue}}</mat-option>
+                    }
+                    </mat-select>
+                </mat-form-field>
+                <!--
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            -->
+                <div>
+                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                    <button mat-raised-button color="primary" matStepperNext>Submit</button>
+                </div>
+            </div>
+        </mat-step>
+    </form>
+</mat-stepper>

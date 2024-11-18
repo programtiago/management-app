@@ -12,9 +12,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatOption } from '@angular/material/core';
+import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { MatGridList } from '@angular/material/grid-list';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -34,7 +36,10 @@ import { MatGridList } from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatOption,
     MatSelect,
-    MatGridList
+    MatGridList,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   exports: [
     MatToolbarModule,
@@ -51,7 +56,10 @@ import { MatGridList } from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatOption,
     MatSelect,
-    MatGridList
+    MatGridList,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class AppMaterialModule { }

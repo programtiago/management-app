@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { UserFormComponent } from './users/user-form/user-form.component';
+import { MultiformsComponent } from './users/multiforms/multiforms.component';
 
 const routes: Routes = [
   { path: '', component: UsersComponent},
-  { path: 'new', component: UserFormComponent}
+  { path: 'new', component: MultiformsComponent}
 ];
 
 @NgModule({
