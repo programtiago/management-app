@@ -17,6 +17,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatGridList } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatGridList,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule 
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -59,7 +61,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatGridList,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ]
 })
 export class AppMaterialModule { }

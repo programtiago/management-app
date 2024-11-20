@@ -5,7 +5,7 @@ export interface User {
     firstName: string,
     lastName: string,
     workNumber: number,
-    birthdayDate: string,
+    birthdayDate?: string,
     department: string,
     admissionDate: string,
     registryDate: string,

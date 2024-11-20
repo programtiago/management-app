@@ -15,7 +15,7 @@ export class UsersComponent {
 
   users$: Observable<User[]>;
   displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', 'department', 'registryDate', 'isActive', 
-    'userRole',  'email', 'contactNumber', 'updatedAt', 'actions'
+    'userRole',  'email', 'contactNumber', 'updatedAt', 'birthdayDate', 'actions'
   ]
   /*
   users: User[] = [

@@ -29,6 +29,11 @@
               <th mat-header-cell *matHeaderCellDef> Registry Date </th>
               <td mat-cell *matCellDef="let user"> {{ user.registryDate }} </td>
           </ng-container>
+
+          <ng-container matColumnDef="birthdayDate">
+            <th mat-header-cell *matHeaderCellDef> Birthday Date </th>
+            <td mat-cell *matCellDef="let user"> {{ user.birthdayDate }} </td>
+        </ng-container>
   
           <ng-container matColumnDef="isActive">
               <th mat-header-cell *matHeaderCellDef> Status </th>

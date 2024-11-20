@@ -1,18 +1,14 @@
 package com.netceed.management.management_app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
-import com.netceed.management.management_app.utils.LocalDateDeserializer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,13 +29,14 @@ public class User {
     private String lastName;
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     private int workNumber;
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate birthdayDate;
     private String department;
     @Enumerated(EnumType.STRING)
     private ShiftType shiftType;
     private String recruitmentCompany;
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate admissionDate;
     private boolean isActive = true;
     @Enumerated(EnumType.STRING)

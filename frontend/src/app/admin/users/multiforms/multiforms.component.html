@@ -112,7 +112,7 @@
         
                                 <div>
                                     <div class="btn-navigation-stepper">
-                                        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                                        <button mat-raised-button (click)="onCancel()" color="primary">Cancel</button>
                                         <button mat-raised-button (click)="onSubmit()" color="primary" matStepperNext>Submit</button>
                                     </div>
                                 </div>
