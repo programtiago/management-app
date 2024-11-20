@@ -1,3 +1,31 @@
 .mat-mdc-form-field{
     width: 100%
 }
+
+
+@media only screen and (min-width: 1537px) {
+    .mat-mdc-card {
+        max-width: 45%;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin: 5em auto;
+    }
+}
+
+
+@media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .mat-mdc-card {
+        max-width: 75%;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin: 2em auto;
+    }
+}
+    
+
+.btn-navigation-stepper{
+    display: flex;
+    justify-content: center;
+}

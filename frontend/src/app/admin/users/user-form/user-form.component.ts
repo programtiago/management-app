@@ -17,10 +17,12 @@ export class UserFormComponent{
 
   userRegistrationForm: FormGroup;
 
+  /*
   usersRoles: UserRole[] = [
     {value: 0, viewValue: 'ADMIN'}, 
     {value: 1, viewValue: 'EMPLOYEE'}
   ];
+  */
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private location: Location, private matSnackBar: MatSnackBar

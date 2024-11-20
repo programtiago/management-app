@@ -20,7 +20,7 @@ export class AdminService {
     );
   }
 
-  post(userData: User){
+  post(userData: any){
     return this.httpClient.post<User>(`${this.API_USERS}/new`, userData)
   }
 }

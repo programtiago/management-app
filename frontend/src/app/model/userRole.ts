@@ -1,4 +1,4 @@
-export interface UserRole{
-    value: number,
-    viewValue: string
+export enum UserRole{
+    ADMIN = 'ADMIN',
+    USER = 'EMPLOYEE'
 }

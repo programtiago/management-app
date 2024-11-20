@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UserRole } from '../../../model/userRole';
 import { Department } from '../../../model/department';
 import { ShiftType } from '../../../model/ShiftType';
+import { AdminService } from '../../services/admin.service';
+import { UserRole } from '../../../model/userRole';
+import { DatePipe, formatDate } from '@angular/common';
+import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-multiforms',
@@ -11,13 +14,12 @@ import { ShiftType } from '../../../model/ShiftType';
 })
 export class MultiformsComponent implements OnInit{
 
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService,
+    private datePipe: DatePipe
+  ){}
 
   //TEMPORARILY. Further we need to catch from the API
-  usersRoles: UserRole[] = [
-    {value: 0, viewValue: 'ADMIN'}, 
-    {value: 1, viewValue: 'EMPLOYEE'}
-  ];
+  UserRole = UserRole;
 
   //TEMPORARILY. Further we need to catch from the API
   departments: Department[] = [
@@ -45,10 +47,10 @@ export class MultiformsComponent implements OnInit{
   }
 
   employeeRegister = this.formBuilder.group({
-    basic:this.formBuilder.group({
+    basic: this.formBuilder.group({
       firstName: this.formBuilder.control('', Validators.required),
       lastName: this.formBuilder.control('', Validators.required),
-      birthdayDate: this.formBuilder.control('', Validators.required)
+      birthdayDate: this.formBuilder.control(null)
     }),
 
     contact: this.formBuilder.group({
@@ -65,9 +67,35 @@ export class MultiformsComponent implements OnInit{
     }),
     
     security: this.formBuilder.group({
-      userRole: this.formBuilder.control('', Validators.required),
+      userRole: [UserRole.USER],
       password: this.formBuilder.control('', Validators.required)
     })
   })
 
+
+  onSubmit(){
+    const employeeRegisterFormData = {
+      firstName: this.employeeRegister.value.basic?.firstName,
+      lastName: this.employeeRegister.value.basic?.lastName,
+      birthdayDate: this.datePipe.transform(this.employeeRegister.value.basic?.birthdayDate, 'yyyy-MM-dd'),
+      email: this.employeeRegister.value.contact?.email,
+      contactNumber: this.employeeRegister.value.contact?.contactNumber,
+      workNumber: this.employeeRegister.value.professionalData?.workNumber,
+      department: this.employeeRegister.value.professionalData?.department,
+      admissionDate: this.datePipe.transform(this.employeeRegister.value.professionalData?.admissionDate, 'yyyy-MM-dd'),
+      recruitmentCompany: this.employeeRegister.value.professionalData?.recruitmentCompany,
+      shiftType: this.employeeRegister.value.professionalData?.shiftType,
+      userRole: this.employeeRegister.value.security?.userRole,
+      password: this.employeeRegister.value.security?.password
+    };
+
+    this.adminService.post(employeeRegisterFormData).subscribe(
+      (res) => {
+        console.log("User submited sucessfully: ", res)
+      },
+      (error) => {
+        console.error("Error submiting user: ", error)
+      }
+    )
+  }
 }
