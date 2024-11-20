@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,11 +64,12 @@ public class UserController {
 
     @PostMapping("/new")
     public ResponseEntity<User> create(@RequestBody @Valid User newUser) throws NoSuchFieldException {
+
+        System.out.println(newUser.getBirthdayDate());
+
         boolean workNumberAlreadyExists = userService.workNumberExists(newUser.getWorkNumber());
         boolean emailAlreadyExists = userService.emailAlreadyExists(newUser.getEmail());
         boolean birthdayDateGivenIsValid = userService.birthdayDateIsValid(newUser.getBirthdayDate());
-
-        System.out.println("Controlador" + birthdayDateGivenIsValid);
 
         if (workNumberAlreadyExists) {
             throw new NoSuchFieldException("Work Number " +  newUser.getWorkNumber() + " already registered");
@@ -79,7 +78,7 @@ public class UserController {
             throw new EmailAlreadyExistsException("Email " +  newUser.getEmail() + " already registered");
         }
         if (newUser.getAdmissionDate() == null){
-            newUser.setAdmissionDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))); //if the user doesn't send admission date, will be created a instance automatically
+            newUser.setAdmissionDate(LocalDate.now()); //if the user doesn't send admission date, will be created a instance automatically
         }
         if (!birthdayDateGivenIsValid){
             throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");

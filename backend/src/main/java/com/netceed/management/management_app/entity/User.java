@@ -1,21 +1,22 @@
 package com.netceed.management.management_app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.netceed.management.management_app.utils.LocalDateDeserializer;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -32,38 +33,44 @@ public class User {
     private String lastName;
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     private int workNumber;
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdayDate;
     private String department;
+    @Enumerated(EnumType.STRING)
+    private ShiftType shiftType;
+    private String recruitmentCompany;
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    private String admissionDate;
+    @JsonFormat(pattern = "yyyy-MM-dd", shape = JsonFormat.Shape.STRING)
+    private LocalDate admissionDate;
     private boolean isActive = true;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.EMPLOYEE;
     @Email
     @NotBlank(message = "Email is mandatory")
     private String email;
     @NotBlank(message = "The Contact Number is mandatory")
-    @Size(max = 10)
+    @Size(min = 9, max = 9)
     private String contactNumber;
     @NotBlank(message = "The Password is mandatory")
     private String password;
     private String updatedAt;
 
-    public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, String department, UserRole userRole, String contactNumber){
+        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, String department, UserRole userRole, ShiftType shiftType, String recruitmentCompany, String contactNumber){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.admissionDate = admissionDate;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
         this.department = department;
         this.email = email;
         this.password = password;
+        this.admissionDate = admissionDate;
         this.contactNumber = contactNumber;
         this.userRole = userRole;
+        this.shiftType = shiftType;
+        this.recruitmentCompany = recruitmentCompany;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
-    public User(String firstName, String lastName, String email, String password, UserRole userRole){
+    public User(String firstName, String lastName, LocalDate admissionDate, String email, String password, UserRole userRole){
         this.firstName = firstName;
         this.lastName = lastName;
         this.admissionDate = admissionDate;

@@ -7,6 +7,7 @@ import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -48,8 +49,6 @@ public class UserServiceImpl implements UserService {
                     user.setUserRole(newUser.getUserRole());
                     user.setActive(newUser.isActive());
                     user.setWorkNumber(newUser.getWorkNumber());
-                    user.setBirthdayDate(newUser.getBirthdayDate());
-                    user.setRegistryDate(userOptional.get().getRegistryDate());
                     user.setContactNumber(newUser.getContactNumber());
                     user.setEmail(newUser.getEmail());
                     user.setDepartment(newUser.getDepartment());
@@ -79,8 +78,6 @@ public class UserServiceImpl implements UserService {
     public boolean birthdayDateIsValid(LocalDate birthdayDate) {
         int yearOfToday = LocalDate.now().getYear();
         int yearOfBirthday = birthdayDate.getYear();
-
-        System.out.println("Diff: " + (yearOfToday - yearOfBirthday));
 
         return (yearOfToday - yearOfBirthday) >= 18;
     }
