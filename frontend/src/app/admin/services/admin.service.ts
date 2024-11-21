@@ -14,10 +14,7 @@ export class AdminService {
 
   list(){
     return this.httpClient.get<User[]>(`${this.API_USERS}/all`)
-      .pipe(
-      first(),
-      delay(5000)
-    );
+      .pipe(first());
   }
 
   post(userData: any){

@@ -103,16 +103,6 @@ export class MultiformsComponent implements OnInit{
       }
     )
   }
-    
-
-  /*
-  this.adminService.post(this.employeeRegister.value).subscribe(
-    (res) => this.onSucess(), error => {
-      this.onError()
-      console.log(error)
-    }
-  )}
-    */
 
   onCancel(){
     this.location.back();
