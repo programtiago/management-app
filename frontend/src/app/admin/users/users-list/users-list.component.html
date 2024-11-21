@@ -1,57 +1,57 @@
-<table mat-table [dataSource]="users" fixedLayout="true">
+<mat-table [dataSource]="users" fixedLayout="true">
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let user"> {{ user.firstName }} </td>
+      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let user"> {{ user.lastName }} </td>
+      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="workNumber">
-      <th mat-header-cell *matHeaderCellDef> Work Number </th>
-      <td mat-cell *matCellDef="let user"> {{ user.workNumber }} </td>
+      <mat-header-cell *matHeaderCellDef> Work Number </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.workNumber }} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="department">
-      <th mat-header-cell *matHeaderCellDef> Department </th>
-      <td mat-cell *matCellDef="let user"> {{ user.department }} </td>
+      <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.department }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="registryDate">
-        <th mat-header-cell *matHeaderCellDef> Registry Date </th>
-        <td mat-cell *matCellDef="let user"> {{ user.registryDate }} </td>
+        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.registryDate }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="birthdayDate">
-      <th mat-header-cell *matHeaderCellDef> Birthday Date </th>
-      <td mat-cell *matCellDef="let user"> {{ user.birthdayDate }} </td>
+      <mat-header-cell *matHeaderCellDef> Birthday Date </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.birthdayDate }} </mat-cell>
   </ng-container>
 
     <ng-container matColumnDef="isActive">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let user"> {{ user.isActive }} </td>
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.isActive }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="userRole">
-        <th mat-header-cell *matHeaderCellDef> Role </th>
-        <td mat-cell *matCellDef="let user"> {{ user.userRole }} </td>
+        <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.userRole }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="contactNumber">
-        <th mat-header-cell *matHeaderCellDef> Contact </th>
-        <td mat-cell *matCellDef="let user"> {{ user.contactNumber }} </td>
+        <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.contactNumber }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="updatedAt">
-        <th mat-header-cell *matHeaderCellDef> Updated At </th>
-        <td mat-cell *matCellDef="let user"> {{ user.updatedAt }} </td>
+        <mat-header-cell *matHeaderCellDef> Updated At </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.updatedAt }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions">
@@ -72,6 +72,6 @@
       </mat-cell>
   </ng-container>
   
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
