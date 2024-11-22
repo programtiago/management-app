@@ -97,8 +97,10 @@ public class UserController {
                 try{
                     userService.deactivateAccount(id);
                 }catch (Exception e){
-                    throw new Exception("User is not activated. Impossible to update the state");
+                    throw new Exception("Something went wrong. Please try again");
                 }
+            }else{
+                throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
             }
         }else{
             throw new ResourceNotFoundException("User with id " + id + " not found");
@@ -115,8 +117,10 @@ public class UserController {
                 try{
                     userService.activateAccount(id);
                 }catch (Exception e){
-                    throw new Exception("User is already activated. Impossible to update the state");
+                    throw new Exception("Something went wrong. Please try again");
                 }
+            }else{
+                throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
             }
         }else{
             throw new ResourceNotFoundException("User with id " + id + " not found");
