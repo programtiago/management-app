@@ -4,7 +4,6 @@ import { catchError, Observable, of } from 'rxjs';
 import { User } from '../../model/user';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -15,9 +14,7 @@ export class UsersComponent {
 
   users$: Observable<User[]>;
   
-  constructor(private adminService: AdminService, private dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute
+  constructor(private adminService: AdminService, private dialog: MatDialog
   ){
     this.users$ = this.adminService.list().pipe(
       catchError(error => {

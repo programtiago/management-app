@@ -4,8 +4,7 @@ import { Department } from '../../../model/department';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/userRole';
-import { DatePipe, formatDate, Location } from '@angular/common';
-import { User } from '../../../model/user';
+import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -89,8 +88,6 @@ export class MultiformsComponent implements OnInit{
       userRole: this.employeeRegister.value.security?.userRole,
       password: this.employeeRegister.value.security?.password
     };
-
-    console.log(employeeRegisterFormData.birthdayDate)
 
     this.adminService.post(employeeRegisterFormData).subscribe(
       (res) => {
