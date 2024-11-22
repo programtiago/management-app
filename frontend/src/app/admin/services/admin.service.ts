@@ -17,7 +17,19 @@ export class AdminService {
       .pipe(first());
   }
 
+  getById(id: string){
+    return this.httpClient.get<User>(`${this.API_USERS}/` + id)
+  }
+
   post(userData: any){
     return this.httpClient.post<User>(`${this.API_USERS}/new`, userData)
+  }
+
+  desativateUser(userId: string){
+    return this.httpClient.post(`${this.API_USERS}/desativate/` + userId, {})
+  }
+
+  activateUser(userId: string){
+    return this.httpClient.post(`${this.API_USERS}/activate/` + userId, {})
   }
 }
