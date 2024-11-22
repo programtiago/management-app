@@ -1,4 +1,4 @@
-<mat-table [dataSource]="users" fixedLayout="true">
+<mat-table [dataSource]="users">
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
@@ -31,7 +31,19 @@
 
     <ng-container matColumnDef="isActive">
         <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{ user.isActive }} </mat-cell>
+        <mat-cell *matCellDef="let user">
+          <!--
+          <div *ngIf="user.isActive == true">
+            <button mat-raised-button style="color: green;">Ativo</button>
+          </div>
+
+          <div *ngIf="user.isActive == false">
+            <button mat-raised-button color="accent">Desativo</button>
+          </div>
+        -->
+          <button mat-raised-button style="background-color: green;">Ativo</button>
+        </mat-cell>
+        <!--<mat-cell *matCellDef="let user"> {{ user.isActive }} </mat-cell>-->
     </ng-container>
 
     <ng-container matColumnDef="userRole">
@@ -56,7 +68,7 @@
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-mini-fab color="accent" aria-label="Add user">
+        <button mat-mini-fab color="primary" aria-label="Add user">
           <mat-icon (click)="onAdd()">add</mat-icon>
         </button>
       </mat-header-cell>
@@ -66,7 +78,7 @@
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-mini-fab color="primary" aria-label="Delete user">
+        <button mat-mini-fab color="accent" aria-label="Delete user">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

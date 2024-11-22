@@ -14,17 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UsersComponent {
 
   users$: Observable<User[]>;
-  displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', 'department', 'registryDate', 'isActive', 
-    'userRole',  'email', 'contactNumber', 'updatedAt', 'birthdayDate', 'actions'
-  ]
-  /*
-  users: User[] = [
-    { _id: '1', firstName: 'Tiago', lastName: 'Silva', workNumber: 30035, department: 'IT', registryDate: '15/11/2021', isActive: true,
-      userRole: 'ADMIN', email: 'programtiagodev@gmail.com', contactNumber: '912568714', updatedAt: ''
-    }
-  ];
-  */
-
+  
   constructor(private adminService: AdminService, private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute
@@ -44,8 +34,5 @@ export class UsersComponent {
     })
   }
 
-  onAdd(){
-    this.router.navigate(['new'], {relativeTo: this.route})
-  }
 
 }

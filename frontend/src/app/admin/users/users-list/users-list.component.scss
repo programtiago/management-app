@@ -1,0 +1,11 @@
+@media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .mat-mdc-table{
+        width: 100%;
+    }
+
+    .column-flex{
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+    }
+}

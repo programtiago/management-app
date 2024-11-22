@@ -9,7 +9,7 @@
 
 @media only screen and (min-width: 1537px) {
     .mat-mdc-card {
-        max-width: 65%;
+        max-width: 85%;
         display: flex;
         align-content: center;
         justify-content: center;
@@ -17,16 +17,18 @@
     }
 }
 
-
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
     .mat-mdc-card {
         display: flex;
         align-content: center;
         justify-content: center;
         margin: 2em auto;
+        max-width: 85%;
     }
 
-    .mat-mdc-table{
-        max-width: 100%
-    }
+}
+
+.mat-toolbar{
+    align-content: center;
+    justify-content: center;
 }
