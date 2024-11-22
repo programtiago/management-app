@@ -1,4 +1,4 @@
 export interface Department{
-    value: number,
+    value: string,
     viewValue: string
 }

@@ -3,7 +3,9 @@
       <mat-toolbar color="primary">Users List</mat-toolbar>
 
         <div class="column-flex mat-elevation-z8">
-          <app-users-list *ngIf="users$ | async as users; else loading" [users]="users"></app-users-list>
+          <app-users-list *ngIf="users$ | async as users; else loading" 
+          [users]="users">
+        </app-users-list>
         
           <ng-template #loading>
             <div class="loading-spinner">

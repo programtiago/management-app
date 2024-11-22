@@ -17,7 +17,7 @@ export class AdminService {
       .pipe(first());
   }
 
-  getById(id: string){
+  getById(id: any){
     return this.httpClient.get<User>(`${this.API_USERS}/` + id)
   }
 
@@ -25,11 +25,11 @@ export class AdminService {
     return this.httpClient.post<User>(`${this.API_USERS}/new`, userData)
   }
 
-  desativateUser(userId: string){
-    return this.httpClient.post(`${this.API_USERS}/desativate/` + userId, {})
+  deactivateUser(userId: number){
+    return this.httpClient.post(`${this.API_USERS}/deactivate/` + userId, {})
   }
 
-  activateUser(userId: string){
+  activateUser(userId: number){
     return this.httpClient.post(`${this.API_USERS}/activate/` + userId, {})
   }
 }

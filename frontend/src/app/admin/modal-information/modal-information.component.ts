@@ -13,16 +13,18 @@ export class ModalInformationComponent implements OnInit{
   actionForAtivate: string = "Activate";
   statusUser: any;
   response: any;
-  userId!: string;
+  userId: number;
 
   constructor(public dialogRef: MatDialogRef<ModalInformationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private adminService: AdminService
   ){
+    
     this.userId = this.data.at(1)
+    console.log(this.data)
     this.response = this.adminService.getById(this.userId).subscribe((res) => {
       this.statusUser = res.active;
-      console.log(this.statusUser)
     });
+  
   }
 
   onConfirm(result: boolean): void{

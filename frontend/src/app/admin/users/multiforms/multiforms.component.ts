@@ -6,6 +6,7 @@ import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/userRole';
 import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-multiforms',
@@ -23,13 +24,13 @@ export class MultiformsComponent implements OnInit{
 
   //TEMPORARILY. Further we need to catch from the API
   departments: Department[] = [
-    {value: 0, viewValue: "ADMINISTRATION"},
-    {value: 1, viewValue: 'LOGISTIC'},
-    {value: 2, viewValue: 'PURCHASING'},
-    {value: 3, viewValue: 'HUMAN RESOURCES'},
-    {value: 4, viewValue: 'INFORMATION TECHNOLOGY'},
-    {value: 5, viewValue: 'PRODUCTION'},
-    {value: 6, viewValue: 'DEVELOPMENT'},
+    {value: "ADMIN", viewValue: "ADMIN"},
+    {value: "LOGISTIC", viewValue: 'LOG'},
+    {value: "PURCHASING", viewValue: 'PCHG'},
+    {value: "HUMAN RESOURCES", viewValue: 'HR'},
+    {value: "INFORMATION TECHNOLOGY", viewValue: 'IT'},
+    {value: "PRODUCTION", viewValue: 'PROD'},
+    {value: "DEVELOPMENT", viewValue: 'DVL'},
 
   ];
 
