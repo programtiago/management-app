@@ -82,12 +82,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User desativateAccount(Long id) {
+    public User deactivateAccount(Long id) {
         User user = userRepository.findById(id).orElseThrow();
 
         user.setActive(false);
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public User activateAccount(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+
+        user.setActive(true);
+
+        return userRepository.save(user);
+
     }
 
 }

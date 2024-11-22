@@ -87,16 +87,35 @@ public class UserController {
         return ResponseEntity.ok(userService.create(newUser));
     }
 
-    @PostMapping("/desativate/{id}")
-    public void desativateAccount(@PathVariable Long id) throws Exception{
+    //Method responsible for changing status of the user   boolean true -> false
+    @PostMapping("/deactivate/{id}")
+    public void deactivateAccount(@PathVariable Long id) throws Exception{
         Optional<User> user = userService.getById(id);
 
         if (user.isPresent()){
             if (user.get().isActive()){
                 try{
-                    userService.desativateAccount(id);
+                    userService.deactivateAccount(id);
                 }catch (Exception e){
                     throw new Exception("User is not activated. Impossible to update the state");
+                }
+            }
+        }else{
+            throw new ResourceNotFoundException("User with id " + id + " not found");
+        }
+    }
+
+    //Method responsible for changing status of the user   boolean false -> true
+    @PostMapping("/activate/{id}")
+    public void activateAccount(@PathVariable Long id) throws Exception{
+        Optional<User> user = userService.getById(id);
+
+        if (user.isPresent()){
+            if (!user.get().isActive()){
+                try{
+                    userService.activateAccount(id);
+                }catch (Exception e){
+                    throw new Exception("User is already activated. Impossible to update the state");
                 }
             }
         }else{
