@@ -16,5 +16,6 @@ public interface UserService {
     boolean workNumberExists(int workNumber);
     boolean emailAlreadyExists(String email);
     boolean birthdayDateIsValid(LocalDate birthdayDate);
+    User desativateAccount(Long id);
 }
 

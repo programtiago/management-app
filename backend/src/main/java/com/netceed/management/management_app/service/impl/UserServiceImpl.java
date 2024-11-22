@@ -7,7 +7,6 @@ import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -81,4 +80,14 @@ public class UserServiceImpl implements UserService {
 
         return (yearOfToday - yearOfBirthday) >= 18;
     }
+
+    @Override
+    public User desativateAccount(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+
+        user.setActive(false);
+
+        return userRepository.save(user);
+    }
+
 }
