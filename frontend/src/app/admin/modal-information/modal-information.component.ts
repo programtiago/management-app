@@ -20,7 +20,6 @@ export class ModalInformationComponent implements OnInit{
   ){
     
     this.userId = this.data.at(1)
-    console.log(this.data)
     this.response = this.adminService.getById(this.userId).subscribe((res) => {
       this.statusUser = res.active;
     });

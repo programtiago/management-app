@@ -8,28 +8,32 @@ import { first } from 'rxjs';
 })
 export class AdminService {
 
-  private readonly API_USERS = 'http://localhost:8080/api/v1/users'
+  private readonly BASE_API_URL_USERS = '/api/v1/users'
 
   constructor(private httpClient: HttpClient) { }
 
   list(){
-    return this.httpClient.get<User[]>(`${this.API_USERS}/all`)
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/all`)
       .pipe(first());
   }
 
-  getById(id: any){
-    return this.httpClient.get<User>(`${this.API_USERS}/` + id)
+  getById(id: number){
+    return this.httpClient.get<User>(`${this.BASE_API_URL_USERS}/` + id)
   }
 
   post(userData: any){
-    return this.httpClient.post<User>(`${this.API_USERS}/new`, userData)
+    return this.httpClient.post<User>(`${this.BASE_API_URL_USERS}/new`, userData)
   }
 
   deactivateUser(userId: number){
-    return this.httpClient.post(`${this.API_USERS}/deactivate/` + userId, {})
+    return this.httpClient.post(`${this.BASE_API_URL_USERS}/deactivate/` + userId, {})
   }
 
   activateUser(userId: number){
-    return this.httpClient.post(`${this.API_USERS}/activate/` + userId, {})
+    return this.httpClient.post(`${this.BASE_API_URL_USERS}/activate/` + userId, {})
+  }
+
+  deleteUserById(userId: number){
+    return this.httpClient.delete(`${this.BASE_API_URL_USERS}` + userId)
   }
 }

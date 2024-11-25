@@ -18,7 +18,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
-@CrossOrigin
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -100,7 +99,7 @@ public class UserController {
                     throw new Exception("Something went wrong. Please try again");
                 }
             }else{
-                throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
+                throw new IllegalArgumentException("User already deactivated. Impossible to active with id " + id);
             }
         }else{
             throw new ResourceNotFoundException("User with id " + id + " not found");

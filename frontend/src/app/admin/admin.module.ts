@@ -9,6 +9,7 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { UsersComponent } from './users/users.component';
 import { SharedModule } from '../shared/shared.module';
 import { ModalInformationComponent } from './modal-information/modal-information.component';
+import { ModalDeleteuserInfoComponent } from './modal-deleteuser-info/modal-deleteuser-info.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ModalInformationComponent } from './modal-information/modal-information
     AdminComponent,
     UsersListComponent,
     UsersComponent,
-    ModalInformationComponent
+    ModalInformationComponent,
+    ModalDeleteuserInfoComponent
   ],
   imports: [
     CommonModule,

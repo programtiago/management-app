@@ -6,6 +6,7 @@ import { ModalInformationComponent } from '../../modal-information/modal-informa
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { ModalDeleteuserInfoComponent } from '../../modal-deleteuser-info/modal-deleteuser-info.component';
 
 @Component({
   selector: 'app-users-list',
@@ -54,7 +55,6 @@ export class UsersListComponent implements OnInit{
 
   onChangeUserStatus(user: User){
     this.selectedUserId = user.id;
-    console.log(user.id)
 
     if (user.active == false){
       this.questionForChangingStatus = this.questionForActivate;
@@ -99,4 +99,25 @@ export class UsersListComponent implements OnInit{
     })
   }
 
+  onDelete(userId: number){
+    const dialogRef = this.dialog.open(ModalDeleteuserInfoComponent, {
+      height: '160px',
+      width: '400px',
+      data: 'Are you sure that u want to delete this user ?'
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result){
+          this.adminService.deleteUserById(userId).subscribe(
+            () => {
+              this.snackBar.open('User deleted sucessfully !', 'X', {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'center'
+              });
+              this.refresh();
+            },
+            () => this.onError("It wasn't possible to delete the user. Please try again or check your internet connection"))}
+      })
+    }
 }
