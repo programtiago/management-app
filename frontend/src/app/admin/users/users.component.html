@@ -2,7 +2,7 @@
     <mat-card-content>
       <mat-toolbar color="primary">Users List</mat-toolbar>
 
-        <div class="column-flex mat-elevation-z8">
+        <div class="users-list-container mat-elevation-z8">
           <app-users-list *ngIf="users$ | async as users; else loading" 
           [users]="users">
         </app-users-list>
@@ -14,9 +14,6 @@
           </ng-template>
         </div>    
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Filtrar</button>
-      </mat-card-actions>
   </mat-card>
     
     

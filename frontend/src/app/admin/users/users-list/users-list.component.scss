@@ -1,9 +1,22 @@
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
     .mat-mdc-table{
         width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        //display: table;
     }
 }
 
 .btn-user-status{
     width: 70px;
+}
+
+.mat-mdc-cell, .mat-mdc-header{
+    line-break: unset;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.mat-mdc-header-cell{
+    font-weight: bold;
 }

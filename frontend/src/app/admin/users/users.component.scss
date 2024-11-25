@@ -18,14 +18,20 @@
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .users-list-container{
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
     .mat-mdc-card {
         display: flex;
         align-content: center;
         justify-content: center;
         margin: 2em auto;
-        max-width: 85%;
-    }
+        max-width: 95%;
 
+    }
 }
 
 .mat-toolbar{

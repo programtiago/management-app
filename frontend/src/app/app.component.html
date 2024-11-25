@@ -1,11 +1,19 @@
 <mat-toolbar color="primary">
   <span>Full Stack Application Spring and Angular</span>
 </mat-toolbar>
+
 <mat-drawer-container class="app-view">
-  <button mat-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-  <mat-drawer mode="side" opened>Drawer content</mat-drawer>
+    <mat-drawer mode="side" opened>
+      <div class="btn-navbar-container">
+        <button (click)="onOpenMenu()" mat-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      
+        <button (click)="onFilter()" mat-button>
+          <mat-icon>filter</mat-icon>
+        </button>
+      </div>
+    </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>
   </mat-drawer-content>
