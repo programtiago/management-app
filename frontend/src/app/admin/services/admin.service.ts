@@ -33,7 +33,11 @@ export class AdminService {
     return this.httpClient.post(`${this.BASE_API_URL_USERS}/activate/` + userId, {})
   }
 
+  update(user: User, userId: number){
+    return this.httpClient.put<User>(`${this.BASE_API_URL_USERS}/` + userId, user);
+  }
+
   deleteUserById(userId: number){
-    return this.httpClient.delete(`${this.BASE_API_URL_USERS}` + userId)
+    return this.httpClient.delete(`${this.BASE_API_URL_USERS}/` + userId)
   }
 }

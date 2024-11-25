@@ -1,8 +1,7 @@
-<!---
 <mat-card  class="user-form-style">
-    <mat-toolbar color="primary">Sign Up Employee</mat-toolbar>
+    <mat-toolbar color="primary">Update User</mat-toolbar>
     <mat-card-content>
-        <form [formGroup]="userRegistrationForm">
+        <form [formGroup]="userUpdateForm">
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput placeholder="First Name" formControlName="firstName" appearance="outline">
             </mat-form-field>
@@ -19,14 +18,14 @@
                 <input matInput placeholder="Department" formControlName="department">
             </mat-form-field>
     
-            <mat-form-field class="full-width" appearance="outline">
-                <mat-select placeholder="User Role">
-                @for (userRole of usersRoles; track userRole) {
-                    <mat-option [value]="userRole.viewValue">{{userRole.viewValue}}</mat-option>
-                }
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-select formControlName="userRole">
+                <mat-option *ngFor="let role of userRoles | keyvalue" [value]="role.value">
+                    {{ role.value }}
+                </mat-option>
                 </mat-select>
             </mat-form-field>
-    
+
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
@@ -34,11 +33,15 @@
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput placeholder="Contact Number" formControlName="contactNumber">
             </mat-form-field>
+
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput placeholder="Password" formControlName="password">
+            </mat-form-field>
+
         </form>
         <mat-card-actions style="align-content: center; justify-content: center;">
-            <button mat-raised-button color="primary">Cancel</button>
-            <button mat-raised-button color="accent">Register</button>
+            <button mat-raised-button (click)="onCancel()" color="primary">Cancel</button>
+            <button mat-raised-button (click)="onUpdate()" color="accent">Update</button>
           </mat-card-actions>
     </mat-card-content>
 </mat-card>
--->

@@ -16,8 +16,8 @@ import { ModalDeleteuserInfoComponent } from '../../modal-deleteuser-info/modal-
 export class UsersListComponent implements OnInit{
 
   @Input() users: User[] = []
-  @Output() onChangeStatus = new EventEmitter(false)
 
+  selectedUser: any;
   selectedUserId : any;
   
   questionForChangingStatus: string = "";
@@ -97,6 +97,10 @@ export class UsersListComponent implements OnInit{
         }
       }
     })
+  }
+
+  onUpdate(userId: number){
+    this.router.navigate(['edit', userId], {relativeTo: this.route});
   }
 
   onDelete(userId: number){

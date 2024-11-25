@@ -6,7 +6,6 @@ import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/userRole';
 import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from '../../../model/user';
 
 @Component({
   selector: 'app-multiforms',
@@ -72,7 +71,6 @@ export class MultiformsComponent implements OnInit{
       password: this.formBuilder.control('', Validators.required)
     })
   })
-
 
   onSubmit(){
     const employeeRegisterFormData = {

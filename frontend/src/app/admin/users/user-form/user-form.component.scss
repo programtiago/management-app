@@ -4,9 +4,7 @@
  
     
 mat-card{
-    margin: 0.8em auto;
-    border: 0 none;
-    box-shadow: 10px;
+    margin: 2em auto;
     display: flex;
     align-items: center;
 }
@@ -23,15 +21,9 @@ mat-card{
     }
 }
 
-
-mat-card-content{
-    margin: 5px;
-
-}
-
 mat-form-field{
     height: 45px;
-    margin: 0.8em;
+    margin: 0.7em;
 }
 
 mat-toolbar{

@@ -13,5 +13,6 @@ export interface User {
     userRole: UserRole,
     email: string,
     contactNumber: string
-    updatedAt: string
+    updatedAt: string,
+    password: string
 }
