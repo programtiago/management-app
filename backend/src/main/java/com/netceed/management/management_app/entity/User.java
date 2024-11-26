@@ -1,12 +1,17 @@
 package com.netceed.management.management_app.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,20 +26,33 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "The First Name is mandatory")
     private String firstName;
+    @NotBlank(message = "The Last Name is mandatory")
     private String lastName;
+    @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     private int workNumber;
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate birthdayDate;
     private String department;
+    @Enumerated(EnumType.STRING)
     private WorkStatus workStatus = WorkStatus.AVAILABLE;
+    @Enumerated(EnumType.STRING)
     private ShiftType shiftType;
     private String recruitmentCompany;
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate admissionDate;
     private boolean isActive = true;
+    @Enumerated(EnumType.STRING)
     private UserRole userRole = UserRole.EMPLOYEE;
+    @Email
+    @NotBlank(message = "Email is mandatory")
     private String email;
+    @NotBlank(message = "The Contact Number is mandatory")
+    @Size(min = 9, max = 9)
     private String contactNumber;
+    @NotBlank(message = "The Password is mandatory")
     private String password;
     private String updatedAt;
 

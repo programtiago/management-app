@@ -1,17 +1,16 @@
 package com.netceed.management.management_app.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Getter;
 
+@Getter
 public enum ShiftType {
-    MORNING, AFTERNOON, NIGHT;
+    MORNING("MORNING"), AFTERNOON("AFTERNOON"), NIGHT("NIGHT");
 
-    @JsonCreator
-    public static ShiftType forName(String name){
-        for (ShiftType st : values()){
-            if (st.name().equals(name)){
-                return st;
-            }
-        }
-        return null;
+    private String code;
+
+    ShiftType(String code){
+        this.code = code;
     }
+
 }

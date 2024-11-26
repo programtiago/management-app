@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +34,8 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> getById(@PathVariable Long id){
-        if (userService.getById(id).isEmpty()){
+    public ResponseEntity<UserDto> getById(@PathVariable Long id){
+        if (userService.getById(id) ==  null){
             throw new ResourceNotFoundException("User with the id " + id + " not found ");
         }
         return ResponseEntity.ok(userService.getById(id));
@@ -42,9 +43,9 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
-        Optional<User> user = userService.getById(id);
+        UserDto user = userService.getById(id);
 
-        if (user.isEmpty()){
+        if (user == null){
             throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
         }
 
@@ -52,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody @Valid User user, @PathVariable Long id){
+    public ResponseEntity<?> update(@RequestBody @Valid UserDto user, @PathVariable Long id){
 
         try{
             User userToUpdate = userService.update(user, id);
@@ -63,9 +64,8 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<User> create(@RequestBody @Valid User newUser) throws NoSuchFieldException {
-
-        System.out.println(newUser.getBirthdayDate());
+    public ResponseEntity<UserDto> create(@RequestBody @Valid User newUser) throws NoSuchFieldException {
+        LocalDate admissionDate = LocalDate.now();
 
         boolean workNumberAlreadyExists = userService.workNumberExists(newUser.getWorkNumber());
         boolean emailAlreadyExists = userService.emailAlreadyExists(newUser.getEmail());
@@ -78,7 +78,7 @@ public class UserController {
             throw new EmailAlreadyExistsException("Email " +  newUser.getEmail() + " already registered");
         }
         if (newUser.getAdmissionDate() == null){
-            newUser.setAdmissionDate(LocalDate.now()); //if the user doesn't send admission date, will be created a instance automatically
+            //return LocalDate.now();
         }
         if (!birthdayDateGivenIsValid){
             throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");
@@ -90,10 +90,10 @@ public class UserController {
     //Method responsible for changing status of the user   boolean true -> false
     @PostMapping("/deactivate/{id}")
     public void deactivateAccount(@PathVariable Long id) throws Exception{
-        Optional<User> user = userService.getById(id);
+        UserDto user = userService.getById(id);
 
-        if (user.isPresent()){
-            if (user.get().isActive()){
+        if (user != null){
+            if (user.isActive()){
                 try{
                     userService.deactivateAccount(id);
                 }catch (Exception e){
@@ -110,10 +110,10 @@ public class UserController {
     //Method responsible for changing status of the user   boolean false -> true
     @PostMapping("/activate/{id}")
     public void activateAccount(@PathVariable Long id) throws Exception{
-        Optional<User> user = userService.getById(id);
+        UserDto user = userService.getById(id);
 
-        if (user.isPresent()){
-            if (!user.get().isActive()){
+        if (user != null){
+            if (!user.isActive()){
                 try{
                     userService.activateAccount(id);
                 }catch (Exception e){

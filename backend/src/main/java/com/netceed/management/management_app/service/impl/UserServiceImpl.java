@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getById(Long id){
-        return userRepository.findById(id);
+    public UserDto getById(Long id){
+        return userRepository.findById(id).map(userMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("User resource not found with id " + id));
     }
 
     @Override
@@ -41,33 +41,45 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User newUser, Long id) {
-        Optional<User> userOptional = userRepository.findById(id);
-
-        if (userOptional.isEmpty()){
-            throw new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist.");
-        }
-
+    public User update(UserDto newUser, Long id) {
         return userRepository.findById(id)
                 .map(user -> {
-                    user.setFirstName(newUser.getFirstName());
-                    user.setLastName(newUser.getLastName());
-                    user.setUserRole(newUser.getUserRole());
+                    user.setFirstName(newUser.firstName());
+                    user.setLastName(newUser.lastName());
+                    user.setUserRole(newUser.userRole());
                     user.setActive(newUser.isActive());
-                    user.setWorkNumber(newUser.getWorkNumber());
-                    user.setContactNumber(newUser.getContactNumber());
-                    user.setEmail(newUser.getEmail());
-                    user.setDepartment(newUser.getDepartment());
-                    user.setPassword(newUser.getPassword());
+                    user.setWorkNumber(newUser.workNumber());
+                    user.setContactNumber(newUser.contactNumber());
+                    user.setEmail(newUser.email());
+                    user.setDepartment(newUser.department());
+                    user.setPassword(newUser.password());
                     user.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
                     return userRepository.save(user);
-                }).orElseThrow();
+                }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
     }
 
     @Override
-    public User create(User user) {
-        return userRepository.save(user);
+    public UserDto create(User user) {
+        User userToInsert = new User();
+        userToInsert.setId(user.getId());
+        userToInsert.setFirstName(user.getFirstName());
+        userToInsert.setLastName(user.getLastName());
+        userToInsert.setBirthdayDate(user.getBirthdayDate());
+        userToInsert.setActive(user.isActive());
+        userToInsert.setUserRole(user.getUserRole());
+        userToInsert.setPassword(user.getPassword());
+        userToInsert.setEmail(user.getEmail());
+        userToInsert.setDepartment(user.getDepartment());
+        userToInsert.setContactNumber(user.getContactNumber());
+        userToInsert.setUpdatedAt(user.getUpdatedAt());
+        userToInsert.setShiftType(user.getShiftType());
+        userToInsert.setWorkStatus(user.getWorkStatus());
+        userToInsert.setAdmissionDate(user.getAdmissionDate());
+
+        userRepository.save(user);
+
+        return userMapper.toDto(user);
     }
 
     @Override

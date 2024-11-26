@@ -24,14 +24,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
-
+		
 		User user = new User("Tiago", "Silva", "programtiago@gmail.com", 30035, LocalDate.of(1996,5,2),
 				"tiago123", LocalDate.now(), "IT", UserRole.EMPLOYEE, ShiftType.MORNING, "INTERN",
 				"913562547");
 
 		userRepository.save(user);
 
-		 */
 	}
 }
