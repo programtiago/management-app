@@ -13,24 +13,20 @@ export class ModalInformationComponent implements OnInit{
   actionForAtivate: string = "Activate";
   statusUser: any;
   response: any;
-  userId: number;
+  userId: any;
 
   constructor(public dialogRef: MatDialogRef<ModalInformationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private adminService: AdminService
-  ){
-    
-    this.userId = this.data.at(1)
-    this.response = this.adminService.getById(this.userId).subscribe((res) => {
-      this.statusUser = res.active;
-    });
-  
-  }
+  ){}
 
   onConfirm(result: boolean): void{
     this.dialogRef.close(result);
   }
 
   ngOnInit(): void {
-  }
-    
+    this.userId = this.data.at(1)
+    this.response = this.adminService.getById(this.userId).subscribe((res) => {
+      this.statusUser = res.active;
+    });
+  } 
 }
