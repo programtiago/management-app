@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.UserDto;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
@@ -23,8 +24,8 @@ public class UserController {
     private final UserServiceImpl userService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<User>> getAllUsers() throws Exception {
-        List<User> usersFound = userService.getAllUsers();
+    public ResponseEntity<List<UserDto>> getAllUsers() throws Exception {
+        List<UserDto> usersFound = userService.getAllUsers();
 
         if (usersFound.isEmpty())
             throw new Exception("No users to retrieve");

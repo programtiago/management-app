@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.UserDto;
+import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
@@ -10,17 +12,22 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll()
+                .stream().map(userMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
