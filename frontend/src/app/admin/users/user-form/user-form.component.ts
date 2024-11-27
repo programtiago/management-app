@@ -46,7 +46,7 @@ export class UserFormComponent implements OnInit{
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
 
-    this.adminService.getById(this.userId).subscribe((res) => {
+    this.adminService.getUserById(this.userId).subscribe((res) => {
       this.userSelected = res;
       this.userUpdateForm.patchValue({
         firstName: res.firstName,
@@ -63,7 +63,7 @@ export class UserFormComponent implements OnInit{
   }
 
   onUpdate(): void{
-    this.adminService.update(this.userUpdateForm.value, this.userId).subscribe((res) => {
+    this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe((res) => {
       this.onSucessUpdatedUser();
       this.router.navigateByUrl("")
       if (res == null)

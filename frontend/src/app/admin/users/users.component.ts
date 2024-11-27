@@ -17,7 +17,7 @@ export class UsersComponent {
   
   constructor(private adminService: AdminService, private dialog: MatDialog, private snackbar: MatSnackBar
   ){
-    this.users$ = this.adminService.list().pipe(
+    this.users$ = this.adminService.listUsers().pipe(
       catchError(error => {
         this.onError('Error loading the users.')
         return of([])

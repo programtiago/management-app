@@ -11,6 +11,9 @@ import { SharedModule } from '../shared/shared.module';
 import { ModalInformationComponent } from './modal-information/modal-information.component';
 import { ModalDeleteuserInfoComponent } from './modal-deleteuser-info/modal-deleteuser-info.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentFormComponent } from './departments/department-form/department-form.component';
+import { DepartmentsListComponent } from './departments/departments-list/departments-list.component';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UsersComponent,
     ModalInformationComponent,
     ModalDeleteuserInfoComponent,
-    DashboardComponent
+    DashboardComponent,
+    DepartmentsComponent,
+    DepartmentFormComponent,
+    DepartmentsListComponent
   ],
   imports: [
     CommonModule,

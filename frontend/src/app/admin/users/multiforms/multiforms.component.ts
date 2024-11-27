@@ -22,6 +22,7 @@ export class MultiformsComponent implements OnInit{
   UserRole = UserRole;
 
   //TEMPORARILY. Further we need to catch from the API
+  /*
   departments: Department[] = [
     {value: "ADMIN", viewValue: "ADMIN"},
     {value: "LOGISTIC", viewValue: 'LOG'},
@@ -32,6 +33,7 @@ export class MultiformsComponent implements OnInit{
     {value: "DEVELOPMENT", viewValue: 'DVL'},
 
   ];
+  */
 
   //TEMPORARILY. Further we need to catch from the API
   shiftTypes: ShiftType[] = [
@@ -88,7 +90,7 @@ export class MultiformsComponent implements OnInit{
       password: this.employeeRegister.value.security?.password
     };
 
-    this.adminService.post(employeeRegisterFormData).subscribe(
+    this.adminService.createUser(employeeRegisterFormData).subscribe(
       (res) => {
         this.onSucess();
         console.log("User submited sucessfully: ", res)

@@ -1,0 +1,40 @@
+
+.loading-spinner{
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.15);
+}
+
+@media only screen and (min-width: 1537px) {
+    .mat-mdc-card {
+        max-width: 55%;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin: 5em auto;
+    }
+}
+
+@media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .department-list-container{
+        flex-direction: column; 
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .mat-mdc-card {
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        margin: 2em auto;
+        max-width: 800px;
+
+    }
+}
+
+.mat-toolbar{
+    align-content: center;
+    justify-content: center;
+}

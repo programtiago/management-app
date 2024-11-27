@@ -12,13 +12,13 @@
         </mat-menu>
 
         <mat-menu #users="matMenu">
-          <button mat-menu-item [routerLink]="['admin/new']">Add User</button>
-          <button mat-menu-item [routerLink]="['admin/all']">List Users</button>
+          <button mat-menu-item [routerLink]="['admin/user/new']">Add User</button>
+          <button mat-menu-item [routerLink]="['admin/users/all']">List Users</button>
         </mat-menu>
 
         <mat-menu #departments="matMenu">
           <button mat-menu-item>Add Department</button>
-          <button mat-menu-item>List Departments</button>
+          <button mat-menu-item [routerLink]="['admin/departments/all']">List Departments</button>
         </mat-menu>
       
         <button (click)="onFilter()" mat-button>

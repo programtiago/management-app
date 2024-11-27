@@ -1,0 +1,10 @@
+<div *ngFor="let department of departments">
+    <mat-card>
+        <mat-card-header>Department {{department.description}}</mat-card-header>
+        <mat-card-content style="display: inline; align-content: center; justify-content: center;">
+            <p>Code: {{department.value}}</p>
+            <p>Total Employees: {{department.totalEmployees}}</p>
+        </mat-card-content>
+    </mat-card>
+</div>
+

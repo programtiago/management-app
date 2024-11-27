@@ -1,4 +1,7 @@
 export interface Department{
+    id: number,
     value: string,
-    viewValue: string
+    description: string,
+    registryDate: string,
+    totalEmployees: number
 }

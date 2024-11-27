@@ -44,9 +44,8 @@ export class UsersListComponent implements OnInit{
   }
 
   refresh(){
-    this.adminService.list().subscribe((res) => {
+    this.adminService.listUsers().subscribe((res) => {
       this.users = res;
-      console.log(res)
     });
   }
 
