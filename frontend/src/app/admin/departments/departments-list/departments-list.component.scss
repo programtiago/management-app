@@ -1,11 +1,14 @@
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
     .mat-mdc-card{
         width: 100%;
-        max-width: 100%;
-        margin-bottom: 1rem;
+        max-width: 85%;
+        margin: 0 4em;
         justify-content: center;
         align-content: center;
-        margin-bottom: 20px !important;
+    }
+
+    .mat-mdc-card:hover{
+       background-color: darkgray;
     }
 }
 

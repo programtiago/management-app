@@ -1,10 +1,15 @@
-<div *ngFor="let department of departments">
+<div *ngFor="let department of departments" style="margin-bottom: 20px;">
     <mat-card>
-        <mat-card-header>Department {{department.description}}</mat-card-header>
-        <mat-card-content style="display: inline; align-content: center; justify-content: center;">
+        <mat-card-header style="align-content: center !important; font-weight: bold; justify-content: center !important;">
+            <mat-card-title>Department {{department.description}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="display: flex !important; align-content: center !important; justify-content: center !important;">
             <p>Code: {{department.value}}</p>
             <p>Total Employees: {{department.totalEmployees}}</p>
         </mat-card-content>
+        <button mat-button><mat-icon>more_vert</mat-icon></button>
+        <button mat-button><mat-icon>delete</mat-icon></button>
+        <button mat-button><mat-icon>update</mat-icon></button>
     </mat-card>
 </div>
 

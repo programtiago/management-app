@@ -20,8 +20,6 @@
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
     .department-list-container{
         flex-direction: column; 
-        width: 100%;
-        overflow-x: auto;
     }
 
     .mat-mdc-card {
@@ -30,7 +28,6 @@
         justify-content: center;
         margin: 2em auto;
         max-width: 800px;
-
     }
 }
 
