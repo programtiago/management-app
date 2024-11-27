@@ -3,13 +3,25 @@
         <mat-card-header style="align-content: center !important; font-weight: bold; justify-content: center !important;">
             <mat-card-title>Department {{department.description}}</mat-card-title>
         </mat-card-header>
-        <mat-card-content style="display: flex !important; align-content: center !important; justify-content: center !important;">
-            <p>Code: {{department.value}}</p>
-            <p>Total Employees: {{department.totalEmployees}}</p>
+        <mat-card-content>
+            <p style="display: flex; align-content: center !important; justify-content: center !important;">Code: {{department.value}}</p>
+            <p style="display: flex; align-content: center !important; justify-content: center !important;">Total Employees: {{department.totalEmployees}}</p>
         </mat-card-content>
-        <button mat-button><mat-icon>more_vert</mat-icon></button>
-        <button mat-button><mat-icon>delete</mat-icon></button>
-        <button mat-button><mat-icon>update</mat-icon></button>
+        <mat-card-actions style="justify-content: flex-end;">
+            <button [matMenuTriggerFor]="menu" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>more_vert</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>dialpad</mat-icon>
+                        <span>Assign employee</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                        <mat-icon>voicemail</mat-icon>
+                        <span>View all employees</span>
+                        </button>            
+                </mat-menu>
+            <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit</mat-icon></button>
+            <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete</mat-icon></button>
+        </mat-card-actions>
     </mat-card>
 </div>
 
