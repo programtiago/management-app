@@ -1,6 +1,5 @@
 package com.netceed.management.management_app.enums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 
 @Getter

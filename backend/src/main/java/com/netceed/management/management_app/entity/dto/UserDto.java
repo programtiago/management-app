@@ -1,6 +1,7 @@
-package com.netceed.management.management_app.entity;
+package com.netceed.management.management_app.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.netceed.management.management_app.entity.Shift;
 import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
@@ -27,8 +28,7 @@ public record UserDto (
     String department,
     @Enumerated(EnumType.STRING)
     WorkStatus workStatus,
-    @Enumerated(EnumType.STRING)
-    ShiftType shiftType,
+    Shift shift,
     String recruitmentCompany,
     String registryDate,
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
@@ -46,7 +46,7 @@ public record UserDto (
     String password,
     String updatedAt
 ){
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String department, WorkStatus workStatus, ShiftType shiftType, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,7 +54,7 @@ public record UserDto (
         this.birthdayDate = birthdayDate;
         this.department = department;
         this.workStatus = workStatus;
-        this.shiftType = shiftType;
+        this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
         this.admissionDate = admissionDate;

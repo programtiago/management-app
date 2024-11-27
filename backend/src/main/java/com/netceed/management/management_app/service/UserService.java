@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.entity.UserDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 
 import java.time.LocalDate;
 import java.util.List;

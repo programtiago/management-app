@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.entity.UserDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
@@ -12,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -30,7 +27,7 @@ public class UserController {
 
         if (usersFound.isEmpty())
             throw new Exception("No users to retrieve");
-        return ResponseEntity.ok(userService.getAllUsers());
+        return ResponseEntity.ok(usersFound);
     }
 
     @GetMapping("/{id}")
@@ -65,8 +62,6 @@ public class UserController {
 
     @PostMapping("/new")
     public ResponseEntity<UserDto> create(@RequestBody @Valid User newUser) throws NoSuchFieldException {
-        LocalDate admissionDate = LocalDate.now();
-
         boolean workNumberAlreadyExists = userService.workNumberExists(newUser.getWorkNumber());
         boolean emailAlreadyExists = userService.emailAlreadyExists(newUser.getEmail());
         boolean birthdayDateGivenIsValid = userService.birthdayDateIsValid(newUser.getBirthdayDate());
@@ -77,9 +72,7 @@ public class UserController {
         if (emailAlreadyExists){
             throw new EmailAlreadyExistsException("Email " +  newUser.getEmail() + " already registered");
         }
-        if (newUser.getAdmissionDate() == null){
-            //return LocalDate.now();
-        }
+
         if (!birthdayDateGivenIsValid){
             throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");
         }

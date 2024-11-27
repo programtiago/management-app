@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.entity.UserDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -12,9 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,18 +39,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(UserDto newUser, Long id) {
+    public User update(UserDto userUpdate, Long id) {
         return userRepository.findById(id)
                 .map(user -> {
-                    user.setFirstName(newUser.firstName());
-                    user.setLastName(newUser.lastName());
-                    user.setUserRole(newUser.userRole());
-                    user.setActive(newUser.isActive());
-                    user.setWorkNumber(newUser.workNumber());
-                    user.setContactNumber(newUser.contactNumber());
-                    user.setEmail(newUser.email());
-                    user.setDepartment(newUser.department());
-                    user.setPassword(newUser.password());
+                    user.setFirstName(userUpdate.firstName());
+                    user.setLastName(userUpdate.lastName());
+                    user.setUserRole(userUpdate.userRole());
+                    user.setActive(userUpdate.isActive());
+                    user.setWorkNumber(userUpdate.workNumber());
+                    user.setContactNumber(userUpdate.contactNumber());
+                    user.setEmail(userUpdate.email());
+                    user.setDepartment(userUpdate.department());
+                    user.setPassword(userUpdate.password());
                     user.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
                     return userRepository.save(user);
@@ -73,7 +71,7 @@ public class UserServiceImpl implements UserService {
         userToInsert.setDepartment(user.getDepartment());
         userToInsert.setContactNumber(user.getContactNumber());
         userToInsert.setUpdatedAt(user.getUpdatedAt());
-        userToInsert.setShiftType(user.getShiftType());
+        userToInsert.setShift(user.getShift());
         userToInsert.setWorkStatus(user.getWorkStatus());
         userToInsert.setAdmissionDate(user.getAdmissionDate());
 
