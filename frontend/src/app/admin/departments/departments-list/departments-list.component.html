@@ -12,12 +12,16 @@
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item>
                         <mat-icon>dialpad</mat-icon>
-                        <span>Assign employee</span>
+                        <span>Assign employee</span> <!--This will allow the admin to assign a employee to a department-->
                     </button>
                     <button mat-menu-item disabled>
+                        <mat-icon>voicemail</mat-icon> 
+                        <span>View all employees</span>  <!--This will allow the admin to see the employees of each department-->
+                    </button>   
+                    <button mat-menu-item disabled>
                         <mat-icon>voicemail</mat-icon>
-                        <span>View all employees</span>
-                        </button>            
+                        <span>Track Department</span> <!--This will allow the admin to see all the movements of employees inside a department-->
+                    </button>           
                 </mat-menu>
             <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit</mat-icon></button>
             <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete</mat-icon></button>

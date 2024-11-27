@@ -8,8 +8,12 @@
 }
 
 @media only screen and (min-width: 1537px) {
+    .department-list-container{
+        flex-direction: column; 
+    }
+    
     .mat-mdc-card {
-        max-width: 55%;
+        max-width: 45%;
         display: flex;
         align-content: center;
         justify-content: center;
