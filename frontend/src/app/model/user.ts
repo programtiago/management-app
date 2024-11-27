@@ -9,7 +9,7 @@ export interface User {
     department: string,
     admissionDate: string,
     registryDate: string,
-    active: boolean,
+    isActive: boolean,
     userRole: UserRole,
     email: string,
     contactNumber: string

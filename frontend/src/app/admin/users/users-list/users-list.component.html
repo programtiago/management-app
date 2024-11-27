@@ -30,13 +30,13 @@
   </ng-container>
 
     <ng-container matColumnDef="isActive">
-        <mat-header-cell class="isActive_header_cell" *matHeaderCellDef>Status</mat-header-cell>
-        <mat-cell class="department_cell" *matCellDef="let user">
-          <div *ngIf="user.active == true" (click)="onChangeUserStatus(user)" >
+        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell *matCellDef="let user">
+          <div *ngIf="user.isActive== true" (click)="onChangeUserStatus(user)">
             <button mat-raised-button style="background-color: green;">Ativo</button>
           </div>
 
-          <div *ngIf="user.active == false" (click)="onChangeUserStatus(user)">
+          <div *ngIf="user.isActive== false" (click)="onChangeUserStatus(user)">
             <button class="btn-user-status" mat-raised-button color="warn">Desativo</button>
           </div>
         </mat-cell>
@@ -48,8 +48,8 @@
     </ng-container>
 
     <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-        <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
+        <mat-header-cell class="email_header_cell" *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell class="email_cell" *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="contactNumber">

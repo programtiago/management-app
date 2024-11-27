@@ -26,7 +26,7 @@ export class ModalInformationComponent implements OnInit{
   ngOnInit(): void {
     this.userId = this.data.at(1)
     this.response = this.adminService.getById(this.userId).subscribe((res) => {
-      this.statusUser = res.active;
+      this.statusUser = res.isActive;
     });
   } 
 }

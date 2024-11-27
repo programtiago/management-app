@@ -46,6 +46,7 @@ export class UsersListComponent implements OnInit{
   refresh(){
     this.adminService.list().subscribe((res) => {
       this.users = res;
+      console.log(res)
     });
   }
 
@@ -56,9 +57,9 @@ export class UsersListComponent implements OnInit{
   onChangeUserStatus(user: User){
     this.selectedUserId = user.id;
 
-    if (user.active == false){
+    if (user.isActive == false){
       this.questionForChangingStatus = this.questionForActivate;
-    }else if (user.active == true){
+    }else if (user.isActive == true){
       this.questionForChangingStatus = this.questionForDesativate;
     }
 
@@ -70,7 +71,7 @@ export class UsersListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result){
-        if (user.active == false){
+        if (user.isActive == false){
           this.adminService.activateUser(user.id).subscribe(
             () => {
               this.snackBar.open('User activated sucessfully !', 'X', {
@@ -82,7 +83,7 @@ export class UsersListComponent implements OnInit{
             },
             () => this.onError('Occurred a error. Please try again or check your internet connection')
           )
-        }else if (user.active == true){
+        }else if (user.isActive == true){
           this.adminService.deactivateUser(user.id).subscribe(
             () => {
               this.snackBar.open('User deactivated sucessfully !', 'X', {
