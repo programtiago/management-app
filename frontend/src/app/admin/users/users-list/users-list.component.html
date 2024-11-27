@@ -32,11 +32,11 @@
     <ng-container matColumnDef="isActive">
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let user">
-          <div *ngIf="user.isActive== true" (click)="onChangeUserStatus(user)">
+          <div *ngIf="user.isActive == true" (click)="onChangeUserStatus(user)">
             <button mat-raised-button style="background-color: green;">Ativo</button>
           </div>
 
-          <div *ngIf="user.isActive== false" (click)="onChangeUserStatus(user)">
+          <div *ngIf="user.isActive == false" (click)="onChangeUserStatus(user)">
             <button class="btn-user-status" mat-raised-button color="warn">Desativo</button>
           </div>
         </mat-cell>
