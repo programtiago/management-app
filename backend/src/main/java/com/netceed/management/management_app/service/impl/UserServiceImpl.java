@@ -59,22 +59,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(User user) {
-        User userToInsert = new User();
-        userToInsert.setId(user.getId());
-        userToInsert.setFirstName(user.getFirstName());
-        userToInsert.setLastName(user.getLastName());
-        userToInsert.setBirthdayDate(user.getBirthdayDate());
-        userToInsert.setActive(user.isActive());
-        userToInsert.setUserRole(user.getUserRole());
-        userToInsert.setPassword(user.getPassword());
-        userToInsert.setEmail(user.getEmail());
-        userToInsert.setDepartment(user.getDepartment());
-        userToInsert.setContactNumber(user.getContactNumber());
-        userToInsert.setUpdatedAt(user.getUpdatedAt());
-        userToInsert.setShift(user.getShift());
-        userToInsert.setWorkStatus(user.getWorkStatus());
-        userToInsert.setAdmissionDate(user.getAdmissionDate());
-
         userRepository.save(user);
 
         return userMapper.toDto(user);

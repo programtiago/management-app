@@ -38,5 +38,17 @@ public class DepartmentServiceImpl implements DepartmentService {
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
     }
 
+    @Override
+    public boolean valueDepartmentExists(String value) {
+        return departmentRepository.findByValue(value).isPresent();
+    }
+
+    @Override
+    public DepartmentDto create(Department department) {
+        departmentRepository.save(department);
+
+        return departmentMapper.toDto(department);
+    }
+
 
 }

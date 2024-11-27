@@ -1,9 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Department;
-import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.dto.DepartmentDto;
-import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.DepartmentServiceImpl;
 import jakarta.validation.Valid;
@@ -29,6 +27,19 @@ public class DepartmentController {
             throw new Exception("No departments to retrieve.");
         return ResponseEntity.ok(departmentsFound);
     }
+
+    @PostMapping("/new")
+    public ResponseEntity<DepartmentDto> create(@RequestBody @Valid Department newDepartment){
+        //Each department code has to be different - Department code associate only one department ?? maybe in future this changes
+        boolean codeDepartmentAlreadyExists = departmentService.valueDepartmentExists(newDepartment.getValue());
+
+        if (codeDepartmentAlreadyExists){
+            throw new IllegalArgumentException("Department Value " + newDepartment.getValue() + " already exists.");
+        }
+
+        return ResponseEntity.ok(departmentService.create(newDepartment));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody @Valid DepartmentDto department, @PathVariable Long id){
         try{

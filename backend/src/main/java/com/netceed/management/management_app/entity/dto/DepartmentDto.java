@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity.dto;
 
-public record DepartmentDto (Long id, String value, String description, String registryDate,
-                             int totalEmployees) {
-}
+import jakarta.validation.constraints.NotBlank;
+
+public record DepartmentDto (Long id, @NotBlank String value, @NotBlank String description, String registryDate,
+                             int totalEmployees) { }
