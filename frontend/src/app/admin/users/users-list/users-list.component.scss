@@ -5,6 +5,24 @@
         margin-bottom: 1rem;
         //display: table;
     }
+
+    mat-cell:nth-child(8),
+    mat-header-cell:nth-child(8) {
+        flex: 0 0 15%;
+    }
+}
+
+@media only screen and (min-width: 1537px){
+    .mat-mdc-table{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    mat-cell:nth-child(8),
+    mat-header-cell:nth-child(8) {
+        flex: 0 0 10%;
+    }
 }
 
 .btn-user-status{
@@ -20,3 +38,4 @@
 .mat-mdc-header-cell{
     font-weight: bold;
 }
+

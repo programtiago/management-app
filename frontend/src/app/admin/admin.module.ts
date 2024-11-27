@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { SharedModule } from '../shared/shared.module';
 import { ModalInformationComponent } from './modal-information/modal-information.component';
 import { ModalDeleteuserInfoComponent } from './modal-deleteuser-info/modal-deleteuser-info.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ModalDeleteuserInfoComponent } from './modal-deleteuser-info/modal-dele
     UsersListComponent,
     UsersComponent,
     ModalInformationComponent,
-    ModalDeleteuserInfoComponent
+    ModalDeleteuserInfoComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

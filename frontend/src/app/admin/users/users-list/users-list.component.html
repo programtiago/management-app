@@ -5,23 +5,23 @@
     </ng-container>
   
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-      <mat-cell  *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+      <mat-header-cell class="lastName_header_cell" *matHeaderCellDef> Last Name </mat-header-cell>
+      <mat-cell class="lastName_cell" *matCellDef="let user"> {{ user.lastName }} </mat-cell>
     </ng-container>     
 
     <ng-container matColumnDef="workNumber">
       <mat-header-cell *matHeaderCellDef> Work Number </mat-header-cell>
-      <mat-cell style="min-width: 20px;" *matCellDef="let user"> {{ user.workNumber }} </mat-cell>
+      <mat-cell class="workNumber_cell"*matCellDef="let user"> {{ user.workNumber }} </mat-cell>
     </ng-container>
   
     <ng-container matColumnDef="department">
-      <mat-header-cell style="min-width: 150px;" *matHeaderCellDef> Department </mat-header-cell>
-      <mat-cell style="min-width: 150px; max-width: 100px;" *matCellDef="let user"> {{ user.department }} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{ user.department }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="registryDate">
         <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
-        <mat-cell style="max-width: 100px;" *matCellDef="let user"> {{ user.registryDate }} </mat-cell>
+        <mat-cell class="department_registryDate" *matCellDef="let user"> {{ user.registryDate }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="birthdayDate">
@@ -30,8 +30,8 @@
   </ng-container>
 
     <ng-container matColumnDef="isActive">
-        <mat-header-cell style="max-width: 85px;" *matHeaderCellDef>Status</mat-header-cell>
-        <mat-cell style="max-width: 85px;" *matCellDef="let user">
+        <mat-header-cell class="isActive_header_cell" *matHeaderCellDef>Status</mat-header-cell>
+        <mat-cell class="department_cell" *matCellDef="let user">
           <div *ngIf="user.active == true" (click)="onChangeUserStatus(user)" >
             <button mat-raised-button style="background-color: green;">Ativo</button>
           </div>
@@ -43,13 +43,13 @@
     </ng-container>
 
     <ng-container matColumnDef="userRole">
-        <mat-header-cell style="max-width: 120px; min-width: 95px;" *matHeaderCellDef> Role </mat-header-cell>
-        <mat-cell style="max-width: 120px; min-width: 95px" *matCellDef="let user"> {{ user.userRole }} </mat-cell>
+        <mat-header-cell class="userRole_header_cell" *matHeaderCellDef> Role </mat-header-cell>
+        <mat-cell class="userRole_cell" *matCellDef="let user"> {{ user.userRole }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-        <mat-header-cell  style="max-width: 300px; min-width: 280px;" *matHeaderCellDef> Email </mat-header-cell>
-        <mat-cell style="max-width: 300px; min-width: 280px" *matCellDef="let user"> {{ user.email }} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.email }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="contactNumber">

@@ -5,9 +5,21 @@
 <mat-drawer-container class="app-view">
     <mat-drawer mode="side" opened>
       <div class="btn-navbar-container">
-        <button (click)="onOpenMenu()" mat-button>
-          <mat-icon>menu</mat-icon>
-        </button>
+        <button mat-button [mat-menu-trigger-for]="menu"><mat-icon>menu</mat-icon></button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="users">Users</button>
+          <button mat-menu-item [matMenuTriggerFor]="departments">Departments</button>
+        </mat-menu>
+
+        <mat-menu #users="matMenu">
+          <button mat-menu-item [routerLink]="['admin/new']">Add User</button>
+          <button mat-menu-item [routerLink]="['admin/all']">List Users</button>
+        </mat-menu>
+
+        <mat-menu #departments="matMenu">
+          <button mat-menu-item>Add Department</button>
+          <button mat-menu-item>List Departments</button>
+        </mat-menu>
       
         <button (click)="onFilter()" mat-button>
           <mat-icon>filter</mat-icon>
