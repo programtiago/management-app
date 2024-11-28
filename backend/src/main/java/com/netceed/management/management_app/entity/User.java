@@ -1,7 +1,6 @@
 package com.netceed.management.management_app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
 import jakarta.persistence.*;
@@ -16,7 +15,6 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor

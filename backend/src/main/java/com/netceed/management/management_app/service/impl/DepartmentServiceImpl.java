@@ -38,7 +38,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int retrieveTotalOfEmployees(Long departmentId) {
-        return departmentRepository.getTotalOfEmployees(departmentId);
+        return departmentRepository.getTotalOfEmployeesByDepartment(departmentId);
     }
 
 
