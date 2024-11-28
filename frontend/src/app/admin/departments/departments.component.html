@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-content>
-      <mat-toolbar color="primary">Deparments Available List</mat-toolbar>
+      <mat-toolbar color="primary">Departments Available List</mat-toolbar>
 
         <div class="department-list-container mat-elevation-z8">
           <app-departments-list *ngIf="departments$ | async as departments; else loading"

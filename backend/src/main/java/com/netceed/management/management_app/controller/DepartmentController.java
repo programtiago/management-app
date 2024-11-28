@@ -2,6 +2,7 @@ package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.dto.DepartmentDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.DepartmentServiceImpl;
 import jakarta.validation.Valid;
@@ -28,6 +29,14 @@ public class DepartmentController {
         return ResponseEntity.ok(departmentsFound);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DepartmentDto> getById(@PathVariable Long id){
+        if (departmentService.getById(id) == null){
+            throw new ResourceNotFoundException("Department with the id " + id + " not found ");
+        }
+        return ResponseEntity.ok(departmentService.getById(id));
+    }
+
     @PostMapping("/new")
     public ResponseEntity<DepartmentDto> create(@RequestBody @Valid Department newDepartment){
         //Each department code has to be different - Department code associate only one department ?? maybe in future this changes
@@ -48,5 +57,16 @@ public class DepartmentController {
         }catch (ResourceNotFoundException ex){
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        DepartmentDto department = departmentService.getById(id);
+
+        if (department == null){
+            throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
+        }
+
+        departmentService.deleteById(id);
     }
 }

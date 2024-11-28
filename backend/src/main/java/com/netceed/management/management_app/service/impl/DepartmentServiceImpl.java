@@ -27,6 +27,17 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    public DepartmentDto getById(Long id) {
+        return departmentRepository.findById(id).map(departmentMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("Department resource not found with id " + id));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        departmentRepository.deleteById(id);
+    }
+
+
+    @Override
     public Department update(DepartmentDto departmentUpdate, Long id) {
         return departmentRepository.findById(id)
                 .map(department -> {
@@ -49,6 +60,5 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return departmentMapper.toDto(department);
     }
-
 
 }

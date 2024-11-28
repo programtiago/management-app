@@ -10,4 +10,6 @@ public interface DepartmentService {
     Department update(DepartmentDto department, Long id);
     boolean valueDepartmentExists(String value);
     DepartmentDto create(Department department);
+    DepartmentDto getById(Long id);
+    void deleteById(Long id);
 }
