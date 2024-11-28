@@ -36,6 +36,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.deleteById(id);
     }
 
+    @Override
+    public int retrieveTotalOfEmployees(Long departmentId) {
+        return departmentRepository.getTotalOfEmployees(departmentId);
+    }
+
 
     @Override
     public Department update(DepartmentDto departmentUpdate, Long id) {

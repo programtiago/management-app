@@ -1,8 +1,8 @@
 package com.netceed.management.management_app.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.Shift;
-import com.netceed.management.management_app.enums.ShiftType;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
 import jakarta.persistence.EnumType;
@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
-
+import java.util.Set;
 
 public record UserDto (
     Long id,
@@ -25,7 +25,7 @@ public record UserDto (
     int workNumber,
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     LocalDate birthdayDate,
-    String department,
+    Department department,
     @Enumerated(EnumType.STRING)
     WorkStatus workStatus,
     Shift shift,
@@ -46,7 +46,7 @@ public record UserDto (
     String password,
     String updatedAt
 ){
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

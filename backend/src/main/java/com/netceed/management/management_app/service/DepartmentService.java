@@ -12,4 +12,5 @@ public interface DepartmentService {
     DepartmentDto create(Department department);
     DepartmentDto getById(Long id);
     void deleteById(Long id);
+    int retrieveTotalOfEmployees(Long departmentId);
 }

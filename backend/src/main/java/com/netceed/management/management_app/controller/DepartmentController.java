@@ -3,8 +3,10 @@ package com.netceed.management.management_app.controller;
 import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.dto.DepartmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.mapper.DepartmentMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.DepartmentServiceImpl;
+import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,8 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentServiceImpl departmentService;
+    private final UserServiceImpl userService;
+    private final DepartmentMapper departmentMapper;
 
     @GetMapping("/all")
     public ResponseEntity<List<DepartmentDto>> getAllDepartments() throws Exception {
@@ -68,5 +72,16 @@ public class DepartmentController {
         }
 
         departmentService.deleteById(id);
+    }
+
+    @GetMapping("/totalEmployees/{id}")
+    public int getTotalEmployeesForDepartment(@PathVariable Long id){
+        DepartmentDto department = departmentService.getById(id);
+
+        if (department == null){
+            throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
+        }
+
+        return departmentService.retrieveTotalOfEmployees(id);
     }
 }

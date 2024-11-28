@@ -1,9 +1,6 @@
 package com.netceed.management.management_app.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -28,11 +26,15 @@ public class Department {
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));;
     private int totalEmployees;
 
-    public Department(String value, String description, int totalEmployees){
+    @OneToMany(mappedBy = "department")
+    private Set<User> users;
+
+    public Department(String value, String description, int totalEmployees, Set<User> users){
         this.value = value;
         this.description = description;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         this.totalEmployees = totalEmployees;
+        this.users = users;
     }
 
 }

@@ -16,6 +16,7 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -34,11 +35,13 @@ public class User {
     private int workNumber;
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate birthdayDate;
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
     @Enumerated(EnumType.STRING)
     private WorkStatus workStatus = WorkStatus.AVAILABLE;
-    @OneToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "shift_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "shift_id", nullable = false)
     private Shift shift;
     private String recruitmentCompany;
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -58,7 +61,7 @@ public class User {
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
     private String updatedAt;
 
-        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, String department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber){
+        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber){
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
@@ -84,7 +87,7 @@ public class User {
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
-    public User(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public User(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;

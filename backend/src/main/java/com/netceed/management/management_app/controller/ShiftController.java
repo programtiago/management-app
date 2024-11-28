@@ -17,7 +17,7 @@ public class ShiftController {
 
     private final ShiftServiceImpl shiftService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Shift>> getAllShifts(){
         return ResponseEntity.ok(shiftService.getAllShifts());
     }
