@@ -4,6 +4,7 @@ import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
+import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
     private final UserMapper userMapper;
     @Override
     public List<UserDto> getAllUsers() {
@@ -59,6 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(User user) {
+        user.getDepartment().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(user.getId()) + 1);
         userRepository.save(user);
 
         return userMapper.toDto(user);
