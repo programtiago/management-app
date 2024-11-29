@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public record EquipmentDto(Long id, String description, String serialNumber, String macAddress,
                            String brand, String model, String type, String location, String function,
-                           String unity, User user, LocalDateTime allocationDateTime, LocalDateTime returningDateTime,
+                           String unity, String registryDate, User user, LocalDateTime allocationDateTime, LocalDateTime returningDateTime,
                            StatusEquipment statusEquipment, String finalCondition) { }
 
 

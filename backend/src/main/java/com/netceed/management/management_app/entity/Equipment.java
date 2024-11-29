@@ -1,11 +1,14 @@
 package com.netceed.management.management_app.entity;
 
 import com.netceed.management.management_app.enums.StatusEquipment;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 //Class represents a equipment that can be assigned to a Department or a User
 //Ex: Keyboard
@@ -14,6 +17,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Equipment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private String serialNumber;
@@ -22,18 +27,22 @@ public class Equipment {
     private String model;
     private String type; //SCANNER, SCREEN, MOUSE, DESKTOP
     private String location;
-    private String function; //Packaging, Housing, Test, whatever...
+    private String goal; //Packaging, Housing, Test, whatever...
     private String unity; //This will be department ??
+    private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime allocationDateTime;
     private LocalDateTime returningDateTime; //The equipment can be returned and assigned to another user for example
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE;
-    private String finalCondition; //The equipment returns and we make a intern validation to be assigned to other user
+    private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
-    public Equipment(String description, String serialNumber, String macAddress, String brand,
-                     String model, String type, String location, String function,
-                     String unity, LocalDateTime allocationDateTime,
-                     LocalDateTime returningDateTime, StatusEquipment statusEquipment) {
+    public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
+                     String model, String type, String location, String goal,
+                     String unity, String registryDate, User user, LocalDateTime allocationDateTime,
+                     LocalDateTime returningDateTime, StatusEquipment statusEquipment, String statusPhysic) {
+        this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
         this.macAddress = macAddress;
@@ -41,10 +50,13 @@ public class Equipment {
         this.model = model;
         this.type = type;
         this.location = location;
-        this.function = function;
+        this.goal = goal;
         this.unity = unity;
+        this.registryDate = registryDate;
+        this.user = user;
         this.allocationDateTime = allocationDateTime;
         this.returningDateTime = returningDateTime;
         this.statusEquipment = statusEquipment;
+        this.statusPhysic = statusPhysic;
     }
 }

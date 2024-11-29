@@ -1,11 +1,13 @@
 package com.netceed.management.management_app;
 
 import com.netceed.management.management_app.entity.Department;
+import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.Shift;
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.enums.ShiftType;
+import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.repository.DepartmentRepository;
+import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.ShiftRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,6 +31,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final ShiftRepository shiftRepository;
 	private final DepartmentRepository departmentRepository;
+	private final EquipmentRepository equipmentRepository;
 
 
 	public static void main(String[] args) {
@@ -38,7 +42,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		/*
-
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -116,7 +119,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user.setContactNumber("913562547");
 		user.setDepartment(itDepartment);
 
-
 		User user2 = new User();
 
 		user2.setFirstName("António");
@@ -162,11 +164,109 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user4.setContactNumber("915236214");
 		user4.setDepartment(developmentDepartment);
 
+
 		userRepository.save(user);
 		userRepository.save(user2);
 		userRepository.save(user3);
 		userRepository.save(user4);
 
+		Equipment scanner = new Equipment();
+
+		scanner.setDescription("Scanner Zebra DS2208-SR7U2100SGW BLACK");
+		scanner.setSerialNumber("22180010552203");
+		scanner.setLocation("Housing RCU 1");
+		scanner.setGoal("Housing");
+		scanner.setUnity("Refurb");
+		scanner.setUser(user3);
+		scanner.setType("Scanners");
+		scanner.setModel("DS2208");
+		scanner.setMacAddress("");
+		scanner.setBrand("Zebra");
+		scanner.setStatusPhysic("New");
+		scanner.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		scanner.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 18, 35));
+		scanner.setReturningDateTime(LocalDateTime.now());
+
+		equipmentRepository.save(scanner);
+
+		Equipment printer = new Equipment();
+
+		printer.setDescription("Impressora Toshiba B-FV4T-TS14-QM-R");
+		printer.setSerialNumber("2302P000862");
+		printer.setLocation("Packaging NB6");
+		printer.setGoal("Packaging");
+		printer.setUnity("Refurb");
+		printer.setUser(user2);
+		printer.setType("Printers");
+		printer.setModel("B-FV4T");
+		printer.setMacAddress("");
+		printer.setBrand("Toshiba");
+		printer.setStatusPhysic("New");
+		printer.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		printer.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 32));
+		printer.setReturningDateTime(LocalDateTime.now());
+
+		equipmentRepository.save(printer);
+
+
+		Equipment screen = new Equipment();
+
+		screen.setDescription("Monitor Philips 222B1TC/00");
+		screen.setSerialNumber("22180010552203");
+		screen.setLocation("Housing RCU 1");
+		screen.setGoal("Housing");
+		screen.setUnity("Refurb");
+		screen.setUser(user);
+		screen.setType("Screens");
+		screen.setModel("222B1TC/00");
+		screen.setMacAddress("");
+		screen.setBrand("Philips");
+		screen.setStatusPhysic("New");
+		screen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		screen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 56));
+		screen.setReturningDateTime(LocalDateTime.now());
+
+		equipmentRepository.save(screen);
+
+		Equipment wifiPen = new Equipment();
+
+		wifiPen.setDescription("Pen WIFI TP-Link AC1300 UM-MIMO");
+		wifiPen.setSerialNumber("RF1K115000774");
+		wifiPen.setLocation("Development 1.2");
+		wifiPen.setGoal("Development");
+		wifiPen.setUnity("Refurb");
+		wifiPen.setUser(user4);
+		wifiPen.setType("USB Adapter");
+		wifiPen.setModel("AC1300");
+		wifiPen.setMacAddress("");
+		wifiPen.setBrand("TP-link");
+		wifiPen.setStatusPhysic("New");
+		wifiPen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		wifiPen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 21));
+		wifiPen.setReturningDateTime(LocalDateTime.now());
+
+		equipmentRepository.save(wifiPen);
+
+		Equipment desktop = new Equipment();
+
+		desktop.setDescription("Desktop Dell OPT3040MFF-SB16-R6");
+		desktop.setSerialNumber("22180010552203");
+		desktop.setLocation("Housing RCU 1");
+		desktop.setGoal("Housing");
+		desktop.setUnity("Refurb");
+		desktop.setUser(user2);
+		desktop.setType("Desktops");
+		desktop.setModel("OPT3040MFF-SB16-R6");
+		desktop.setMacAddress("");
+		desktop.setBrand("Dell");
+		desktop.setStatusPhysic("Used");
+		desktop.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		desktop.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 13));
+		desktop.setReturningDateTime(LocalDateTime.now());
+
+		equipmentRepository.save(desktop);
+
 		 */
+
 	}
 }

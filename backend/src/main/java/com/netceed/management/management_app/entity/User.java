@@ -62,7 +62,10 @@ public class User {
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
     private String updatedAt;
 
-        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber){
+    @OneToMany(mappedBy = "user")
+    private Set<Equipment> equipments;
+
+        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<Equipment> equipments){
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
@@ -76,6 +79,7 @@ public class User {
         this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.equipments = equipments;
     }
 
     public User(String firstName, String lastName, LocalDate admissionDate, String email, String password, UserRole userRole){

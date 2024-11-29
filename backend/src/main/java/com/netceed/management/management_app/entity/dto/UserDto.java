@@ -2,6 +2,7 @@ package com.netceed.management.management_app.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.entity.Department;
+import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.Shift;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
@@ -44,9 +45,11 @@ public record UserDto (
     String contactNumber,
     @NotBlank(message = "The Password is mandatory")
     String password,
-    String updatedAt
+    String updatedAt,
+    Set<Equipment> equipments
 ){
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt,
+                   Set<Equipment> equipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,5 +67,6 @@ public record UserDto (
         this.contactNumber = contactNumber;
         this.password = password;
         this.updatedAt = updatedAt;
+        this.equipments = equipments;
     }
 }
