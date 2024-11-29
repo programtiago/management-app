@@ -38,6 +38,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 		/*
+
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -166,18 +167,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		userRepository.save(user3);
 		userRepository.save(user4);
 
-
-		//userRepository.save(user);
-		//userRepository.save(user2);
-		//userRepository.save(user3);
-		//userRepository.save(user4);
-		//userRepository.save(user5);
-
-		//itDepartment.setUser(user);
-		//qualityControlDepartment.setUser(user5);
-		//productionDepartment.setUser(user3);
-		//administrationDepartment.setUser(user2);
-		//productionDepartment.setUser(user4);
 		 */
 	}
 }

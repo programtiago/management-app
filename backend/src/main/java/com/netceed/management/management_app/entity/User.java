@@ -42,7 +42,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private WorkStatus workStatus = WorkStatus.AVAILABLE;
     @ManyToOne
-    @JoinColumn(name = "shift_id", nullable = false)
+    @JoinColumn(name = "shift_id")
     private Shift shift;
     private String recruitmentCompany;
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
