@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
                     user.setWorkNumber(userUpdate.workNumber());
                     user.setContactNumber(userUpdate.contactNumber());
                     user.setEmail(userUpdate.email());
-                    user.setDepartment(userUpdate.department());
+                    //user.setDepartment(userUpdate.department());
                     user.setPassword(userUpdate.password());
                     user.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto create(User user) {
-        user.getDepartment().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(user.getId()) + 1);
+        //user.getDepartment().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(user.getId()) + 1);
         userRepository.save(user);
 
         return userMapper.toDto(user);
@@ -102,6 +102,13 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
 
+    }
+
+    @Override
+    public List<UserDto> getUsersByDepartment(Long id) {
+        return userRepository.findAll().stream()
+                .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)
+                .toList();
     }
 
 }

@@ -7,6 +7,7 @@ import com.netceed.management.management_app.exception.EmailAlreadyExistsExcepti
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@EqualsAndHashCode
 public class UserController {
 
     private final UserServiceImpl userService;
@@ -118,5 +120,10 @@ public class UserController {
         }else{
             throw new ResourceNotFoundException("User with id " + id + " not found");
         }
+    }
+
+    @GetMapping("/department/{id}")
+    public List<UserDto> getUsersByDepartment(@PathVariable Long id){
+        return userService.getUsersByDepartment(id);
     }
 }

@@ -36,8 +36,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
 
+		/*
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -45,7 +45,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 		List<Shift> shifts = new ArrayList<>(Arrays.asList(generalShift, morningShift, afternoonShift, nightShift));
 
-		//shiftRepository.saveAll(shifts);
+		shiftRepository.saveAll(shifts);
 
 		Department itDepartment = new Department();
 		itDepartment.setValue("IT");
@@ -98,7 +98,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		List<Department> departments = new ArrayList<>(Arrays.asList(itDepartment, logisticDepartment, qualityControlDepartment, purchasingDepartment, humanResourcesDepartment, developmentDepartment,
 				administrationDepartment, productionDepartment));
 
-		//departmentRepository.saveAll(departments);
+		departmentRepository.saveAll(departments);
 
 		User user = new User();
 
@@ -129,7 +129,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user2.setShift(generalShift);
 		user2.setRecruitmentCompany("ADECO");
 		user2.setContactNumber("913254123");
-		user2.setDepartment(administrationDepartment);
+		user2.setDepartment(itDepartment);
 
 		User user3 = new User();
 
@@ -146,7 +146,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user3.setContactNumber("965214655");
 		user3.setDepartment(productionDepartment);
 
-
 		User user4 = new User();
 
 		user4.setFirstName("Daniel");
@@ -162,14 +161,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user4.setContactNumber("915236214");
 		user4.setDepartment(developmentDepartment);
 
-
-
-		//userRepository.save(user);
-		//userRepository.save(user2);
-		//userRepository.save(user3);
+		userRepository.save(user);
+		userRepository.save(user2);
+		userRepository.save(user3);
 		userRepository.save(user4);
-
-
 
 
 		//userRepository.save(user);
@@ -183,8 +178,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//productionDepartment.setUser(user3);
 		//administrationDepartment.setUser(user2);
 		//productionDepartment.setUser(user4);
-
-		*/
-
+		 */
 	}
 }

@@ -18,5 +18,6 @@ public interface UserService {
     boolean birthdayDateIsValid(LocalDate birthdayDate);
     User deactivateAccount(Long id);
     User activateAccount(Long id);
+    List<UserDto> getUsersByDepartment(Long id);
 }
 
