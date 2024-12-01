@@ -23,8 +23,8 @@
                         <span>Track Department</span> <!--This will allow the admin to see all the movements of employees inside a department-->
                     </button>           
                 </mat-menu>
-            <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit</mat-icon></button>
-            <button style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete</mat-icon></button>
+            <button (click)="onUpdate()" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit</mat-icon></button>
+            <button (click)="onDelete(department.id)" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete</mat-icon></button>
         </mat-card-actions>
     </mat-card>
 </div>

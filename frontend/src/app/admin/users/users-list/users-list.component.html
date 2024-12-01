@@ -16,7 +16,7 @@
   
     <ng-container matColumnDef="department">
       <mat-header-cell *matHeaderCellDef> Department </mat-header-cell>
-      <mat-cell *matCellDef="let user"> {{ user.department }} </mat-cell>
+      <mat-cell *matCellDef="let user"> {{ user.department.description }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="registryDate">
@@ -68,6 +68,7 @@
           <mat-icon (click)="onAdd()">add</mat-icon>
         </button>
       </mat-header-cell>
+
       
       <mat-cell *matCellDef="let user">
         <button mat-mini-fab (click)="onUpdate(user.id)" color="primary" aria-label="Edit user">
@@ -77,6 +78,15 @@
         <button (click)="onDelete(user.id)" mat-mini-fab color="accent" aria-label="Delete user">
           <mat-icon>delete</mat-icon>
         </button>
+
+        <button [matMenuTriggerFor]="menu" mat-icon-button color="primary">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="openMenuForEquipmentAssignment(user)">
+            <span>Assign Equipment</span>
+          </button>
+        </mat-menu>
       </mat-cell>
   </ng-container>
   

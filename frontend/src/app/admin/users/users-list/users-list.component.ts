@@ -6,7 +6,8 @@ import { ModalInformationComponent } from '../../modal-information/modal-informa
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
-import { ModalDeleteuserInfoComponent } from '../../modal-deleteuser-info/modal-deleteuser-info.component';
+import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-deleteuser-info.component';
+import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 
 @Component({
   selector: 'app-users-list',
@@ -25,7 +26,7 @@ export class UsersListComponent implements OnInit{
   questionForDesativate: string = "This will deactivate the user account. Would u like to proceed ?";
 
   displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', 'department', 'registryDate', 'isActive', 
-    'userRole',  'email', 'contactNumber', 'updatedAt', 'birthdayDate', 'actions'
+    'userRole',  'email', 'contactNumber', 'birthdayDate', 'actions'
   ]
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
@@ -123,5 +124,13 @@ export class UsersListComponent implements OnInit{
             },
             () => this.onError("It wasn't possible to delete the user. Please try again or check your internet connection"))}
       })
+    }
+
+    openMenuForEquipmentAssignment(user: User){
+      const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
+        height: '550px',
+        width: '750px',
+        data: user
+      });
     }
 }

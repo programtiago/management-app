@@ -1,0 +1,22 @@
+<mat-toolbar style="display: flex; align-content: center; justify-content: center;" color="primary">
+    Assign Equipment
+</mat-toolbar>
+<mat-card style="width: 80; display: flex;">
+    <mat-card-content style="max-width: 55%;">
+        <mat-form-field style="max-width: 100%; display: flex;">
+            <mat-label>Equipment</mat-label>
+            <mat-select #equipmentValue (selectionChange)="changeEquipment($event.value)">
+              @for (equipment of equipments; track equipments) {
+                <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>  
+          <p>{{data.firstName}}</p>  
+          <p>{{data.lastName}}</p>  
+          <p>{{data.workNumber}}</p>  
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="onConfirm()" mat-raised-button color="primary">Confirm</button>
+        <button mat-raised-button color="warn">Cancel</button>
+    </mat-card-actions>
+</mat-card>

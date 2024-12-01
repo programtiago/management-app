@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
 import { first } from 'rxjs';
 import { Department } from '../../model/department';
+import { Equipment } from '../../model/equiment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class AdminService {
 
   private readonly BASE_API_URL_USERS = '/api/v1/users'
   private readonly BASE_API_URL_DEPARTMENTS = '/api/v1/departments'
+  private readonly BASE_API_URL_EQUIPMENTS = '/api/v1/equipments'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -46,5 +48,21 @@ export class AdminService {
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}/all`)
       .pipe(first());
+  }
+
+  deleteDepartmentById(departmentId: number){
+    return this.httpClient.delete(`${this.BASE_API_URL_DEPARTMENTS}/` + departmentId)
+  }
+
+  getTotalEmployeesForDepartment(departmentId: number){
+    return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
+  }
+
+  getEquipments(){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all`).pipe(first())
+  }
+
+  assignEquipmentToUser(userId: number, equipmentId: number){
+    return this.httpClient.post(`${this.BASE_API_URL_USERS}/`+userId+`/equipment/${equipmentId}`, {})
   }
 }

@@ -9,12 +9,13 @@ import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { UsersComponent } from './users/users.component';
 import { SharedModule } from '../shared/shared.module';
 import { ModalInformationComponent } from './modal-information/modal-information.component';
-import { ModalDeleteuserInfoComponent } from './modal-deleteuser-info/modal-deleteuser-info.component';
+import { ModalDeleteuserInfoComponent } from './users/modal-deleteuser-info/modal-deleteuser-info.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { DepartmentFormComponent } from './departments/department-form/department-form.component';
 import { DepartmentsListComponent } from './departments/departments-list/departments-list.component';
-
+import { ModalInfoDeleteComponent } from './departments/modal-info-delete/modal-info-delete.component';
+import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { DepartmentsListComponent } from './departments/departments-list/departm
     DashboardComponent,
     DepartmentsComponent,
     DepartmentFormComponent,
-    DepartmentsListComponent
+    DepartmentsListComponent,
+    ModalInfoDeleteComponent,
+    ModalUsersAssignmentEquipmentComponent
   ],
   imports: [
     CommonModule,
