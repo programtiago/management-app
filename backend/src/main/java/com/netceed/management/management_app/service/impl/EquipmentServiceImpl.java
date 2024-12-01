@@ -1,15 +1,23 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.Equipment;
+import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
+import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
+import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.EquipmentService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +25,8 @@ import java.util.stream.Collectors;
 public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final EquipmentMapper equipmentMapper;
 
     @Override
@@ -58,7 +68,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                    equipment.setSerialNumber(equipmentDto.serialNumber());
                    equipment.setType(equipmentDto.type());
                    equipment.setUnity(equipmentDto.unity());
-                   equipment.setUser(equipmentDto.user());
+                   equipment.setUsers(equipmentDto.users());
 
                     return equipmentRepository.save(equipment);
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
@@ -67,5 +77,23 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public EquipmentDto getById(Long id) {
         return equipmentRepository.findById(id).map(equipmentMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("Equipment resource not found with id " + id));
+    }
+
+    @Override
+    @Transactional
+    public void assignEquipmentToUser(Long userId, Long equipmentId) {
+        Optional<Equipment> equipmentOpt = equipmentRepository.findByIdAndUsersIsNull(equipmentId);
+
+        if (equipmentOpt.isPresent()){
+            Equipment equipment = equipmentOpt.get();
+            User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not found"));
+
+            user.getEquipments().add(equipment);
+            equipment.getUsers().add(user);
+
+            equipmentRepository.save(equipment);
+            userRepository.save(user);
+
+        }
     }
 }

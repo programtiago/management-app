@@ -2,13 +2,13 @@ package com.netceed.management.management_app.entity;
 
 import com.netceed.management.management_app.enums.StatusEquipment;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 //Class represents a equipment that can be assigned to a Department or a User
 //Ex: Keyboard
@@ -30,9 +30,8 @@ public class Equipment {
     private String goal; //Packaging, Housing, Test, whatever...
     private String unity; //This will be department ??
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @ManyToMany(mappedBy = "equipments")
+    private List<User> users;
     private LocalDateTime allocationDateTime;
     private LocalDateTime returningDateTime; //The equipment can be returned and assigned to another user for example
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE;
@@ -40,7 +39,7 @@ public class Equipment {
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
                      String model, String type, String location, String goal,
-                     String unity, String registryDate, User user, LocalDateTime allocationDateTime,
+                     String unity, String registryDate, List<User> users, LocalDateTime allocationDateTime,
                      LocalDateTime returningDateTime, StatusEquipment statusEquipment, String statusPhysic) {
         this.id = id;
         this.description = description;
@@ -53,7 +52,7 @@ public class Equipment {
         this.goal = goal;
         this.unity = unity;
         this.registryDate = registryDate;
-        this.user = user;
+        this.users = users;
         this.allocationDateTime = allocationDateTime;
         this.returningDateTime = returningDateTime;
         this.statusEquipment = statusEquipment;

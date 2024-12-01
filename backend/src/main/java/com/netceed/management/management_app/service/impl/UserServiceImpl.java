@@ -1,10 +1,13 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
+import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +26,9 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
+    private final EquipmentRepository equipmentRepository;
     private final UserMapper userMapper;
+    private final EquipmentMapper equipmentMapper;
     @Override
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
@@ -109,6 +115,21 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)
                 .toList();
+    }
+
+    @Override
+    public void assignEquipmentToUser(Long userId, Long equipmentId) {
+        User user = userRepository.findById(userId).orElseThrow();
+
+        EquipmentDto equipmentDto = equipmentMapper.toDto(equipmentRepository.findById(equipmentId).orElseThrow());
+
+        if (!equipmentDto.users().isEmpty()){
+            throw new IllegalArgumentException("This equipment is already assigned !");
+        }
+
+        equipmentDto.users().add(user);
+        user.setEquipments(List.of(equipmentMapper.toEntity(equipmentDto)));
+        equipmentRepository.save(equipmentMapper.toEntity(equipmentDto));
     }
 
 }

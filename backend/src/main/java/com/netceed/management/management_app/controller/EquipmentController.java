@@ -2,8 +2,10 @@ package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
+import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/equipments")
@@ -18,6 +21,7 @@ import java.util.List;
 public class EquipmentController {
 
     private final EquipmentServiceImpl equipmentService;
+    private final UserServiceImpl userService;
 
     @GetMapping("/all")
     public ResponseEntity<List<EquipmentDto>> getAll() throws Exception {
@@ -69,6 +73,14 @@ public class EquipmentController {
         }
 
         equipmentService.delete(id);
+    }
+
+    @PostMapping("/{userId}/user/{equipmentId}")
+    public ResponseEntity<?> assignEquipmentToUser(@PathVariable Long userId, @PathVariable Long equipmentId){
+        equipmentService.assignEquipmentToUser(userId, equipmentId);
+
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+
     }
 
 

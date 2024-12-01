@@ -9,6 +9,7 @@ import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -125,5 +126,10 @@ public class UserController {
     @GetMapping("/department/{id}")
     public List<UserDto> getUsersByDepartment(@PathVariable Long id){
         return userService.getUsersByDepartment(id);
+    }
+
+    @PostMapping("/{userId}/equipment/{equipmentId}")
+    public void assignUserToDepartment(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
+        userService.assignEquipmentToUser(userId, equipmentId);
     }
 }

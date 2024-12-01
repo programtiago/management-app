@@ -14,6 +14,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 public record UserDto (
@@ -46,10 +47,10 @@ public record UserDto (
     @NotBlank(message = "The Password is mandatory")
     String password,
     String updatedAt,
-    Set<Equipment> equipments
+    List<Equipment> equipments
 ){
     public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt,
-                   Set<Equipment> equipments) {
+                   List<Equipment> equipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

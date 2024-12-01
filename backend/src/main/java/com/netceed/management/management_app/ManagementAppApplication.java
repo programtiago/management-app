@@ -19,9 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @SpringBootApplication
@@ -40,8 +38,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		/*
+
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -164,11 +162,22 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user4.setContactNumber("915236214");
 		user4.setDepartment(developmentDepartment);
 
+		Set<User> scannerUsers = new HashSet<>();
+		Set<User> printerUsers = new HashSet<>();
+		Set<User> screenUsers = new HashSet<>();
+		Set<User> desktopUsers = new HashSet<>();
+		Set<User> usbAdapterUsers = new HashSet<>();
 
-		userRepository.save(user);
-		userRepository.save(user2);
-		userRepository.save(user3);
-		userRepository.save(user4);
+		scannerUsers.add(user3);
+		printerUsers.add(user2);
+		screenUsers.add(user);
+		usbAdapterUsers.add(user4);
+		desktopUsers.add(user2);
+
+		userRepository.saveAll(printerUsers);
+		userRepository.saveAll(screenUsers);
+		userRepository.saveAll(usbAdapterUsers);
+		userRepository.saveAll(desktopUsers);
 
 		Equipment scanner = new Equipment();
 
@@ -177,7 +186,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setLocation("Housing RCU 1");
 		scanner.setGoal("Housing");
 		scanner.setUnity("Refurb");
-		scanner.setUser(user3);
 		scanner.setType("Scanners");
 		scanner.setModel("DS2208");
 		scanner.setMacAddress("");
@@ -187,7 +195,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 18, 35));
 		scanner.setReturningDateTime(LocalDateTime.now());
 
-		equipmentRepository.save(scanner);
+		Set<Equipment> scannerEquipment = new HashSet<>();
+		scannerEquipment.add(scanner);
+
+		//user.setEquipments(scannerEquipment);
+		equipmentRepository.saveAll(scannerEquipment);
+		userRepository.saveAll(scannerUsers);
 
 		Equipment printer = new Equipment();
 
@@ -196,7 +209,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setLocation("Packaging NB6");
 		printer.setGoal("Packaging");
 		printer.setUnity("Refurb");
-		printer.setUser(user2);
 		printer.setType("Printers");
 		printer.setModel("B-FV4T");
 		printer.setMacAddress("");
@@ -206,8 +218,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 32));
 		printer.setReturningDateTime(LocalDateTime.now());
 
-		equipmentRepository.save(printer);
+		Set<Equipment> printerEquipment = new HashSet<>();
+		printerEquipment.add(printer);
 
+		//user2.setEquipments(scannerEquipment);
+		equipmentRepository.saveAll(scannerEquipment);
+		userRepository.saveAll(printerUsers);
 
 		Equipment screen = new Equipment();
 
@@ -216,7 +232,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setLocation("Housing RCU 1");
 		screen.setGoal("Housing");
 		screen.setUnity("Refurb");
-		screen.setUser(user);
 		screen.setType("Screens");
 		screen.setModel("222B1TC/00");
 		screen.setMacAddress("");
@@ -226,7 +241,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 56));
 		screen.setReturningDateTime(LocalDateTime.now());
 
-		equipmentRepository.save(screen);
+		Set<Equipment> screenEquipment = new HashSet<>();
+		screenEquipment.add(screen);
+
+		//user.setEquipments(screenEquipment);
+		equipmentRepository.saveAll(screenEquipment);
+		userRepository.saveAll(screenUsers);
 
 		Equipment wifiPen = new Equipment();
 
@@ -235,7 +255,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setLocation("Development 1.2");
 		wifiPen.setGoal("Development");
 		wifiPen.setUnity("Refurb");
-		wifiPen.setUser(user4);
 		wifiPen.setType("USB Adapter");
 		wifiPen.setModel("AC1300");
 		wifiPen.setMacAddress("");
@@ -245,7 +264,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 21));
 		wifiPen.setReturningDateTime(LocalDateTime.now());
 
-		equipmentRepository.save(wifiPen);
+		Set<Equipment> wifiPenEquipement = new HashSet<>();
+		wifiPenEquipement.add(wifiPen);
+
+		//user4.setEquipments(wifiPenEquipement);
+		equipmentRepository.saveAll(wifiPenEquipement);
+		userRepository.saveAll(usbAdapterUsers);
 
 		Equipment desktop = new Equipment();
 
@@ -254,7 +278,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setLocation("Housing RCU 1");
 		desktop.setGoal("Housing");
 		desktop.setUnity("Refurb");
-		desktop.setUser(user2);
 		desktop.setType("Desktops");
 		desktop.setModel("OPT3040MFF-SB16-R6");
 		desktop.setMacAddress("");
@@ -264,9 +287,13 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 13));
 		desktop.setReturningDateTime(LocalDateTime.now());
 
-		equipmentRepository.save(desktop);
+		Set<Equipment> desktopEquipment = new HashSet<>();
+		desktopEquipment.add(desktop);
+
+		//user2.setEquipments(desktopEquipment);
+		equipmentRepository.saveAll(desktopEquipment);
+		userRepository.saveAll(desktopUsers);
 
 		 */
-
 	}
 }

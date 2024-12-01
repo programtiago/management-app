@@ -15,12 +15,12 @@ public class EquipmentMapper {
 
         return new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
                 equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getGoal(),
-                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUser(), equipment.getAllocationDateTime(), equipment.getReturningDateTime(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
+                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUsers(), equipment.getAllocationDateTime(), equipment.getReturningDateTime(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
     public Equipment toEntity(EquipmentDto equipmentDto) {
         Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(),
-                equipmentDto.type(), equipmentDto.location(), equipmentDto.function(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.user(), equipmentDto.allocationDateTime(),
+                equipmentDto.type(), equipmentDto.location(), equipmentDto.function(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.users(), equipmentDto.allocationDateTime(),
                 equipmentDto.returningDateTime(), equipmentDto.statusEquipment(), equipmentDto.finalCondition());
 
         if (equipmentDto.id() != null) {

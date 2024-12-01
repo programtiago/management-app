@@ -9,20 +9,19 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode
 public class User {
 
     @Id
@@ -61,11 +60,14 @@ public class User {
     private String password;
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
     private String updatedAt;
+    @ManyToMany
+    @JoinTable(
+            name = "user_equipment",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
+    private List<Equipment> equipments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private Set<Equipment> equipments;
-
-        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<Equipment> equipments){
+        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, List<Equipment> equipments){
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
