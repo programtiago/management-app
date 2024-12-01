@@ -78,22 +78,4 @@ public class EquipmentServiceImpl implements EquipmentService {
     public EquipmentDto getById(Long id) {
         return equipmentRepository.findById(id).map(equipmentMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("Equipment resource not found with id " + id));
     }
-
-    @Override
-    @Transactional
-    public void assignEquipmentToUser(Long userId, Long equipmentId) {
-        Optional<Equipment> equipmentOpt = equipmentRepository.findByIdAndUsersIsNull(equipmentId);
-
-        if (equipmentOpt.isPresent()){
-            Equipment equipment = equipmentOpt.get();
-            User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User Not found"));
-
-            user.getEquipments().add(equipment);
-            equipment.getUsers().add(user);
-
-            equipmentRepository.save(equipment);
-            userRepository.save(user);
-
-        }
-    }
 }

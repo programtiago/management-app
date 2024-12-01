@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.Shift;
@@ -15,7 +16,6 @@ import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 public record UserDto (
     Long id,
@@ -47,6 +47,7 @@ public record UserDto (
     @NotBlank(message = "The Password is mandatory")
     String password,
     String updatedAt,
+    @JsonIgnore
     List<Equipment> equipments
 ){
     public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt,

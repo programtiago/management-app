@@ -74,14 +74,4 @@ public class EquipmentController {
 
         equipmentService.delete(id);
     }
-
-    @PostMapping("/{userId}/user/{equipmentId}")
-    public ResponseEntity<?> assignEquipmentToUser(@PathVariable Long userId, @PathVariable Long equipmentId){
-        equipmentService.assignEquipmentToUser(userId, equipmentId);
-
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
-
-    }
-
-
 }
