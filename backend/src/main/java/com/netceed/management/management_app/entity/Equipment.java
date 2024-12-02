@@ -39,8 +39,8 @@ public class Equipment {
      */
     @OneToMany(mappedBy = "equipment")
     private Set<UserEquipment> userEquipments = new HashSet<>();
-
-    private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE;
+    @Enumerated(EnumType.STRING)
+    private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,

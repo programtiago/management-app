@@ -9,4 +9,7 @@ public interface UserEquipmentService {
 
     List<UserEquipment> getAll();
     void assignUserToEquipment(Long userId, Long equipmentId);
+    boolean doesEquipmentBelongToUser(Long equipmentId, Long userId);
+    void returnEquipmentFromUser(Long userId, Long equipmentId);
+
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface UserEquipmentRepository extends JpaRepository<UserEquipment, Long> {
     Optional<UserEquipment> findUserEquipmentByEquipmentId(Long equipmentId);
+    boolean existsByEquipmentIdAndUserId(Long equipmentId, Long userId);
 }

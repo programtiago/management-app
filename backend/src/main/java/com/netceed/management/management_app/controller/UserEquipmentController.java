@@ -1,7 +1,9 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.UserEquipment;
+import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
+import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +17,26 @@ import java.util.List;
 public class UserEquipmentController {
 
     private final UserEquipmentServiceImpl userEquipmentService;
+    private final EquipmentServiceImpl equipmentService;
+    private final UserServiceImpl userService;
 
     @GetMapping("/all")
     public ResponseEntity<List<UserEquipment>> getAllAssignments(){
         return ResponseEntity.ok(userEquipmentService.getAll());
     }
 
+    @GetMapping("/checkOwnership")
+    public boolean checkOwnerOfEquipment(@RequestParam Long equipmentId, @RequestParam Long userId){
+        return userEquipmentService.doesEquipmentBelongToUser(equipmentId, userId);
+    }
+
     @PostMapping("/{userId}/equipment/{equipmentId}")
     public void assignUserToEquipment(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
         userEquipmentService.assignUserToEquipment(userId, equipmentId);
+    }
+
+    @DeleteMapping("/{userId}/equipment/{equipmentId}")
+    public void returnEquipmentFromUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
+        userEquipmentService.returnEquipmentFromUser(userId, equipmentId);
     }
 }
