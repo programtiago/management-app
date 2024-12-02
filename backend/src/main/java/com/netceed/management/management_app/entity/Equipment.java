@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 //Class represents a equipment that can be assigned to a Department or a User
 //Ex: Keyboard
@@ -29,17 +30,23 @@ public class Equipment {
     private String goal; //Packaging, Housing, Test, whatever...
     private String unity; //This will be department ??
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    @ManyToMany(mappedBy = "equipments")
+    /*
+    @JoinTable(
+            name = "user_equipment",
+            joinColumns = @JoinColumn(name = "equipment_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
-    private LocalDateTime allocationDateTime;
-    private LocalDateTime returningDateTime; //The equipment can be returned and assigned to another user for example
+     */
+    @OneToMany(mappedBy = "equipment")
+    private Set<UserEquipment> userEquipments = new HashSet<>();
+
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE;
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
                      String model, String type, String location, String goal,
-                     String unity, String registryDate, List<User> users, LocalDateTime allocationDateTime,
-                     LocalDateTime returningDateTime, StatusEquipment statusEquipment, String statusPhysic) {
+                     String unity, String registryDate, Set<UserEquipment> usersEquipments,
+                     StatusEquipment statusEquipment, String statusPhysic) {
         this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
@@ -51,10 +58,13 @@ public class Equipment {
         this.goal = goal;
         this.unity = unity;
         this.registryDate = registryDate;
-        this.users = users;
-        this.allocationDateTime = allocationDateTime;
-        this.returningDateTime = returningDateTime;
+        this.userEquipments = usersEquipments;
         this.statusEquipment = statusEquipment;
         this.statusPhysic = statusPhysic;
+    }
+
+    public void addUserEquipment(UserEquipment userEquipment){
+        userEquipments.add(userEquipment);
+        userEquipment.setEquipment(this);
     }
 }

@@ -19,6 +19,5 @@ public interface UserService {
     User deactivateAccount(Long id);
     User activateAccount(Long id);
     List<UserDto> getUsersByDepartment(Long id);
-    void assignEquipmentToUser(Long userId, Long equipmentId);
 }
 

@@ -16,7 +16,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -60,14 +62,14 @@ public class User {
     private String password;
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
     private String updatedAt;
-    @ManyToMany
-    @JoinTable(
-            name = "user_equipment",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-    private List<Equipment> equipments = new ArrayList<>();
+    /*
+    @ManyToMany(mappedBy = "users")
+    private Set<UserEquipment> equipments = new HashSet<>();
+     */
+    @OneToMany(mappedBy = "user")
+    private Set<UserEquipment> userEquipments = new HashSet<>();
 
-        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, List<Equipment> equipments){
+        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
@@ -81,7 +83,7 @@ public class User {
         this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        this.equipments = equipments;
+        this.userEquipments = equipments;
     }
 
     public User(String firstName, String lastName, LocalDate admissionDate, String email, String password, UserRole userRole){
@@ -112,5 +114,10 @@ public class User {
             this.contactNumber = contactNumber;
             this.password = password;
             this.updatedAt = updatedAt;
+    }
+
+    public void addUserEquipment(UserEquipment userEquipment){
+            userEquipments.add(userEquipment);
+            userEquipment.setUser(this);
     }
 }

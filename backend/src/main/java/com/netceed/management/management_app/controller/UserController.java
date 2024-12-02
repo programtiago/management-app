@@ -127,9 +127,4 @@ public class UserController {
     public List<UserDto> getUsersByDepartment(@PathVariable Long id){
         return userService.getUsersByDepartment(id);
     }
-
-    @PostMapping("/{userId}/equipment/{equipmentId}")
-    public void assignUserToDepartment(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
-        userService.assignEquipmentToUser(userId, equipmentId);
-    }
 }

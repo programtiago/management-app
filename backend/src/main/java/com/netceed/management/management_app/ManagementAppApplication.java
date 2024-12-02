@@ -1,9 +1,6 @@
 package com.netceed.management.management_app;
 
-import com.netceed.management.management_app.entity.Department;
-import com.netceed.management.management_app.entity.Equipment;
-import com.netceed.management.management_app.entity.Shift;
-import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.*;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.repository.DepartmentRepository;
@@ -14,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +22,7 @@ import java.util.*;
 
 @SpringBootApplication
 @RequiredArgsConstructor
+@EnableWebMvc
 public class ManagementAppApplication implements CommandLineRunner {
 
 	private final UserRepository userRepository;
@@ -48,6 +47,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		List<Shift> shifts = new ArrayList<>(Arrays.asList(generalShift, morningShift, afternoonShift, nightShift));
 
 		shiftRepository.saveAll(shifts);
+
 
 		Department itDepartment = new Department();
 		itDepartment.setValue("IT");
@@ -192,13 +192,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setBrand("Zebra");
 		scanner.setStatusPhysic("New");
 		scanner.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
-		scanner.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 18, 35));
-		scanner.setReturningDateTime(LocalDateTime.now());
 
 		Set<Equipment> scannerEquipment = new HashSet<>();
 		scannerEquipment.add(scanner);
 
-		//user.setEquipments(scannerEquipment);
 		equipmentRepository.saveAll(scannerEquipment);
 		userRepository.saveAll(scannerUsers);
 
@@ -215,13 +212,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setBrand("Toshiba");
 		printer.setStatusPhysic("New");
 		printer.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
-		printer.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 32));
-		printer.setReturningDateTime(LocalDateTime.now());
 
 		Set<Equipment> printerEquipment = new HashSet<>();
 		printerEquipment.add(printer);
 
-		//user2.setEquipments(scannerEquipment);
 		equipmentRepository.saveAll(scannerEquipment);
 		userRepository.saveAll(printerUsers);
 
@@ -238,13 +232,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setBrand("Philips");
 		screen.setStatusPhysic("New");
 		screen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
-		screen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 56));
-		screen.setReturningDateTime(LocalDateTime.now());
 
 		Set<Equipment> screenEquipment = new HashSet<>();
 		screenEquipment.add(screen);
 
-		//user.setEquipments(screenEquipment);
 		equipmentRepository.saveAll(screenEquipment);
 		userRepository.saveAll(screenUsers);
 
@@ -261,13 +252,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setBrand("TP-link");
 		wifiPen.setStatusPhysic("New");
 		wifiPen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
-		wifiPen.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 21));
-		wifiPen.setReturningDateTime(LocalDateTime.now());
 
 		Set<Equipment> wifiPenEquipement = new HashSet<>();
 		wifiPenEquipement.add(wifiPen);
 
-		//user4.setEquipments(wifiPenEquipement);
 		equipmentRepository.saveAll(wifiPenEquipement);
 		userRepository.saveAll(usbAdapterUsers);
 
@@ -284,16 +272,24 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setBrand("Dell");
 		desktop.setStatusPhysic("Used");
 		desktop.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
-		desktop.setAllocationDateTime(LocalDateTime.of(2024, 11, 29, 17, 13));
-		desktop.setReturningDateTime(LocalDateTime.now());
 
 		Set<Equipment> desktopEquipment = new HashSet<>();
 		desktopEquipment.add(desktop);
 
-		//user2.setEquipments(desktopEquipment);
+
+		Set<UserEquipment> setUserEquipment1 = new HashSet<>();
+		UserEquipment userEquipment1 = new UserEquipment();
+		userEquipment1.setEquipment(scanner);
+		userEquipment1.setUser(user2);
+		userEquipment1.setAssignedDate(LocalDateTime.of(12,12,30, 12, 30));
+		userEquipment1.setComments("First equipment assignment");
+		setUserEquipment1.add(userEquipment1);
+
+		scanner.setUserEquipments(setUserEquipment1);
 		equipmentRepository.saveAll(desktopEquipment);
 		userRepository.saveAll(desktopUsers);
 
 		 */
+
 	}
 }

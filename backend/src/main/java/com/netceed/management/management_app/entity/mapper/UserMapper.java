@@ -14,7 +14,7 @@ public class UserMapper {
 
         return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(), user.getDepartment(), user.getWorkStatus(), user.getShift(),
                 user.getRecruitmentCompany(), user.getRegistryDate(), user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getContactNumber(), user.getPassword(),
-                user.getUpdatedAt(), user.getEquipments());
+                user.getUpdatedAt(), user.getUserEquipments());
     }
 
     public User toEntity(UserDto userDto){

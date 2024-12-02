@@ -59,16 +59,14 @@ public class EquipmentServiceImpl implements EquipmentService {
                    equipment.setModel(equipmentDto.model());
                    equipment.setStatusEquipment(equipmentDto.statusEquipment());
                    equipment.setDescription(equipmentDto.description());
-                   equipment.setAllocationDateTime(equipmentDto.allocationDateTime());
                    equipment.setStatusPhysic(equipmentDto.finalCondition());
                    equipment.setGoal(equipmentDto.function());
                    equipment.setMacAddress(equipmentDto.macAddress());
-                   equipment.setReturningDateTime(equipmentDto.returningDateTime());
                    equipment.setLocation(equipmentDto.location());
                    equipment.setSerialNumber(equipmentDto.serialNumber());
                    equipment.setType(equipmentDto.type());
                    equipment.setUnity(equipmentDto.unity());
-                   equipment.setUsers(equipmentDto.users());
+                   equipment.setUserEquipments(equipmentDto.usersEquipments());
 
                     return equipmentRepository.save(equipment);
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));

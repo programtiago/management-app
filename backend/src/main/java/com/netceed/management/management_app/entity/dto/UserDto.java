@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.Shift;
+import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
 import jakarta.persistence.EnumType;
@@ -16,6 +17,7 @@ import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 public record UserDto (
     Long id,
@@ -47,11 +49,11 @@ public record UserDto (
     @NotBlank(message = "The Password is mandatory")
     String password,
     String updatedAt,
-    @JsonIgnore
-    List<Equipment> equipments
+
+    Set<UserEquipment> userEquipments
 ){
     public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt,
-                   List<Equipment> equipments) {
+                   Set<UserEquipment> userEquipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -69,6 +71,6 @@ public record UserDto (
         this.contactNumber = contactNumber;
         this.password = password;
         this.updatedAt = updatedAt;
-        this.equipments = equipments;
+        this.userEquipments = userEquipments;
     }
 }

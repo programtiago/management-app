@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
@@ -115,21 +116,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)
                 .toList();
-    }
-
-    @Override
-    public void assignEquipmentToUser(Long userId, Long equipmentId) {
-        User user = userRepository.findById(userId).orElseThrow();
-
-        EquipmentDto equipmentDto = equipmentMapper.toDto(equipmentRepository.findById(equipmentId).orElseThrow());
-
-        if (!equipmentDto.users().isEmpty()){
-            throw new IllegalArgumentException("This equipment is already assigned !");
-        }
-
-        equipmentDto.users().add(user);
-        user.setEquipments(List.of(equipmentMapper.toEntity(equipmentDto)));
-        equipmentRepository.save(equipmentMapper.toEntity(equipmentDto));
     }
 
 }
