@@ -53,7 +53,7 @@ export class UserFormComponent implements OnInit{
         lastName: res.lastName,
         birthdatyDate: res.birthdayDate,
         workNumber: res.workNumber,
-        department: res.department,
+        department: res.department.description,
         userRole: res.userRole,
         email: res.email,
         contactNumber: res.contactNumber,

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { Department } from '../../model/department';
 import { Equipment } from '../../model/equiment';
+import { UserEquipment } from '../../model/user-equipment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class AdminService {
   private readonly BASE_API_URL_USERS = '/api/v1/users'
   private readonly BASE_API_URL_DEPARTMENTS = '/api/v1/departments'
   private readonly BASE_API_URL_EQUIPMENTS = '/api/v1/equipments'
+  private readonly BASE_API_URL_USER_EQUIPMENTS = '/api/v1/user-equipments'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -62,7 +64,11 @@ export class AdminService {
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all`).pipe(first())
   }
 
-  assignEquipmentToUser(userId: number, equipmentId: number){
-    return this.httpClient.post(`${this.BASE_API_URL_USERS}/`+userId+`/equipment/${equipmentId}`, {})
+  getEquipmentById(equipmentId: number):Observable<Equipment>{
+    return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
+  }
+
+  assignEquipmentToUser(userId: number, equipmentId: number): Observable<UserEquipment>{
+    return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`, {})
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../model/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit{
   }
 
   onAdd(){
-    this.router.navigate(['new'], {relativeTo: this.route})
+      this.router.navigate(['admin/new'])
   }
 
   onChangeUserStatus(user: User){
@@ -101,7 +101,7 @@ export class UsersListComponent implements OnInit{
   }
 
   onUpdate(userId: number){
-    this.router.navigate(['edit', userId], {relativeTo: this.route});
+    this.router.navigate(['admin/edit', userId]);
   }
 
   onDelete(userId: number){

@@ -8,10 +8,10 @@ import { DepartmentsComponent } from './departments/departments.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},
-  { path: 'users/all', component: UsersComponent},
-  { path: 'user/new', component: MultiformsComponent},
-  { path: 'edit/user/:id', component: UserFormComponent},
-  { path: 'departments/all', component: DepartmentsComponent}
+  { path: 'users', component: UsersComponent},
+  { path: 'new', component: MultiformsComponent},
+  { path: 'edit/:id', component: UserFormComponent},
+  { path: 'departments', component: DepartmentsComponent}
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import java.util.Set;
 
 public record EquipmentDto(Long id, String description, String serialNumber, String macAddress,
                            String brand, String model, String type, String location, String function,
-                           String unity, String registryDate, @JsonIgnore Set<UserEquipment> usersEquipments,
+                           String unity, String registryDate, Set<UserEquipment> usersEquipments,
                            StatusEquipment statusEquipment, String finalCondition) { }
 
 

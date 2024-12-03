@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import jakarta.persistence.*;
 import lombok.Data;

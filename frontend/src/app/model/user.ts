@@ -1,3 +1,4 @@
+import { Department } from "./department"
 import { UserRole } from "./userRole"
 
 export interface User {
@@ -6,7 +7,7 @@ export interface User {
     lastName: string,
     workNumber: number,
     birthdayDate?: string,
-    department: string,
+    department: Department,
     admissionDate: string,
     registryDate: string,
     isActive: boolean,

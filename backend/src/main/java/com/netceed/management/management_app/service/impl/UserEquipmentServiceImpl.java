@@ -4,7 +4,9 @@ import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
 import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
+import com.netceed.management.management_app.entity.mapper.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.repository.EquipmentRepository;
@@ -25,6 +27,7 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
     private final UserMapper userMapper;
+    private final UserEquipmentMapper userEquipmentMapper;
     private final EquipmentMapper equipmentMapper;
 
     @Override
@@ -33,19 +36,22 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
     }
 
     @Override
-    public void assignUserToEquipment(Long userId, Long equipmentId) {
+    public UserEquipment assignUserToEquipment(Long userId, Long equipmentId) {
             UserDto userDto = userMapper.toDto(userRepository.findById(userId).orElseThrow());
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
             UserEquipment userEquipment = new UserEquipment();
 
             Optional<UserEquipment> userEquipmentFound = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId);
+            //UserEquipmentDto userEquipmentDto = null;
 
-            if (userEquipmentFound.isEmpty()){
+        if (userEquipmentFound.isEmpty()){
                 userEquipment.setAssignedDate(LocalDateTime.now());
                 userEquipment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber() + " assigned at " + userEquipment.getAssignedDate());
                 userEquipment.setEquipment(equipment);
                 userEquipment.setUser(userMapper.toEntity(userDto));
+                //userEquipmentDto = userEquipmentMapper.toDto(userEquipment);
+                System.out.println(userEquipment);
 
                 userEquipmentRepository.save(userEquipment);
 
@@ -60,19 +66,15 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
             if (userEquipmentFound.isPresent()){
                 throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
             }
-    }
 
-    @Override
-    public boolean doesEquipmentBelongToUser(Long equipmentId, Long userId) {
-        return userEquipmentRepository.existsByEquipmentIdAndUserId(equipmentId, userId);
+            return userEquipment;
     }
 
     @Override
     public void returnEquipmentFromUser(Long userId, Long equipmentId) {
-        User user = userRepository.findById(userId).orElseThrow();
         Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
-        UserEquipment userEquipment = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId).orElseThrow();
+        UserEquipment userEquipment = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId).orElseThrow(); //this will allow to catch the id of the object by giving equipmentId and userId and delete
 
         boolean equipmentBelongsToUser = userEquipmentRepository.existsByEquipmentIdAndUserId(equipmentId, userId);
 
@@ -80,7 +82,7 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
             throw new IllegalArgumentException("The id equipment id " + equipmentId + " doesn't belong to the user id " + userId);
         }
 
-        equipment.setStatusEquipment(StatusEquipment.AVAILABLE);
+        equipment.setStatusEquipment(StatusEquipment.AVAILABLE); //changes the status of the object given
         equipmentRepository.save(equipment);
         userEquipmentRepository.deleteById(userEquipment.getId());
 

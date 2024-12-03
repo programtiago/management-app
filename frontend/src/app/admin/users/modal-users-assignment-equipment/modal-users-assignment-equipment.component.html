@@ -1,22 +1,52 @@
 <mat-toolbar style="display: flex; align-content: center; justify-content: center;" color="primary">
     Assign Equipment
 </mat-toolbar>
-<mat-card style="width: 80; display: flex;">
-    <mat-card-content style="max-width: 55%;">
-        <mat-form-field style="max-width: 100%; display: flex;">
-            <mat-label>Equipment</mat-label>
+<mat-card>
+    <mat-card-content>
+        <mat-form-field class="full-width">
+            <mat-label>Select Equipment</mat-label>
             <mat-select #equipmentValue (selectionChange)="changeEquipment($event.value)">
               @for (equipment of equipments; track equipments) {
                 <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
               }
             </mat-select>
           </mat-form-field>  
-          <p>{{data.firstName}}</p>  
-          <p>{{data.lastName}}</p>  
-          <p>{{data.workNumber}}</p>  
     </mat-card-content>
-    <mat-card-actions>
-        <button (click)="onConfirm()" mat-raised-button color="primary">Confirm</button>
-        <button mat-raised-button color="warn">Cancel</button>
+</mat-card>
+<mat-card *ngIf="canLoadInformationCardAssignment" style="display: flex; align-content: center; justify-content: center;">
+  <mat-card-header style="display: table-row; justify-content: center; align-content: center;">
+    <mat-card-title style="display: flex; justify-content: center; align-content: center;">Overview of assignment</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+      <div class="card-assignment-information" style="justify-content: center; align-content: center;">
+        <mat-card>
+          <div class="card-equipment-information">
+            <p>Marca: {{selectedEquipment.brand}}</p>
+            <p>Modelo: {{selectedEquipment.model}}</p>
+            <p>S/N: {{selectedEquipment.serialNumber}}</p>
+            <p>Unidade: {{selectedEquipment.unity}}</p>
+          </div>
+        </mat-card>
+        
+        <mat-card>
+          <div class="card-user-information">
+            <p>Nome: {{data.firstName + data.lastName}}</p>
+            <p>Número de Colaborador: {{data.workNumber}}</p>
+            <p>Departamento: {{data.department.value}}</p>
+            <p>Email: {{data.email}}</p>
+          </div>
+        </mat-card>
+    </div>
+  </mat-card-content>
+
+  <ng-template>
+    <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+    <mat-card-actions  style="justify-content: center; align-content: center">
+        <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
+        <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
     </mat-card-actions>
 </mat-card>

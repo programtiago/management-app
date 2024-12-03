@@ -1,3 +1,5 @@
+import { UserEquipment } from "./user-equipment";
+
 export interface Equipment{
     id: number,
     description: string,
@@ -12,5 +14,6 @@ export interface Equipment{
     allocationDateTime: Date,
     returningDateTime: Date,
     statusEquipment: string,
-    finalCondition: string
+    finalCondition: string,
+    userEquipments: UserEquipment[]
 }
