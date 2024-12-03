@@ -29,12 +29,12 @@ export class UsersListComponent implements OnInit{
     'userRole',  'email', 'contactNumber', 'birthdayDate', 'actions'
   ]
 
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
+  constructor(private router: Router, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
-    
+   
   }
 
   onError(errorMsg: string){
@@ -128,7 +128,7 @@ export class UsersListComponent implements OnInit{
 
     openMenuForEquipmentAssignment(user: User){
       const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
-        height: '550px',
+        height: '200px',
         width: '750px',
         data: user
       });

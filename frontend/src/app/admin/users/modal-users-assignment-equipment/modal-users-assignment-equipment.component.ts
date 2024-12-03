@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../model/user';
 import { AdminService } from '../../services/admin.service';
@@ -70,6 +70,7 @@ export class ModalUsersAssignmentEquipmentComponent {
         this.selectedEquipment = res;
         if (res.id != null)
           this.canLoadInformationCardAssignment = true
+          this.dialogRef.updateSize('750px', '550px') //if loads the equipment information withou error updates modal size
       })
       console.log(this.canLoadInformationCardAssignment)
     }
