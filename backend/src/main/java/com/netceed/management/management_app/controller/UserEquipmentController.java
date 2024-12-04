@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/user-equipments")
@@ -23,8 +24,14 @@ public class UserEquipmentController {
     }
 
     @PostMapping("/{userId}/equipment/{equipmentId}")
-    public ResponseEntity<UserEquipment> assignUserToEquipment(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
-        return ResponseEntity.ok(userEquipmentService.assignUserToEquipment(userId, equipmentId));
+    public ResponseEntity<UserEquipment> assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
+        return ResponseEntity.ok(userEquipmentService.assignEquipmentToUser(userId, equipmentId));
+    }
+
+    @PostMapping("/{userId}/equipments")
+    public ResponseEntity<List<UserEquipment>> assignMultipleEquipmentsToUser(@PathVariable @Param("userId") Long userId, @RequestBody List<Long> equipmentsId){
+        List<UserEquipment> userEquipments = userEquipmentService.assignEquipmentsToUser(userId, equipmentsId);
+        return ResponseEntity.ok(userEquipments);
     }
 
     @DeleteMapping("/{userId}/equipment/{equipmentId}")

@@ -2,7 +2,6 @@ package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
-import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/equipments")

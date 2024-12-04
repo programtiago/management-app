@@ -4,9 +4,6 @@ import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserDto;
-import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
-import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
-import com.netceed.management.management_app.entity.mapper.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.repository.EquipmentRepository;
@@ -17,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserEquipmentServiceImpl implements UserEquipmentService {
@@ -27,8 +26,6 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
     private final UserMapper userMapper;
-    private final UserEquipmentMapper userEquipmentMapper;
-    private final EquipmentMapper equipmentMapper;
 
     @Override
     public List<UserEquipment> getAll() {
@@ -36,29 +33,26 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
     }
 
     @Override
-    public UserEquipment assignUserToEquipment(Long userId, Long equipmentId) {
+    public UserEquipment assignEquipmentToUser(Long userId, Long equipmentId) {
             UserDto userDto = userMapper.toDto(userRepository.findById(userId).orElseThrow());
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
             UserEquipment userEquipment = new UserEquipment();
 
             Optional<UserEquipment> userEquipmentFound = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId);
-            //UserEquipmentDto userEquipmentDto = null;
 
         if (userEquipmentFound.isEmpty()){
                 userEquipment.setAssignedDate(LocalDateTime.now());
                 userEquipment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber() + " assigned at " + userEquipment.getAssignedDate());
                 userEquipment.setEquipment(equipment);
                 userEquipment.setUser(userMapper.toEntity(userDto));
-                //userEquipmentDto = userEquipmentMapper.toDto(userEquipment);
-                System.out.println(userEquipment);
 
                 userEquipmentRepository.save(userEquipment);
-
                 equipment.getUserEquipments().add(userEquipment);
-                userDto.userEquipments().add(userEquipment);
 
+                userDto.userEquipments().add(userEquipment);
                 userRepository.save(userMapper.toEntity(userDto));
+
                 equipment.setStatusEquipment(StatusEquipment.IN_USE);
                 equipmentRepository.save(equipment);
             }
@@ -68,6 +62,32 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
             }
 
             return userEquipment;
+    }
+
+    //Assign multiple equipments object to a user object
+    @Override
+    public List<UserEquipment> assignEquipmentsToUser(Long userId, List<Long> equipmentsId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        List<UserEquipment> userEquipments = new ArrayList<>(); //List to store each object of User Equipment.
+
+        if (userOpt.isPresent()){
+            User user = userOpt.get();
+            for (Long equipmentId : equipmentsId){ //For each given id on the List<Long>
+                Optional<Equipment> equipmentOpt = equipmentRepository.findById(equipmentId);
+                if (equipmentOpt.isPresent()){ //Checks if the given id it's present on the db
+                    Equipment equipment = equipmentOpt.get();
+
+                    UserEquipment userEquipment = new UserEquipment(); //object instanciate each assignment
+
+                    userEquipment.setUser(user);
+                    userEquipment.setEquipment(equipment);
+                    userEquipment.setAssignedDate(LocalDateTime.now());
+                    userEquipments.add(userEquipment);
+                }
+            }
+        }
+
+        return userEquipmentRepository.saveAll(userEquipments); //save the collectiont that holds all the user equipment objects
     }
 
     @Override

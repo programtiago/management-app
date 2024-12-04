@@ -1,14 +1,14 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.UserEquipment;
-import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
 
 import java.util.List;
 
 public interface UserEquipmentService {
 
     List<UserEquipment> getAll();
-    UserEquipment assignUserToEquipment(Long userId, Long equipmentId);
+    UserEquipment assignEquipmentToUser(Long userId, Long equipmentId);
+    List<UserEquipment> assignEquipmentsToUser(Long userId, List<Long> equipmentsId);
     void returnEquipmentFromUser(Long userId, Long equipmentId);
 
 }
