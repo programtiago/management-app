@@ -16,6 +16,7 @@ import { DepartmentFormComponent } from './departments/department-form/departmen
 import { DepartmentsListComponent } from './departments/departments-list/departments-list.component';
 import { ModalInfoDeleteComponent } from './departments/modal-info-delete/modal-info-delete.component';
 import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assignment-equipment/modal-users-assignment-equipment.component';
+import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,9 @@ import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assi
     AdminRoutingModule,
     AppMaterialModule,
     SharedModule
+  ],
+  providers: [
+    //{provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions}
   ]
 })
 export class AdminModule { }

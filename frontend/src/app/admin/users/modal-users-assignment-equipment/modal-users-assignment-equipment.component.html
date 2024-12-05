@@ -3,14 +3,30 @@
 </mat-toolbar>
 <mat-card>
     <mat-card-content>
-        <mat-form-field class="full-width">
+      <div *ngIf="!canChooseMultipleEquipments" >
+        <mat-form-field appearance="fill" class="full-width">
             <mat-label>Select Equipment</mat-label>
-            <mat-select #equipmentValue (selectionChange)="changeEquipment($event.value)">
+            <mat-select [formControl]="cMultiCtrl" #equipmentValue (selectionChange)="changeEquipment($event.value)" required>
               @for (equipment of equipments; track equipments) {
                 <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
               }
             </mat-select>
-          </mat-form-field>  
+          </mat-form-field>
+          <button color="primary" mat-mini-fab (click)="clear()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
+        </div>  
+          
+        <div *ngIf="canChooseMultipleEquipments">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Select Equipment</mat-label>
+            <mat-select #equipmentValue (selectionChange)="changeEquipment($event.value)" multiple>
+              @for (equipment of equipments; track equipments) {
+                <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field> 
+          <button color="primary" mat-mini-fab (click)="clear()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
+        </div>  
+          <mat-checkbox (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
 </mat-card>
 <mat-card *ngIf="canLoadInformationCardAssignment" style="display: flex; align-content: center; justify-content: center;">
@@ -20,7 +36,7 @@
   <mat-card-content>
       <div class="card-assignment-information" style="justify-content: center; align-content: center;">
         <mat-card>
-          <div class="card-equipment-information">
+          <div *ngIf="!wasClaredMatSelect" class="card-equipment-information">
             <p>Marca: {{selectedEquipment.brand}}</p>
             <p>Modelo: {{selectedEquipment.model}}</p>
             <p>S/N: {{selectedEquipment.serialNumber}}</p>
