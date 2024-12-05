@@ -18,7 +18,7 @@
         <div *ngIf="canChooseMultipleEquipments">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Select Equipment</mat-label>
-            <mat-select #equipmentValue (selectionChange)="changeEquipment($event.value)" multiple>
+            <mat-select [(value)]="selectedMultipleEquipmentsIds" #equipmentValue (selectionChange)="changeMultipleEquipment($event.value)" multiple>
               @for (equipment of equipments; track equipments) {
                 <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
               }
@@ -29,39 +29,65 @@
           <mat-checkbox (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
 </mat-card>
-<mat-card *ngIf="canLoadInformationCardAssignment && !wasClaredMatSelect" style="display: flex; align-content: center; justify-content: center;">
-  <mat-card-header style="display: table-row; justify-content: center; align-content: center;">
-    <mat-card-title style="display: flex; justify-content: center; align-content: center;">Overview of assignment</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-      <div class="card-assignment-information" style="justify-content: center; align-content: center;">
-        <mat-card>
-          <div class="card-equipment-information">
-            <p>Marca: {{selectedEquipment.brand}}</p>
-            <p>Modelo: {{selectedEquipment.model}}</p>
-            <p>S/N: {{selectedEquipment.serialNumber}}</p>
-            <p>Unidade: {{selectedEquipment.unity}}</p>
-          </div>
-        </mat-card>
-        
-        <mat-card>
-          <div class="card-user-information">
-            <p>Nome: {{data.firstName + data.lastName}}</p>
-            <p>Número de Colaborador: {{data.workNumber}}</p>
-            <p>Departamento: {{data.department.value}}</p>
-            <p>Email: {{data.email}}</p>
-          </div>
-        </mat-card>
-    </div>
-  </mat-card-content>
-  
+<div *ngIf="!canChooseMultipleEquipments">
+  <mat-card *ngIf="canLoadInformationCardAssignment && !wasClearedMatSelect" style="display: flex; align-content: center; justify-content: center;">
+    <mat-card-header style="display: table-row; justify-content: center; align-content: center;">
+      <mat-card-title style="display: flex; justify-content: center; align-content: center;">Overview of assignment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="card-assignment-information" style="justify-content: center; align-content: center;">
+          <mat-card>
+            <div class="card-equipment-information">
+              <p>Brand: {{selectedEquipment.brand}}</p>
+              <p>Model: {{selectedEquipment.model}}</p>
+              <p>S/N: {{selectedEquipment.serialNumber}}</p>
+              <p>Unity: {{selectedEquipment.unity}}</p>
+            </div>
+          </mat-card>
+          
+          <mat-card>
+            <div class="card-user-information">
+              <p>Name: {{data.firstName + " " + data.lastName}}</p>
+              <p>Work Number: {{data.workNumber}}</p>
+              <p>Department: {{data.department.value}}</p>
+              <p>Email: {{data.email}}</p>
+            </div>
+          </mat-card>
+      </div>
+    </mat-card-content>
     <mat-card-actions style="justify-content: center; align-content: center">
-        <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
-        <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
-    </mat-card-actions>
-</mat-card>
-<mat-card *ngIf="wasClaredMatSelect" >
+      <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
+      <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
+  </mat-card-actions>   
+  </mat-card>
+</div>
+<div *ngIf="canChooseMultipleEquipments && canLoadInformationCardAssignment">
+  <mat-card *ngFor="let selectedEquipment of selectedMultipleEquipmentsList">
+    <div class="card-equipment-information">
+      <p>Brand: {{selectedEquipment.brand}}</p>
+      <p>Model: {{selectedEquipment.model}}</p>
+      <p>S/N: {{selectedEquipment.serialNumber}}</p>
+      <p>Unity: {{selectedEquipment.unity}}</p>
+    </div>
+  </mat-card>
+  
+  <mat-card>
+    <div class="card-user-information">
+      <p>Name: {{data.firstName + " " + data.lastName}}</p>
+      <p>Work Number: {{data.workNumber}}</p>
+      <p>Department: {{data.department.value}}</p>
+      <p>Email: {{data.email}}</p>
+    </div>
+  </mat-card>
+  <mat-card-actions style="justify-content: center; align-content: center">
+    <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
+    <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
+</mat-card-actions>   
+</div>
+<!---
+<mat-card *ngIf="wasClearedMatSelect">
   <mat-card-content style="display: flex; align-content: center; justify-content: center; color: red;">
     <h2>No equipment selected at the moment...</h2>
   </mat-card-content>
 </mat-card>
+-->

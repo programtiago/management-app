@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
 import { first, Observable } from 'rxjs';
@@ -68,7 +68,17 @@ export class AdminService {
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
   }
 
+  getMultipleEquipmenstByIds(equipmentIds: number[]): Observable<Equipment[]>{
+    return this.httpClient.post<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/multipleEquipments`, equipmentIds);
+  }
+
   assignEquipmentToUser(userId: number, equipmentId: number): Observable<UserEquipment>{
     return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`, {})
+  }
+
+  assignMultipleEquipmentsToUser(userId: number, equipmentsValues: any[]): Observable<UserEquipment[]>{
+    return this.httpClient.post<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`, {
+      equipmentsValues
+    })
   }
 }
