@@ -72,4 +72,9 @@ public class EquipmentController {
 
         equipmentService.delete(id);
     }
+
+    @GetMapping("/multipleEquipments")
+    public ResponseEntity<List<EquipmentDto>> findEquipmentsByIds(@RequestBody List<Long> equipmentsId){
+        return ResponseEntity.ok(equipmentService.findEquipmentsByIds(equipmentsId));
+    }
 }

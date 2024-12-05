@@ -14,10 +14,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,5 +72,21 @@ public class EquipmentServiceImpl implements EquipmentService {
     @Override
     public EquipmentDto getById(Long id) {
         return equipmentRepository.findById(id).map(equipmentMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("Equipment resource not found with id " + id));
+    }
+
+    @Override
+    public List<EquipmentDto> findEquipmentsByIds(List<Long> equipmentsId) {
+        List<EquipmentDto> equipmentsFound = new ArrayList<>();
+
+        for (Long equipmentId : equipmentsId) {
+            Optional<Equipment> equipmentOptional = equipmentRepository.findById(equipmentId);
+
+            if (equipmentOptional.isPresent()){
+                Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
+                equipmentsFound.add(equipmentMapper.toDto(equipment));
+            }
+
+        }
+        return equipmentsFound;
     }
 }

@@ -14,5 +14,6 @@ public interface EquipmentService {
     boolean serialNumberExists(String serialNumber);
     Equipment update(EquipmentDto equipment, Long id);
     EquipmentDto getById(Long id);
+    List<EquipmentDto> findEquipmentsByIds(List<Long> equipemntsId);
 
 }

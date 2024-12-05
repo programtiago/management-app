@@ -11,4 +11,5 @@ import java.util.Set;
 @Repository
 public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     Optional<Equipment> findBySerialNumber(String serialNumber);
+    List<Equipment> findAllByIdIn(List<Long> equipmentsId);
 }
