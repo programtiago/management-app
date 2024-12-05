@@ -29,14 +29,14 @@
           <mat-checkbox (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
 </mat-card>
-<mat-card *ngIf="canLoadInformationCardAssignment" style="display: flex; align-content: center; justify-content: center;">
+<mat-card *ngIf="canLoadInformationCardAssignment && !wasClaredMatSelect" style="display: flex; align-content: center; justify-content: center;">
   <mat-card-header style="display: table-row; justify-content: center; align-content: center;">
     <mat-card-title style="display: flex; justify-content: center; align-content: center;">Overview of assignment</mat-card-title>
   </mat-card-header>
   <mat-card-content>
       <div class="card-assignment-information" style="justify-content: center; align-content: center;">
         <mat-card>
-          <div *ngIf="!wasClaredMatSelect" class="card-equipment-information">
+          <div class="card-equipment-information">
             <p>Marca: {{selectedEquipment.brand}}</p>
             <p>Modelo: {{selectedEquipment.model}}</p>
             <p>S/N: {{selectedEquipment.serialNumber}}</p>
@@ -54,15 +54,14 @@
         </mat-card>
     </div>
   </mat-card-content>
-
-  <ng-template>
-    <div class="loading-spinner">
-        <mat-spinner></mat-spinner>
-    </div>
-  </ng-template>
-
-    <mat-card-actions  style="justify-content: center; align-content: center">
+  
+    <mat-card-actions style="justify-content: center; align-content: center">
         <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
         <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
     </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="wasClaredMatSelect" >
+  <mat-card-content style="display: flex; align-content: center; justify-content: center; color: red;">
+    <h2>No equipment selected at the moment...</h2>
+  </mat-card-content>
 </mat-card>
