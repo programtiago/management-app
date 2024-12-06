@@ -1,1 +1,42 @@
-<p>modal-information-equipment-user-owner works!</p>
+<h2 mat-dialog-title>Table in Modal</h2>
+<mat-dialog-content>
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let equipment"> {{equipment.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Brand </th>
+        <td mat-cell *matCellDef="let equipment"> {{equipment.brand}} </td>
+      </ng-container>
+  
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model </th>
+      <td mat-cell *matCellDef="let equipment"> {{equipment.model}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="serialNumber">
+      <th mat-header-cell *matHeaderCellDef> S/N </th>
+      <td mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let equipment"> {{equipment.statusEquipment}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="registryDate">
+        <th mat-header-cell *matHeaderCellDef> Registry Date </th>
+        <td mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </td>
+    </ng-container>
+  
+
+    <tr mat-header-row *matHeaderRowDef="['brand', 'model', 'serialNumber', 'status', 'registryDate']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['brand', 'model', 'serialNumber', 'status', 'registryDate'];"></tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onClose()">Close</button>
+</mat-dialog-actions>

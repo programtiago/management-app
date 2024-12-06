@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-deleteuser-info.component';
 import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
+import { ModalInformationEquipmentUserOwnerComponent } from '../modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 
 @Component({
   selector: 'app-users-list',
@@ -132,5 +133,12 @@ export class UsersListComponent implements OnInit{
         width: '750px',
         data: user
       });
+    }
+
+    openModalViewEquipmentUserOwner(){
+      this.dialog.open(ModalInformationEquipmentUserOwnerComponent, {
+        width: '600px',
+        data: "afsa"
+      })
     }
 }
