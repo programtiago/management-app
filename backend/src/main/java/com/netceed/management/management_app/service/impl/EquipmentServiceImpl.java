@@ -6,6 +6,7 @@ import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
+import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -88,5 +89,12 @@ public class EquipmentServiceImpl implements EquipmentService {
 
         }
         return equipmentsFound;
+    }
+
+    @Override
+    public List<EquipmentDto> getEquipmentsAvailable() {
+       List<Equipment> equipments = equipmentRepository.findAllByStatusEquipment(StatusEquipment.AVAILABLE);
+
+       return equipmentMapper.convertListEquipmentToDto(equipments);
     }
 }

@@ -15,5 +15,6 @@ public interface EquipmentService {
     Equipment update(EquipmentDto equipment, Long id);
     EquipmentDto getById(Long id);
     List<EquipmentDto> findEquipmentsByIds(List<Long> equipemntsId);
+    List<EquipmentDto> getEquipmentsAvailable();
 
 }

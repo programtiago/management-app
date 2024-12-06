@@ -5,6 +5,9 @@ import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class EquipmentMapper {
 
@@ -27,5 +30,16 @@ public class EquipmentMapper {
             equipment.setId(equipmentDto.id());
         }
         return equipment;
+    }
+
+    public List<EquipmentDto> convertListEquipmentToDto(List<Equipment> equipments){
+        List<EquipmentDto> equipmentDtos = new ArrayList<>();
+        for (Equipment equipment : equipments){
+            EquipmentDto equipmentDto = new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
+                    equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getGoal(), equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(),
+                    equipment.getStatusEquipment(), equipment.getStatusPhysic());
+            equipmentDtos.add(equipmentDto);
+        }
+        return equipmentDtos;
     }
 }

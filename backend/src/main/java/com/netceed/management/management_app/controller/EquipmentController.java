@@ -31,6 +31,17 @@ public class EquipmentController {
         return ResponseEntity.ok(equipmentFound);
     }
 
+    @GetMapping("/all-available")
+    public ResponseEntity<List<EquipmentDto>> getAllEquipmentsAvailable(){
+        List<EquipmentDto> equipmentsAvailableFound = equipmentService.getEquipmentsAvailable();
+
+        if (equipmentsAvailableFound.isEmpty()){
+            throw new RuntimeException("No equipments available to list");
+        }
+
+        return ResponseEntity.ok(equipmentsAvailableFound);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<EquipmentDto> getById(@PathVariable Long id){
         if (equipmentService.getById(id) ==  null){
@@ -73,7 +84,7 @@ public class EquipmentController {
         equipmentService.delete(id);
     }
 
-    @GetMapping("/multipleEquipments")
+    @PostMapping("/multipleEquipments")
     public ResponseEntity<List<EquipmentDto>> findEquipmentsByIds(@RequestBody List<Long> equipmentsId){
         return ResponseEntity.ok(equipmentService.findEquipmentsByIds(equipmentsId));
     }
