@@ -19,7 +19,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class ModalUsersAssignmentEquipmentComponent {
 
-  equipments: Equipment[] = [];
+  equipmentsAvailable: Equipment[] = [];
   selectedEquipment!: Equipment;
 
   userEquipment!: UserEquipment;
@@ -48,8 +48,8 @@ export class ModalUsersAssignmentEquipmentComponent {
         data = res;
       })
 
-      this.adminService.getEquipments().subscribe((res) => {
-        this.equipments = res;
+      this.adminService.getEquipmentsAvailable().subscribe((res) => {
+        this.equipmentsAvailable = res;
       });
     }
 

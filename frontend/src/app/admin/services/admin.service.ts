@@ -64,6 +64,10 @@ export class AdminService {
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all`).pipe(first())
   }
 
+  getEquipmentsAvailable(){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all-available`)
+  }
+
   getEquipmentById(equipmentId: number):Observable<Equipment>{
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
   }
