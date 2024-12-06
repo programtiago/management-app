@@ -18,19 +18,19 @@
         <div *ngIf="canChooseMultipleEquipments">
           <mat-form-field appearance="fill" class="full-width">
             <mat-label>Select Equipment</mat-label>
-            <mat-select [(value)]="selectedMultipleEquipmentsIds" #equipmentValue (selectionChange)="changeMultipleEquipment($event.value)" multiple>
+            <mat-select [formControl]="cMultiCtrl" [(value)]="selectedMultipleEquipmentsIds" #equipmentValue (selectionChange)="changeMultipleEquipment($event.value)" multiple>
               @for (equipment of equipments; track equipments) {
                 <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
               }
             </mat-select>
           </mat-form-field> 
-          <button color="primary" mat-mini-fab (click)="clear()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
+          <button color="primary" mat-mini-fab (click)="clearMultipleSelection()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
         </div>  
           <mat-checkbox (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
 </mat-card>
 <div *ngIf="!canChooseMultipleEquipments">
-  <mat-card *ngIf="canLoadInformationCardAssignment && !wasClearedMatSelect" style="display: flex; align-content: center; justify-content: center;">
+  <mat-card *ngIf="canLoadInformationCardAssignment && this.cMultiCtrl.value != null" style="display: flex; align-content: center; justify-content: center;">
     <mat-card-header style="display: table-row; justify-content: center; align-content: center;">
       <mat-card-title style="display: flex; justify-content: center; align-content: center;">Overview of assignment</mat-card-title>
     </mat-card-header>
@@ -61,7 +61,7 @@
   </mat-card-actions>   
   </mat-card>
 </div>
-<div *ngIf="canChooseMultipleEquipments && canLoadInformationCardAssignment">
+<div *ngIf="canChooseMultipleEquipments && canLoadInformationCardAssignment && this.cMultiCtrl.value != null">
   <mat-card *ngFor="let selectedEquipment of selectedMultipleEquipmentsList">
     <div class="card-equipment-information">
       <p>Brand: {{selectedEquipment.brand}}</p>
@@ -84,8 +84,8 @@
     <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
 </mat-card-actions>   
 </div>
-<!---
-<mat-card *ngIf="wasClearedMatSelect">
+<!--
+<mat-card *ngIf="equipments == null">
   <mat-card-content style="display: flex; align-content: center; justify-content: center; color: red;">
     <h2>No equipment selected at the moment...</h2>
   </mat-card-content>

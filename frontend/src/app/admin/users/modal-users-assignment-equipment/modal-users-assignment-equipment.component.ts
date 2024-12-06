@@ -56,6 +56,15 @@ export class ModalUsersAssignmentEquipmentComponent {
     clear(){
       this.cMultiCtrl.reset();
       this.wasClearedMatSelect = true;
+      this.dialogRef.updateSize('750px', '250px') 
+    }
+
+    clearMultipleSelection(){
+      this.cMultiCtrl.reset(); 
+      if (this.cMultiCtrl.value == null){
+        this.dialogRef.updateSize('750px', '250px') 
+        this.canLoadInformationCardAssignment = false
+      }
     }
   
     onError(errorMsg: string){
@@ -115,18 +124,12 @@ export class ModalUsersAssignmentEquipmentComponent {
             this.canLoadInformationCardAssignment = true
           })
       }
-      this.dialogRef.updateSize('750px', '850px') //if loads the equipment information withou error updates modal size
+      this.dialogRef.updateSize('750px', '600px') //if loads the equipment information withou error updates modal size
     }
 
      //For choosing multiple equipments 
     changeMultipleEquipment(value: number[]){
       this.selectedMultipleEquipmentsIds = value
-      console.log(this.selectedMultipleEquipmentsIds)
-
-        if (this.wasClearedMatSelect){
-          this.wasClearedMatSelect = false;
-        }
-
         if (this.canChooseMultipleEquipments){
           this.adminService.getMultipleEquipmenstByIds(this.selectedMultipleEquipmentsIds).subscribe({
             next: (res) => {
