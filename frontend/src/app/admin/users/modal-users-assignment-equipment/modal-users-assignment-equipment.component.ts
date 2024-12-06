@@ -56,13 +56,13 @@ export class ModalUsersAssignmentEquipmentComponent {
     clear(){
       this.cMultiCtrl.reset();
       this.wasClearedMatSelect = true;
-      this.dialogRef.updateSize('750px', '250px') 
+      this.dialogRef.updateSize('750px', '400px') 
     }
 
     clearMultipleSelection(){
       this.cMultiCtrl.reset(); 
       if (this.cMultiCtrl.value == null){
-        this.dialogRef.updateSize('750px', '250px') 
+        this.dialogRef.updateSize('750px', '400px') 
         this.canLoadInformationCardAssignment = false
       }
     }

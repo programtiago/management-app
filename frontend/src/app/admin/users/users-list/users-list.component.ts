@@ -128,7 +128,7 @@ export class UsersListComponent implements OnInit{
 
     openMenuForEquipmentAssignment(user: User){
       const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
-        height: '270px',
+        height: '400px',
         width: '750px',
         data: user
       });
