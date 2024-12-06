@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
-import { first, Observable } from 'rxjs';
+import { catchError, first, Observable, throwError } from 'rxjs';
 import { Department } from '../../model/department';
 import { Equipment } from '../../model/equiment';
 import { UserEquipment } from '../../model/user-equipment';
@@ -76,9 +76,10 @@ export class AdminService {
     return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`, {})
   }
 
-  assignMultipleEquipmentsToUser(userId: number, equipmentsValues: any[]): Observable<UserEquipment[]>{
-    return this.httpClient.post<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`, {
-      equipmentsValues
-    })
+  assignMultipleEquipmentsToUser(userId: number, equipmentsIds: number[]){
+    console.log("Equipments ids : " + equipmentsIds)
+    return this.httpClient.post<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`,
+      equipmentsIds
+    )
   }
 }

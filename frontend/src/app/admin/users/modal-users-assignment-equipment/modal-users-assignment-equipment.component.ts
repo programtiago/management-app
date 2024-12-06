@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';
 import { FormControl } from '@angular/forms';
-import { HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-users-assignment-equipment',
@@ -82,11 +82,10 @@ export class ModalUsersAssignmentEquipmentComponent {
             }  
           })
         }else{
-
+          console.log(this.selectedMultipleEquipmentsIds)
           this.adminService.assignMultipleEquipmentsToUser(this.data.id, this.selectedMultipleEquipmentsIds).subscribe({
             next: (res) => {
               this.userEquipments = res;
-              console.log(res)
               if (res != null){
                 this.canLoadInformationCardAssignment = true;
                 this.snackbar.open('The equipments were assigned sucessfully.', 'X')
@@ -97,7 +96,7 @@ export class ModalUsersAssignmentEquipmentComponent {
               this.errorMessage = error.error.errors
               this.onError(this.errorMessage)
             }  
-        }) 
+        })  
         }
       }else{
         this.dialogRef.close()
