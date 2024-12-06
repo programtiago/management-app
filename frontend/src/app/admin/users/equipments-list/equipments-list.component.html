@@ -1,0 +1,64 @@
+<mat-table [dataSource]="equipments">
+    <ng-container matColumnDef="brand">
+      <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
+      <mat-cell *matCellDef="let equipment"> {{ equipment.brand }} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="model">
+      <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
+      <mat-cell *matCellDef="let equipment"> {{ equipment.model }} </mat-cell>
+    </ng-container>     
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let equipment"> {{ equipment.description }} </mat-cell>
+    </ng-container>
+  
+    <ng-container matColumnDef="serialNumber">
+      <mat-header-cell *matHeaderCellDef> S/N </mat-header-cell>
+      <mat-cell *matCellDef="let equipment"> {{ equipment.serialNumber }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let equipment"> {{ equipment.statusEquipment }} </mat-cell>
+  </ng-container>
+
+    <ng-container matColumnDef="registryDate">
+        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{ equipment.registryDate }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-mini-fab color="primary" aria-label="Add user">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let user">
+        <button mat-mini-fab color="primary" aria-label="Edit user">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-mini-fab color="accent" aria-label="Delete user">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button [matMenuTriggerFor]="menu" mat-icon-button color="primary">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span>View User</span>
+          </button>
+          <button mat-menu-item>
+            <span>Assign User</span> <!--show only if equipment is available-->
+          </button>
+        </mat-menu>
+      </mat-cell>
+  </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

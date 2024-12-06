@@ -24,7 +24,7 @@
 
         <mat-menu #equipments="matMenu">
           <button mat-menu-item>Add Equipment</button>
-          <button mat-menu-item>List Equipments</button>
+          <button mat-menu-item [routerLink]="['admin/equipments']">List Equipments</button>
         </mat-menu>
       
         <button (click)="onFilter()" mat-button>

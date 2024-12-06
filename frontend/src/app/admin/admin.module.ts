@@ -18,6 +18,8 @@ import { ModalInfoDeleteComponent } from './departments/modal-info-delete/modal-
 import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 import { EquipmentsComponent } from './users/equipments/equipments.component';
+import { EquipmentsListComponent } from './users/equipments-list/equipments-list.component';
+import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { EquipmentsComponent } from './users/equipments/equipments.component';
     DepartmentsListComponent,
     ModalInfoDeleteComponent,
     ModalUsersAssignmentEquipmentComponent,
-    EquipmentsComponent
+    EquipmentsComponent,
+    EquipmentsListComponent,
+    ModalInformationEquipmentUserOwnerComponent
   ],
   imports: [
     CommonModule,

@@ -51,7 +51,7 @@ export class UsersListComponent implements OnInit{
   }
 
   onAdd(){
-      this.router.navigate(['admin/new'])
+    this.router.navigate(['admin/new'])
   }
 
   onChangeUserStatus(user: User){

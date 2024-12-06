@@ -1,0 +1,35 @@
+@media only screen and (min-width: 700px) and (max-width: 1920px) {
+    .mat-mdc-table{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+        display: table;
+    }
+}
+
+@media only screen and (min-width: 2000px){
+    .mat-mdc-table{
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    mat-cell:nth-child(8),
+    mat-header-cell:nth-child(8) {
+        flex: 0 0 12%;
+    }
+}
+
+.btn-user-status{
+    width: 70px;
+}
+
+.mat-mdc-cell, .mat-mdc-header{
+    line-break: unset;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.mat-mdc-header-cell{
+    font-weight: bold;
+}
