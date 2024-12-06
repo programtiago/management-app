@@ -9,6 +9,7 @@
         <mat-menu #menu="matMenu">
           <button mat-menu-item [matMenuTriggerFor]="users">Users</button>
           <button mat-menu-item [matMenuTriggerFor]="departments">Departments</button>
+          <button mat-menu-item [matMenuTriggerFor]="equipments">Equipments</button>
         </mat-menu>
 
         <mat-menu #users="matMenu">
@@ -19,6 +20,11 @@
         <mat-menu #departments="matMenu">
           <button mat-menu-item>Add Department</button>
           <button mat-menu-item [routerLink]="['admin/departments']">List Departments</button>
+        </mat-menu>
+
+        <mat-menu #equipments="matMenu">
+          <button mat-menu-item>Add Equipment</button>
+          <button mat-menu-item>List Equipments</button>
         </mat-menu>
       
         <button (click)="onFilter()" mat-button>

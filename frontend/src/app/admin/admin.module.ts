@@ -17,6 +17,7 @@ import { DepartmentsListComponent } from './departments/departments-list/departm
 import { ModalInfoDeleteComponent } from './departments/modal-info-delete/modal-info-delete.component';
 import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
+import { EquipmentsComponent } from './users/equipments/equipments.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angula
     DepartmentFormComponent,
     DepartmentsListComponent,
     ModalInfoDeleteComponent,
-    ModalUsersAssignmentEquipmentComponent
+    ModalUsersAssignmentEquipmentComponent,
+    EquipmentsComponent
   ],
   imports: [
     CommonModule,
