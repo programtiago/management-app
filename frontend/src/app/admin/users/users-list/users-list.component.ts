@@ -145,7 +145,7 @@ export class UsersListComponent implements OnInit{
       })
       this.selectedUserId = userId
       this.dialog.open(ModalInformationEquipmentUserOwnerComponent, {
-        width: '800px',
+        width: '1000px',
         height: '500px',
         data: [this.selectedUserId, this.userEquipmentsByUser]
       })

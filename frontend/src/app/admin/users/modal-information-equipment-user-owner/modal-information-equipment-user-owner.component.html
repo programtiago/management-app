@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Equipments for {{selectedUser.firstName + " " + selectedUser.lastName}}</h2>
+<h2 mat-dialog-title style="display: flex; justify-content: center; align-content: center;">Equipments for {{selectedUser.firstName + " " + selectedUser.lastName}}</h2>
 <mat-dialog-content>
   <!--  <div *ngFor="let userEquipment of data">
     <mat-card>
@@ -9,42 +9,51 @@
   </div>
   -->
 
-  <table mat-table [dataSource]="userEquipments" class="mat-elevation-z8">
+  <mat-table [dataSource]="userEquipments" class="mat-elevation-z8">
 
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.description}} </td>
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.description}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="brand">
-        <th mat-header-cell *matHeaderCellDef> Brand </th>
-        <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.brand}} </td>
+        <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
+        <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.brand}} </mat-cell>
       </ng-container>
   
     <ng-container matColumnDef="model">
-      <th mat-header-cell *matHeaderCellDef> Model </th>
-      <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.model}} </td>
+      <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
+      <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.model}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="serialNumber">
-      <th mat-header-cell *matHeaderCellDef> S/N </th>
-      <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.serialNumber}} </td>
+      <mat-header-cell *matHeaderCellDef> S/N </mat-header-cell>
+      <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.serialNumber}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.statusEquipment}} </td>
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.statusEquipment}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="registryDate">
-        <th mat-header-cell *matHeaderCellDef> Registry Date </th>
-        <td mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.registryDate}} </td>
+        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+        <mat-cell *matCellDef="let userEquipment"> {{userEquipment.equipment.registryDate}} </mat-cell>
     </ng-container>
   
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
 
-    <tr mat-header-row *matHeaderRowDef="['brand', 'model', 'serialNumber', 'status', 'registryDate']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['brand', 'model', 'serialNumber', 'status', 'registryDate'];"></tr>
-  </table>
+      <mat-cell *matCellDef="let equiment">
+        <button mat-mini-fab color="accent">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+  </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['brand', 'model', 'serialNumber', 'status', 'registryDate', 'actions']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['brand', 'model', 'serialNumber', 'status', 'registryDate', 'actions'];"></mat-row>
+  </mat-table>
 
 </mat-dialog-content>
 <mat-dialog-actions>
