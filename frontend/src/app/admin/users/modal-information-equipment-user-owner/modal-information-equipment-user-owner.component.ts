@@ -12,7 +12,8 @@ import { UserEquipment } from '../../../model/user-equipment';
 export class ModalInformationEquipmentUserOwnerComponent {
 
   userEquipments: UserEquipment[] = []
-  selectedUser!: User
+  selectedUser: User | undefined
+  selectedUserId!: number
 
   constructor(
     public dialogRef: MatDialogRef<ModalInformationEquipmentUserOwnerComponent>,
@@ -24,10 +25,18 @@ export class ModalInformationEquipmentUserOwnerComponent {
 
    this.adminService.getUserById(data.at(0)).subscribe((res) => {
     this.selectedUser = res
+    this.selectedUserId = data.at(0)
    })
   }
 
   onClose():void{
     this.dialogRef.close();
+  }
+
+  //Function responsible to return the equipment object from a user object. The equipment attribuiton is deleted from that user and becomes AVAILABLE for assignment 
+  returnEquipmentFromUser(userId: number, equipmentId: number){
+    this.adminService.returnEquipmentFromUser(userId, equipmentId).subscribe((res) => {
+      console.log(res)
+    })
   }
 }

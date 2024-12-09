@@ -90,4 +90,9 @@ export class AdminService {
   getEquipmentsByUserId(userId: number): Observable<UserEquipment[]>{
     return this.httpClient.get<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`)
   }
+
+  returnEquipmentFromUser(userId: number, equipmentId: number){
+    console.log("USER ID: " + userId + "EQUIPMENT ID: " + equipmentId)
+    return this.httpClient.delete(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`)
+  }
 }
