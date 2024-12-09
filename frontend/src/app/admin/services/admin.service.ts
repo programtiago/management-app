@@ -92,7 +92,6 @@ export class AdminService {
   }
 
   returnEquipmentFromUser(userId: number, equipmentId: number){
-    console.log("USER ID: " + userId + "EQUIPMENT ID: " + equipmentId)
     return this.httpClient.delete(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`)
   }
 }

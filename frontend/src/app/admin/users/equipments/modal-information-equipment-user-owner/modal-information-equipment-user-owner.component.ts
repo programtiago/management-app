@@ -15,6 +15,9 @@ export class ModalInformationEquipmentUserOwnerComponent {
   selectedUser: User | undefined
   selectedUserId!: number
 
+  displayedColumns: String[] = ['description', 'serialNumber', 'brand', 'model', 'registryDate', 'allocationDateTime', 'actions'
+  ]
+
   constructor(
     public dialogRef: MatDialogRef<ModalInformationEquipmentUserOwnerComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private adminService: AdminService
@@ -23,7 +26,7 @@ export class ModalInformationEquipmentUserOwnerComponent {
     this.userEquipments = res
 
     if (this.userEquipments.length < 1){
-      this.dialogRef.updateSize('400px', '200px')
+      this.dialogRef.updateSize('400px', '250px')
     }
    })
 
