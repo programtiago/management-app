@@ -1,4 +1,5 @@
 import { Department } from "./department"
+import { UserEquipment } from "./user-equipment"
 import { UserRole } from "./userRole"
 
 export interface User {
@@ -15,5 +16,6 @@ export interface User {
     email: string,
     contactNumber: string
     updatedAt: string,
-    password: string
+    password: string,
+    userEquipments: UserEquipment[]
 }

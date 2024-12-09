@@ -9,6 +9,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-deleteuser-info.component';
 import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 import { ModalInformationEquipmentUserOwnerComponent } from '../modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { UserEquipment } from '../../../model/user-equipment';
 
 @Component({
   selector: 'app-users-list',
@@ -19,7 +20,9 @@ export class UsersListComponent implements OnInit{
 
   @Input() users: User[] = []
 
-  selectedUser: any;
+  userEquipmentsByUser: UserEquipment[] = [];
+
+  selectedUser!: User | undefined;
   selectedUserId : any;
   
   questionForChangingStatus: string = "";
@@ -35,7 +38,6 @@ export class UsersListComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-   
   }
 
   onError(errorMsg: string){
@@ -135,10 +137,17 @@ export class UsersListComponent implements OnInit{
       });
     }
 
-    openModalViewEquipmentUserOwner(){
+    //Information Modal that renders all the equipments by user. 
+    openModalViewEquipmentUserOwner(userId: number){
+      this.adminService.getUserById(userId).subscribe((res) => {
+        this.selectedUserId = res.id  //store id in a variable
+        this.userEquipmentsByUser.push(...res.userEquipments) //store the objects user Equipments by user
+      })
+      this.selectedUserId = userId
       this.dialog.open(ModalInformationEquipmentUserOwnerComponent, {
-        width: '600px',
-        data: "afsa"
+        width: '800px',
+        height: '500px',
+        data: [this.selectedUserId, this.userEquipmentsByUser]
       })
     }
 }
