@@ -19,7 +19,8 @@ import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assi
 import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 import { EquipmentsComponent } from './users/equipments/equipments.component';
 import { EquipmentsListComponent } from './users/equipments-list/equipments-list.component';
-import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { ModalInformationEquipmentUserOwnerComponent } from './users/equipments/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { ModalInfoReturnEquipmentUserComponent } from './users/equipments/modal-info-return-equipment-user/modal-info-return-equipment-user.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-infor
     ModalUsersAssignmentEquipmentComponent,
     EquipmentsComponent,
     EquipmentsListComponent,
-    ModalInformationEquipmentUserOwnerComponent
+    ModalInformationEquipmentUserOwnerComponent,
+    ModalInfoReturnEquipmentUserComponent
   ],
   imports: [
     CommonModule,

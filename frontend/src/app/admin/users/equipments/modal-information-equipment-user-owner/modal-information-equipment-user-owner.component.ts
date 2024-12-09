@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../../model/user';
-import { AdminService } from '../../services/admin.service';
-import { UserEquipment } from '../../../model/user-equipment';
+import { User } from '../../../../model/user';
+import { AdminService } from '../../../services/admin.service';
+import { UserEquipment } from '../../../../model/user-equipment';
 
 @Component({
   selector: 'app-modal-information-equipment-user-owner',
@@ -21,6 +21,10 @@ export class ModalInformationEquipmentUserOwnerComponent {
   ) {
    this.adminService.getEquipmentsByUserId(data.at(0)).subscribe((res) => {
     this.userEquipments = res
+
+    if (this.userEquipments.length < 1){
+      this.dialogRef.updateSize('400px', '200px')
+    }
    })
 
    this.adminService.getUserById(data.at(0)).subscribe((res) => {
