@@ -4,6 +4,7 @@ import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.repository.EquipmentRepository;
@@ -76,6 +77,7 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
                 Optional<Equipment> equipmentOpt = equipmentRepository.findById(equipmentId);
                 if (equipmentOpt.isPresent()){ //Checks if the given id it's present on the db
                     Equipment equipment = equipmentOpt.get();
+                    equipment.setStatusEquipment(StatusEquipment.IN_USE);
 
                     UserEquipment userEquipment = new UserEquipment(); //object instanciate each assignment
 
@@ -83,8 +85,11 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
                     userEquipment.setEquipment(equipment);
                     userEquipment.setAssignedDate(LocalDateTime.now());
                     userEquipments.add(userEquipment);
+
+                    equipmentRepository.save(equipment);
                 }
             }
+
         }
 
         return userEquipmentRepository.saveAll(userEquipments); //save the collectiont that holds all the user equipment objects
@@ -106,5 +111,10 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
         equipmentRepository.save(equipment);
         userEquipmentRepository.deleteById(userEquipment.getId());
 
+    }
+
+    @Override
+    public List<UserEquipment> getEquipmentsByUserId(Long userId) {
+        return userEquipmentRepository.findByUserId(userId);
     }
 }

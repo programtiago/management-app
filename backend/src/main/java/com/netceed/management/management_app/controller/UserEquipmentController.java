@@ -23,6 +23,11 @@ public class UserEquipmentController {
         return ResponseEntity.ok(userEquipmentService.getAll());
     }
 
+    @GetMapping("/{userId}/equipments")
+    public ResponseEntity<List<UserEquipment>> getEquipmentsByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(userEquipmentService.getEquipmentsByUserId(userId));
+    }
+
     @PostMapping("/{userId}/equipment/{equipmentId}")
     public ResponseEntity<UserEquipment> assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
         return ResponseEntity.ok(userEquipmentService.assignEquipmentToUser(userId, equipmentId));

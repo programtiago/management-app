@@ -10,5 +10,6 @@ public interface UserEquipmentService {
     UserEquipment assignEquipmentToUser(Long userId, Long equipmentId);
     List<UserEquipment> assignEquipmentsToUser(Long userId, List<Long> equipmentsId);
     void returnEquipmentFromUser(Long userId, Long equipmentId);
+    List<UserEquipment> getEquipmentsByUserId(Long userId);
 
 }

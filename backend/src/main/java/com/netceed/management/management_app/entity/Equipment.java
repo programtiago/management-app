@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import jakarta.persistence.*;
@@ -39,6 +40,7 @@ public class Equipment {
     private List<User> users;
      */
     @OneToMany(mappedBy = "equipment")
+    @JsonBackReference
     private Set<UserEquipment> userEquipments = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one

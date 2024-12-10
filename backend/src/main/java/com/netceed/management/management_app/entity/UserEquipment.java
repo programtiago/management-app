@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,17 +19,18 @@ public class UserEquipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonIgnore
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
 
     @Column(nullable = false)
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private LocalDateTime assignedDate;
     private LocalDateTime returnDate;
 
