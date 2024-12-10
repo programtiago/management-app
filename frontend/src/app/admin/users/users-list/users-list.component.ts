@@ -10,6 +10,7 @@ import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-del
 import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 import { ModalInformationEquipmentUserOwnerComponent } from '../equipments/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 import { UserEquipment } from '../../../model/user-equipment';
+import { Equipment } from '../../../model/equiment';
 
 @Component({
   selector: 'app-users-list',
@@ -24,6 +25,9 @@ export class UsersListComponent implements OnInit{
 
   selectedUser!: User | undefined;
   selectedUserId : any;
+  errorMessage: string = "";
+
+  equipmentsAvailable: Equipment[] = []
   
   questionForChangingStatus: string = "";
   questionForActivate: string = "This will activate the account user. Would u like to proceed ?";
@@ -130,11 +134,30 @@ export class UsersListComponent implements OnInit{
     }
 
   openMenuForEquipmentAssignment(user: User){
-      const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
-        height: '400px',
-        width: '750px',
-        data: user
-      });
+      /*
+      this.adminService.getEquipmentsAvailable().subscribe((res) => {
+        this.equipmentsAvailable.push(...res)
+      })
+        */
+
+      this.adminService.getEquipmentsAvailable().subscribe({
+        next: (res) => {
+          this.equipmentsAvailable = res;
+          this.errorMessage = "";
+        },
+        error: (error) => {
+          this.errorMessage = error;
+          console.log("Erro", error.errors)
+          this.onError(this.errorMessage)
+        }
+      }
+      )
+
+      if (this.equipmentsAvailable.length != 0){
+        const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
+          data: user
+        });
+      }
     }
 
     //Information Modal that renders all the equipments by user. 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
 import { catchError, first, Observable, throwError } from 'rxjs';
@@ -66,6 +66,8 @@ export class AdminService {
 
   getEquipmentsAvailable(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all-available`)
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
   }
 
   getEquipmentById(equipmentId: number):Observable<Equipment>{
@@ -97,5 +99,15 @@ export class AdminService {
 
   returnEquipmentFromUser(userId: number, equipmentId: number){
     return this.httpClient.delete(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`)
+  }
+
+  private handleError(error: HttpErrorResponse){
+    console.error('An error occurred:', error);
+
+    if (error.error.errors instanceof ErrorEvent){
+      return throwError('A client-side error occurred: ' + error.error.message);
+    }else{
+      return throwError(`Server returned code: ${error.status}, error message is: ${error.error.errors}`)
+    }
   }
 }

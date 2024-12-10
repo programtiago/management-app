@@ -1,4 +1,4 @@
-import { Component, Inject, Output, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../model/user';
 import { AdminService } from '../../services/admin.service';
@@ -16,7 +16,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './modal-users-assignment-equipment.component.html',
   styleUrl: './modal-users-assignment-equipment.component.scss'
 })
-export class ModalUsersAssignmentEquipmentComponent {
+export class ModalUsersAssignmentEquipmentComponent implements OnInit {
 
   equipmentsAvailable: Equipment[] = [];
   selectedEquipment!: Equipment;
@@ -34,6 +34,9 @@ export class ModalUsersAssignmentEquipmentComponent {
   selectedMultipleEquipmentsIds: number[] = []
   selectedMultipleEquipmentsList: Equipment[] = []
 
+  widthModalAssingment: string = '750px';
+  heightModalAssignment: string = '400px';
+
 
   @ViewChild('matRef') matRef!: MatSelect;
   public cMultiCtrl: FormControl = new FormControl();
@@ -50,6 +53,16 @@ export class ModalUsersAssignmentEquipmentComponent {
       this.adminService.getEquipmentsAvailable().subscribe((res) => {
         this.equipmentsAvailable = res;
       });
+    }
+
+    ngOnInit(): void {
+      this.updateModalAssignmentSize();
+    }
+
+    updateModalAssignmentSize():void{
+      if (this.equipmentsAvailable.length < 1){
+        this.dialogRef.updateSize(this.widthModalAssingment, this.heightModalAssignment)
+      }   
     }
 
     clear(){
