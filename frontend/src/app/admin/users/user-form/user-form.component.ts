@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { UserRole } from '../../../model/userRole';
-import { User } from '../../../model/user';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
@@ -18,13 +17,6 @@ export class UserFormComponent implements OnInit{
   userId!: any
   userSelected: any;
   userUpdateForm!: FormGroup;
-
-  /*
-  usersRoles: UserRole[] = [
-    {value: 0, viewValue: 'ADMIN'}, 
-    {value: 1, viewValue: 'EMPLOYEE'}
-  ];
-  */
 
   constructor(private fb: FormBuilder, private adminService: AdminService,
     private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute,

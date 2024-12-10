@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../../../model/user';
-import { AdminService } from '../../../services/admin.service';
-import { UserEquipment } from '../../../../model/user-equipment';
-import { ModalConfirmationRemoveEquipmentUserComponent } from '../../modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
+import { User } from '../../../model/user';
+import { UserEquipment } from '../../../model/user-equipment';
+import { ModalConfirmationRemoveEquipmentUserComponent } from '../modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-modal-information-equipment-user-owner',

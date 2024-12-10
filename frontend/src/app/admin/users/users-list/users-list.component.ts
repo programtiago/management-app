@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../model/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInformationComponent } from '../../modal-information/modal-information.component';
 import { AdminService } from '../../services/admin.service';
@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-deleteuser-info.component';
 import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
-import { ModalInformationEquipmentUserOwnerComponent } from '../equipments/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { ModalInformationEquipmentUserOwnerComponent } from '../modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 import { UserEquipment } from '../../../model/user-equipment';
 import { Equipment } from '../../../model/equiment';
 
@@ -42,6 +42,7 @@ export class UsersListComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+
   }
 
   onError(errorMsg: string){
@@ -134,12 +135,6 @@ export class UsersListComponent implements OnInit{
     }
 
   openMenuForEquipmentAssignment(user: User){
-      /*
-      this.adminService.getEquipmentsAvailable().subscribe((res) => {
-        this.equipmentsAvailable.push(...res)
-      })
-        */
-
       this.adminService.getEquipmentsAvailable().subscribe({
         next: (res) => {
           this.equipmentsAvailable = res;
@@ -147,11 +142,9 @@ export class UsersListComponent implements OnInit{
         },
         error: (error) => {
           this.errorMessage = error;
-          console.log("Erro", error.errors)
           this.onError(this.errorMessage)
         }
-      }
-      )
+      })
 
       if (this.equipmentsAvailable.length != 0){
         const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {

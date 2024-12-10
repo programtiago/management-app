@@ -45,25 +45,7 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-  </mat-table>
-  <!--
-  <mat-card *ngFor="let userEquipment of userEquipments" style="margin: 2em auto; max-height: 150px; max-width: 65%;">
-    <mat-card-header>
-      <mat-card-title>{{userEquipment.equipment.description}}</mat-card-title>
-      <mat-card-subtitle>{{userEquipment.equipment.serialNumber}}</mat-card-subtitle>
-    </mat-card-header>
-    <div *ngIf="userEquipments != null || userEquipments != undefined" style="display: flex; align-content: center; justify-content: center; height: 200px">
-      <p>Brand: {{userEquipment.equipment.brand}}</p>
-      <p>{{userEquipment.equipment.model}}</p>
-      <p>{{userEquipment.equipment.allocationDateTime}}</p>
-      <p>{{userEquipment.equipment.location}}</p>
-      <p>{{userEquipment.equipment.function}}</p>
-      <button mat-fab><mat-icon>more_vert</mat-icon></button>
-      <button (click)="returnEquipmentFromUser(selectedUserId, userEquipment.equipment.id)" mat-fab><mat-icon>delete</mat-icon></button>
-    </div>
-  </mat-card>
---> 
+</mat-table>
   <div *ngIf="userEquipments.length == 0">
     <h3 style="display: flex; align-content: center; justify-content: center;">There is no equipments available for this user ! </h3>
   </div>

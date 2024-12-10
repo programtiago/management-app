@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Department } from '../../../model/department';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/userRole';
@@ -20,20 +19,6 @@ export class MultiformsComponent implements OnInit{
 
   //TEMPORARILY. Further we need to catch from the API
   UserRole = UserRole;
-
-  //TEMPORARILY. Further we need to catch from the API
-  /*
-  departments: Department[] = [
-    {value: "ADMIN", viewValue: "ADMIN"},
-    {value: "LOGISTIC", viewValue: 'LOG'},
-    {value: "PURCHASING", viewValue: 'PCHG'},
-    {value: "HUMAN RESOURCES", viewValue: 'HR'},
-    {value: "INFORMATION TECHNOLOGY", viewValue: 'IT'},
-    {value: "PRODUCTION", viewValue: 'PROD'},
-    {value: "DEVELOPMENT", viewValue: 'DVL'},
-
-  ];
-  */
 
   //TEMPORARILY. Further we need to catch from the API
   shiftTypes: ShiftType[] = [

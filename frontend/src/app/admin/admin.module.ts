@@ -16,10 +16,9 @@ import { DepartmentFormComponent } from './departments/department-form/departmen
 import { DepartmentsListComponent } from './departments/departments-list/departments-list.component';
 import { ModalInfoDeleteComponent } from './departments/modal-info-delete/modal-info-delete.component';
 import { ModalUsersAssignmentEquipmentComponent } from './users/modal-users-assignment-equipment/modal-users-assignment-equipment.component';
-import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angular/material/checkbox';
 import { EquipmentsComponent } from './users/equipments/equipments.component';
 import { EquipmentsListComponent } from './users/equipments-list/equipments-list.component';
-import { ModalInformationEquipmentUserOwnerComponent } from './users/equipments/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
 
 @NgModule({
@@ -37,8 +36,8 @@ import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-con
     ModalUsersAssignmentEquipmentComponent,
     EquipmentsComponent,
     EquipmentsListComponent,
-    ModalInformationEquipmentUserOwnerComponent,
-    ModalConfirmationRemoveEquipmentUserComponent
+    ModalConfirmationRemoveEquipmentUserComponent,
+    ModalInformationEquipmentUserOwnerComponent
   ],
   imports: [
     CommonModule,
