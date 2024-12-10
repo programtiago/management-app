@@ -129,7 +129,7 @@ export class UsersListComponent implements OnInit{
       })
     }
 
-    openMenuForEquipmentAssignment(user: User){
+  openMenuForEquipmentAssignment(user: User){
       const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
         height: '400px',
         width: '750px',

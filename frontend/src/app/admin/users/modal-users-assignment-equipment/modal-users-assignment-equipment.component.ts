@@ -91,14 +91,14 @@ export class ModalUsersAssignmentEquipmentComponent {
             }  
           })
         }else{
-          console.log(this.selectedMultipleEquipmentsIds)
           this.adminService.assignMultipleEquipmentsToUser(this.data.id, this.selectedMultipleEquipmentsIds).subscribe({
             next: (res) => {
               this.userEquipments = res;
               if (res != null){
                 this.canLoadInformationCardAssignment = true;
                 this.snackbar.open('The equipments were assigned sucessfully.', 'X')
-            
+                this.dialogRef.close();
+                this.navigateToEquipments();
               }
             },
             error: (error) => {
@@ -152,5 +152,9 @@ export class ModalUsersAssignmentEquipmentComponent {
       this.canChooseMultipleEquipments = true
     }
     this.canChooseMultipleEquipments = false
+  }
+
+  navigateToEquipments(){
+    this.router.navigateByUrl("/equipments")
   }
 }
