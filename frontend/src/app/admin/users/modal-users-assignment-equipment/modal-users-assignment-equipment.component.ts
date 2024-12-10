@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';
 import { FormControl } from '@angular/forms';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-users-assignment-equipment',
@@ -41,7 +40,7 @@ export class ModalUsersAssignmentEquipmentComponent {
 
   constructor(public dialogRef: MatDialogRef<ModalUsersAssignmentEquipmentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User, private adminService: AdminService, 
-  private dialog: MatDialog, private snackbar: MatSnackBar, private router: Router){
+      private dialog: MatDialog, private snackbar: MatSnackBar, private router: Router){
       this.canChooseMultipleEquipments = false;
       
       this.adminService.getUserById(data.id).subscribe((res) => {
@@ -80,6 +79,7 @@ export class ModalUsersAssignmentEquipmentComponent {
           this.adminService.assignEquipmentToUser(this.data.id, this.selectedEquipmentId).subscribe({
             next: (res) => {
               this.userEquipment = res;
+              console.log("Resposta" + res)
               if (res.id != null){
                 this.snackbar.open('Equipment assigned sucessfully', 'X', { duration: 2000 });
                 this.dialogRef.close();

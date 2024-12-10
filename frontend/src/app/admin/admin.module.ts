@@ -20,6 +20,7 @@ import { MAT_CHECKBOX_DEFAULT_OPTIONS, MatCheckboxDefaultOptions } from '@angula
 import { EquipmentsComponent } from './users/equipments/equipments.component';
 import { EquipmentsListComponent } from './users/equipments-list/equipments-list.component';
 import { ModalInformationEquipmentUserOwnerComponent } from './users/equipments/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
+import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModalInformationEquipmentUserOwnerComponent } from './users/equipments/
     ModalUsersAssignmentEquipmentComponent,
     EquipmentsComponent,
     EquipmentsListComponent,
-    ModalInformationEquipmentUserOwnerComponent
+    ModalInformationEquipmentUserOwnerComponent,
+    ModalConfirmationRemoveEquipmentUserComponent
   ],
   imports: [
     CommonModule,

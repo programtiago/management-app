@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Remove equipment</h2>
+  <mat-dialog-content>
+    <p>Do u really want to confirm ? This will remove the equipment from the user.</p>
+  </mat-dialog-content>
+  <mat-dialog-actions style="display: flex; align-content: center; justify-content: center;">
+    <button mat-raised-button (click)="onConfirm(false)" color="warn">Cancel</button>
+    <button (click)="onConfirm(true)" mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Confirm</button>
+  </mat-dialog-actions>
+  

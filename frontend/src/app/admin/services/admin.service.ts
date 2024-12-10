@@ -87,6 +87,10 @@ export class AdminService {
     )
   }
 
+  getUserEquipments(): Observable<UserEquipment[]>{
+    return this.httpClient.get<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/all`)
+  }
+
   getEquipmentsByUserId(userId: number): Observable<UserEquipment[]>{
     return this.httpClient.get<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`)
   }
