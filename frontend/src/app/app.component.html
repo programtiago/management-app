@@ -23,11 +23,11 @@
         </mat-menu>
 
         <mat-menu #equipments="matMenu">
-          <button mat-menu-item>Add Equipment</button>
+          <button mat-menu-item [routerLink]="['admin/new-equipment']">Add Equipment</button>
           <button mat-menu-item [routerLink]="['admin/equipments']">List Equipments</button>
         </mat-menu>
       
-        <button (click)="onFilter()" mat-button>
+        <button mat-button>
           <mat-icon>filter</mat-icon>
         </button>
       </div>

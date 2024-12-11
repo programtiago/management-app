@@ -1,0 +1,259 @@
+<!--While inserting a equipment object we may need to indicate  -->
+<div class="equipment-form-container">
+    <mat-card class="card-form-equipment">
+        <mat-card-header style="display: flex; align-content: center; justify-content: center;">
+            <mat-card-title>Insert a new Equipment</mat-card-title>
+        </mat-card-header>
+        <div class="choice-type-assignment-equipment">
+            <mat-card>
+                <mat-card-content>
+                    <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-label>Choose the type of equipment assignment</mat-label>
+                        <mat-select (selectionChange)="valueChoosedChanged($event)">
+                            <mat-option [value]="'USR'">User</mat-option>
+                            <mat-option [value]="'DEP'">Department</mat-option>
+                            <mat-option [value]="'LOC'">Location</mat-option>
+                            <mat-option [value]="'NO'">None</mat-option>
+                        </mat-select>
+                    <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                    </mat-form-field>
+            </mat-card-content>     
+            </mat-card>
+        </div>
+        <div class="equipments-fields-form">
+            <!--Display the element if the value on mat select is Department-->
+            <div *ngIf="selectedValueCreationWithAssignment == 'Department'">
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Description</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+            
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>S/N</mat-label>
+                            <input matInput>
+                        <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Brand</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Model</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Category</mat-label>
+                            <mat-select>
+                                <mat-option>Scanner</mat-option>
+                                <mat-option>Desktop</mat-option>
+                                <mat-option>Printer</mat-option>
+                                <mat-option>Dockstation</mat-option>
+                                <mat-option>Screen</mat-option>
+                                <mat-option>Laptop</mat-option>
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Department</mat-label>
+                            <mat-select>
+                                <mat-option>IT</mat-option>
+                                <mat-option>Logistic</mat-option>
+                                <mat-option>HR</mat-option>
+                                <mat-option>Administration</mat-option>
+                                <mat-option>Purchasing</mat-option>
+                                <mat-option>Development</mat-option>
+                                <mat-option>Production</mat-option>
+                                <mat-option>Quality</mat-option>
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Unity</mat-label>
+                            <mat-select>
+                                <mat-option>Unity A</mat-option>
+                                <mat-option>Unity B</mat-option>
+                                <mat-option>Unity C</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <!--Display the element if the value on mat select is User-->
+            <div *ngIf="selectedValueCreationWithAssignment == 'User'">
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Description</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+            
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>S/N</mat-label>
+                            <input matInput>
+                        <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Brand</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Model</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Category</mat-label>
+                            <mat-select>
+                                <mat-option>Scanner</mat-option>
+                                <mat-option>Desktop</mat-option>
+                                <mat-option>Printer</mat-option>
+                                <mat-option>Dockstation</mat-option>
+                                <mat-option>Screen</mat-option>
+                                <mat-option>Laptop</mat-option>
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>User</mat-label>
+                            <mat-select>
+                                <!--load the users available to be assigned a equipment-->
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Unity</mat-label>
+                            <mat-select>
+                                <mat-option>Unity A</mat-option>
+                                <mat-option>Unity B</mat-option>
+                                <mat-option>Unity C</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+
+            <!--Display the element if the value on mat select is Location-->
+            <div *ngIf="selectedValueCreationWithAssignment == 'Location'">
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Description</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+            
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>S/N</mat-label>
+                            <input matInput>
+                        <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Brand</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Model</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Category</mat-label>
+                            <mat-select>
+                                <mat-option>Scanner</mat-option>
+                                <mat-option>Desktop</mat-option>
+                                <mat-option>Printer</mat-option>
+                                <mat-option>Dockstation</mat-option>
+                                <mat-option>Screen</mat-option>
+                                <mat-option>Laptop</mat-option>
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Location</mat-label>
+                            <mat-select>
+                                <!--load the locations available to assign the equipment-->
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Unity</mat-label>
+                            <mat-select>
+                                <mat-option>Unity A</mat-option>
+                                <mat-option>Unity B</mat-option>
+                                <mat-option>Unity C</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div *ngIf="selectedValueCreationWithAssignment == 'None'">
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Description</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+            
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>S/N</mat-label>
+                            <input matInput>
+                        <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Brand</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Model</mat-label>
+                            <input matInput>
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Category</mat-label>
+                            <mat-select>
+                                <mat-option>Scanner</mat-option>
+                                <mat-option>Desktop</mat-option>
+                                <mat-option>Printer</mat-option>
+                                <mat-option>Dockstation</mat-option>
+                                <mat-option>Screen</mat-option>
+                                <mat-option>Laptop</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                        <!--we can have multiple unitys inside a company for example. Unity of action, where that equipment will focus-->
+                        <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Unity</mat-label>
+                            <mat-select>
+                                <mat-option>Unity A</mat-option>
+                                <mat-option>Unity B</mat-option>
+                                <mat-option>Unity C</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>         
+</mat-card>
+</div>

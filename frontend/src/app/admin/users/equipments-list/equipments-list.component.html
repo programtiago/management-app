@@ -22,13 +22,13 @@
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
       <mat-cell *matCellDef="let equipment">
-        <button color="warn" *ngIf="equipment.statusEquipment == 'IN_USE' || equipment.statusEquipment == 'NOT_AVAILABLE'" mat-raised-button>
+        <button class="btn_statusEquipment" color="warn" *ngIf="equipment.statusEquipment == 'IN_USE' || equipment.statusEquipment == 'NOT_AVAILABLE'" mat-raised-button>
           {{equipment.statusEquipment}} 
         </button>
-        <button color="accent" *ngIf="equipment.statusEquipment == 'ON_WARRANTY' || equipment.statusEquipment == 'FOR_WARRANTY'" mat-raised-button>
+        <button class="btn_statusEquipment" color="accent" *ngIf="equipment.statusEquipment == 'ON_WARRANTY' || equipment.statusEquipment == 'FOR_WARRANTY'" mat-raised-button>
           {{equipment.statusEquipment}} 
         </button>
-        <button *ngIf="equipment.statusEquipment == 'AVAILABLE'" mat-raised-button style="background-color: green; color: white;">
+        <button class="btn_statusEquipment" *ngIf="equipment.statusEquipment == 'AVAILABLE'" mat-raised-button style="background-color: green; color: white;">
           {{equipment.statusEquipment}} 
         </button>
       </mat-cell>
@@ -41,7 +41,7 @@
 
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-mini-fab color="primary" aria-label="Add user">
+        <button [routerLink]="['../new-equipment']" mat-mini-fab color="primary" aria-label="Add user">
           <mat-icon>add</mat-icon>
         </button>
       </mat-header-cell>

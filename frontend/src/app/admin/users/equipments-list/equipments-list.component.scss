@@ -5,6 +5,10 @@
         margin-bottom: 1rem;
         display: table;
     }
+
+    .btn_statusEquipment{
+        width: 100px;
+    }
 }
 
 @media only screen and (min-width: 2000px){
@@ -17,6 +21,10 @@
     mat-cell:nth-child(8),
     mat-header-cell:nth-child(8) {
         flex: 0 0 12%;
+    }
+
+    .btn_statusEquipment{
+        width: 100px;
     }
 }
 

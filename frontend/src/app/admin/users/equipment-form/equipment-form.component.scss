@@ -1,0 +1,55 @@
+
+@media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .equipment-form-container{
+        max-width: 75%;
+        margin: 5em auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .choice-type-assignment-equipment{
+        width: 75%;
+        margin: 2em auto;
+    }
+
+    .equipments-fields-form{
+        width: 75%;
+        margin: 2em auto;
+    }
+
+    .mat-mdc-form-field{
+        width: 100%;
+    }
+
+    .card-form-equipment{
+        position: relative;
+    }
+}
+
+
+@media only screen and (min-width: 1921px){
+    .equipment-form-container{
+        max-width: 45%;
+        margin: 10em auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .choice-type-assignment-equipment{
+        width: 95%;
+        margin: 2em auto;
+    }
+
+    .equipments-fields-form{
+        width: 95%;
+        margin: 2em auto;
+    }
+
+    .mat-mdc-form-field{
+        width: 100%;
+    }
+}

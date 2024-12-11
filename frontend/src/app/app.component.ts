@@ -6,13 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+
+  constructor(){}
+
   title = 'frontend';
 
-  onOpenMenu(){
-    
-  }
-
-  onFilter(){
-    
-  }
 }

@@ -6,6 +6,7 @@ import { UserFormComponent } from './users/user-form/user-form.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { EquipmentsComponent } from './users/equipments/equipments.component';
+import { EquipmentFormComponent } from './users/equipment-form/equipment-form.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'new', component: MultiformsComponent},
   { path: 'edit/:id', component: UserFormComponent},
   { path: 'equipments', component: EquipmentsComponent},
-  { path: 'departments', component: DepartmentsComponent}
+  { path: 'new-equipment', component: EquipmentFormComponent},
+  { path: 'departments', component: DepartmentsComponent},
+ 
 ];
 
 @NgModule({

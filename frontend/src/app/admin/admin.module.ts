@@ -20,6 +20,7 @@ import { EquipmentsComponent } from './users/equipments/equipments.component';
 import { EquipmentsListComponent } from './users/equipments-list/equipments-list.component';
 import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
+import { EquipmentFormComponent } from './users/equipment-form/equipment-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-con
     EquipmentsComponent,
     EquipmentsListComponent,
     ModalConfirmationRemoveEquipmentUserComponent,
-    ModalInformationEquipmentUserOwnerComponent
+    ModalInformationEquipmentUserOwnerComponent,
+    EquipmentFormComponent
   ],
   imports: [
     CommonModule,
