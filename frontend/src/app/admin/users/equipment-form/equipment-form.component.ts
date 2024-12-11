@@ -10,6 +10,8 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 export class EquipmentFormComponent implements OnInit{
 
   selectedValueCreationWithAssignment: any;
+  selectedValueDepartment: any;
+
   constructor(){}
 
   ngOnInit(): void {
@@ -22,7 +24,14 @@ export class EquipmentFormComponent implements OnInit{
       text: event.source.triggerValue
     };
     this.selectedValueCreationWithAssignment = this.selectedValueCreationWithAssignment.text;
-    console.log(this.selectedValueCreationWithAssignment)
+  }
+
+  valueDepartmentSelectedChanged(event: MatSelectChange){
+    this.selectedValueDepartment = {
+      value: event.value,
+      text: event.source.triggerValue
+    }
+    this.selectedValueDepartment = this.selectedValueDepartment.text
   }
 
 

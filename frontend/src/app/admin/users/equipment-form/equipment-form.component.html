@@ -26,6 +26,21 @@
                 <mat-card>
                     <mat-card-content>
                         <mat-form-field appearance="outline" floatLabel="always">
+                            <mat-label>Department</mat-label>
+                            <mat-select (selectionChange)="valueDepartmentSelectedChanged($event)">
+                                <mat-option [value]="'IT'">IT</mat-option>
+                                <mat-option [value]="'LOG'">Logistic</mat-option>
+                                <mat-option [value]="'HR'">HR</mat-option>
+                                <mat-option [value]="'ADMIN'">Administration</mat-option>
+                                <mat-option [value]="'PCHG'">Purchasing</mat-option>
+                                <mat-option [value]="'DVL'">Development</mat-option>
+                                <mat-option [value]="'PROD'">Production</mat-option>
+                                <mat-option [value]="'QLD'">Quality</mat-option>
+                            </mat-select>
+                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="outline" floatLabel="always">
                             <mat-label>Description</mat-label>
                             <input matInput>
                         </mat-form-field>
@@ -59,30 +74,18 @@
                         <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
                         </mat-form-field>
 
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Department</mat-label>
-                            <mat-select>
-                                <mat-option>IT</mat-option>
-                                <mat-option>Logistic</mat-option>
-                                <mat-option>HR</mat-option>
-                                <mat-option>Administration</mat-option>
-                                <mat-option>Purchasing</mat-option>
-                                <mat-option>Development</mat-option>
-                                <mat-option>Production</mat-option>
-                                <mat-option>Quality</mat-option>
-                            </mat-select>
-                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" floatLabel="always">
+                        <mat-form-field *ngIf="selectedValueDepartment == 'Production'" appearance="outline" floatLabel="always">
                             <mat-label>Unity</mat-label>
                             <mat-select>
-                                <mat-option>Unity A</mat-option>
-                                <mat-option>Unity B</mat-option>
-                                <mat-option>Unity C</mat-option>
+                                <!--All the operations available inside Production department.-->
+                                <mat-option>Housing</mat-option>
+                                <mat-option>Packaging</mat-option>
+                                <mat-option>Test</mat-option>
+                                <mat-option>Quality</mat-option>
+                                <mat-option>Logistic</mat-option>
+                                <mat-option>Assembly</mat-option>
                             </mat-select>
                         </mat-form-field>
-
                     </mat-card-content>
                 </mat-card>
             </div>
@@ -244,8 +247,8 @@
 
                         <!--we can have multiple unitys inside a company for example. Unity of action, where that equipment will focus-->
                         <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Unity</mat-label>
-                            <mat-select>
+                            <mat-label>Workstation</mat-label>
+                            <mat-select *ngIf="">
                                 <mat-option>Unity A</mat-option>
                                 <mat-option>Unity B</mat-option>
                                 <mat-option>Unity C</mat-option>
