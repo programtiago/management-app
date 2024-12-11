@@ -1,9 +1,14 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Equipment;
+import com.netceed.management.management_app.entity.User;
+import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
+import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
+import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/equipments")
@@ -20,6 +26,8 @@ public class EquipmentController {
 
     private final EquipmentServiceImpl equipmentService;
     private final UserServiceImpl userService;
+    private final UserEquipmentServiceImpl userEquipmentService;
+    private final UserMapper userMapper;
 
     @GetMapping("/all")
     public ResponseEntity<List<EquipmentDto>> getAll() throws Exception {
@@ -50,15 +58,23 @@ public class EquipmentController {
         return ResponseEntity.ok(equipmentService.getById(id));
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<EquipmentDto> create(@RequestBody @Valid Equipment newEquipment) throws NoSuchFieldException {
+    @PostMapping("/new/{userId}")
+    public ResponseEntity<EquipmentDto> createEquipmentWithAssignmentToUser(@RequestBody @Valid Equipment newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
+        UserEquipment userEquipment = new UserEquipment();
+        UserDto userFound = userService.getById(userId);
+
         boolean serialNumberAlreadyRegistered = equipmentService.serialNumberExists(newEquipment.getSerialNumber());
 
         if (serialNumberAlreadyRegistered) {
             throw new NoSuchFieldException("Serial Number " +  newEquipment.getSerialNumber() + " already belong to a equipment");
         }
 
-        return ResponseEntity.ok(equipmentService.create(newEquipment));
+        if (userFound.id() != null){
+            userEquipment.setEquipment(newEquipment);
+            //userEquipmentService.assignEquipmentToUser(newEquipment.getId(), userFound.id());
+        }
+
+        return ResponseEntity.ok(equipmentService.createEquipmentForUser(newEquipment, userId));
     }
 
     @PutMapping("/{id}")

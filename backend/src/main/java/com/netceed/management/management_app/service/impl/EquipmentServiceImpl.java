@@ -33,9 +33,18 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public EquipmentDto create(Equipment equipment) {
-        return equipmentMapper.toDto(equipmentRepository.save(equipment));
+    public EquipmentDto createEquipmentForUser(Equipment equipment, Long userId) {
+        return equipmentMapper.toDtoAssignToUser(equipmentRepository.save(equipment));
     }
+
+    /*
+    @Override
+    public EquipmentDto create(Equipment equipment) {
+        //To assign to a user
+        return equipmentMapper.toDtoAssignToUser(equipmentRepository.save(equipment));
+    }
+
+     */
 
     @Override
     public List<EquipmentDto> getAllEquipments() {
@@ -58,7 +67,7 @@ public class EquipmentServiceImpl implements EquipmentService {
                    equipment.setStatusEquipment(equipmentDto.statusEquipment());
                    equipment.setDescription(equipmentDto.description());
                    equipment.setStatusPhysic(equipmentDto.finalCondition());
-                   equipment.setGoal(equipmentDto.function());
+                   equipment.setWorkstation(equipmentDto.function());
                    equipment.setMacAddress(equipmentDto.macAddress());
                    equipment.setLocation(equipmentDto.location());
                    equipment.setSerialNumber(equipmentDto.serialNumber());

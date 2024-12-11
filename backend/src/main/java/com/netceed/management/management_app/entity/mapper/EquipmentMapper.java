@@ -17,7 +17,17 @@ public class EquipmentMapper {
         }
 
         return new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
-                equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getGoal(),
+                equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(),
+                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
+    }
+
+    public EquipmentDto toDtoAssignToUser(Equipment equipment){
+        if (equipment == null){
+            return null;
+        }
+
+        return new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
+                equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(),
                 equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
@@ -36,7 +46,7 @@ public class EquipmentMapper {
         List<EquipmentDto> equipmentDtos = new ArrayList<>();
         for (Equipment equipment : equipments){
             EquipmentDto equipmentDto = new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
-                    equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getGoal(), equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(),
+                    equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(), equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(),
                     equipment.getStatusEquipment(), equipment.getStatusPhysic());
             equipmentDtos.add(equipmentDto);
         }

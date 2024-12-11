@@ -1,8 +1,6 @@
 package com.netceed.management.management_app.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +23,8 @@ public class UserEquipment {
     private User user;
 
     @ManyToOne
-    @JsonManagedReference
+    //@JsonManagedReference
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
 
