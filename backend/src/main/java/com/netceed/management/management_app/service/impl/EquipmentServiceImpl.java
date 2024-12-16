@@ -37,14 +37,11 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentMapper.toDtoAssignToUser(equipmentRepository.save(equipment));
     }
 
-    /*
     @Override
     public EquipmentDto create(Equipment equipment) {
         //To assign to a user
         return equipmentMapper.toDtoAssignToUser(equipmentRepository.save(equipment));
     }
-
-     */
 
     @Override
     public List<EquipmentDto> getAllEquipments() {

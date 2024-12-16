@@ -10,12 +10,14 @@ import com.netceed.management.management_app.exception.ResourceNotFoundException
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserServiceImpl;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +52,7 @@ public class EquipmentController {
         return ResponseEntity.ok(equipmentsAvailableFound);
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<EquipmentDto> getById(@PathVariable Long id){
         if (equipmentService.getById(id) ==  null){
@@ -59,6 +62,7 @@ public class EquipmentController {
     }
 
     @PostMapping("/new/{userId}")
+    @Transactional
     public ResponseEntity<EquipmentDto> createEquipmentWithAssignmentToUser(@RequestBody @Valid Equipment newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
         UserEquipment userEquipment = new UserEquipment();
         UserDto userFound = userService.getById(userId);
@@ -71,8 +75,14 @@ public class EquipmentController {
 
         if (userFound.id() != null){
             userEquipment.setEquipment(newEquipment);
-            //userEquipmentService.assignEquipmentToUser(newEquipment.getId(), userFound.id());
+            userEquipment.setAssignedDate(LocalDateTime.now());
+            userEquipment.setUser(userMapper.toEntity(userFound));
+            userEquipment.setComments(newEquipment.getDescription() + " was assigned at " + userEquipment.getAssignedDate());
         }
+
+        equipmentService.create(newEquipment);
+
+        userEquipmentService.assignEquipmentToUser(userId, newEquipment.getId());
 
         return ResponseEntity.ok(equipmentService.createEquipmentForUser(newEquipment, userId));
     }

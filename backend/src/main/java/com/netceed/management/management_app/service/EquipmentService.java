@@ -9,7 +9,7 @@ import java.util.List;
 public interface EquipmentService {
 
     void delete(Long id);
-    //EquipmentDto create(Equipment equipment);
+    EquipmentDto create(Equipment equipment);
     EquipmentDto createEquipmentForUser(Equipment equipment, Long userId);
     List<EquipmentDto> getAllEquipments();
     boolean serialNumberExists(String serialNumber);
