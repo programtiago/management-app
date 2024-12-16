@@ -39,7 +39,7 @@
                             </mat-select>
                         <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
                         </mat-form-field>
-                        
+
                         <mat-form-field appearance="outline" floatLabel="always">
                             <mat-label>Description</mat-label>
                             <input matInput>
@@ -248,11 +248,12 @@
                         <!--we can have multiple unitys inside a company for example. Unity of action, where that equipment will focus-->
                         <mat-form-field appearance="outline" floatLabel="always">
                             <mat-label>Workstation</mat-label>
-                            <mat-select *ngIf="">
+                            <mat-select>
                                 <mat-option>Unity A</mat-option>
                                 <mat-option>Unity B</mat-option>
                                 <mat-option>Unity C</mat-option>
                             </mat-select>
+                            
                         </mat-form-field>
                     </mat-card-content>
                 </mat-card>
