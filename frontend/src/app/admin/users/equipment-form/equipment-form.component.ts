@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild, viewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { User } from '../../../model/user';
+import { Observable } from 'rxjs';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-equipment-form',
@@ -11,11 +14,15 @@ export class EquipmentFormComponent implements OnInit{
 
   selectedValueCreationWithAssignment: any;
   selectedValueDepartment: any;
+  selectedUserId: any;
+  users: User[] = [];
 
-  constructor(){}
+  constructor(private adminSerice: AdminService){}
 
   ngOnInit(): void {
-    
+    this.adminSerice.listUsers().subscribe((res) => {
+      this.users = res;
+    })
   }
 
   valueChoosedChanged(event: MatSelectChange){
@@ -32,6 +39,16 @@ export class EquipmentFormComponent implements OnInit{
       text: event.source.triggerValue
     }
     this.selectedValueDepartment = this.selectedValueDepartment.text
+  }
+
+  checkId(){
+    console.log(this.selectedUserId)
+  }
+
+  create(){
+    this.adminSerice.getUserById(this.selectedUserId).subscribe((res) => {
+      console.log(res)
+    })
   }
 
 

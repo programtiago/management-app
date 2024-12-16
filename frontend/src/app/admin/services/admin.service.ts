@@ -5,6 +5,7 @@ import { catchError, first, Observable, throwError } from 'rxjs';
 import { Department } from '../../model/department';
 import { Equipment } from '../../model/equiment';
 import { UserEquipment } from '../../model/user-equipment';
+import { CreateEquipmentAssignUserRequest } from '../../model/equipment-create-assign-user';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +73,10 @@ export class AdminService {
 
   getEquipmentById(equipmentId: number):Observable<Equipment>{
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
+  }
+
+  createEquipmentAndAssignToUser(newEquipment: CreateEquipmentAssignUserRequest, userId: number){
+    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/new/${userId}`, newEquipment)
   }
 
   getMultipleEquipmenstByIds(equipmentIds: number[]): Observable<Equipment[]>{

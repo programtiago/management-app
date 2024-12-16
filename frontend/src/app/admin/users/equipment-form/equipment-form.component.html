@@ -130,8 +130,10 @@
 
                         <mat-form-field appearance="outline" floatLabel="always">
                             <mat-label>User</mat-label>
-                            <mat-select>
-                                <!--load the users available to be assigned a equipment-->
+                            <mat-select [(value)]="selectedUserId" (selectionChange)="checkId()">
+                                <mat-option *ngFor="let user of users" [value]="user.id">
+                                    {{user.workNumber + " - " + user.firstName + " " + user.lastName + " - " + user.department.value}}
+                                </mat-option>
                             </mat-select>
                         <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
                         </mat-form-field>
@@ -253,11 +255,14 @@
                                 <mat-option>Unity B</mat-option>
                                 <mat-option>Unity C</mat-option>
                             </mat-select>
-                            
                         </mat-form-field>
                     </mat-card-content>
                 </mat-card>
             </div>
         </div>         
 </mat-card>
+<mat-card-actions style="display: flex; justify-content: center; align-content: center;">
+    <button mat-raised-button color="primary" (click)="create()">Create</button>
+    <button mat-raised-button color="warn">Cancel</button>
+</mat-card-actions>
 </div>
