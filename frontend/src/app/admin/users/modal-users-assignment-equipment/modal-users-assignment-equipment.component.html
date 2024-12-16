@@ -26,7 +26,7 @@
           </mat-form-field> 
           <button color="primary" mat-mini-fab (click)="clearMultipleSelection()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
         </div>  
-          <mat-checkbox (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
+          <mat-checkbox *ngIf="equipmentsAvailable.length > 1" (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
 </mat-card>
 <div *ngIf="!canChooseMultipleEquipments">
