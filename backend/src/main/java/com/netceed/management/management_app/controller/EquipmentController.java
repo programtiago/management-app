@@ -6,6 +6,7 @@ import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
+import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
@@ -61,6 +62,7 @@ public class EquipmentController {
         return ResponseEntity.ok(equipmentService.getById(id));
     }
 
+    /****** Create a equipment object. After assigns the equipment object to the user_id given ******/
     @PostMapping("/new/{userId}")
     @Transactional
     public ResponseEntity<EquipmentDto> createEquipmentWithAssignmentToUser(@RequestBody @Valid Equipment newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
@@ -74,6 +76,7 @@ public class EquipmentController {
         }
 
         if (userFound.id() != null){
+            newEquipment.setStatusEquipment(StatusEquipment.IN_USE);
             userEquipment.setEquipment(newEquipment);
             userEquipment.setAssignedDate(LocalDateTime.now());
             userEquipment.setUser(userMapper.toEntity(userFound));
