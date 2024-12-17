@@ -9,7 +9,7 @@
                 <mat-card-content>
                     <mat-form-field appearance="outline" floatLabel="always">
                         <mat-label>Choose the type of equipment assignment</mat-label>
-                        <mat-select (selectionChange)="valueChoosedChanged($event)">
+                        <mat-select [(value)]="typeAssignmentSelected" (selectionChange)="valueChoosedChanged($event)">
                             <mat-option [value]="'USR'">User</mat-option>
                             <mat-option [value]="'DEP'">Department</mat-option>
                             <mat-option [value]="'LOC'">Location</mat-option>
@@ -94,61 +94,63 @@
             <div *ngIf="selectedValueCreationWithAssignment == 'User'">
                 <mat-card>
                     <mat-card-content>
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Description</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-            
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>S/N</mat-label>
-                            <input matInput>
-                        <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
-                        </mat-form-field>
+                        <form [formGroup]="createEquipmentForm">
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Description</mat-label>
+                                <input matInput formControlName="description">
+                            </mat-form-field>
+                
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>S/N</mat-label>
+                                <input matInput formControlName="serialNumber">
+                            <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Brand</mat-label>
+                                <input matInput formControlName="brand">
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Model</mat-label>
+                                <input matInput formControlName="model">
+                            </mat-form-field>
+        
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Category</mat-label>
+                                <mat-select [(value)]="selectedCategory" formControlName="category">
+                                    <mat-option *ngFor="let category of categorys" [value]="category">
+                                        {{category}}
+                                    </mat-option>
+                                </mat-select>
+                            <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                            </mat-form-field>
     
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Brand</mat-label>
-                            <input matInput>
-                        </mat-form-field>
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>User</mat-label>
+                                <mat-select [(value)]="selectedUserId" formControlName="user">
+                                    <mat-option *ngFor="let user of users" [value]="user.id">
+                                        {{user.workNumber + " - " + user.firstName + " " + user.lastName + " - " + user.department.value}}
+                                    </mat-option>
+                                </mat-select>
+                            <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
+                            </mat-form-field>
     
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Model</mat-label>
-                            <input matInput>
-                        </mat-form-field>
-    
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Category</mat-label>
-                            <mat-select>
-                                <mat-option>Scanner</mat-option>
-                                <mat-option>Desktop</mat-option>
-                                <mat-option>Printer</mat-option>
-                                <mat-option>Dockstation</mat-option>
-                                <mat-option>Screen</mat-option>
-                                <mat-option>Laptop</mat-option>
-                            </mat-select>
-                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>User</mat-label>
-                            <mat-select [(value)]="selectedUserId" (selectionChange)="checkId()">
-                                <mat-option *ngFor="let user of users" [value]="user.id">
-                                    {{user.workNumber + " - " + user.firstName + " " + user.lastName + " - " + user.department.value}}
-                                </mat-option>
-                            </mat-select>
-                        <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" floatLabel="always">
-                            <mat-label>Unity</mat-label>
-                            <mat-select>
-                                <mat-option>Unity A</mat-option>
-                                <mat-option>Unity B</mat-option>
-                                <mat-option>Unity C</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
+                            <mat-form-field appearance="outline" floatLabel="always">
+                                <mat-label>Unity</mat-label>
+                                <mat-select [(value)]="selectedWorkstation" formControlName="unity">
+                                    <mat-option *ngFor="let workstation of workstations" [value]="workstation">
+                                        {{workstation}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </form>
                     </mat-card-content>
                 </mat-card>
+                <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
+                    <button mat-raised-button color="primary" (click)="createEquipmentAndAssignToUser(this.selectedUserId)">Create</button>
+                    <button mat-raised-button color="warn">Cancel</button>
+                </mat-card-actions>
             </div>
 
 
@@ -261,8 +263,4 @@
             </div>
         </div>         
 </mat-card>
-<mat-card-actions style="display: flex; justify-content: center; align-content: center;">
-    <button mat-raised-button color="primary" (click)="create()">Create</button>
-    <button mat-raised-button color="warn">Cancel</button>
-</mat-card-actions>
 </div>
