@@ -17,8 +17,10 @@ export class EquipmentsListComponent implements OnInit{
   displayedColumns: String[] = ['brand', 'model', 'description', 'serialNumber', 'registryDate', 'status', 'actions']
 
   constructor(private adminService: AdminService, private snackbar: MatSnackBar, private dialog: MatDialog){
-
+    
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 }

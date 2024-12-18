@@ -46,12 +46,12 @@
         </button>
       </mat-header-cell>
 
-      <mat-cell *matCellDef="let user">
-        <button mat-mini-fab color="primary" aria-label="Edit user">
+      <mat-cell *matCellDef="let equipment">
+        <button mat-mini-fab color="primary" aria-label="Edit equipment">
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-mini-fab color="accent" aria-label="Delete user">
+        <button mat-mini-fab color="accent" aria-label="Delete equipment">
           <mat-icon>delete</mat-icon>
         </button>
 
@@ -62,8 +62,8 @@
           <button mat-menu-item>
             <span>View User</span>
           </button>
-          <button mat-menu-item>
-            <span>Assign User</span> <!--show only if equipment is available-->
+          <button *ngIf="equipment.statusEquipment == 'AVAILABLE'" mat-menu-item>
+            <span>Assign User</span>
           </button>
         </mat-menu>
       </mat-cell>

@@ -70,7 +70,7 @@ export class EquipmentFormComponent implements OnInit{
       if (this.createEquipmentForm.valid){
         console.log(this.createEquipmentForm.value)
         this.adminSerice.createEquipmentAndAssignToUser(newEquipment, userId).subscribe((res) => {
-          console.log("Sucessfull response" + res)
+          console.log("Sucessfull response" + res.userEquipments)
         }), (error: any) => {
           console.log(error)
         }
