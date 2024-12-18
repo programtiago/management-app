@@ -62,6 +62,11 @@ public class EquipmentController {
         return ResponseEntity.ok(equipmentService.getById(id));
     }
 
+    @PostMapping("/new")
+    public ResponseEntity<EquipmentDto> createEquipment(@RequestBody @Valid Equipment newEquipment){
+        return ResponseEntity.ok(equipmentService.create(newEquipment));
+    }
+
     /****** Create a equipment object. After assigns the equipment object to the user_id given ******/
     @PostMapping("/new/{userId}")
     @Transactional
