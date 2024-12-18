@@ -6,6 +6,7 @@ import { Department } from '../../model/department';
 import { Equipment } from '../../model/equiment';
 import { UserEquipment } from '../../model/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment-create-assign-user';
+import { CreateEquipmentRequest } from '../../model/equipment-create-normal';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +74,11 @@ export class AdminService {
 
   getEquipmentById(equipmentId: number):Observable<Equipment>{
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
+  }
+
+  //Normal post equipment object
+  createEquipmentWithNoAssign(newEquipment: CreateEquipmentRequest){
+    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/new`, newEquipment);
   }
 
   createEquipmentAndAssignToUser(newEquipment: CreateEquipmentAssignUserRequest, userId: number){

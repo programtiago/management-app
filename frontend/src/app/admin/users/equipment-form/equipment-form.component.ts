@@ -13,7 +13,7 @@ import { Equipment } from '../../../model/equiment';
 })
 export class EquipmentFormComponent implements OnInit{
 
-  selectedValueCreationWithAssignment: any
+  selectedValueCreationAssignmentType: any
   selectedValueDepartment: any
   selectedUserId: any
   selectedCategory: any
@@ -23,18 +23,27 @@ export class EquipmentFormComponent implements OnInit{
   users: User[] = [];
 
   createEquipmentForm!: FormGroup;
-  
+  createEquipmentAndAssignToUserForm!: FormGroup;
 
   categorys: string[] = ['Scanner', 'Desktop', 'Printer', 'Dockstation', 'Screen', 'Laptop']
   workstations: string[] = ['Unity A', 'Unity B', 'Unity C']
 
   constructor(private adminSerice: AdminService, private fb: FormBuilder){
-    this.createEquipmentForm = this.fb.group({
+    this.createEquipmentAndAssignToUserForm = this.fb.group({
       description: [''],
       serialNumber: [''],
       brand: [''],
       model: [''],
       user: [''],
+      category: [''],
+      unity: [''], 
+    })
+    
+    this.createEquipmentForm = this.fb.group({
+      description: [''],
+      serialNumber: [''],
+      brand: [''],
+      model: [''],
       category: [''],
       unity: [''], 
     })
@@ -47,11 +56,11 @@ export class EquipmentFormComponent implements OnInit{
   }
 
   valueChoosedChanged(event: MatSelectChange){
-    this.selectedValueCreationWithAssignment = {
+    this.selectedValueCreationAssignmentType = {
       value: event.value,
       text: event.source.triggerValue
     };
-    this.selectedValueCreationWithAssignment = this.selectedValueCreationWithAssignment.text;
+    this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
   }
 
   valueDepartmentSelectedChanged(event: MatSelectChange){
@@ -62,13 +71,23 @@ export class EquipmentFormComponent implements OnInit{
     this.selectedValueDepartment = this.selectedValueDepartment.text
   }
 
+  createEquipment(){
+    const newEquipment: CreateEquipmentAssignUserRequest = this.createEquipmentForm.value;
+    if (this.selectedValueCreationAssignmentType == 'None'){
+      if (this.createEquipmentForm.valid){
+        this.adminSerice.createEquipmentWithNoAssign(newEquipment).subscribe((res) => {
+          console.log("Sucessfull response", res)
+        }), (error: any) => {
+          console.log(error)
+        }
+      }
+    }
+  }
   
   createEquipmentAndAssignToUser(userId: number){
-    const newEquipment: CreateEquipmentAssignUserRequest = this.createEquipmentForm.value;
-    if (this.selectedValueCreationWithAssignment == 'User'){
-      console.log("USER SELECTED")
-      if (this.createEquipmentForm.valid){
-        console.log(this.createEquipmentForm.value)
+    const newEquipment: CreateEquipmentAssignUserRequest = this.createEquipmentAndAssignToUserForm.value;
+    if (this.selectedValueCreationAssignmentType == 'User'){
+      if (this.createEquipmentAndAssignToUserForm.valid){
         this.adminSerice.createEquipmentAndAssignToUser(newEquipment, userId).subscribe((res) => {
           console.log("Sucessfull response" + res.userEquipments)
         }), (error: any) => {
