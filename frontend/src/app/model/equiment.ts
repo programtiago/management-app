@@ -15,5 +15,5 @@ export interface Equipment{
     returningDateTime: Date,
     statusEquipment: string,
     finalCondition: string,
-    userEquipments: UserEquipment[]
+    usersEquipments: UserEquipment[]
 }

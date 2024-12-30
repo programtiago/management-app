@@ -82,7 +82,7 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="openMenuForEquipmentAssignment(user)">
+          <button *ngIf="user.isActive" mat-menu-item (click)="openMenuForEquipmentAssignment(user)">
             <span>Assign Equipment</span>
           </button>
           <button mat-menu-item (click)="openModalViewEquipmentUserOwner(user.id)">

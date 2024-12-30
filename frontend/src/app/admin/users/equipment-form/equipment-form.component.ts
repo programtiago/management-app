@@ -4,7 +4,8 @@ import { User } from '../../../model/user';
 import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CreateEquipmentAssignUserRequest } from '../../../model/equipment-create-assign-user';
-import { Equipment } from '../../../model/equiment';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-equipment-form',
@@ -28,7 +29,8 @@ export class EquipmentFormComponent implements OnInit{
   categorys: string[] = ['Scanner', 'Desktop', 'Printer', 'Dockstation', 'Screen', 'Laptop']
   workstations: string[] = ['Unity A', 'Unity B', 'Unity C']
 
-  constructor(private adminSerice: AdminService, private fb: FormBuilder){
+  constructor(private adminSerice: AdminService, private fb: FormBuilder, private router: Router, private location: Location, ){
+    //Form to send the data equipment with assignment 
     this.createEquipmentAndAssignToUserForm = this.fb.group({
       description: [''],
       serialNumber: [''],
@@ -39,6 +41,7 @@ export class EquipmentFormComponent implements OnInit{
       unity: [''], 
     })
     
+    //Form to send the data equipment only with no assign
     this.createEquipmentForm = this.fb.group({
       description: [''],
       serialNumber: [''],
@@ -76,7 +79,9 @@ export class EquipmentFormComponent implements OnInit{
     if (this.selectedValueCreationAssignmentType == 'None'){
       if (this.createEquipmentForm.valid){
         this.adminSerice.createEquipmentWithNoAssign(newEquipment).subscribe((res) => {
-          console.log("Sucessfull response", res)
+          if (res != null){
+            this.router.navigateByUrl("admin/equipments")
+          }
         }), (error: any) => {
           console.log(error)
         }
@@ -89,11 +94,17 @@ export class EquipmentFormComponent implements OnInit{
     if (this.selectedValueCreationAssignmentType == 'User'){
       if (this.createEquipmentAndAssignToUserForm.valid){
         this.adminSerice.createEquipmentAndAssignToUser(newEquipment, userId).subscribe((res) => {
-          console.log("Sucessfull response" + res.userEquipments)
+          if (res != null){
+            this.router.navigateByUrl("admin/equipments")
+          }
         }), (error: any) => {
           console.log(error)
         }
       }
     }
+  }
+
+  onCancel(){
+    this.location.back();
   }
 }

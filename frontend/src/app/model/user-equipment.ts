@@ -4,7 +4,7 @@ import { User } from "./user";
 export interface UserEquipment{
     id: number,
     user: User,
-    equipment: Equipment,
+    equipment: Equipment[],
     assignedDate: Date,
     comments: string
 }

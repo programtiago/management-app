@@ -89,7 +89,7 @@
                     </mat-card-content>
                     <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
                         <button mat-raised-button color="primary">Create</button>
-                        <button mat-raised-button color="warn">Cancel</button>
+                        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
@@ -153,7 +153,7 @@
                 </mat-card>
                 <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
                     <button mat-raised-button color="primary" (click)="createEquipmentAndAssignToUser(this.selectedUserId)">Create</button>
-                    <button mat-raised-button color="warn">Cancel</button>
+                    <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
                 </mat-card-actions>
             </div>
 
@@ -215,7 +215,7 @@
                     </mat-card-content>
                     <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
                         <button mat-raised-button color="primary">Create</button>
-                        <button mat-raised-button color="warn">Cancel</button>
+                        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
@@ -267,7 +267,7 @@
                     </mat-card-content>
                     <mat-card-actions style="display: flex; justify-content: center; align-content: center;">
                         <button mat-raised-button color="primary" (click)="createEquipment()">Create</button>
-                        <button mat-raised-button color="warn">Cancel</button>
+                        <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
                     </mat-card-actions>
                 </mat-card>
             </div>

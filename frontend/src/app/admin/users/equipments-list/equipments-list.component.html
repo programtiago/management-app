@@ -47,12 +47,16 @@
       </mat-header-cell>
 
       <mat-cell *matCellDef="let equipment">
-        <button mat-mini-fab color="primary" aria-label="Edit equipment">
+        <button mat-mini-fab color="accent" aria-label="Edit equipment">
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button mat-mini-fab color="accent" aria-label="Delete equipment">
-          <mat-icon>delete</mat-icon>
+        <button mat-mini-fab color="warn" aria-label="Delete equipment">
+          <mat-icon (click)="onDelete(equipment.id)">delete</mat-icon>
+        </button>
+
+        <button mat-mini-fab color="primary" aria-label="View equipment history">
+          <mat-icon>history</mat-icon>
         </button>
 
         <button [matMenuTriggerFor]="menu" mat-icon-button color="primary">

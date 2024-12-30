@@ -45,6 +45,7 @@ export class AdminService {
     return this.httpClient.put<User>(`${this.BASE_API_URL_USERS}/` + userId, user);
   }
 
+
   deleteUserById(userId: number){
     return this.httpClient.delete(`${this.BASE_API_URL_USERS}/` + userId)
   }
@@ -62,6 +63,9 @@ export class AdminService {
     return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
   }
 
+
+
+
   getEquipments(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all`).pipe(first())
   }
@@ -74,6 +78,10 @@ export class AdminService {
 
   getEquipmentById(equipmentId: number):Observable<Equipment>{
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
+  }
+
+  deleteEquipmentById(equipmentId: number){
+    return this.httpClient.delete(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
   }
 
   //Normal post equipment object

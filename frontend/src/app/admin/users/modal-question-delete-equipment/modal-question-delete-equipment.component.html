@@ -1,0 +1,7 @@
+<h2 mat-dialog-title style="color: red; display: flex; justify-content: center; align-content: center;">Warning</h2>
+  <mat-dialog-content>
+    <p>{{data}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions style="display: flex; align-content: center; justify-content: center;">
+    <button (click)="onConfirm()" mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>OK</button>
+  </mat-dialog-actions>
