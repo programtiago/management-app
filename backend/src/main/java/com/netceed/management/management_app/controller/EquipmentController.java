@@ -7,6 +7,7 @@ import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
+import com.netceed.management.management_app.exception.EquipmentHasAssigmentException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
 import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
@@ -113,6 +114,8 @@ public class EquipmentController {
 
         if (equipment == null){
             throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
+        }else if (!equipment.usersEquipments().isEmpty()){
+            throw new EquipmentHasAssigmentException("Impossible to delete the resource. The resource has one or more assignments");
         }
 
         equipmentService.delete(id);
