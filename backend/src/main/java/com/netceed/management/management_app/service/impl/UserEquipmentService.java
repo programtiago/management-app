@@ -5,12 +5,12 @@ import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserDto;
 import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
+import com.netceed.management.management_app.entity.mapper.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
-import com.netceed.management.management_app.service.UserEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,22 +18,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserEquipmentServiceImpl implements UserEquipmentService {
+public class UserEquipmentService{
 
     private final UserEquipmentRepository userEquipmentRepository;
+    private final UserEquipmentMapper userEquipmentMapper;
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
     private final UserMapper userMapper;
 
-    @Override
-    public List<UserEquipment> getAll() {
-        return userEquipmentRepository.findAll();
+    public List<UserEquipmentDto> getAll() {
+        return userEquipmentRepository.findAll()
+                .stream().map(userEquipmentMapper::toDto)
+                .collect(Collectors.toList());
     }
 
-    @Override
     public UserEquipment assignEquipmentToUser(Long userId, Long equipmentId) {
             UserDto userDto = userMapper.toDto(userRepository.findById(userId).orElseThrow());
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
@@ -66,7 +68,6 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
     }
 
     //Assign multiple equipments object to a user object
-    @Override
     public List<UserEquipment> assignEquipmentsToUser(Long userId, List<Long> equipmentsId) {
         Optional<User> userOpt = userRepository.findById(userId);
         List<UserEquipment> userEquipments = new ArrayList<>(); //List to store each object of User Equipment.
@@ -95,7 +96,6 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
         return userEquipmentRepository.saveAll(userEquipments); //save the collectiont that holds all the user equipment objects
     }
 
-    @Override
     public void returnEquipmentFromUser(Long userId, Long equipmentId) {
         Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
@@ -113,8 +113,16 @@ public class UserEquipmentServiceImpl implements UserEquipmentService {
 
     }
 
-    @Override
-    public List<UserEquipment> getEquipmentsByUserId(Long userId) {
-        return userEquipmentRepository.findByUserId(userId);
+    public List<UserEquipmentDto> getEquipmentsByUserId(Long userId) {
+        return userEquipmentRepository.findByUserId(userId).stream().map(userEquipmentMapper::toDto)
+                .collect(Collectors.toList());
     }
+
+    /*
+    @Override
+    public Optional<UserDto> getUserByEquipmentId(Long equipmentId) {
+        return userEquipmentRepository.findUserByEquipmentId(equipmentId);
+    }
+
+     */
 }

@@ -31,9 +31,19 @@ public class EquipmentMapper {
                 equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
+    public Equipment toEntityAssignToUser(EquipmentDto equipmentDto){
+        if (equipmentDto == null){
+            return null;
+        }
+
+        return new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(),
+                equipmentDto.model(), equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
+                equipmentDto.statusEquipment(), equipmentDto.finalCondition());
+    }
+
     public Equipment toEntity(EquipmentDto equipmentDto) {
         Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(),
-                equipmentDto.type(), equipmentDto.location(), equipmentDto.function(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
+                equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
                 equipmentDto.statusEquipment(), equipmentDto.finalCondition());
 
         if (equipmentDto.id() != null) {

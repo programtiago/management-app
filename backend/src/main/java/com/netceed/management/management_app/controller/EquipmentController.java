@@ -1,110 +1,99 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Equipment;
-import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
+import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
 import com.netceed.management.management_app.enums.StatusEquipment;
 import com.netceed.management.management_app.exception.EquipmentHasAssigmentException;
-import com.netceed.management.management_app.exception.ResourceNotFoundException;
-import com.netceed.management.management_app.service.impl.EquipmentServiceImpl;
-import com.netceed.management.management_app.service.impl.UserEquipmentServiceImpl;
-import com.netceed.management.management_app.service.impl.UserServiceImpl;
+import com.netceed.management.management_app.service.impl.EquipmentService;
+import com.netceed.management.management_app.service.impl.UserEquipmentService;
+import com.netceed.management.management_app.service.impl.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/equipments")
 @RequiredArgsConstructor
 public class EquipmentController {
 
-    private final EquipmentServiceImpl equipmentService;
-    private final UserServiceImpl userService;
-    private final UserEquipmentServiceImpl userEquipmentService;
+    private final EquipmentService equipmentService;
+    private final UserService userService;
+    private final UserEquipmentService userEquipmentService;
     private final UserMapper userMapper;
+    private final EquipmentMapper equipmentMapper;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<EquipmentDto>> getAll() throws Exception {
+    @GetMapping
+    public List<EquipmentDto> getAll() throws Exception {
 
         List<EquipmentDto> equipmentFound = equipmentService.getAllEquipments();
 
         if (equipmentFound.isEmpty())
             throw new Exception("No equipments to retrieve");
-        return ResponseEntity.ok(equipmentFound);
+        return equipmentFound;
     }
 
     @GetMapping("/all-available")
-    public ResponseEntity<List<EquipmentDto>> getAllEquipmentsAvailable(){
+    public List<EquipmentDto> getAllEquipmentsAvailable(){
         List<EquipmentDto> equipmentsAvailableFound = equipmentService.getEquipmentsAvailable();
 
         if (equipmentsAvailableFound.isEmpty()){
             throw new RuntimeException("No equipments available to list");
         }
 
-        return ResponseEntity.ok(equipmentsAvailableFound);
+        return equipmentsAvailableFound;
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<EquipmentDto> getById(@PathVariable Long id){
-        if (equipmentService.getById(id) ==  null){
-            throw new ResourceNotFoundException("Equipment with the id " + id + " not found ");
-        }
-        return ResponseEntity.ok(equipmentService.getById(id));
+    public EquipmentDto getById(@PathVariable Long id){
+        return equipmentService.getById(id);
     }
 
-    @PostMapping("/new")
-    public ResponseEntity<EquipmentDto> createEquipment(@RequestBody @Valid Equipment newEquipment){
-        return ResponseEntity.ok(equipmentService.create(newEquipment));
+    @PostMapping
+    public Equipment createEquipment(@RequestBody @Valid EquipmentDto newEquipment){
+        return equipmentService.create(newEquipment);
     }
 
     /****** Create a equipment object. After assigns the equipment object to the user_id given ******/
     @PostMapping("/new/{userId}")
     @Transactional
-    public ResponseEntity<EquipmentDto> createEquipmentWithAssignmentToUser(@RequestBody @Valid Equipment newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
+    public Equipment createEquipmentWithAssignmentToUser(@RequestBody @Valid EquipmentDto newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
         UserEquipment userEquipment = new UserEquipment();
         UserDto userFound = userService.getById(userId);
 
-        boolean serialNumberAlreadyRegistered = equipmentService.serialNumberExists(newEquipment.getSerialNumber());
+        boolean serialNumberAlreadyRegistered = equipmentService.serialNumberExists(newEquipment.serialNumber());
 
         if (serialNumberAlreadyRegistered) {
-            throw new NoSuchFieldException("Serial Number " +  newEquipment.getSerialNumber() + " already belong to a equipment");
+            throw new NoSuchFieldException("Serial Number " +  newEquipment.serialNumber() + " already belong to a equipment");
         }
 
         if (userFound.id() != null){
             newEquipment.setStatusEquipment(StatusEquipment.IN_USE);
-            userEquipment.setEquipment(newEquipment);
+            userEquipment.setEquipment(equipmentMapper.toEntity(newEquipment));
             userEquipment.setAssignedDate(LocalDateTime.now());
             userEquipment.setUser(userMapper.toEntity(userFound));
-            userEquipment.setComments(newEquipment.getDescription() + " was assigned at " + userEquipment.getAssignedDate());
+            userEquipment.setComments(newEquipment.description() + " was assigned at " + userEquipment.getAssignedDate());
         }
 
         equipmentService.create(newEquipment);
 
-        userEquipmentService.assignEquipmentToUser(userId, newEquipment.getId());
+        userEquipmentService.assignEquipmentToUser(userId, newEquipment.id());
 
-        return ResponseEntity.ok(equipmentService.createEquipmentForUser(newEquipment, userId));
+        return equipmentService.createEquipmentForUser(newEquipment, userId);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@RequestBody @Valid EquipmentDto equipment, @PathVariable Long id){
-
-        try{
-            Equipment equipmentToUpdate = equipmentService.update(equipment, id);
-            return new ResponseEntity<>(equipmentToUpdate, HttpStatus.OK);
-        }catch (ResourceNotFoundException ex){
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public void update(@RequestBody @Valid EquipmentDto equipment, @PathVariable Long id){
+        equipmentService.update(equipment, id);
     }
 
     @DeleteMapping("/{id}")
@@ -113,7 +102,7 @@ public class EquipmentController {
         EquipmentDto equipment = equipmentService.getById(id);
 
         if (equipment == null){
-            throw new ResourceNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
+            throw new EntityNotFoundException("Impossible to delete the resource. The id " + id + " was not found.");
         }else if (!equipment.usersEquipments().isEmpty()){
             throw new EquipmentHasAssigmentException("Impossible to delete the resource. The resource has one or more assignments");
         }
@@ -121,8 +110,9 @@ public class EquipmentController {
         equipmentService.delete(id);
     }
 
+    //To assign multiple equipments
     @PostMapping("/multipleEquipments")
-    public ResponseEntity<List<EquipmentDto>> findEquipmentsByIds(@RequestBody List<Long> equipmentsId){
-        return ResponseEntity.ok(equipmentService.findEquipmentsByIds(equipmentsId));
+    public List<EquipmentDto> findEquipmentsByIds(@RequestBody List<Long> equipmentsId){
+        return equipmentService.findEquipmentsByIds(equipmentsId);
     }
 }

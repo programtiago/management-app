@@ -1,53 +1,44 @@
 package com.netceed.management.management_app.service.impl;
 
 import com.netceed.management.management_app.entity.User;
-import com.netceed.management.management_app.entity.UserEquipment;
-import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import com.netceed.management.management_app.entity.dto.UserDto;
-import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
 import com.netceed.management.management_app.entity.mapper.UserMapper;
+import com.netceed.management.management_app.exception.BirthayDateException;
+import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
-import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
-import com.netceed.management.management_app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
-    private final EquipmentRepository equipmentRepository;
     private final UserMapper userMapper;
-    private final EquipmentMapper equipmentMapper;
-    @Override
+
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
                 .stream().map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
 
-    @Override
     public UserDto getById(Long id){
         return userRepository.findById(id).map(userMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("User resource not found with id " + id));
     }
 
-    @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
     }
 
-    @Override
     public User update(UserDto userUpdate, Long id) {
         return userRepository.findById(id)
                 .map(user -> {
@@ -66,25 +57,35 @@ public class UserServiceImpl implements UserService {
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
     }
 
-    @Override
-    public UserDto create(User user) {
-        user.getDepartment().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(user.getId()) + 1);
-        userRepository.save(user);
+    public User create(UserDto newUser) throws NoSuchFieldException {
+        boolean workNumberAlreadyExists = workNumberExists(newUser.workNumber());
+        boolean emailAlreadyExists = emailAlreadyExists(newUser.email());
+        boolean birthdayDateGivenIsValid = birthdayDateIsValid(newUser.birthdayDate());
 
-        return userMapper.toDto(user);
+        if (workNumberAlreadyExists) {
+            throw new NoSuchFieldException("Work Number " +  newUser.workNumber() + " already registered");
+        }
+        if (emailAlreadyExists){
+            throw new EmailAlreadyExistsException("Email " +  newUser.email() + " already registered");
+        }
+
+        if (!birthdayDateGivenIsValid){
+            throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");
+        }
+
+        newUser.department().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(newUser.id()) + 1);
+
+        return userRepository.save(userMapper.toEntity(newUser));
     }
 
-    @Override
     public boolean workNumberExists(int workNumber) {
         return userRepository.findByWorkNumber(workNumber).isPresent();
     }
 
-    @Override
     public boolean emailAlreadyExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    @Override
     public boolean birthdayDateIsValid(LocalDate birthdayDate) {
         int yearOfToday = LocalDate.now().getYear();
         int yearOfBirthday = birthdayDate.getYear();
@@ -92,26 +93,33 @@ public class UserServiceImpl implements UserService {
         return (yearOfToday - yearOfBirthday) >= 18;
     }
 
-    @Override
-    public User deactivateAccount(Long id) {
-        User user = userRepository.findById(id).orElseThrow();
+    public UserDto deactivateAccount(Long id) throws Exception {
+        UserDto userToDeactivateFound = getById(id);
+        User userEntity = userMapper.toEntity(userToDeactivateFound);
 
-        user.setActive(false);
+        if (userToDeactivateFound.isActive()) {
+            try {
+                userToDeactivateFound.setIsActive(false);
+            } catch (Exception e) {
+                throw new Exception("Something went wrong. Please try again");
+            }
+        } else {
+            throw new IllegalArgumentException("User already deactivated. Impossible to active with id " + id);
+        }
 
-        return userRepository.save(user);
+        userRepository.save(userEntity);
+
+        return userToDeactivateFound;
     }
 
-    @Override
     public User activateAccount(Long id) {
         User user = userRepository.findById(id).orElseThrow();
 
         user.setActive(true);
 
         return userRepository.save(user);
-
     }
 
-    @Override
     public List<UserDto> getUsersByDepartment(Long id) {
         return userRepository.findAll().stream()
                 .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)

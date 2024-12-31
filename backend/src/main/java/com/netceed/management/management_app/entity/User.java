@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.enums.WorkStatus;
@@ -67,6 +68,7 @@ public class User {
     private Set<UserEquipment> equipments = new HashSet<>();
      */
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private Set<UserEquipment> userEquipments = new HashSet<>();
 
         public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){

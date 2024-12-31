@@ -12,4 +12,5 @@ public interface UserEquipmentRepository extends JpaRepository<UserEquipment, Lo
     Optional<UserEquipment> findUserEquipmentByEquipmentId(Long equipmentId);
     boolean existsByEquipmentIdAndUserId(Long equipmentId, Long userId);
     List<UserEquipment> findByUserId(Long userId);
+    //Optional<UserDto> findUserByEquipmentId(Long equipmentId);
 }

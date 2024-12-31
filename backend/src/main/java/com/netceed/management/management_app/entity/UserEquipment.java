@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import com.netceed.management.management_app.entity.dto.EquipmentDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,12 +19,12 @@ public class UserEquipment {
     private Long id;
 
     @ManyToOne
-    @JsonIgnore
+    @JsonManagedReference
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    //@JsonManagedReference
+    @JsonManagedReference
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
@@ -34,4 +35,5 @@ public class UserEquipment {
     private LocalDateTime returnDate;
 
     private String comments;
+
 }

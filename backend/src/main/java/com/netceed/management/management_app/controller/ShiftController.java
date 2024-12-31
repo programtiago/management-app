@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Shift;
-import com.netceed.management.management_app.service.impl.ShiftServiceImpl;
+import com.netceed.management.management_app.service.impl.ShiftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShiftController {
 
-    private final ShiftServiceImpl shiftService;
+    private final ShiftService shiftService;
 
     @GetMapping("/all")
     public ResponseEntity<List<Shift>> getAllShifts(){

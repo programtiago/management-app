@@ -1,9 +1,7 @@
 package com.netceed.management.management_app.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.Department;
-import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.Shift;
 import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.enums.UserRole;
@@ -16,7 +14,6 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 public record UserDto (
@@ -71,5 +68,10 @@ public record UserDto (
         this.password = password;
         this.updatedAt = updatedAt;
         this.userEquipments = userEquipments;
+    }
+
+    public UserDto setIsActive(boolean value) {
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+                registryDate, admissionDate, value, userRole, email, contactNumber, password, updatedAt, userEquipments);
     }
 }
