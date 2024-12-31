@@ -112,12 +112,23 @@ public class UserService {
         return userToDeactivateFound;
     }
 
-    public User activateAccount(Long id) {
-        User user = userRepository.findById(id).orElseThrow();
+    public UserDto activateAccount(Long id) throws Exception {
+        UserDto userToActivateFound = getById(id);
+        User userEntity = userMapper.toEntity(userToActivateFound);
 
-        user.setActive(true);
+        if (!userToActivateFound.isActive()) {
+            try {
+                userToActivateFound.setIsActive(true);
+            } catch (Exception e) {
+                throw new Exception("Something went wrong. Please try again");
+            }
+        } else {
+            throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
+        }
 
-        return userRepository.save(user);
+        userRepository.save(userEntity);
+
+        return userToActivateFound;
     }
 
     public List<UserDto> getUsersByDepartment(Long id) {

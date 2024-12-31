@@ -35,12 +35,12 @@ public class UserEquipmentController {
      */
 
     @PostMapping("/{userId}/equipment/{equipmentId}")
-    public UserEquipment assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
+    public UserEquipmentDto assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
         return userEquipmentService.assignEquipmentToUser(userId, equipmentId);
     }
 
     @PostMapping("/{userId}/equipments")
-    public List<UserEquipment> assignMultipleEquipmentsToUser(@PathVariable @Param("userId") Long userId, @RequestBody List<Long> equipmentsId){
+    public List<UserEquipmentDto> assignMultipleEquipmentsToUser(@PathVariable @Param("userId") Long userId, @RequestBody List<Long> equipmentsId){
         return userEquipmentService.assignEquipmentsToUser(userId, equipmentsId);
     }
 

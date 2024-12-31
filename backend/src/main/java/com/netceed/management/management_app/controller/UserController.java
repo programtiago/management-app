@@ -54,19 +54,7 @@ public class UserController {
     //Method responsible for changing status of the user   boolean false -> true
     @PostMapping("/activate/{id}")
     public void activateAccount(@PathVariable Long id) throws Exception{
-        UserDto user = userService.getById(id);
-
-        if (user != null) {
-            if (!user.isActive()) {
-                try {
-                    userService.activateAccount(id);
-                } catch (Exception e) {
-                    throw new Exception("Something went wrong. Please try again");
-                }
-            } else {
-                throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
-            }
-        }
+        userService.activateAccount(id);
     }
 
     @GetMapping("/department/{id}")

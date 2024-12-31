@@ -31,12 +31,12 @@ public class EquipmentMapper {
                 equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
-    public Equipment toEntityAssignToUser(EquipmentDto equipmentDto){
+    public EquipmentDto toEntityAssignToUser(EquipmentDto equipmentDto){
         if (equipmentDto == null){
             return null;
         }
 
-        return new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(),
+        return new EquipmentDto(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(),
                 equipmentDto.model(), equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
                 equipmentDto.statusEquipment(), equipmentDto.finalCondition());
     }

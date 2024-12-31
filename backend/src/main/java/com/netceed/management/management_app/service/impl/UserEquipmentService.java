@@ -25,9 +25,10 @@ import java.util.stream.Collectors;
 public class UserEquipmentService{
 
     private final UserEquipmentRepository userEquipmentRepository;
-    private final UserEquipmentMapper userEquipmentMapper;
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
+
+    private final UserEquipmentMapper userEquipmentMapper;
     private final UserMapper userMapper;
 
     public List<UserEquipmentDto> getAll() {
@@ -36,7 +37,7 @@ public class UserEquipmentService{
                 .collect(Collectors.toList());
     }
 
-    public UserEquipment assignEquipmentToUser(Long userId, Long equipmentId) {
+    public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId) {
             UserDto userDto = userMapper.toDto(userRepository.findById(userId).orElseThrow());
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
@@ -68,7 +69,7 @@ public class UserEquipmentService{
     }
 
     //Assign multiple equipments object to a user object
-    public List<UserEquipment> assignEquipmentsToUser(Long userId, List<Long> equipmentsId) {
+    public List<UserEquipmentDto> assignEquipmentsToUser(Long userId, List<Long> equipmentsId) {
         Optional<User> userOpt = userRepository.findById(userId);
         List<UserEquipment> userEquipments = new ArrayList<>(); //List to store each object of User Equipment.
 
@@ -92,8 +93,11 @@ public class UserEquipmentService{
             }
 
         }
+        List<UserEquipment> assignmentsUser = userEquipmentRepository.saveAll(userEquipments);
 
-        return userEquipmentRepository.saveAll(userEquipments); //save the collectiont that holds all the user equipment objects
+        List<UserEquipmentDto> assignmentsUserDto = userEquipmentMapper.convertListUserEquipmentsToDto(assignmentsUser);
+
+        return assignmentsUserDto; //save the collection that holds all the user equipment objects
     }
 
     public void returnEquipmentFromUser(Long userId, Long equipmentId) {

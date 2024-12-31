@@ -4,6 +4,9 @@ import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class UserEquipmentMapper {
 
@@ -24,5 +27,14 @@ public class UserEquipmentMapper {
             userEquipment.setId(userEquipmentDto.id());
         }
         return userEquipment;
+    }
+
+    public List<UserEquipmentDto> convertListUserEquipmentsToDto(List<UserEquipment> userEquipments){
+        List<UserEquipmentDto> userEquipmentsDtos = new ArrayList<>();
+        for (UserEquipment userEquipment : userEquipments){
+            UserEquipmentDto userEquipmentDto = new UserEquipmentDto(userEquipment.getId(), userEquipment.getUser(), userEquipment.getEquipment(), userEquipment.getAssignedDate(), userEquipment.getReturnDate(), userEquipment.getComments());
+            userEquipmentsDtos.add(userEquipmentDto);
+        }
+        return userEquipmentsDtos;
     }
 }
