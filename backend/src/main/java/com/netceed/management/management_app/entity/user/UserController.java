@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody @Valid UserDto newUser) throws NoSuchFieldException {
+    public UserDto create(@RequestBody @Valid UserDto newUser) throws NoSuchFieldException {
         return userService.create(newUser);
     }
 

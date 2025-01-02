@@ -43,10 +43,12 @@ public record UserDto (
     String contactNumber,
     @NotBlank(message = "The Password is mandatory")
     String password,
+    boolean isAvailableForVacation,
     String updatedAt,
     Set<UserEquipment> userEquipments
 ){
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt,
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password,
+                   boolean isAvailableForVacation, String updatedAt,
                    Set<UserEquipment> userEquipments) {
         this.id = id;
         this.firstName = firstName;
@@ -63,6 +65,7 @@ public record UserDto (
         this.userRole = userRole;
         this.email = email;
         this.contactNumber = contactNumber;
+        this.isAvailableForVacation = isAvailableForVacation;
         this.password = password;
         this.updatedAt = updatedAt;
         this.userEquipments = userEquipments;
@@ -70,6 +73,6 @@ public record UserDto (
 
     public UserDto setIsActive(boolean value) {
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, value, userRole, email, contactNumber, password, updatedAt, userEquipments);
+                registryDate, admissionDate, value, userRole, email, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
     }
 }

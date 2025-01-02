@@ -51,13 +51,15 @@ public class UserService {
                     user.setEmail(userUpdate.email());
                     user.setDepartment(userUpdate.department());
                     user.setPassword(userUpdate.password());
+                    user.setWorkStatus(userUpdate.workStatus());
+                    user.setAvailableForVacation(userUpdate.isAvailableForVacation());
                     user.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
 
                     return userRepository.save(user);
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
     }
 
-    public User create(UserDto newUser) throws NoSuchFieldException {
+    public UserDto create(UserDto newUser) throws NoSuchFieldException {
         boolean workNumberAlreadyExists = workNumberExists(newUser.workNumber());
         boolean emailAlreadyExists = emailAlreadyExists(newUser.email());
         boolean birthdayDateGivenIsValid = birthdayDateIsValid(newUser.birthdayDate());
@@ -73,9 +75,14 @@ public class UserService {
             throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");
         }
 
-        newUser.department().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(newUser.id()) + 1);
+        if (newUser.department() != null){
+            newUser.department().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(newUser.id()) + 1);
+        }
 
-        return userRepository.save(userMapper.toEntity(newUser));
+        User newUserEntity = userMapper.toEntity(newUser);
+        userRepository.save(newUserEntity);
+
+        return userMapper.toDto(newUserEntity);
     }
 
     public boolean workNumberExists(int workNumber) {
