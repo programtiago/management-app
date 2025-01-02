@@ -1,8 +1,5 @@
 package com.netceed.management.management_app;
 
-import com.netceed.management.management_app.entity.*;
-import com.netceed.management.management_app.enums.StatusEquipment;
-import com.netceed.management.management_app.enums.UserRole;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.ShiftRepository;
@@ -12,12 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
 @SpringBootApplication
 @RequiredArgsConstructor

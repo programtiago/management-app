@@ -1,12 +1,12 @@
 package com.netceed.management.management_app.service;
 
-import com.netceed.management.management_app.entity.Equipment;
-import com.netceed.management.management_app.entity.UserEquipment;
-import com.netceed.management.management_app.entity.dto.EquipmentDto;
-import com.netceed.management.management_app.entity.dto.UserDto;
-import com.netceed.management.management_app.entity.mapper.EquipmentMapper;
-import com.netceed.management.management_app.entity.mapper.UserMapper;
-import com.netceed.management.management_app.enums.StatusEquipment;
+import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.equipment.EquipmentDto;
+import com.netceed.management.management_app.entity.user.UserDto;
+import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
+import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.netceed.management.management_app.repository;
 
-import com.netceed.management.management_app.entity.Department;
+import com.netceed.management.management_app.entity.department.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

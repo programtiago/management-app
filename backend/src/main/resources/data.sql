@@ -1,4 +1,4 @@
-INSERT INTO USER (id, firstName, lastName, workNumber, birthdayDate, department,
+INSERT INTO `USER` (id, firstName, lastName, workNumber, birthdayDate, department,
  workStatus, shift, recruitmentCompany, registryDate, admissionDate, isActive,
     userRole, email, contactNumber, password, isAvailableForVacation, updatedAt)
 

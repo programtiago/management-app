@@ -1,8 +1,8 @@
 package com.netceed.management.management_app.service;
 
-import com.netceed.management.management_app.entity.Department;
-import com.netceed.management.management_app.entity.dto.DepartmentDto;
-import com.netceed.management.management_app.entity.mapper.DepartmentMapper;
+import com.netceed.management.management_app.entity.department.Department;
+import com.netceed.management.management_app.entity.department.DepartmentDto;
+import com.netceed.management.management_app.entity.department.DepartmentMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;

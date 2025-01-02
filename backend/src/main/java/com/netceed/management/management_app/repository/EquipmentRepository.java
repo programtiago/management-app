@@ -1,8 +1,7 @@
 package com.netceed.management.management_app.repository;
 
-import com.netceed.management.management_app.entity.Equipment;
-import com.netceed.management.management_app.entity.dto.EquipmentDto;
-import com.netceed.management.management_app.enums.StatusEquipment;
+import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
