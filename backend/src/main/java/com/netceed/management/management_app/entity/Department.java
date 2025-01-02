@@ -21,6 +21,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "value is required")
+    @Column(name = "`value`")
     private String value;
     @NotBlank(message = "description is required")
     private String description;

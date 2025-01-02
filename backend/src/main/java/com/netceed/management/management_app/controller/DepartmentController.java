@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.dto.DepartmentDto;
-import com.netceed.management.management_app.service.impl.DepartmentService;
+import com.netceed.management.management_app.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

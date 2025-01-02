@@ -16,15 +16,14 @@ import org.hibernate.validator.constraints.Range;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "`user`")
 public class User {
 
     @Id
@@ -116,6 +115,28 @@ public class User {
             this.contactNumber = contactNumber;
             this.password = password;
             this.updatedAt = updatedAt;
+    }
+
+    public User(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.workNumber = workNumber;
+            this.birthdayDate = birthdayDate;
+            this.department = department;
+            this.shift = shift;
+            this.registryDate = registryDate;
+            this.admissionDate = admissionDate;
+            this.workStatus = workStatus;
+            this.recruitmentCompany = recruitmentCompany;
+            this.isActive = isActive;
+            this.userRole = userRole;
+            this.email = email;
+            this.contactNumber = contactNumber;
+            this.password = password;
+            this.updatedAt = updatedAt;
+            this.userEquipments = userEquipments;
+
     }
 
     public void addUserEquipment(UserEquipment userEquipment){

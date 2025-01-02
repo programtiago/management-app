@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.service.impl;
+package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.Department;
 import com.netceed.management.management_app.entity.dto.DepartmentDto;

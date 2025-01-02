@@ -19,7 +19,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-
 @SpringBootApplication
 @RequiredArgsConstructor
 @EnableWebMvc
@@ -30,15 +29,14 @@ public class ManagementAppApplication implements CommandLineRunner {
 	private final DepartmentRepository departmentRepository;
 	private final EquipmentRepository equipmentRepository;
 
-
 	public static void main(String[] args) {
 		SpringApplication.run(ManagementAppApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
 
+		/*
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -179,12 +177,14 @@ public class ManagementAppApplication implements CommandLineRunner {
 		userRepository.saveAll(usbAdapterUsers);
 		userRepository.saveAll(desktopUsers);
 
+
+
 		Equipment scanner = new Equipment();
 
 		scanner.setDescription("Scanner Zebra DS2208-SR7U2100SGW BLACK");
 		scanner.setSerialNumber("22180010552203");
 		scanner.setLocation("Housing RCU 1");
-		scanner.setGoal("Housing");
+		scanner.setLocation("Housing");
 		scanner.setUnity("Refurb");
 		scanner.setType("Scanners");
 		scanner.setModel("DS2208");
@@ -204,7 +204,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setDescription("Impressora Toshiba B-FV4T-TS14-QM-R");
 		printer.setSerialNumber("2302P000862");
 		printer.setLocation("Packaging NB6");
-		printer.setGoal("Packaging");
+		printer.setLocation("Packaging");
 		printer.setUnity("Refurb");
 		printer.setType("Printers");
 		printer.setModel("B-FV4T");
@@ -224,7 +224,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setDescription("Monitor Philips 222B1TC/00");
 		screen.setSerialNumber("22180010552203");
 		screen.setLocation("Housing RCU 1");
-		screen.setGoal("Housing");
+		screen.setLocation("Housing");
 		screen.setUnity("Refurb");
 		screen.setType("Screens");
 		screen.setModel("222B1TC/00");
@@ -244,7 +244,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setDescription("Pen WIFI TP-Link AC1300 UM-MIMO");
 		wifiPen.setSerialNumber("RF1K115000774");
 		wifiPen.setLocation("Development 1.2");
-		wifiPen.setGoal("Development");
+		wifiPen.setLocation("Development");
 		wifiPen.setUnity("Refurb");
 		wifiPen.setType("USB Adapter");
 		wifiPen.setModel("AC1300");
@@ -264,7 +264,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setDescription("Desktop Dell OPT3040MFF-SB16-R6");
 		desktop.setSerialNumber("22180010552203");
 		desktop.setLocation("Housing RCU 1");
-		desktop.setGoal("Housing");
+		desktop.setLocation("Housing");
 		desktop.setUnity("Refurb");
 		desktop.setType("Desktops");
 		desktop.setModel("OPT3040MFF-SB16-R6");

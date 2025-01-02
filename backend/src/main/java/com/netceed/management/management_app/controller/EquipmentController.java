@@ -1,8 +1,7 @@
 package com.netceed.management.management_app.controller;
 
-import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.dto.EquipmentDto;
-import com.netceed.management.management_app.service.impl.EquipmentService;
+import com.netceed.management.management_app.service.EquipmentService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.service.impl;
+package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.Shift;
 import com.netceed.management.management_app.repository.ShiftRepository;

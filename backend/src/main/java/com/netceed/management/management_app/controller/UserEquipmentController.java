@@ -1,8 +1,7 @@
 package com.netceed.management.management_app.controller;
 
-import com.netceed.management.management_app.entity.UserEquipment;
 import com.netceed.management.management_app.entity.dto.UserEquipmentDto;
-import com.netceed.management.management_app.service.impl.UserEquipmentService;
+import com.netceed.management.management_app.service.UserEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +30,6 @@ public class UserEquipmentController {
     public ResponseEntity<UserDto> getUserByEquipmentId(@PathVariable Long equipmentId){
         return ResponseEntity.ok(userEquipmentService.getUserByEquipmentId(equipmentId).orElseThrow());
     }
-
      */
 
     @PostMapping("/{userId}/equipment/{equipmentId}")

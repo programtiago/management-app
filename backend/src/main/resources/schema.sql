@@ -1,0 +1,20 @@
+CREATE TABLE IF NO EXISTS USER (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    workNumber INT,
+    birthdayDate DATE,
+    department BIGINT,
+    workStatus ENUM('AVAILABLE', 'SICK', 'ABSENCE_JUSTIFICATION', 'ABSENCE_WITHOUT_JUSTIFICATION'),
+    shift BIGINT,
+    recruitmentCompany VARCHAR(255),
+    registryDate VARCHAR(255),
+    admissionDate DATE,
+    isActive BOOLEAN,
+    userRole ENUM('ADMIN', 'EMPLOYEE'),
+    email VARCHAR(255),
+    contactNumber VARCHAR(9),
+    password VARCHAR(255),
+    isAvailableForVacation BOOLEAN,
+    updatedAt VARCHAR(255)
+);

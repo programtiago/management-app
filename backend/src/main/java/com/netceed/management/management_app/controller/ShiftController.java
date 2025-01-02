@@ -1,7 +1,7 @@
 package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.Shift;
-import com.netceed.management.management_app.service.impl.ShiftService;
+import com.netceed.management.management_app.service.ShiftService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

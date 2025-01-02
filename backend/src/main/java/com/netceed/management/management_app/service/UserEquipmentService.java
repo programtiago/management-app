@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.service.impl;
+package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.Equipment;
 import com.netceed.management.management_app.entity.User;
@@ -65,7 +65,7 @@ public class UserEquipmentService{
                 throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
             }
 
-            return userEquipment;
+            return userEquipmentMapper.toDto(userEquipment);
     }
 
     //Assign multiple equipments object to a user object
@@ -121,12 +121,4 @@ public class UserEquipmentService{
         return userEquipmentRepository.findByUserId(userId).stream().map(userEquipmentMapper::toDto)
                 .collect(Collectors.toList());
     }
-
-    /*
-    @Override
-    public Optional<UserDto> getUserByEquipmentId(Long equipmentId) {
-        return userEquipmentRepository.findUserByEquipmentId(equipmentId);
-    }
-
-     */
 }

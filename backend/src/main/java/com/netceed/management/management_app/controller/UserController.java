@@ -2,7 +2,7 @@ package com.netceed.management.management_app.controller;
 
 import com.netceed.management.management_app.entity.User;
 import com.netceed.management.management_app.entity.dto.UserDto;
-import com.netceed.management.management_app.service.impl.UserService;
+import com.netceed.management.management_app.service.UserService;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
