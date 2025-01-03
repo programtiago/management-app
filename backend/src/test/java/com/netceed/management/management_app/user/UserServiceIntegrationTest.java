@@ -1,7 +1,5 @@
 package com.netceed.management.management_app.user;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
 import com.netceed.management.management_app.entity.user.*;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -18,12 +16,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Transactional
 public class UserServiceIntegrationTest {
     @Autowired
     private UserService userService;
@@ -35,8 +34,14 @@ public class UserServiceIntegrationTest {
     private final List<UserDto> usersDtoList = new ArrayList<>();
     private UserMapper userMapper = new UserMapper();
 
+
     @BeforeEach
     void setUp(){
+
+    }
+
+    @BeforeAll
+    void initialize(){
         userRepository.deleteAll();
 
         testUser1 = new User(1L, "Tiago", "Silva", 30032, LocalDate.of(1996, 05, 02), null, WorkStatus.AVAILABLE,
@@ -55,73 +60,52 @@ public class UserServiceIntegrationTest {
         userRepository.save(testUser2);
         userRepository.save(nonExistentTestUserOnTheList);
 
-        UserMapper userMapper = new UserMapper();
-
         List<User> usersList = Arrays.asList(testUser1, testUser2);
         usersDtoList.addAll(userMapper.convertListUserToDto(usersList));
-
-
-
-        /*
-        UserDto userDto1 = new UserDto(1L, "Tiago", "Silva", 30032, LocalDate.of(1996, 05, 02), null,
-                WorkStatus.AVAILABLE, null, "Adeco" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 05, 12),
-                true, UserRole.EMPLOYEE, "programtiago@gmail.com", "912342123", "tiago123", null, null);
-
-         */
-
-        /*
-        UserDto userDto2 = new UserDto(2L, "Elaine", "Cruz", 80040, LocalDate.of(1998, 06, 16), null,
-                WorkStatus.AVAILABLE, null, "Synergie" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 11, 7),
-                true, UserRole.EMPLOYEE, "elaine.cruz@gmail.com", "916521425", "elaine123", null, null);
-
-         */
     }
 
     @Test
     void testGetAllUsers() throws Exception {
         List<UserDto> users = userService.getAllUsers();
 
-        Assertions.assertNotNull(users);
-        Assertions.assertEquals(2, users.size());
-
-        Assertions.assertEquals("Tiago", users.get(0).firstName());
-        Assertions.assertEquals("Elaine", users.get(1).firstName());
-
+        org.assertj.core.api.Assertions.assertThat(users).isNotEmpty();
+        org.assertj.core.api.Assertions.assertThat(users).hasSize(3);
+        org.assertj.core.api.Assertions.assertThat(users.get(0).firstName()).isEqualTo("Tiago");
+        org.assertj.core.api.Assertions.assertThat(users.get(1).firstName()).isEqualTo("Elaine");
+        org.assertj.core.api.Assertions.assertThat(users.get(2).firstName()).isEqualTo("Rui");
     }
 
     @Test
     void testCreateUserWithNoAssign() throws Exception{
         // Create User
-        UserDto userDto = new UserDto(3L, "Fernando", "Castro", 80032, LocalDate.of(1996, 05, 02), null,
+        UserDto userDto = new UserDto(4L, "Fernando", "Castro", 80032, LocalDate.of(1996, 05, 02), null,
                 WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23),
                 true, UserRole.ADMIN, "fernado.silva@gmail.com", "965217898", "fernando123", false, null, null);
 
         UserDto createdUserDto = userService.create(userDto);
 
-        Assertions.assertNotNull(createdUserDto.id());
-        Assertions.assertEquals(userDto.firstName(), createdUserDto.firstName());
-        Assertions.assertEquals(userDto.email(), createdUserDto.email());
+        org.assertj.core.api.Assertions.assertThat(createdUserDto.id()).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(userDto.firstName()).isEqualTo(createdUserDto.firstName());
+        org.assertj.core.api.Assertions.assertThat(userDto.email()).isEqualTo(createdUserDto.email());
 
         //Verify if the user is saved on database
-        User savedUser = userRepository.findById(createdUserDto.id()).orElse(null);
-        Assertions.assertNotNull(savedUser);
-        Assertions.assertEquals(userDto.firstName(), savedUser.getFirstName());
-        Assertions.assertEquals(userDto.email(), savedUser.getEmail());
-
+        User savedUser = userRepository.findById(createdUserDto.id()).orElseThrow(() -> new ResourceNotFoundException("No resource found with the id " + createdUserDto.id()));
+        org.assertj.core.api.Assertions.assertThat(savedUser).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(userDto.email()).isEqualTo(savedUser.getEmail());
     }
 
     @Test
     void testExistsByWorkNumber_WhenExists_ReturnsTrue() {
         int existingWorkNumber = 30032;
         boolean exists = userService.workNumberExists(existingWorkNumber);
-        Assertions.assertTrue(exists);
+        org.assertj.core.api.Assertions.assertThat(exists).isTrue();
     }
 
     @Test
     void testExistsByWorkNumber_WhenNotExists_ReturnsFalse() {
         int nonExistingWorkNumber = 84125;
-        boolean exists = userService.workNumberExists(nonExistingWorkNumber);
-        Assertions.assertFalse(exists);
+        boolean notExists = userService.workNumberExists(nonExistingWorkNumber);
+        org.assertj.core.api.Assertions.assertThat(notExists).isFalse();
     }
 
     @Test
@@ -129,23 +113,24 @@ public class UserServiceIntegrationTest {
         String emailExists = "programtiago@gmail.com";
 
         boolean exists = userService.emailAlreadyExists(emailExists);
-        Assertions.assertTrue(exists);
+        org.assertj.core.api.Assertions.assertThat(exists).isTrue();
     }
 
     @Test
     void testExistsByEmail_WhenNotExists_ReturnsFalse(){
         String emailExists = "afonso.martins@gmail.com";
 
-        boolean nonExistingEmail = userService.emailAlreadyExists(emailExists);
-        Assertions.assertFalse(nonExistingEmail);
+        boolean notExists = userService.emailAlreadyExists(emailExists);
+        org.assertj.core.api.Assertions.assertThat(notExists).isFalse();
     }
 
     @Test
     void testGetUserById() {
-        UserDto foundUser = userService.getById(testUser1.getId());
-        Assertions.assertEquals(testUser1.getFirstName(), foundUser.firstName());
-        Assertions.assertEquals(testUser1.getLastName(), foundUser.lastName());
-        Assertions.assertEquals(testUser1.getEmail(), foundUser.email());
+        UserDto foundUser = userService.getById(testUser2.getId());
+
+        org.assertj.core.api.Assertions.assertThat(testUser2.getFirstName()).isEqualTo(foundUser.firstName());
+        org.assertj.core.api.Assertions.assertThat(testUser2.getLastName()).isEqualTo(foundUser.lastName());
+        org.assertj.core.api.Assertions.assertThat(testUser2.getEmail()).isEqualTo(foundUser.email());
     }
 
     @Test
@@ -156,25 +141,27 @@ public class UserServiceIntegrationTest {
         testUser2.setAvailableForVacation(true);
 
         UserDto userToUpdateDto = userMapper.toDto(testUser2);
-        User userToUpdate = userService.update(userToUpdateDto, userToUpdateDto.id());
+        User userUpdated = userService.update(userToUpdateDto, userToUpdateDto.id());
 
-        Assertions.assertEquals(false, userToUpdate.isActive());
-        Assertions.assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")), userToUpdate.getUpdatedAt());
-        Assertions.assertEquals(WorkStatus.VACATION, userToUpdate.getWorkStatus());
-        Assertions.assertEquals(true, userToUpdate.isAvailableForVacation());
-
+        org.assertj.core.api.Assertions.assertThat(userUpdated.isActive()).isFalse();
+        org.assertj.core.api.Assertions.assertThat(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))).isEqualTo(userUpdated.getUpdatedAt());
+        org.assertj.core.api.Assertions.assertThat(WorkStatus.VACATION).isEqualTo(userUpdated.getWorkStatus());
+        org.assertj.core.api.Assertions.assertThat(userUpdated.isAvailableForVacation()).isTrue();
     }
 
     @Test
     void testDeleteUser(){
-        userService.delete(testUser1.getId());
-        Assertions.assertThrows(ResourceNotFoundException.class, () -> userService.getById(testUser1.getId()));
+        userService.delete(nonExistentTestUserOnTheList.getId());
+
+        Optional<User> deletedUser = userRepository.findById(nonExistentTestUserOnTheList.getId());
+        org.assertj.core.api.Assertions.assertThat(deletedUser).isEmpty();
     }
 
     @Test
     void testDifferentObjects(){
         org.assertj.core.api.Assertions.assertThat(testUser1).isNotEqualTo(testUser2);
     }
+
 
     @Test
     void testSizeCollectionAndObjectsExistentOrNot(){
@@ -183,8 +170,4 @@ public class UserServiceIntegrationTest {
                 .contains(userMapper.toDto(testUser1), userMapper.toDto(testUser1))
                 .doesNotContain(userMapper.toDto(nonExistentTestUserOnTheList));
     }
-
-
-
-
 }
