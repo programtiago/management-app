@@ -1,7 +1,5 @@
 package com.netceed.management.management_app.entity.user;
 
-import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
@@ -46,15 +44,15 @@ public class UserController {
     }
 
     //Method responsible for changing status of the user   boolean true -> false
-    @PostMapping("/deactivate/{id}")
-    public void deactivateAccount(@PathVariable Long id) throws Exception{
-        userService.deactivateAccount(id);
+    @PutMapping("/deactivate/{id}")
+    public UserDto deactivateAccount(@PathVariable Long id){
+        return userService.deactivateAccount(id);
     }
 
     //Method responsible for changing status of the user   boolean false -> true
-    @PostMapping("/activate/{id}")
-    public void activateAccount(@PathVariable Long id) throws Exception{
-        userService.activateAccount(id);
+    @PutMapping("/activate/{id}")
+    public UserDto activateAccount(@PathVariable Long id){
+        return userService.activateAccount(id);
     }
 
     @GetMapping("/department/{id}")

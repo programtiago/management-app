@@ -9,6 +9,7 @@ import com.netceed.management.management_app.exception.ResourceNotFoundException
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -60,9 +61,9 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-        boolean workNumberAlreadyExists = workNumberExists(newUser.workNumber());
-        boolean emailAlreadyExists = emailAlreadyExists(newUser.email());
-        boolean birthdayDateGivenIsValid = birthdayDateIsValid(newUser.birthdayDate());
+        boolean workNumberAlreadyExists = checkIfGivenWorkNumberExists(newUser.workNumber());
+        boolean emailAlreadyExists = findEmailIfAlreadyExists(newUser.email());
+        boolean birthdayDateGivenIsValid = checkIfGivenBirthdayDateIsValid(newUser.birthdayDate());
 
         if (workNumberAlreadyExists) {
             throw new IllegalArgumentException("Work Number " +  newUser.workNumber() + " already registered");
@@ -85,57 +86,53 @@ public class UserService {
         return userMapper.toDto(newUserEntity);
     }
 
-    public boolean workNumberExists(int workNumber) {
+    public boolean checkIfGivenWorkNumberExists(int workNumber) {
         return userRepository.findByWorkNumber(workNumber).isPresent();
     }
 
-    public boolean emailAlreadyExists(String email) {
+    public boolean findEmailIfAlreadyExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
 
-    public boolean birthdayDateIsValid(LocalDate birthdayDate) {
+    public boolean checkIfGivenBirthdayDateIsValid(LocalDate birthdayDate) {
         int yearOfToday = LocalDate.now().getYear();
         int yearOfBirthday = birthdayDate.getYear();
 
         return (yearOfToday - yearOfBirthday) >= 18;
     }
 
-    public UserDto deactivateAccount(Long id) throws Exception {
-        UserDto userToDeactivateFound = getById(id);
-        User userEntity = userMapper.toEntity(userToDeactivateFound);
+    public UserDto deactivateAccount(Long id){
+        User userToDeactivate = userRepository.findById(id).orElseThrow();
 
-        if (userToDeactivateFound.isActive()) {
+        if (userToDeactivate.isActive()) {
             try {
-                userToDeactivateFound.setIsActive(false);
+                userToDeactivate.setActive(false);
+                userRepository.save(userToDeactivate);
             } catch (Exception e) {
-                throw new Exception("Something went wrong. Please try again");
+                new BadRequestException("Something went wrong. Please try again");
             }
         } else {
             throw new IllegalArgumentException("User already deactivated. Impossible to active with id " + id);
         }
 
-        userRepository.save(userEntity);
-
-        return userToDeactivateFound;
+        return userMapper.toDto(userToDeactivate);
     }
 
-    public UserDto activateAccount(Long id) throws Exception {
-        UserDto userToActivateFound = getById(id);
-        User userEntity = userMapper.toEntity(userToActivateFound);
+    public UserDto activateAccount(Long id){
+        User userToActivate = userRepository.findById(id).orElseThrow();
 
-        if (!userToActivateFound.isActive()) {
+        if (!userToActivate.isActive()) {
             try {
-                userToActivateFound.setIsActive(true);
+                userToActivate.setActive(true);
+                userRepository.save(userToActivate);
             } catch (Exception e) {
-                throw new Exception("Something went wrong. Please try again");
+                new BadRequestException("Something went wrong. Please try again");
             }
         } else {
             throw new IllegalArgumentException("User already activated. Impossible to active with id " + id);
         }
 
-        userRepository.save(userEntity);
-
-        return userToActivateFound;
+        return userMapper.toDto(userToActivate);
     }
 
     public List<UserDto> getUsersByDepartment(Long id) {

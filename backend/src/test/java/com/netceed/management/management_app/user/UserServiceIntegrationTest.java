@@ -2,15 +2,19 @@ package com.netceed.management.management_app.user;
 
 import com.netceed.management.management_app.entity.user.*;
 import com.netceed.management.management_app.exception.BirthayDateException;
+import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolationException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,6 +26,7 @@ import java.util.Optional;
 
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Transactional
@@ -54,8 +59,8 @@ public class UserServiceIntegrationTest {
                 null, "Adeco", "30-10-2023 12:45", LocalDate.of(2023, 10, 30), true,
                 UserRole.EMPLOYEE, "elaine.cruz@gmail.com", "965214523", "elaine123", null, null);
 
-        nonExistentTestUserOnTheList = new User(3L, "Rui", "Salgado", 80052, LocalDate.of(1987, 04, 16), null, WorkStatus.AVAILABLE,
-                null, "Adeco", "29-02-2023 13:01", LocalDate.of(2023, 10, 30), true,
+        nonExistentTestUserOnTheList = new User(3L, "Rui", "Salgado", 80054, LocalDate.of(1987, 04, 16), null, WorkStatus.AVAILABLE,
+                null, "Adeco", "29-02-2023 13:01", LocalDate.of(2023, 10, 30), false,
                 UserRole.EMPLOYEE, "rui.salgado@gmail.com", "915493251", "rui123", null, null);
 
         userRepository.save(testUser1);
@@ -99,14 +104,14 @@ public class UserServiceIntegrationTest {
     @Test
     void testExistsByWorkNumber_WhenExists_ReturnsTrue() {
         int existingWorkNumber = 30032;
-        boolean exists = userService.workNumberExists(existingWorkNumber);
+        boolean exists = userService.checkIfGivenWorkNumberExists(existingWorkNumber);
         org.assertj.core.api.Assertions.assertThat(exists).isTrue();
     }
 
     @Test
     void testExistsByWorkNumber_WhenNotExists_ReturnsFalse() {
         int nonExistingWorkNumber = 84125;
-        boolean notExists = userService.workNumberExists(nonExistingWorkNumber);
+        boolean notExists = userService.checkIfGivenWorkNumberExists(nonExistingWorkNumber);
         org.assertj.core.api.Assertions.assertThat(notExists).isFalse();
     }
 
@@ -114,7 +119,7 @@ public class UserServiceIntegrationTest {
     void testExistsByEmail_WhenNotExists_ReturnsTrue(){
         String emailExists = "programtiago@gmail.com";
 
-        boolean exists = userService.emailAlreadyExists(emailExists);
+        boolean exists = userService.findEmailIfAlreadyExists(emailExists);
         org.assertj.core.api.Assertions.assertThat(exists).isTrue();
     }
 
@@ -122,7 +127,7 @@ public class UserServiceIntegrationTest {
     void testExistsByEmail_WhenNotExists_ReturnsFalse(){
         String emailExists = "afonso.martins@gmail.com";
 
-        boolean notExists = userService.emailAlreadyExists(emailExists);
+        boolean notExists = userService.findEmailIfAlreadyExists(emailExists);
         org.assertj.core.api.Assertions.assertThat(notExists).isFalse();
     }
 
@@ -164,7 +169,6 @@ public class UserServiceIntegrationTest {
         org.assertj.core.api.Assertions.assertThat(testUser1).isNotEqualTo(testUser2);
     }
 
-
     @Test
     void testSizeCollectionAndObjectsExistentOrNot(){
         org.assertj.core.api.Assertions.assertThat(usersDtoList)
@@ -194,6 +198,109 @@ public class UserServiceIntegrationTest {
         LocalDate validBirthday = LocalDate.now().minusYears(18); // Exactly 18 years old
 
         // This should not throw an exception
-        userService.birthdayDateIsValid(validBirthday);
+        userService.checkIfGivenBirthdayDateIsValid(validBirthday);
     }
+
+    @Test
+    void shouldThrowExceptionWhenEmailAlreadyExists(){
+        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, LocalDate.of(1997, 2, 12), null,
+                WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2),
+                true, UserRole.ADMIN, "programtiago@gmail.com", "965217898", "teste123xx", false, null, null);
+
+
+        EmailAlreadyExistsException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), EmailAlreadyExistsException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(EmailAlreadyExistsException.class)
+                .hasMessage("Email " +  userDto.email() + " already registered");
+    }
+    @Test
+    void shouldNotThrowExceptionWhenEmailDoesNotExists() {
+        String testEmail = "xxxxxxxx@x.com";
+
+        // This should not throw an exception
+       userService.findEmailIfAlreadyExists(testEmail);
+    }
+
+    @Test
+    void shouldThrowExceptionWhenWorkNumberAlreadyExists(){
+        UserDto userDto = new UserDto(5L, "xxxxx", "yyyyy", 80054, LocalDate.of(2000, 9, 30), null,
+                WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2),
+                true, UserRole.ADMIN, "yyyyyyyyyyyyyyy123@gmail.com", "912317421", "teste123xx", false, null, null);
+
+        IllegalArgumentException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), IllegalArgumentException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Work Number " +  userDto.workNumber() + " already registered");
+    }
+    @Test
+    void shouldNotThrowExceptionWhenWorkNumberDoesNotExists() {
+        int testWorkNumber = 32052;
+
+        // This should not throw an exception
+        userService.checkIfGivenWorkNumberExists(testWorkNumber);
+    }
+
+    /******************* workNumber < 30000 **************************/
+    @Test
+    void shouldThrowExceptionWhenWorkNumberIsLessThanThirtyThousand() {
+        UserDto userDto = new UserDto(5L, "Catarina", "Almeida", 29999, LocalDate.of(1989, 10, 10), null,
+                WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 5, 27),
+                true, UserRole.ADMIN, "yyyyyyyysadjpoasjdasyyyyyyy123@gmail.com", "912365419", "safasdoajsdia", false, null, null);
+
+        ConstraintViolationException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), ConstraintViolationException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(ConstraintViolationException.class);
+
+    }
+
+    /******************* workNumber > 100000 **************************/
+    @Test
+    void shouldThrowExceptionWhenWorkNumberIsGreaterThanHundredThousand() {
+        UserDto userDto = new UserDto(5L, "Catarina", "Almeida", 100001, LocalDate.of(1989, 10, 10), null,
+                WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 5, 27),
+                true, UserRole.ADMIN, "yyyyyyyysadjpoasjdasyyyyyyy123@gmail.com", "912365419", "safasdoajsdia", false, null, null);
+
+        ConstraintViolationException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), ConstraintViolationException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(ConstraintViolationException.class);
+
+    }
+
+    @Test
+    void testActivateUser(){
+        UserDto activatedUser = userService.activateAccount(nonExistentTestUserOnTheList.getId());
+
+        org.assertj.core.api.Assertions.assertThat(activatedUser.isActive()).isEqualTo(true);
+
+    }
+
+    /******************* Try active user object with isActive: true **************************/
+    @Test
+    void shouldThrowExceptionWhenTryingActivateUserThatIsAlreadyActivated() {
+        IllegalArgumentException throwable = Assertions.catchThrowableOfType(() -> userService.activateAccount(testUser1.getId()), IllegalArgumentException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("User already activated. Impossible to active with id " + testUser1.getId());
+
+    }
+
+    /******************* Try deactivate user object with isActive: false **************************/
+    @Test
+    void shouldThrowExceptionWhenTryingDeactivateUserThatIsAlreadyDeactivated() {
+        IllegalArgumentException throwable = Assertions.catchThrowableOfType(() -> userService.deactivateAccount(nonExistentTestUserOnTheList.getId()), IllegalArgumentException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("User already deactivated. Impossible to active with id " + nonExistentTestUserOnTheList.getId());
+
+    }
+
+
+
+
 }
