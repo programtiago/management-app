@@ -136,7 +136,6 @@ public class User {
             this.password = password;
             this.updatedAt = updatedAt;
             this.userEquipments = userEquipments;
-
     }
 
     public void addUserEquipment(UserEquipment userEquipment){

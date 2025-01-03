@@ -43,6 +43,11 @@ public class UserController {
         return userService.create(newUser);
     }
 
+    @PostMapping
+    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("userId") Long equipmentId) {
+        return userService.createUserForEquipment(newUser, equipmentId);
+    }
+
     //Method responsible for changing status of the user   boolean true -> false
     @PutMapping("/deactivate/{id}")
     public UserDto deactivateAccount(@PathVariable Long id){

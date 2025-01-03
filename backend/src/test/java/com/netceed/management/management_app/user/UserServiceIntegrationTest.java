@@ -24,7 +24,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -40,7 +39,6 @@ public class UserServiceIntegrationTest {
     private User nonExistentTestUserOnTheList;
     private final List<UserDto> usersDtoList = new ArrayList<>();
     private UserMapper userMapper = new UserMapper();
-
 
     @BeforeEach
     void setUp(){
@@ -299,8 +297,4 @@ public class UserServiceIntegrationTest {
                 .hasMessage("User already deactivated. Impossible to active with id " + nonExistentTestUserOnTheList.getId());
 
     }
-
-
-
-
 }

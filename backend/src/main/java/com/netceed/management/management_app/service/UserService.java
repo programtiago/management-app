@@ -1,8 +1,10 @@
 package com.netceed.management.management_app.service;
 
+import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
@@ -25,6 +27,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
     private final UserMapper userMapper;
+    private final EquipmentService equipmentService;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
@@ -139,6 +142,15 @@ public class UserService {
         return userRepository.findAll().stream()
                 .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)
                 .toList();
+    }
+
+    UserDto createUserForEquipment(UserDto newUser, Long equipmentId){
+        UserEquipment userEquipment = new UserEquipment();
+        EquipmentDto equipmentDto = equipmentService.getById(equipmentId);
+
+        if (equipmentDto.id() != null){
+
+        }
     }
 
 }
