@@ -59,13 +59,13 @@ public class UserService {
                 }).orElseThrow(() -> new ResourceNotFoundException("Operation failed because the resource with the id " + id + " doesn't exist."));
     }
 
-    public UserDto create(UserDto newUser) throws NoSuchFieldException {
+    public UserDto create(UserDto newUser){
         boolean workNumberAlreadyExists = workNumberExists(newUser.workNumber());
         boolean emailAlreadyExists = emailAlreadyExists(newUser.email());
         boolean birthdayDateGivenIsValid = birthdayDateIsValid(newUser.birthdayDate());
 
         if (workNumberAlreadyExists) {
-            throw new NoSuchFieldException("Work Number " +  newUser.workNumber() + " already registered");
+            throw new IllegalArgumentException("Work Number " +  newUser.workNumber() + " already registered");
         }
         if (emailAlreadyExists){
             throw new EmailAlreadyExistsException("Email " +  newUser.email() + " already registered");

@@ -1,10 +1,12 @@
 package com.netceed.management.management_app.user;
 
 import com.netceed.management.management_app.entity.user.*;
+import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.UserRepository;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -169,5 +171,29 @@ public class UserServiceIntegrationTest {
                 .hasSize(2)
                 .contains(userMapper.toDto(testUser1), userMapper.toDto(testUser1))
                 .doesNotContain(userMapper.toDto(nonExistentTestUserOnTheList));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenAgeIsLessThan18(){
+        LocalDate underageBirthday = LocalDate.now().minusYears(17).plusDays(1); // 17 years and 1 day old
+
+        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, underageBirthday, null,
+                WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23),
+                true, UserRole.ADMIN, "fernado.silva@gmail.com", "965217898", "fernando123", false, null, null);
+
+
+        BirthayDateException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), BirthayDateException.class);
+
+        Assertions.assertThat(throwable)
+                .isInstanceOf(BirthayDateException.class)
+                .hasMessage("Birthday Date given indicate the user doesn't have 18 years or more");
+    }
+
+    @Test
+    void shouldNotThrowExceptionWhenAgeIs18() {
+        LocalDate validBirthday = LocalDate.now().minusYears(18); // Exactly 18 years old
+
+        // This should not throw an exception
+        userService.birthdayDateIsValid(validBirthday);
     }
 }
