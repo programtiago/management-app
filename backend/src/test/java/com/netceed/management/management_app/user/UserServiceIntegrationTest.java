@@ -15,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -29,7 +31,9 @@ public class UserServiceIntegrationTest {
     private UserRepository userRepository;
     private User testUser1;
     private User testUser2;
-    private UserDto testUserDto;
+    private User nonExistentTestUserOnTheList;
+    private final List<UserDto> usersDtoList = new ArrayList<>();
+    private UserMapper userMapper = new UserMapper();
 
     @BeforeEach
     void setUp(){
@@ -43,8 +47,18 @@ public class UserServiceIntegrationTest {
                 null, "Adeco", "30-10-2023 12:45", LocalDate.of(2023, 10, 30), true,
                 UserRole.EMPLOYEE, "elaine.cruz@gmail.com", "965214523", "elaine123", null, null);
 
+        nonExistentTestUserOnTheList = new User(3L, "Rui", "Salgado", 80052, LocalDate.of(1987, 04, 16), null, WorkStatus.AVAILABLE,
+                null, "Adeco", "29-02-2023 13:01", LocalDate.of(2023, 10, 30), true,
+                UserRole.EMPLOYEE, "rui.salgado@gmail.com", "915493251", "rui123", null, null);
+
         userRepository.save(testUser1);
         userRepository.save(testUser2);
+        userRepository.save(nonExistentTestUserOnTheList);
+
+        UserMapper userMapper = new UserMapper();
+
+        List<User> usersList = Arrays.asList(testUser1, testUser2);
+        usersDtoList.addAll(userMapper.convertListUserToDto(usersList));
 
 
 
@@ -64,12 +78,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    @DisplayName("Happy Path Test: save user and return user dto")
-    void givenCorrectUserDto_whenSaveUser_withNoAssignment_thenReturnUserDTO() throws Exception{}
-
-
-    @Test
-    public void testGetAllUsers() throws Exception {
+    void testGetAllUsers() throws Exception {
         List<UserDto> users = userService.getAllUsers();
 
         Assertions.assertNotNull(users);
@@ -81,7 +90,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testCreateUserWithNoAssign() throws Exception{
+    void testCreateUserWithNoAssign() throws Exception{
         // Create User
         UserDto userDto = new UserDto(3L, "Fernando", "Castro", 80032, LocalDate.of(1996, 05, 02), null,
                 WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23),
@@ -102,21 +111,21 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testExistsByWorkNumber_WhenExists_ReturnsTrue() {
+    void testExistsByWorkNumber_WhenExists_ReturnsTrue() {
         int existingWorkNumber = 30032;
         boolean exists = userService.workNumberExists(existingWorkNumber);
         Assertions.assertTrue(exists);
     }
 
     @Test
-    public void testExistsByWorkNumber_WhenNotExists_ReturnsFalse() {
+    void testExistsByWorkNumber_WhenNotExists_ReturnsFalse() {
         int nonExistingWorkNumber = 84125;
         boolean exists = userService.workNumberExists(nonExistingWorkNumber);
         Assertions.assertFalse(exists);
     }
 
     @Test
-    public void testExistsByEmail_WhenNotExists_ReturnsTrue(){
+    void testExistsByEmail_WhenNotExists_ReturnsTrue(){
         String emailExists = "programtiago@gmail.com";
 
         boolean exists = userService.emailAlreadyExists(emailExists);
@@ -124,7 +133,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testExistsByEmail_WhenNotExists_ReturnsFalse(){
+    void testExistsByEmail_WhenNotExists_ReturnsFalse(){
         String emailExists = "afonso.martins@gmail.com";
 
         boolean nonExistingEmail = userService.emailAlreadyExists(emailExists);
@@ -132,7 +141,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testGetUserById() {
+    void testGetUserById() {
         UserDto foundUser = userService.getById(testUser1.getId());
         Assertions.assertEquals(testUser1.getFirstName(), foundUser.firstName());
         Assertions.assertEquals(testUser1.getLastName(), foundUser.lastName());
@@ -140,8 +149,7 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testUpdateUser(){
-        UserMapper userMapper = new UserMapper();
+    void testUpdateUser(){
         testUser2.setActive(false);
         testUser2.setUpdatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         testUser2.setWorkStatus(WorkStatus.VACATION);
@@ -158,9 +166,22 @@ public class UserServiceIntegrationTest {
     }
 
     @Test
-    public void testDeleteUser(){
+    void testDeleteUser(){
         userService.delete(testUser1.getId());
         Assertions.assertThrows(ResourceNotFoundException.class, () -> userService.getById(testUser1.getId()));
+    }
+
+    @Test
+    void testDifferentObjects(){
+        org.assertj.core.api.Assertions.assertThat(testUser1).isNotEqualTo(testUser2);
+    }
+
+    @Test
+    void testSizeCollectionAndObjectsExistentOrNot(){
+        org.assertj.core.api.Assertions.assertThat(usersDtoList)
+                .hasSize(2)
+                .contains(userMapper.toDto(testUser1), userMapper.toDto(testUser1))
+                .doesNotContain(userMapper.toDto(nonExistentTestUserOnTheList));
     }
 
 

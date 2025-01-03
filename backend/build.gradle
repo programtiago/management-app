@@ -38,6 +38,7 @@ dependencies {
 	'io.swagger.core.v3:swagger-annotations:2.2.20'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 	runtimeOnly 'com.h2database:h2'
+	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.3'
 	//testImplementation group: 'com.h2database', name: 'h2', version: '2.2.224'
 
 }
