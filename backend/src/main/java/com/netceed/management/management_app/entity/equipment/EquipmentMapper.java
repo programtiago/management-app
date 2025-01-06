@@ -31,7 +31,7 @@ public class EquipmentMapper {
                 equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
-    public EquipmentDto toEntityAssignToUser(EquipmentDto equipmentDto){
+    public EquipmentDto fromDtoToDtoAssignToUser(EquipmentDto equipmentDto){
         if (equipmentDto == null){
             return null;
         }
@@ -49,6 +49,7 @@ public class EquipmentMapper {
         if (equipmentDto.id() != null) {
             equipment.setId(equipmentDto.id());
         }
+
         return equipment;
     }
 

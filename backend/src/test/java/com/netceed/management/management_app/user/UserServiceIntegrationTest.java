@@ -1,10 +1,17 @@
 package com.netceed.management.management_app.user;
 
+import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.*;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
+import com.netceed.management.management_app.repository.EquipmentRepository;
+import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
+import com.netceed.management.management_app.service.EquipmentService;
+import com.netceed.management.management_app.service.UserEquipmentService;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolationException;
@@ -33,20 +40,30 @@ public class UserServiceIntegrationTest {
     @Autowired
     private UserService userService;
     @Autowired
+    private EquipmentService equipmentService;
+    @Autowired
+    private UserEquipmentService userEquipmentService;
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private EquipmentRepository equipmentRepository;
+    @Autowired
+    private UserEquipmentRepository userEquipmentRepository;
     private User testUser1;
     private User testUser2;
+    private Equipment testEquipment1;
+    private Equipment testEquipment2;
     private User nonExistentTestUserOnTheList;
     private final List<UserDto> usersDtoList = new ArrayList<>();
     private UserMapper userMapper = new UserMapper();
+    private EquipmentMapper equipmentMapper = new EquipmentMapper();
+    private UserEquipmentMapper userEquipmentMapper = new UserEquipmentMapper();
 
     @BeforeEach
-    void setUp(){
-
-    }
-
+    void setUp(){}
     @BeforeAll
     void initialize(){
+        equipmentRepository.deleteAll();
         userRepository.deleteAll();
 
         testUser1 = new User(1L, "Tiago", "Silva", 30032, LocalDate.of(1996, 05, 02), null, WorkStatus.AVAILABLE,
@@ -61,9 +78,16 @@ public class UserServiceIntegrationTest {
                 null, "Adeco", "29-02-2023 13:01", LocalDate.of(2023, 10, 30), false,
                 UserRole.EMPLOYEE, "rui.salgado@gmail.com", "915493251", "rui123", null, null);
 
+        testEquipment1 = new Equipment("Monitor XXL", "asfasd231321321213", "BRANDY", "MODELX", "Monitors", "Development");
+
+        testEquipment2 = new Equipment("Rato Microsoft", "M213412X", "Microsoft", "M1254", "Mouse", "Development");
+
         userRepository.save(testUser1);
         userRepository.save(testUser2);
         userRepository.save(nonExistentTestUserOnTheList);
+
+        equipmentRepository.save(testEquipment1);
+        equipmentRepository.save(testEquipment2);
 
         List<User> usersList = Arrays.asList(testUser1, testUser2);
         usersDtoList.addAll(userMapper.convertListUserToDto(usersList));

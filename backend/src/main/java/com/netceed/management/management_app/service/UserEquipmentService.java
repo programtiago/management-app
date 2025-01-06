@@ -51,7 +51,6 @@ public class UserEquipmentService{
                 userEquipment.setEquipment(equipment);
                 userEquipment.setUser(userMapper.toEntity(userDto));
 
-                userEquipmentRepository.save(userEquipment);
                 equipment.getUserEquipments().add(userEquipment);
 
                 userDto.userEquipments().add(userEquipment);
@@ -59,6 +58,7 @@ public class UserEquipmentService{
 
                 equipment.setStatusEquipment(StatusEquipment.IN_USE);
                 equipmentRepository.save(equipment);
+                userEquipmentRepository.save(userEquipment);
             }
 
             if (userEquipmentFound.isPresent()){

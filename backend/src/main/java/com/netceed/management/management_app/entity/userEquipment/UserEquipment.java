@@ -20,13 +20,11 @@ public class UserEquipment {
     private Long id;
 
     @ManyToOne
-    @JsonManagedReference
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JsonManagedReference
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
 

@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.UserDto;
@@ -9,6 +10,7 @@ import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
+import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,12 @@ import java.util.stream.Collectors;
 public class EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
+    private final UserRepository userRepository;
 
     private final EquipmentMapper equipmentMapper;
     private final UserMapper userMapper;
 
-    private final UserService userService;
+    //private final UserService userService;
     private final UserEquipmentService userEquipmentService;
 
     public void delete(Long id) {
@@ -33,34 +36,42 @@ public class EquipmentService {
     }
     public EquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws NoSuchFieldException {
         UserEquipment userEquipment = new UserEquipment();
-        UserDto userFound = userService.getById(userId);
+        User user = userRepository.findById(userId).orElseThrow();
+        UserDto userFound = userMapper.toDto(user);
 
         boolean serialNumberAlreadyRegistered = serialNumberExists(newEquipment.serialNumber());
+
 
         if (serialNumberAlreadyRegistered) {
             throw new NoSuchFieldException("Serial Number " +  newEquipment.serialNumber() + " already belong to a equipment");
         }
 
+        Equipment savedEquipment = equipmentRepository.save(equipmentMapper.toEntity(newEquipment));
+
+
+
         if (userFound.id() != null){
-            newEquipment.setStatusEquipment(StatusEquipment.IN_USE);
+            equipmentRepository.save(savedEquipment);
             userEquipment.setEquipment(equipmentMapper.toEntity(newEquipment));
             userEquipment.setAssignedDate(LocalDateTime.now());
             userEquipment.setUser(userMapper.toEntity(userFound));
             userEquipment.setComments(newEquipment.description() + " was assigned at " + userEquipment.getAssignedDate());
+
+            user.getUserEquipments().add(userEquipment);
+            savedEquipment.getUserEquipments().add(userEquipment);
+
         }
 
-        create(newEquipment);
+        userEquipmentService.assignEquipmentToUser(userId, savedEquipment.getId());
 
-        userEquipmentService.assignEquipmentToUser(userId, newEquipment.id());
-
-        return equipmentMapper.toEntityAssignToUser(newEquipment);
+        return equipmentMapper.fromDtoToDtoAssignToUser(equipmentMapper.toDto(savedEquipment));
     }
 
     //Create simple equipment object without assigning to anyone or anywhere
     public EquipmentDto create(EquipmentDto equipment) {
-        Equipment newEquipment = equipmentMapper.toEntity(equipment);
+        equipmentRepository.save(equipmentMapper.toEntity(equipment));
 
-        return equipmentMapper.toDto(equipmentRepository.save(newEquipment));
+        return equipmentMapper.toDto(equipmentMapper.toEntity(equipment));
     }
 
     public List<EquipmentDto> getAllEquipments() {

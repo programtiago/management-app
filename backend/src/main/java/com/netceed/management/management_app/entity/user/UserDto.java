@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
@@ -71,6 +72,11 @@ public record UserDto (
         this.userEquipments = userEquipments;
     }
 
+    public UserDto setId(Long id){
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+                registryDate, admissionDate, isActive, userRole, email, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
+    }
+
     public UserDto setFirstName(String firstName) {
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
@@ -132,6 +138,16 @@ public record UserDto (
     }
 
     public UserDto setEmail(String email) {
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+                registryDate, admissionDate, isActive, userRole, email, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
+    }
+
+    public UserDto setAvailableForVacation(boolean value) {
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+                registryDate, admissionDate, isActive, userRole, email, contactNumber, password, value, updatedAt, userEquipments);
+    }
+
+    public UserDto setDepartment(Department department) {
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
     }

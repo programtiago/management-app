@@ -2,6 +2,8 @@ package com.netceed.management.management_app.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
@@ -67,24 +69,25 @@ public class User {
     private Set<UserEquipment> equipments = new HashSet<>();
      */
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+    @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
 
-        public User(String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.workNumber = workNumber;
-        this.birthdayDate = birthdayDate;
-        this.department = department;
-        this.email = email;
-        this.password = password;
-        this.admissionDate = admissionDate;
-        this.contactNumber = contactNumber;
-        this.userRole = userRole;
-        this.shift = shift;
-        this.recruitmentCompany = recruitmentCompany;
-        this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-        this.userEquipments = equipments;
+        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
+            this.firstName = firstName;
+            this.id = id;
+            this.lastName = lastName;
+            this.workNumber = workNumber;
+            this.birthdayDate = birthdayDate;
+            this.department = department;
+            this.email = email;
+            this.password = password;
+            this.admissionDate = admissionDate;
+            this.contactNumber = contactNumber;
+            this.userRole = userRole;
+            this.shift = shift;
+            this.recruitmentCompany = recruitmentCompany;
+            this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            this.userEquipments = equipments;
     }
 
     public User(String firstName, String lastName, LocalDate admissionDate, String email, String password, UserRole userRole){

@@ -31,15 +31,16 @@ public class EquipmentController {
     }
 
     @PostMapping
-    public EquipmentDto createEquipment(@RequestBody @Valid EquipmentDto newEquipment){
+    //@Transactional
+    public EquipmentDto createEquipment(@RequestBody @Valid EquipmentDto newEquipment) throws NoSuchFieldException {
         return equipmentService.create(newEquipment);
     }
 
     /****** Create a equipment object. After assigns the equipment object to the user_id given ******/
     @PostMapping("/{userId}")
     @Transactional
-    public EquipmentDto createEquipmentWithAssignmentToUser(@RequestBody @Valid EquipmentDto newEquipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
-        return equipmentService.createEquipmentForUser(newEquipment, userId);
+    public EquipmentDto createEquipmentWithAssignmentToUser(@RequestBody @Valid EquipmentDto equipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
+        return equipmentService.createEquipmentForUser(equipment, userId);
     }
 
     @PutMapping("/{id}")

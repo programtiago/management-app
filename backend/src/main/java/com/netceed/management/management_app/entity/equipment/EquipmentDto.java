@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 
 import java.util.Set;
 
@@ -10,9 +11,9 @@ public record EquipmentDto(Long id, String description, String serialNumber, Str
                            StatusEquipment statusEquipment, String finalCondition) {
 
     //Create equipment object and assign to a user object
-    public static EquipmentDto EquipmentDto(Long id, String description, String serialNumber, String brand, String model, String registryDate, Set<UserEquipment> userEquipments, String type, String unity,
-                                            StatusEquipment statusEquipment){
-        return new EquipmentDto(id, description, serialNumber, "", brand, model, type, "", "", unity, registryDate, userEquipments, StatusEquipment.IN_USE, "");
+    public EquipmentDto setId(Long id) {
+        return new EquipmentDto(id, description, serialNumber, macAddress, brand, model, type, location, workstation,
+                unity, registryDate, usersEquipments, statusEquipment, finalCondition);
     }
 
     public EquipmentDto setDescription(String description) {

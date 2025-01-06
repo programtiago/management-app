@@ -39,7 +39,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
+
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -48,7 +48,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		List<Shift> shifts = new ArrayList<>(Arrays.asList(generalShift, morningShift, afternoonShift, nightShift));
 
 		shiftRepository.saveAll(shifts);
-
 
 		Department itDepartment = new Department();
 		itDepartment.setValue("IT");
@@ -192,7 +191,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setMacAddress("");
 		scanner.setBrand("Zebra");
 		scanner.setStatusPhysic("New");
-		scanner.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		scanner.setStatusEquipment(StatusEquipment.AVAILABLE);
 
 		Set<Equipment> scannerEquipment = new HashSet<>();
 		scannerEquipment.add(scanner);
@@ -212,7 +211,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setMacAddress("");
 		printer.setBrand("Toshiba");
 		printer.setStatusPhysic("New");
-		printer.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		printer.setStatusEquipment(StatusEquipment.AVAILABLE);
 
 		Set<Equipment> printerEquipment = new HashSet<>();
 		printerEquipment.add(printer);
@@ -232,7 +231,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setMacAddress("");
 		screen.setBrand("Philips");
 		screen.setStatusPhysic("New");
-		screen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		screen.setStatusEquipment(StatusEquipment.AVAILABLE);
 
 		Set<Equipment> screenEquipment = new HashSet<>();
 		screenEquipment.add(screen);
@@ -252,7 +251,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setMacAddress("");
 		wifiPen.setBrand("TP-link");
 		wifiPen.setStatusPhysic("New");
-		wifiPen.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		wifiPen.setStatusEquipment(StatusEquipment.AVAILABLE);
 
 		Set<Equipment> wifiPenEquipement = new HashSet<>();
 		wifiPenEquipement.add(wifiPen);
@@ -272,12 +271,12 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setMacAddress("");
 		desktop.setBrand("Dell");
 		desktop.setStatusPhysic("Used");
-		desktop.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+		desktop.setStatusEquipment(StatusEquipment.AVAILABLE);
 
 		Set<Equipment> desktopEquipment = new HashSet<>();
 		desktopEquipment.add(desktop);
 
-
+		/*
 		Set<UserEquipment> setUserEquipment1 = new HashSet<>();
 		UserEquipment userEquipment1 = new UserEquipment();
 		userEquipment1.setEquipment(scanner);
@@ -286,11 +285,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		userEquipment1.setComments("First equipment assignment");
 		setUserEquipment1.add(userEquipment1);
 
-		scanner.setUserEquipments(setUserEquipment1);
-		equipmentRepository.saveAll(desktopEquipment);
-		userRepository.saveAll(desktopUsers);
-
 		 */
 
+		//scanner.setUserEquipments(setUserEquipment1);
+		equipmentRepository.saveAll(desktopEquipment);
+		userRepository.saveAll(desktopUsers);
 	}
 }

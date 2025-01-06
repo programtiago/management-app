@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -45,7 +47,7 @@ public class Equipment {
     private List<User> users;
      */
     @OneToMany(mappedBy = "equipment")
-    @JsonBackReference
+    @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
     @Enumerated(EnumType.STRING)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
@@ -72,8 +74,7 @@ public class Equipment {
     }
 
     //For   -> type equipment assignment - NONE
-    public Equipment(Long id, String description, String serialNumber, String brand, String model, String category, String workstation){
-        this.id = id;
+    public Equipment(String description, String serialNumber, String brand, String model, String category, String workstation){
         this.description = description;
         this.serialNumber = serialNumber;
         this.brand = brand;

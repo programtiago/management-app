@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.entity.user;
 
 import com.netceed.management.management_app.service.UserService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
@@ -43,8 +44,9 @@ public class UserController {
         return userService.create(newUser);
     }
 
-    @PostMapping
-    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("userId") Long equipmentId) {
+    @PostMapping("/{equipmentId}")
+    @Transactional
+    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) {
         return userService.createUserForEquipment(newUser, equipmentId);
     }
 

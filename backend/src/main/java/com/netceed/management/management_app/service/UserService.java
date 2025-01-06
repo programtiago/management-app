@@ -1,15 +1,16 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
+import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,13 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
+
     private final DepartmentRepository departmentRepository;
+
     private final UserMapper userMapper;
+
     private final EquipmentService equipmentService;
+    private final UserEquipmentService userEquipmentService;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
@@ -144,13 +149,16 @@ public class UserService {
                 .toList();
     }
 
-    UserDto createUserForEquipment(UserDto newUser, Long equipmentId){
-        UserEquipment userEquipment = new UserEquipment();
+    /****** Create a user object. After assigns the user object to the equipment_id given ******/
+    public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) {
         EquipmentDto equipmentDto = equipmentService.getById(equipmentId);
 
-        if (equipmentDto.id() != null){
-
+        if (equipmentDto.id() != null) {
+            create(newUser);
         }
-    }
 
+        userEquipmentService.assignEquipmentToUser(newUser.id(), equipmentDto.id());
+
+        return userMapper.fromDtoToDto(newUser);
+    }
 }

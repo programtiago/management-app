@@ -1,9 +1,5 @@
 package com.netceed.management.management_app.entity.user;
 
-import com.netceed.management.management_app.entity.equipment.Equipment;
-import com.netceed.management.management_app.entity.equipment.EquipmentDto;
-import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,14 +19,16 @@ public class UserMapper {
     }
 
     public User toEntity(UserDto userDto){
-        User user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(), userDto.department(), userDto.workStatus(), userDto.shift(),
+        User user = new User();
+
+        if (userDto.id() != null){
+            user.setId(userDto.id());
+        }
+
+        user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(), userDto.department(), userDto.workStatus(), userDto.shift(),
                 userDto.recruitmentCompany(), userDto.registryDate(), userDto.admissionDate(), userDto.isActive(), userDto.userRole(), userDto.email(), userDto.contactNumber(), userDto.password(),
                 userDto.updatedAt());
 
-        if (userDto.id() != null)
-        {
-            user.setId(userDto.id());
-        }
         return user;
     }
 
@@ -43,5 +41,15 @@ public class UserMapper {
             userDtos.add(userDto);
         }
         return userDtos;
+    }
+
+    public UserDto fromDtoToDto(UserDto userDto){
+        if (userDto == null){
+            return null;
+        }
+
+        return new UserDto(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(),
+                userDto.department(), userDto.workStatus(), userDto.shift(), userDto.recruitmentCompany(), userDto.registryDate(),
+                userDto.admissionDate(), userDto.isActive(), userDto.userRole(), userDto.email(), userDto.contactNumber(), userDto.password(), userDto.isAvailableForVacation(), userDto.updatedAt(), userDto.userEquipments());
     }
 }
