@@ -22,6 +22,8 @@ import { ModalInformationEquipmentUserOwnerComponent } from './users/modal-infor
 import { ModalConfirmationRemoveEquipmentUserComponent } from './users/modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
 import { EquipmentFormComponent } from './users/equipment-form/equipment-form.component';
 import { ModalQuestionDeleteEquipmentComponent } from './users/modal-question-delete-equipment/modal-question-delete-equipment.component';
+import { ModalViewUserOwnerEquipmentComponent } from './users/modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
+import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-assignment-term/modal-generate-assignment-term.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ModalQuestionDeleteEquipmentComponent } from './users/modal-question-de
     ModalConfirmationRemoveEquipmentUserComponent,
     ModalInformationEquipmentUserOwnerComponent,
     EquipmentFormComponent,
-    ModalQuestionDeleteEquipmentComponent
+    ModalQuestionDeleteEquipmentComponent,
+    ModalViewUserOwnerEquipmentComponent,
+    ModalGenerateAssignmentTermComponent
   ],
   imports: [
     CommonModule,

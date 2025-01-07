@@ -63,10 +63,10 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>
+          <button *ngIf="equipment.statusEquipment == 'IN_USE'" (click)="openModalViewUserOwner(equipment.id)" mat-menu-item>
             <span>View User</span>
           </button>
-          <button *ngIf="equipment.statusEquipment == 'AVAILABLE'" mat-menu-item>
+          <button (click)="openModalToAssignEquipmentToUser()" *ngIf="equipment.statusEquipment == 'AVAILABLE'" mat-menu-item>
             <span>Assign User</span>
           </button>
         </mat-menu>

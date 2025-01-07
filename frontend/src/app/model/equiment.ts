@@ -1,3 +1,4 @@
+import { User } from "./user";
 import { UserEquipment } from "./user-equipment";
 
 export interface Equipment{

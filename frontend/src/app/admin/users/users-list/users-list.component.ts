@@ -39,7 +39,11 @@ export class UsersListComponent implements OnInit{
 
   constructor(private router: Router, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar
-  ){}
+  ){
+    this.adminService.getEquipmentsAvailable().subscribe((res) =>  {
+      this.equipmentsAvailable = res;
+    })
+  }
 
   ngOnInit(): void {
 
@@ -137,6 +141,7 @@ export class UsersListComponent implements OnInit{
   openMenuForEquipmentAssignment(user: User){
       this.adminService.getEquipmentsAvailable().subscribe({
         next: (res) => {
+          console.log(res)
           this.equipmentsAvailable = res;
           this.errorMessage = "";
         },

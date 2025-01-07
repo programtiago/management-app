@@ -8,7 +8,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './modal-confirmation-remove-equipment-user.component.scss'
 })
 export class ModalConfirmationRemoveEquipmentUserComponent {
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogDeleteEquipmentFromUser: MatDialogRef<ModalConfirmationRemoveEquipmentUserComponent>){}
 
   onConfirm(result: boolean){

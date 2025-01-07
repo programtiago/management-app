@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user';
-import { catchError, first, Observable, throwError } from 'rxjs';
+import { catchError, delay, first, Observable, throwError } from 'rxjs';
 import { Department } from '../../model/department';
 import { Equipment } from '../../model/equiment';
 import { UserEquipment } from '../../model/user-equipment';
@@ -21,7 +21,7 @@ export class AdminService {
   constructor(private httpClient: HttpClient) { }
 
   listUsers(){
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/all`)
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}`)
       .pipe(first());
   }
 
@@ -30,15 +30,15 @@ export class AdminService {
   }
 
   createUser(userData: any){
-    return this.httpClient.post<User>(`${this.BASE_API_URL_USERS}/new`, userData)
+    return this.httpClient.post<User>(`${this.BASE_API_URL_USERS}`, userData)
   }
 
   deactivateUser(userId: number){
-    return this.httpClient.post(`${this.BASE_API_URL_USERS}/deactivate/` + userId, {})
+    return this.httpClient.put(`${this.BASE_API_URL_USERS}/deactivate/` + userId, {})
   }
 
   activateUser(userId: number){
-    return this.httpClient.post(`${this.BASE_API_URL_USERS}/activate/` + userId, {})
+    return this.httpClient.put(`${this.BASE_API_URL_USERS}/activate/` + userId, {})
   }
 
   updateUser(user: User, userId: number){
@@ -51,7 +51,7 @@ export class AdminService {
   }
 
   listDepartments(){
-    return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}/all`)
+    return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());
   }
 
@@ -67,12 +67,13 @@ export class AdminService {
 
 
   getEquipments(){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all`).pipe(first())
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())
   }
 
   getEquipmentsAvailable(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all-available`)
-      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error))
+      .pipe(first(), delay(2000),
+      catchError((error: HttpErrorResponse) => this.handleError(error))
     );
   }
 
@@ -86,11 +87,11 @@ export class AdminService {
 
   //Normal post equipment object
   createEquipmentWithNoAssign(newEquipment: CreateEquipmentRequest){
-    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/new`, newEquipment);
+    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}`, newEquipment);
   }
 
   createEquipmentAndAssignToUser(newEquipment: CreateEquipmentAssignUserRequest, userId: number){
-    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/new/${userId}`, newEquipment)
+    return this.httpClient.post<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${userId}`, newEquipment)
   }
 
   getMultipleEquipmenstByIds(equipmentIds: number[]): Observable<Equipment[]>{
@@ -109,7 +110,7 @@ export class AdminService {
   }
 
   getUserEquipments(): Observable<UserEquipment[]>{
-    return this.httpClient.get<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/all`)
+    return this.httpClient.get<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}`)
   }
 
   getEquipmentsByUserId(userId: number): Observable<UserEquipment[]>{

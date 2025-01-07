@@ -2,18 +2,19 @@
     Assign Equipment
 </mat-toolbar>
 <mat-card>
+  <div *ngIf="equipmentsAvailable$ | async as equipments; else loading">
     <mat-card-content *ngIf="equipmentsAvailable.length > 0">
-      <div *ngIf="!canChooseMultipleEquipments" >
-        <mat-form-field appearance="fill" class="full-width">
+      <div *ngIf="!canChooseMultipleEquipments">
+          <mat-form-field appearance="fill" class="full-width">
             <mat-label>Select Equipment</mat-label>
             <mat-select [formControl]="cMultiCtrl" #equipmentValue (selectionChange)="changeEquipment($event.value)" required>
               @for (equipment of equipmentsAvailable; track equipmentsAvailable) {
                 <mat-option [value]="equipment.id">{{equipment.description}}</mat-option>
               }
-            </mat-select>
+            </mat-select>  
           </mat-form-field>
           <button color="primary" mat-mini-fab (click)="clear()" matPrefix style="margin-left: 1em;"><mat-icon>clear</mat-icon></button>
-        </div>  
+      </div>  
           
         <div *ngIf="canChooseMultipleEquipments">
           <mat-form-field appearance="fill" class="full-width">
@@ -28,6 +29,12 @@
         </div>  
           <mat-checkbox *ngIf="equipmentsAvailable.length > 1" (change)="canChooseMultipleEquipments = $event.source.checked" [checked]="canChooseMultipleEquipments" color="primary">Assign multiple equipments</mat-checkbox>  
     </mat-card-content>
+  </div>
+  <ng-template #loading>
+    <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
 </mat-card>
 <div *ngIf="!canChooseMultipleEquipments">
   <mat-card *ngIf="canLoadInformationCardAssignment && this.cMultiCtrl.value != null" style="display: flex; align-content: center; justify-content: center;">

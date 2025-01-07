@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';
 import { FormControl } from '@angular/forms';
+import { catchError, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-modal-users-assignment-equipment',
@@ -19,6 +20,7 @@ import { FormControl } from '@angular/forms';
 export class ModalUsersAssignmentEquipmentComponent implements OnInit {
 
   equipmentsAvailable: Equipment[] = [];
+  equipmentsAvailable$: Observable<Equipment[]>;
   selectedEquipment!: Equipment;
 
   userEquipment!: UserEquipment;
@@ -53,10 +55,21 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
       this.adminService.getEquipmentsAvailable().subscribe((res) => {
         this.equipmentsAvailable = res;
       });
+
+      this.equipmentsAvailable$ = this.adminService.getEquipmentsAvailable().pipe(
+        catchError(error => {
+          this.onError("Error loading equipments " + error.error.errors);
+          return of ([])
+        })
+        );
     }
 
     ngOnInit(): void {
-      this.updateModalAssignmentSize();
+      this.updateModalAssignmentSize(); 
+      this.equipmentsAvailable$.subscribe((res) => {
+        this.equipmentsAvailable = res;
+        console.log(res)
+      })
     }
 
     updateModalAssignmentSize():void{

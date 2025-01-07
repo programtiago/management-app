@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{"Equipment owner " + user.firstName + " " + user.lastName}}</h2>
+<mat-dialog-content>
+    <p>{{"Admission Date: " + user.admissionDate}}</p>
+    <p>{{"Email: " + user.email}}</p>
+    <p>{{"Work Number: " + user.workNumber}}</p>
+    <p>{{"Registry Date: " + user.registryDate}}</p>
+</mat-dialog-content>
+<mat-dialog-actions style="display: flex; align-content: center; justify-content: center;">
+    <button mat-raised-button color="primary" (click)="onOk()">OK</button>
+</mat-dialog-actions>

@@ -31,6 +31,7 @@ export class ModalInformationEquipmentUserOwnerComponent implements OnInit{
     private snackbar: MatSnackBar
   ) {
    this.adminService.getEquipmentsByUserId(data.at(0)).subscribe((res) => {
+    console.log("EQUIPAMENTOS DO USUARIO", res)
     this.userEquipments = res
    })
 
@@ -42,8 +43,8 @@ export class ModalInformationEquipmentUserOwnerComponent implements OnInit{
 
   updateModalSize(): void{
     if (this.userEquipments){
-      this.modalWidth = this.userEquipments.length > 1 ? 1000 : 400
-      this.modalHeight = this.userEquipments.length > 1 ? 500 : 250
+      this.modalWidth = this.userEquipments.length > 1 ? 1000 : 500
+      this.modalHeight = this.userEquipments.length > 1 ? 500 : 300
     }
   }
 
