@@ -1,15 +1,14 @@
 package com.netceed.management.management_app.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,7 +37,9 @@ public class User {
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     private int workNumber;
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @Past
     private LocalDate birthdayDate;
+    private Long nif;
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
@@ -72,7 +73,7 @@ public class User {
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
 
-        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
+        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Long nif , Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
             this.firstName = firstName;
             this.id = id;
             this.lastName = lastName;
@@ -84,26 +85,29 @@ public class User {
             this.admissionDate = admissionDate;
             this.contactNumber = contactNumber;
             this.userRole = userRole;
+            this.nif = nif;
             this.shift = shift;
             this.recruitmentCompany = recruitmentCompany;
             this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
             this.userEquipments = equipments;
     }
 
-    public User(String firstName, String lastName, LocalDate admissionDate, String email, String password, UserRole userRole){
+    public User(String firstName, String lastName, LocalDate admissionDate, String email, Long nif, String password, UserRole userRole){
         this.firstName = firstName;
         this.lastName = lastName;
         this.admissionDate = admissionDate;
         this.email = email;
+        this.nif = nif;
         this.password = password;
         this.userRole = userRole;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
-    public User(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public User(Long id, String firstName, String lastName, Long nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
+            this.nif = nif;
             this.workNumber = workNumber;
             this.birthdayDate = birthdayDate;
             this.department = department;
@@ -120,11 +124,12 @@ public class User {
             this.updatedAt = updatedAt;
     }
 
-    public User(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
+    public User(Long id, String firstName, String lastName, int workNumber, Long nif, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
             this.workNumber = workNumber;
+            this.nif = nif;
             this.birthdayDate = birthdayDate;
             this.department = department;
             this.shift = shift;
@@ -139,10 +144,5 @@ public class User {
             this.password = password;
             this.updatedAt = updatedAt;
             this.userEquipments = userEquipments;
-    }
-
-    public void addUserEquipment(UserEquipment userEquipment){
-            userEquipments.add(userEquipment);
-            userEquipment.setUser(this);
     }
 }

@@ -6,7 +6,6 @@ import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserRole;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.ShiftRepository;
@@ -18,7 +17,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -39,7 +37,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);
@@ -285,10 +282,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		userEquipment1.setComments("First equipment assignment");
 		setUserEquipment1.add(userEquipment1);
 
-		 */
-
 		//scanner.setUserEquipments(setUserEquipment1);
 		equipmentRepository.saveAll(desktopEquipment);
 		userRepository.saveAll(desktopUsers);
+
+		 */
 	}
 }

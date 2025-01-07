@@ -46,7 +46,7 @@ public class UserController {
 
     @PostMapping("/{equipmentId}")
     @Transactional
-    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) {
+    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException {
         return userService.createUserForEquipment(newUser, equipmentId);
     }
 

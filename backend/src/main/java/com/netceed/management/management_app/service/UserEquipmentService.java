@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.user.UserDto;
@@ -28,6 +29,7 @@ public class UserEquipmentService{
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
 
+    private final EquipmentMapper equipmentMapper;
     private final UserEquipmentMapper userEquipmentMapper;
     private final UserMapper userMapper;
 
@@ -38,34 +40,33 @@ public class UserEquipmentService{
     }
 
     public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId) {
-            UserDto userDto = userMapper.toDto(userRepository.findById(userId).orElseThrow());
+            User user = userRepository.findById(userId).orElseThrow();
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
-
-            UserEquipment userEquipment = new UserEquipment();
 
             Optional<UserEquipment> userEquipmentFound = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId);
 
+        UserEquipment assigment = new UserEquipment();
         if (userEquipmentFound.isEmpty()){
-                userEquipment.setAssignedDate(LocalDateTime.now());
-                userEquipment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber() + " assigned at " + userEquipment.getAssignedDate());
-                userEquipment.setEquipment(equipment);
-                userEquipment.setUser(userMapper.toEntity(userDto));
+                assigment.setAssignedDate(LocalDateTime.now());
+                assigment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber());
+                assigment.setEquipment(equipment);
+                assigment.setUser(user);
 
-                equipment.getUserEquipments().add(userEquipment);
+                equipment.getUserEquipments().add(assigment);
 
-                userDto.userEquipments().add(userEquipment);
-                userRepository.save(userMapper.toEntity(userDto));
+                user.getUserEquipments().add(assigment);
+                userRepository.save(user);
 
                 equipment.setStatusEquipment(StatusEquipment.IN_USE);
                 equipmentRepository.save(equipment);
-                userEquipmentRepository.save(userEquipment);
+                userEquipmentRepository.save(assigment);
             }
 
             if (userEquipmentFound.isPresent()){
                 throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
             }
 
-            return userEquipmentMapper.toDto(userEquipment);
+            return userEquipmentMapper.toDto(assigment);
     }
 
     //Assign multiple equipments object to a user object
@@ -91,7 +92,6 @@ public class UserEquipmentService{
                     equipmentRepository.save(equipment);
                 }
             }
-
         }
         List<UserEquipment> assignmentsUser = userEquipmentRepository.saveAll(userEquipments);
 

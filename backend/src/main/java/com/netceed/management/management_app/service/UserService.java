@@ -1,14 +1,17 @@
 package com.netceed.management.management_app.service;
 
+import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
+import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +31,10 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final DepartmentRepository departmentRepository;
+    private final EquipmentRepository equipmentRepository;
 
     private final UserMapper userMapper;
+    private final EquipmentMapper equipmentMapper;
 
     private final EquipmentService equipmentService;
     private final UserEquipmentService userEquipmentService;
@@ -69,29 +74,9 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-        boolean workNumberAlreadyExists = checkIfGivenWorkNumberExists(newUser.workNumber());
-        boolean emailAlreadyExists = findEmailIfAlreadyExists(newUser.email());
-        boolean birthdayDateGivenIsValid = checkIfGivenBirthdayDateIsValid(newUser.birthdayDate());
+        userRepository.save(userMapper.toEntity(newUser));
 
-        if (workNumberAlreadyExists) {
-            throw new IllegalArgumentException("Work Number " +  newUser.workNumber() + " already registered");
-        }
-        if (emailAlreadyExists){
-            throw new EmailAlreadyExistsException("Email " +  newUser.email() + " already registered");
-        }
-
-        if (!birthdayDateGivenIsValid){
-            throw new BirthayDateException("Birthday Date given indicate the user doesn't have 18 years or more");
-        }
-
-        if (newUser.department() != null){
-            newUser.department().setTotalEmployees(departmentRepository.getTotalOfEmployeesByDepartment(newUser.id()) + 1);
-        }
-
-        User newUserEntity = userMapper.toEntity(newUser);
-        userRepository.save(newUserEntity);
-
-        return userMapper.toDto(newUserEntity);
+        return userMapper.toDto(userMapper.toEntity(newUser));
     }
 
     public boolean checkIfGivenWorkNumberExists(int workNumber) {
@@ -150,15 +135,28 @@ public class UserService {
     }
 
     /****** Create a user object. After assigns the user object to the equipment_id given ******/
-    public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) {
-        EquipmentDto equipmentDto = equipmentService.getById(equipmentId);
+    public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
+       Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
+       EquipmentDto equipmentFound = equipmentMapper.toDto(equipment);
 
-        if (equipmentDto.id() != null) {
-            create(newUser);
-        }
+       boolean workNumberAlreadyExists = userRepository.findByWorkNumber(newUser.workNumber()).isPresent();
+       boolean emailAlreadyExists = userRepository.findByEmail(newUser.email()).isPresent();
 
-        userEquipmentService.assignEquipmentToUser(newUser.id(), equipmentDto.id());
+       if (workNumberAlreadyExists){
+           throw new IllegalArgumentException("Work Number " +  newUser.workNumber() + " already belong to a user");
+       }
+       if (emailAlreadyExists){
+           throw new IllegalArgumentException("Email " +  newUser.email() + " already belong to a user");
+       }
 
-        return userMapper.fromDtoToDto(newUser);
+       User savedUser = userRepository.save(userMapper.toEntity(newUser));
+
+       if (equipmentFound.id() != null){
+           userRepository.save(savedUser);
+       }
+
+       userEquipmentService.assignEquipmentToUser(savedUser.getId(), equipmentId);
+
+       return userMapper.toDto(savedUser);
     }
 }

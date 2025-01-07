@@ -14,7 +14,6 @@ import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,38 +27,25 @@ public class EquipmentService {
     private final EquipmentMapper equipmentMapper;
     private final UserMapper userMapper;
 
-    //private final UserService userService;
     private final UserEquipmentService userEquipmentService;
 
     public void delete(Long id) {
         equipmentRepository.deleteById(id);
     }
-    public EquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws NoSuchFieldException {
-        UserEquipment userEquipment = new UserEquipment();
+    public EquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException {
         User user = userRepository.findById(userId).orElseThrow();
         UserDto userFound = userMapper.toDto(user);
 
         boolean serialNumberAlreadyRegistered = serialNumberExists(newEquipment.serialNumber());
 
-
         if (serialNumberAlreadyRegistered) {
-            throw new NoSuchFieldException("Serial Number " +  newEquipment.serialNumber() + " already belong to a equipment");
+            throw new IllegalArgumentException("Serial Number " +  newEquipment.serialNumber() + " already belong to a equipment");
         }
 
         Equipment savedEquipment = equipmentRepository.save(equipmentMapper.toEntity(newEquipment));
 
-
-
         if (userFound.id() != null){
             equipmentRepository.save(savedEquipment);
-            userEquipment.setEquipment(equipmentMapper.toEntity(newEquipment));
-            userEquipment.setAssignedDate(LocalDateTime.now());
-            userEquipment.setUser(userMapper.toEntity(userFound));
-            userEquipment.setComments(newEquipment.description() + " was assigned at " + userEquipment.getAssignedDate());
-
-            user.getUserEquipments().add(userEquipment);
-            savedEquipment.getUserEquipments().add(userEquipment);
-
         }
 
         userEquipmentService.assignEquipmentToUser(userId, savedEquipment.getId());
@@ -118,7 +104,6 @@ public class EquipmentService {
                 Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
                 equipmentsFound.add(equipmentMapper.toDto(equipment));
             }
-
         }
         return equipmentsFound;
     }

@@ -2,7 +2,9 @@ package com.netceed.management.management_app.entity.userEquipment;
 
 import com.fasterxml.jackson.annotation.*;
 import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.User;
+import com.netceed.management.management_app.entity.user.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +32,7 @@ public class UserEquipment {
 
     @Column(nullable = false)
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
-    private LocalDateTime assignedDate;
+    private LocalDateTime assignedDate = LocalDateTime.now();
     private LocalDateTime returnDate;
 
     private String comments;

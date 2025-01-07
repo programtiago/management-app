@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -39,13 +40,6 @@ public class Equipment {
     private String unity; //Packaging, Housing, Test, whatever...
     @NotNull
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-    /*
-    @JoinTable(
-            name = "user_equipment",
-            joinColumns = @JoinColumn(name = "equipment_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
-     */
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
@@ -83,9 +77,4 @@ public class Equipment {
         this.workstation = workstation;
     }
 
-    //Assign equipment to user
-    public void addUserEquipment(UserEquipment userEquipment){
-        userEquipments.add(userEquipment);
-        userEquipment.setEquipment(this);
-    }
 }

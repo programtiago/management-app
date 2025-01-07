@@ -1,8 +1,5 @@
 package com.netceed.management.management_app.entity.equipment;
 
-
-import com.netceed.management.management_app.entity.equipment.Equipment;
-import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
