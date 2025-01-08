@@ -21,7 +21,10 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
 
   equipmentsAvailable: Equipment[] = [];
   equipmentsAvailable$: Observable<Equipment[]>;
+  
   selectedEquipment!: Equipment;
+  selectedEquipment$?: Observable<Equipment>;
+
 
   userEquipment!: UserEquipment;
   userEquipments: UserEquipment[] = []
@@ -62,6 +65,13 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
           return of ([])
         })
         );
+
+        this.equipmentsAvailable$ = this.adminService.getEquipmentsAvailable().pipe(
+          catchError(error => {
+            this.onError("Error loading equipments " + error.error.errors);
+            return of ([])
+          })
+          );
     }
 
     ngOnInit(): void {
@@ -142,6 +152,11 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
     changeEquipment(value: number){
       this.selectedEquipmentId = value;
 
+      this.selectedEquipment$ = this.adminService.getEquipmentById(this.selectedEquipmentId);
+      this.selectedEquipment$.subscribe((res) => {
+        console.log("RESPOSTA PRONTA: ", res)
+      })
+      
       if (!this.canChooseMultipleEquipments){
         this.adminService.getEquipmentById(this.selectedEquipmentId).subscribe((res) => {
           this.selectedEquipment = res;
@@ -149,6 +164,7 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
           if (res.id != null)
             this.canLoadInformationCardAssignment = true
           })
+          
       }
       this.dialogRef.updateSize('750px', '600px') //if loads the equipment information withou error updates modal size
     }

@@ -63,17 +63,13 @@ export class AdminService {
     return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
   }
 
-
-
-
   getEquipments(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())
   }
 
   getEquipmentsAvailable(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/all-available`)
-      .pipe(first(), delay(2000),
-      catchError((error: HttpErrorResponse) => this.handleError(error))
+      .pipe(catchError((error: HttpErrorResponse) => this.handleError(error))
     );
   }
 

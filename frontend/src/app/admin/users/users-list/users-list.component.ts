@@ -134,14 +134,13 @@ export class UsersListComponent implements OnInit{
               });
               this.refresh();
             },
-            () => this.onError("It wasn't possible to delete the user. Please try again or check your internet connection"))}
+            () => this.onError("It wasn't possible to delete the user because there are equipments attached !"))}
       })
     }
 
   openMenuForEquipmentAssignment(user: User){
       this.adminService.getEquipmentsAvailable().subscribe({
         next: (res) => {
-          console.log(res)
           this.equipmentsAvailable = res;
           this.errorMessage = "";
         },
@@ -155,6 +154,8 @@ export class UsersListComponent implements OnInit{
         const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
           data: user
         });
+      }else{
+        this.onError('No equipments available to assign !');
       }
     }
 
