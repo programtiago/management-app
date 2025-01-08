@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class UserController {
 
     @PostMapping("/{equipmentId}")
     @Transactional
-    public UserEquipmentDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException {
+    public UserEquipmentDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException, BadRequestException {
         return userService.createUserForEquipment(newUser, equipmentId);
     }
 

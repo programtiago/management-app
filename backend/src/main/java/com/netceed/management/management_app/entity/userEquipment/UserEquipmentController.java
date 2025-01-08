@@ -2,6 +2,7 @@ package com.netceed.management.management_app.entity.userEquipment;
 
 import com.netceed.management.management_app.service.UserEquipmentService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class UserEquipmentController {
      */
 
     @PostMapping("/{userId}/equipment/{equipmentId}")
-    public UserEquipmentDto assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId){
+    public UserEquipmentDto assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId) throws BadRequestException {
         return userEquipmentService.assignEquipmentToUser(userId, equipmentId);
     }
 

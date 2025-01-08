@@ -1,10 +1,7 @@
 package com.netceed.management.management_app.entity.equipment;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -42,14 +39,14 @@ public class Equipment {
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
-    private Set<UserEquipment> userEquipments = new HashSet<>();
+    private Set<UserEquipment> userEquipments;
     @Enumerated(EnumType.STRING)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
                      String model, String type, String location, String workstation,
-                     String unity, String registryDate, Set<UserEquipment> usersEquipments,
+                     String unity, Set<UserEquipment> usersEquipments,
                      StatusEquipment statusEquipment, String statusPhysic) {
         this.id = id;
         this.description = description;
@@ -61,8 +58,8 @@ public class Equipment {
         this.location = location;
         this.workstation = workstation;
         this.unity = unity;
-        this.registryDate = registryDate;
-        this.userEquipments = usersEquipments;
+        this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.userEquipments = new HashSet<>();
         this.statusEquipment = statusEquipment;
         this.statusPhysic = statusPhysic;
     }

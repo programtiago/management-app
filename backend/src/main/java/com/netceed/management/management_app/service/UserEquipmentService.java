@@ -13,9 +13,12 @@ import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +42,7 @@ public class UserEquipmentService{
                 .collect(Collectors.toList());
     }
 
-    public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId) {
+    public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId) throws BadRequestException {
             User user = userRepository.findById(userId).orElseThrow();
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
@@ -52,14 +55,20 @@ public class UserEquipmentService{
                 assigment.setEquipment(equipment);
                 assigment.setUser(user);
 
-                equipment.getUserEquipments().add(assigment);
-
                 user.getUserEquipments().add(assigment);
                 userRepository.save(user);
 
                 equipment.setStatusEquipment(StatusEquipment.IN_USE);
-                equipmentRepository.save(equipment);
+                equipment.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
                 userEquipmentRepository.save(assigment);
+
+                boolean equipmentAssignment = equipment.getUserEquipments().add(assigment);
+
+                if (equipmentAssignment)
+                    equipmentRepository.save(equipment);
+                else
+                    throw new BadRequestException("Bad request, please check out the data, maybe you are missing something !");
             }
 
             if (userEquipmentFound.isPresent()){

@@ -8,7 +8,9 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
@@ -28,7 +30,9 @@ public record UserDto (
     @Enumerated(EnumType.STRING)
     WorkStatus workStatus,
     Shift shift,
+    @NotNull
     String recruitmentCompany,
+    @NotNull
     String registryDate,
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     LocalDate admissionDate,
@@ -38,7 +42,8 @@ public record UserDto (
     @Email
     @NotBlank(message = "Email is mandatory")
     String email,
-    Long nif,
+    @Length(min = 9, max = 9)
+    String nif,
     @NotBlank(message = "The Contact Number is mandatory")
     @Size(min = 9, max = 9)
     String contactNumber,
@@ -48,7 +53,7 @@ public record UserDto (
     String updatedAt,
     Set<UserEquipment> userEquipments
 ){
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, Long nif, String contactNumber, String password,
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
                    boolean isAvailableForVacation, String updatedAt,
                    Set<UserEquipment> userEquipments) {
         this.id = id;

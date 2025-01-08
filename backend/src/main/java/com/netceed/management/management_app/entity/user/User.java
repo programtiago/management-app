@@ -13,6 +13,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
@@ -39,7 +40,8 @@ public class User {
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     @Past
     private LocalDate birthdayDate;
-    private Long nif;
+    @Length(min = 9, max = 9)
+    private String nif;
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
@@ -73,7 +75,7 @@ public class User {
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
 
-        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, Long nif , Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
+        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, String nif , Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
             this.firstName = firstName;
             this.id = id;
             this.lastName = lastName;
@@ -92,7 +94,7 @@ public class User {
             this.userEquipments = equipments;
     }
 
-    public User(String firstName, String lastName, LocalDate admissionDate, String email, Long nif, String password, UserRole userRole){
+    public User(String firstName, String lastName, LocalDate admissionDate, String email, String nif, String password, UserRole userRole){
         this.firstName = firstName;
         this.lastName = lastName;
         this.admissionDate = admissionDate;
@@ -103,7 +105,7 @@ public class User {
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
     }
 
-    public User(Long id, String firstName, String lastName, Long nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
@@ -124,7 +126,7 @@ public class User {
             this.updatedAt = updatedAt;
     }
 
-    public User(Long id, String firstName, String lastName, int workNumber, Long nif, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
+    public User(Long id, String firstName, String lastName, int workNumber, String nif, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;

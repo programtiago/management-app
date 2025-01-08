@@ -5,6 +5,7 @@ import com.netceed.management.management_app.service.EquipmentService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class EquipmentController {
     /****** Create a equipment object. After assigns the equipment object to the user_id given ******/
     @PostMapping("/{userId}")
     @Transactional
-    public UserEquipmentDto createEquipmentWithAssignmentToUser(@RequestBody @Valid EquipmentDto equipment, @PathVariable("userId") Long userId) throws NoSuchFieldException {
+    public UserEquipmentDto createEquipmentWithAssignmentToUser(@RequestBody @Valid EquipmentDto equipment, @PathVariable("userId") Long userId) throws NoSuchFieldException, BadRequestException {
         return equipmentService.createEquipmentForUser(equipment, userId);
     }
 

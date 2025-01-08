@@ -40,7 +40,7 @@ public class EquipmentMapper {
 
     public Equipment toEntity(EquipmentDto equipmentDto) {
         Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(),
-                equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
+                equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.usersEquipments(),
                 equipmentDto.statusEquipment(), equipmentDto.finalCondition());
 
         if (equipmentDto.id() != null) {
