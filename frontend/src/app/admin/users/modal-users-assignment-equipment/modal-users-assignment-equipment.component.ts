@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../../model/user';
+import { User } from '../../../model/user/user';
 import { AdminService } from '../../services/admin.service';
-import { Equipment } from '../../../model/equiment';
+import { Equipment } from '../../../model/equipment/equiment';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserEquipment } from '../../../model/user-equipment';
+import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Router } from '@angular/router';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSelect } from '@angular/material/select';

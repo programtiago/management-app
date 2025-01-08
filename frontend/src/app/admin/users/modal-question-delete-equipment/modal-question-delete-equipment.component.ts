@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Equipment } from '../../../model/equiment';
+import { Equipment } from '../../../model/equipment/equiment';
 
 @Component({
   selector: 'app-modal-question-delete-equipment',

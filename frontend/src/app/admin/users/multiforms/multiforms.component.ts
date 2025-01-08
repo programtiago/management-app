@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
-import { UserRole } from '../../../model/userRole';
+import { UserRole } from '../../../model/user/userRole';
 import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-multiforms',
@@ -19,6 +20,9 @@ export class MultiformsComponent implements OnInit{
 
   //TEMPORARILY. Further we need to catch from the API
   UserRole = UserRole;
+
+  typeAssignmentSelected: string = '';
+  selectedValueCreationAssignmentType: any
 
   //TEMPORARILY. Further we need to catch from the API
   shiftTypes: ShiftType[] = [
@@ -37,7 +41,8 @@ export class MultiformsComponent implements OnInit{
     basic: this.formBuilder.group({
       firstName: this.formBuilder.control('', Validators.required),
       lastName: this.formBuilder.control('', Validators.required),
-      birthdayDate: this.formBuilder.control(null)
+      birthdayDate: this.formBuilder.control(null),
+      nif: this.formBuilder.control('', Validators.required)
     }),
 
     contact: this.formBuilder.group({
@@ -99,5 +104,13 @@ export class MultiformsComponent implements OnInit{
   private onError(){
     this.snackBar.open('Error saving user', 'X', { duration: 2000})
   }
+
+  valueChoosedChanged(event: MatSelectChange){
+      this.selectedValueCreationAssignmentType = {
+        value: event.value,
+        text: event.source.triggerValue
+      };
+      this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
+    }
 
 }

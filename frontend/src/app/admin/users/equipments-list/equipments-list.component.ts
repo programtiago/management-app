@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Equipment } from '../../../model/equiment';
+import { Equipment } from '../../../model/equipment/equiment';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { UserEquipment } from '../../../model/user-equipment';
+import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { ModalQuestionDeleteEquipmentComponent } from '../modal-question-delete-equipment/modal-question-delete-equipment.component';
 import { ModalViewUserOwnerEquipmentComponent } from '../modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
-import { User } from '../../../model/user';
+import { User } from '../../../model/user/user';
 
 @Component({
   selector: 'app-equipments-list',
@@ -44,6 +44,7 @@ export class EquipmentsListComponent implements OnInit{
             this.snackbar.open('Equipment deleted successfully', 'Close', 
               { duration: 3000, verticalPosition: 'top', horizontalPosition: 'right' });
           });
+          this.onRefresh();
       }else if (!userEquipmentsEmpty){
           const dialogRef = this.dialog.open(ModalQuestionDeleteEquipmentComponent, {
             height: '220px',

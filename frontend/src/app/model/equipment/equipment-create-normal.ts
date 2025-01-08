@@ -1,12 +1,9 @@
-import { User } from "./user";
-
-export interface CreateEquipmentAssignUserRequest{
+export interface CreateEquipmentRequest{
     id: number,
     serialNumber: string,
     description: string,
     brand: string,
     model: string,
     category: string,
-    user: User,
     unity: string
 }

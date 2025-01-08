@@ -1,12 +1,12 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../../model/user';
-import { catchError, delay, first, Observable, throwError } from 'rxjs';
+import { User } from '../../model/user/user';
+import { catchError, first, Observable, throwError } from 'rxjs';
 import { Department } from '../../model/department';
-import { Equipment } from '../../model/equiment';
-import { UserEquipment } from '../../model/user-equipment';
-import { CreateEquipmentAssignUserRequest } from '../../model/equipment-create-assign-user';
-import { CreateEquipmentRequest } from '../../model/equipment-create-normal';
+import { Equipment } from '../../model/equipment/equiment';
+import { UserEquipment } from '../../model/user-equipment/user-equipment';
+import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
+import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
 
 @Injectable({
   providedIn: 'root'

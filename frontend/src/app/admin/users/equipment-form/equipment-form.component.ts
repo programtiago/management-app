@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { User } from '../../../model/user';
+import { User } from '../../../model/user/user';
 import { AdminService } from '../../services/admin.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { CreateEquipmentAssignUserRequest } from '../../../model/equipment-create-assign-user';
+import { CreateEquipmentAssignUserRequest } from '../../../model/equipment/equipment-create-assign-user';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -95,6 +95,7 @@ export class EquipmentFormComponent implements OnInit{
       if (this.createEquipmentAndAssignToUserForm.valid){
         this.adminSerice.createEquipmentAndAssignToUser(newEquipment, userId).subscribe((res) => {
           if (res != null){
+
             this.router.navigateByUrl("admin/equipments")
           }
         }), (error: any) => {

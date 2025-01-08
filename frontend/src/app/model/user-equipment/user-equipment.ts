@@ -1,5 +1,5 @@
-import { Equipment } from "./equiment";
-import { User } from "./user";
+import { Equipment } from "../equipment/equiment";
+import { User } from "../user/user";
 
 export interface UserEquipment{
     id: number,

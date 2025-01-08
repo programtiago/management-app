@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { catchError, Observable, of } from 'rxjs';
-import { User } from '../../model/user';
+import { User } from '../../model/user/user';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 import { MatSnackBar } from '@angular/material/snack-bar';

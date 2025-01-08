@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { User } from '../../../model/user';
-import { UserEquipment } from '../../../model/user-equipment';
+import { User } from '../../../model/user/user';
+import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { ModalConfirmationRemoveEquipmentUserComponent } from '../modal-confirmation-remove-equipment-user/modal-confirmation-remove-equipment-user.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';

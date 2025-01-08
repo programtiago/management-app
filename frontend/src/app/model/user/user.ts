@@ -1,5 +1,5 @@
-import { Department } from "./department"
-import { UserEquipment } from "./user-equipment"
+import { Department } from "../department"
+import { UserEquipment } from "../user-equipment/user-equipment"
 import { UserRole } from "./userRole"
 
 export interface User {
@@ -7,7 +7,8 @@ export interface User {
     firstName: string,
     lastName: string,
     workNumber: number,
-    birthdayDate?: string,
+    birthdayDate: string,
+    nif: string,
     department: Department,
     admissionDate: string,
     registryDate: string,

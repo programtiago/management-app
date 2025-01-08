@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from '../../../model/user';
+import { User } from '../../../model/user/user';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInformationComponent } from '../../modal-information/modal-information.component';
@@ -9,8 +9,8 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { ModalDeleteuserInfoComponent } from '../modal-deleteuser-info/modal-deleteuser-info.component';
 import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignment-equipment/modal-users-assignment-equipment.component';
 import { ModalInformationEquipmentUserOwnerComponent } from '../modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
-import { UserEquipment } from '../../../model/user-equipment';
-import { Equipment } from '../../../model/equiment';
+import { UserEquipment } from '../../../model/user-equipment/user-equipment';
+import { Equipment } from '../../../model/equipment/equiment';
 
 @Component({
   selector: 'app-users-list',

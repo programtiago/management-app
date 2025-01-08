@@ -1,26 +1,29 @@
-.mat-mdc-form-field{
-    width: 100%
-}
-
-
 @media only screen and (min-width: 1537px) {
     .mat-mdc-card {
-        max-width: 45%;
+        max-width: 65%;
         display: flex;
         align-content: center;
         justify-content: center;
         margin: 5em auto;
+    }
+
+    .mat-mdc-form-field{
+        width: 100%
     }
 }
 
 
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
     .mat-mdc-card {
-        max-width: 75%;
+        max-width: 90%;
         display: flex;
         align-content: center;
         justify-content: center;
         margin: 2em auto;
+    }
+
+    .mat-mdc-form-field {
+        width: 100%
     }
 }
     
