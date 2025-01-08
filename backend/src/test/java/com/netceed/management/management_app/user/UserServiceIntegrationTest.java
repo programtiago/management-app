@@ -132,17 +132,17 @@ public class UserServiceIntegrationTest {
                 WorkStatus.AVAILABLE, null, "INTERN" , LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2021, 11, 12),
                 true, UserRole.EMPLOYEE, "antonio.amadeu@gmail.com", 244035541L, "915302412", "antonio123", false, null, null);
 
-        UserDto createdUserDto = userService.createUserForEquipment(userDto, testEquipment1.getId());
+        UserEquipmentDto userEquipmentDto = userService.createUserForEquipment(userDto, testEquipment1.getId());
 
         Equipment equipment = equipmentRepository.findById(testEquipment1.getId()).orElseThrow();
         EquipmentDto equipmentDto = equipmentMapper.toDto(equipment);
 
-        org.assertj.core.api.Assertions.assertThat(createdUserDto.id()).isNotNull();
-        org.assertj.core.api.Assertions.assertThat(userDto.firstName()).isEqualTo(createdUserDto.firstName());
-        org.assertj.core.api.Assertions.assertThat(userDto.email()).isEqualTo(createdUserDto.email());
+        org.assertj.core.api.Assertions.assertThat(userEquipmentDto.id()).isNotNull();
+        org.assertj.core.api.Assertions.assertThat(userDto.firstName()).isEqualTo(userEquipmentDto.user().getFirstName());
+        org.assertj.core.api.Assertions.assertThat(userDto.email()).isEqualTo(userEquipmentDto.user().getEmail());
 
         //Verify if the user is saved on database
-        User savedUser = userRepository.findById(createdUserDto.id()).orElseThrow(() -> new ResourceNotFoundException("No resource found with the id " + createdUserDto.id()));
+        User savedUser = userRepository.findById(userEquipmentDto.user().getId()).orElseThrow(() -> new ResourceNotFoundException("No resource found with the id " + userEquipmentDto.user().getId()));
         org.assertj.core.api.Assertions.assertThat(savedUser).isNotNull();
         org.assertj.core.api.Assertions.assertThat(userDto.email()).isEqualTo(savedUser.getEmail());
     }

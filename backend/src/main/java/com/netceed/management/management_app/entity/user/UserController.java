@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity.user;
 
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -46,7 +47,7 @@ public class UserController {
 
     @PostMapping("/{equipmentId}")
     @Transactional
-    public UserDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException {
+    public UserEquipmentDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException {
         return userService.createUserForEquipment(newUser, equipmentId);
     }
 

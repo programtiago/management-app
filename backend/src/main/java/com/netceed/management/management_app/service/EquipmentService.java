@@ -2,12 +2,12 @@ package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -32,7 +32,7 @@ public class EquipmentService {
     public void delete(Long id) {
         equipmentRepository.deleteById(id);
     }
-    public EquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException {
+    public UserEquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException {
         User user = userRepository.findById(userId).orElseThrow();
         UserDto userFound = userMapper.toDto(user);
 
@@ -48,9 +48,7 @@ public class EquipmentService {
             equipmentRepository.save(savedEquipment);
         }
 
-        userEquipmentService.assignEquipmentToUser(userId, savedEquipment.getId());
-
-        return equipmentMapper.fromDtoToDtoAssignToUser(equipmentMapper.toDto(savedEquipment));
+        return userEquipmentService.assignEquipmentToUser(userId, savedEquipment.getId());
     }
 
     //Create simple equipment object without assigning to anyone or anywhere

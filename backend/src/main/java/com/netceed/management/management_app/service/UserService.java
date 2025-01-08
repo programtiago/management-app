@@ -7,6 +7,7 @@ import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.BirthayDateException;
 import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
@@ -135,7 +136,8 @@ public class UserService {
     }
 
     /****** Create a user object. After assigns the user object to the equipment_id given ******/
-    public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
+    //public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
+    public UserEquipmentDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
        Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
        EquipmentDto equipmentFound = equipmentMapper.toDto(equipment);
 
@@ -155,8 +157,6 @@ public class UserService {
            userRepository.save(savedUser);
        }
 
-       userEquipmentService.assignEquipmentToUser(savedUser.getId(), equipmentId);
-
-       return userMapper.toDto(savedUser);
+       return userEquipmentService.assignEquipmentToUser(savedUser.getId(), equipmentId);
     }
 }
