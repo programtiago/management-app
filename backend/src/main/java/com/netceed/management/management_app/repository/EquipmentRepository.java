@@ -13,4 +13,5 @@ public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
     Optional<Equipment> findBySerialNumber(String serialNumber);
     List<Equipment> findAllByIdIn(List<Long> equipmentsId);
     List<Equipment> findAllByStatusEquipment(StatusEquipment statusEquipment);
+    List<Equipment> findByIsActiveTrue();
 }

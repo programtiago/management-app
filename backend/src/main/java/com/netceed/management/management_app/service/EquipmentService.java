@@ -15,9 +15,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,8 +30,16 @@ public class EquipmentService {
 
     private final UserEquipmentService userEquipmentService;
 
+    //The resource is not deleted from the repo. The flag isActive controls if the equipment can be shown as available
     public void delete(Long id) {
-        equipmentRepository.deleteById(id);
+        Equipment equipment = equipmentRepository.findById(id).orElseThrow();
+
+        if (equipment.getId() != null){
+            equipment.setStatusEquipment(StatusEquipment.NOT_AVAILABLE);
+            equipment.setActive(false);
+        }
+
+        equipmentRepository.save(equipment);
     }
     public UserEquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException, BadRequestException {
         User user = userRepository.findById(userId).orElseThrow();
@@ -63,7 +68,7 @@ public class EquipmentService {
     }
 
     public List<EquipmentDto> getAllEquipments() {
-        return equipmentRepository.findAll()
+        return equipmentRepository.findByIsActiveTrue()
                 .stream().map(equipmentMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -86,6 +91,7 @@ public class EquipmentService {
                    equipment.setSerialNumber(equipmentDto.serialNumber());
                    equipment.setType(equipmentDto.type());
                    equipment.setUnity(equipmentDto.unity());
+                   equipment.setActive(equipment.isActive());
                    equipment.setUserEquipments(equipmentDto.usersEquipments());
 
                     return equipmentRepository.save(equipment);

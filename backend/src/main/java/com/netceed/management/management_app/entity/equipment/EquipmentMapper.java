@@ -15,7 +15,7 @@ public class EquipmentMapper {
 
         return new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
                 equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(),
-                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
+                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.isActive(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
     public EquipmentDto toDtoAssignToUser(Equipment equipment){
@@ -25,7 +25,7 @@ public class EquipmentMapper {
 
         return new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
                 equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(),
-                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
+                equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.isActive(), equipment.getStatusEquipment(), equipment.getStatusPhysic());
     }
 
     public EquipmentDto fromDtoToDtoAssignToUser(EquipmentDto equipmentDto){
@@ -35,13 +35,12 @@ public class EquipmentMapper {
 
         return new EquipmentDto(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(),
                 equipmentDto.model(), equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.usersEquipments(),
-                equipmentDto.statusEquipment(), equipmentDto.finalCondition());
+                equipmentDto.isActive(), equipmentDto.statusEquipment(), equipmentDto.finalCondition());
     }
 
     public Equipment toEntity(EquipmentDto equipmentDto) {
-        Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(),
-                equipmentDto.type(), equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.usersEquipments(),
-                equipmentDto.statusEquipment(), equipmentDto.finalCondition());
+        Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(), equipmentDto.type(),
+                equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.statusEquipment(), equipmentDto.isActive(), equipmentDto.finalCondition());
 
         if (equipmentDto.id() != null) {
             equipment.setId(equipmentDto.id());
@@ -54,7 +53,7 @@ public class EquipmentMapper {
         List<EquipmentDto> equipmentDtos = new ArrayList<>();
         for (Equipment equipment : equipments){
             EquipmentDto equipmentDto = new EquipmentDto(equipment.getId(), equipment.getDescription(), equipment.getSerialNumber(), equipment.getMacAddress(), equipment.getBrand(),
-                    equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(), equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(),
+                    equipment.getModel(), equipment.getType(), equipment.getLocation(), equipment.getWorkstation(), equipment.getUnity(), equipment.getRegistryDate(), equipment.getUserEquipments(), equipment.isActive(),
                     equipment.getStatusEquipment(), equipment.getStatusPhysic());
             equipmentDtos.add(equipmentDto);
         }

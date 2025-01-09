@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -189,6 +190,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setBrand("Zebra");
 		scanner.setStatusPhysic("New");
 		scanner.setStatusEquipment(StatusEquipment.AVAILABLE);
+		scanner.setActive(true);
+		scanner.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		Set<Equipment> scannerEquipment = new HashSet<>();
 		scannerEquipment.add(scanner);
@@ -209,6 +212,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setBrand("Toshiba");
 		printer.setStatusPhysic("New");
 		printer.setStatusEquipment(StatusEquipment.AVAILABLE);
+		printer.setActive(true);
+		printer.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		Set<Equipment> printerEquipment = new HashSet<>();
 		printerEquipment.add(printer);
@@ -229,6 +234,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setBrand("Philips");
 		screen.setStatusPhysic("New");
 		screen.setStatusEquipment(StatusEquipment.AVAILABLE);
+		screen.setActive(true);
+		screen.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		Set<Equipment> screenEquipment = new HashSet<>();
 		screenEquipment.add(screen);
@@ -249,6 +256,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setBrand("TP-link");
 		wifiPen.setStatusPhysic("New");
 		wifiPen.setStatusEquipment(StatusEquipment.AVAILABLE);
+		wifiPen.setActive(true);
+		wifiPen.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		Set<Equipment> wifiPenEquipement = new HashSet<>();
 		wifiPenEquipement.add(wifiPen);
@@ -269,6 +278,8 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setBrand("Dell");
 		desktop.setStatusPhysic("Used");
 		desktop.setStatusEquipment(StatusEquipment.AVAILABLE);
+		desktop.setActive(true);
+		desktop.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
 		Set<Equipment> desktopEquipment = new HashSet<>();
 		desktopEquipment.add(desktop);

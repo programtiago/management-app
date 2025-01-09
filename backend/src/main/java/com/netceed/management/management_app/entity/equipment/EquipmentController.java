@@ -22,6 +22,7 @@ public class EquipmentController {
         return equipmentService.getAllEquipments();
     }
 
+    //Return All Equipments StatusEquipment.AVAILABLE
     @GetMapping("/all-available")
     public List<EquipmentDto> getAllEquipmentsAvailable(){
         return equipmentService.getEquipmentsAvailable();
@@ -49,10 +50,8 @@ public class EquipmentController {
         equipmentService.update(equipment, id);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        equipmentService.delete(id);
-    }
+    @PutMapping("deactivate/{id}")
+    public void delete(@PathVariable Long id){equipmentService.delete(id);}
 
     //To assign multiple equipments
     @PostMapping("/multipleEquipments")

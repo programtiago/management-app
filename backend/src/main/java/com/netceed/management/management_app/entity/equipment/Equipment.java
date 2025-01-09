@@ -36,18 +36,18 @@ public class Equipment {
     private String workstation; //There are multiple workstation inside a location
     private String unity; //Packaging, Housing, Test, whatever...
     @NotNull
-    private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    private String registryDate;
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
     private Set<UserEquipment> userEquipments;
+    private boolean isActive;
     @Enumerated(EnumType.STRING)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
                      String model, String type, String location, String workstation,
-                     String unity, Set<UserEquipment> usersEquipments,
-                     StatusEquipment statusEquipment, String statusPhysic) {
+                     String unity, StatusEquipment statusEquipment, boolean isActive, String statusPhysic) {
         this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
@@ -60,6 +60,7 @@ public class Equipment {
         this.unity = unity;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.userEquipments = new HashSet<>();
+        this.isActive = isActive;
         this.statusEquipment = statusEquipment;
         this.statusPhysic = statusPhysic;
     }
@@ -73,5 +74,4 @@ public class Equipment {
         this.type = category;
         this.workstation = workstation;
     }
-
 }
