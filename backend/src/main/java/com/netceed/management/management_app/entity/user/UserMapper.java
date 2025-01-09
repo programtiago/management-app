@@ -24,6 +24,7 @@ public class UserMapper {
 
         if (userDto.id() != null){
             user.setId(userDto.id());
+
         }
 
         user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.nif(), userDto.workNumber(), userDto.birthdayDate(), userDto.department(), userDto.workStatus(), userDto.shift(),

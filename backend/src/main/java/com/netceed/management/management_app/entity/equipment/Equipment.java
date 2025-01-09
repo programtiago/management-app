@@ -47,7 +47,7 @@ public class Equipment {
 
     public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
                      String model, String type, String location, String workstation,
-                     String unity, StatusEquipment statusEquipment, boolean isActive, String statusPhysic) {
+                     String unity, String registryDate, StatusEquipment statusEquipment, boolean isActive, String statusPhysic) {
         this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
@@ -58,7 +58,7 @@ public class Equipment {
         this.location = location;
         this.workstation = workstation;
         this.unity = unity;
-        this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+        this.registryDate = registryDate;
         this.userEquipments = new HashSet<>();
         this.isActive = isActive;
         this.statusEquipment = statusEquipment;

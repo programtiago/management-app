@@ -6,15 +6,12 @@ import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.WorkStatus;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
-import com.netceed.management.management_app.exception.BirthayDateException;
-import com.netceed.management.management_app.exception.EmailAlreadyExistsException;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
@@ -137,7 +134,7 @@ public class UserService {
 
     /****** Create a user object. After assigns the user object to the equipment_id given ******/
     //public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
-    public UserEquipmentDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException, BadRequestException {
+    public UserEquipmentDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
        Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
        EquipmentDto equipmentFound = equipmentMapper.toDto(equipment);
 
@@ -151,10 +148,12 @@ public class UserService {
            throw new IllegalArgumentException("Email " +  newUser.email() + " already belong to a user");
        }
 
-       User savedUser = userRepository.save(userMapper.toEntity(newUser));
-
+       User savedUser = new User();
        if (equipmentFound.id() != null){
-           userRepository.save(savedUser);
+           UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.department(), newUser.shift(), newUser.recruitmentCompany(), newUser.admissionDate(),
+                   newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments());
+
+           savedUser = userRepository.save(userMapper.toEntity(userToSave));
        }
 
        return userEquipmentService.assignEquipmentToUser(savedUser.getId(), equipmentId);

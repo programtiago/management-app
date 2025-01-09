@@ -12,8 +12,10 @@ import com.netceed.management.management_app.exception.ResourceNotFoundException
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,7 +43,7 @@ public class EquipmentService {
 
         equipmentRepository.save(equipment);
     }
-    public UserEquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException, BadRequestException {
+    public UserEquipmentDto createEquipmentForUser(EquipmentDto newEquipment, Long userId) throws IllegalArgumentException{
         User user = userRepository.findById(userId).orElseThrow();
         UserDto userFound = userMapper.toDto(user);
 

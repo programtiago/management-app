@@ -2,6 +2,8 @@ package com.netceed.management.management_app.entity.equipment;
 
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class EquipmentMapper {
 
     public Equipment toEntity(EquipmentDto equipmentDto) {
         Equipment equipment = new Equipment(equipmentDto.id(), equipmentDto.description(), equipmentDto.serialNumber(), equipmentDto.macAddress(), equipmentDto.brand(), equipmentDto.model(), equipmentDto.type(),
-                equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.statusEquipment(), equipmentDto.isActive(), equipmentDto.finalCondition());
+                equipmentDto.location(), equipmentDto.workstation(), equipmentDto.unity(), equipmentDto.registryDate(), equipmentDto.statusEquipment(), equipmentDto.isActive(), equipmentDto.finalCondition());
 
         if (equipmentDto.id() != null) {
             equipment.setId(equipmentDto.id());

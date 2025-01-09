@@ -42,13 +42,14 @@ public class UserEquipmentService{
                 .collect(Collectors.toList());
     }
 
-    public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId) throws BadRequestException {
+    public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId){
             User user = userRepository.findById(userId).orElseThrow();
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
 
             Optional<UserEquipment> userEquipmentFound = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId);
 
         UserEquipment assigment = new UserEquipment();
+        boolean equipmentAssignment;
         if (userEquipmentFound.isEmpty()){
                 assigment.setAssignedDate(LocalDateTime.now());
                 assigment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber());
@@ -63,19 +64,16 @@ public class UserEquipmentService{
 
                 userEquipmentRepository.save(assigment);
 
-                boolean equipmentAssignment = equipment.getUserEquipments().add(assigment);
+                equipmentAssignment = equipment.getUserEquipments().add(assigment);
 
                 if (equipmentAssignment)
                     equipmentRepository.save(equipment);
-                else
-                    throw new BadRequestException("Bad request, please check out the data, maybe you are missing something !");
             }
+        else{
+            throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
+        }
 
-            if (userEquipmentFound.isPresent()){
-                throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
-            }
-
-            return userEquipmentMapper.toDto(assigment);
+        return userEquipmentMapper.toDto(assigment);
     }
 
     //Assign multiple equipments object to a user object

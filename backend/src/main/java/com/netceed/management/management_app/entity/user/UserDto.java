@@ -14,6 +14,8 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public record UserDto (
@@ -32,6 +34,7 @@ public record UserDto (
     Shift shift,
     @NotNull
     String recruitmentCompany,
+    @NotBlank
     @NotNull
     String registryDate,
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
@@ -53,6 +56,7 @@ public record UserDto (
     String updatedAt,
     Set<UserEquipment> userEquipments
 ){
+
     public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
                    boolean isAvailableForVacation, String updatedAt,
                    Set<UserEquipment> userEquipments) {
@@ -78,37 +82,12 @@ public record UserDto (
         this.userEquipments = userEquipments;
     }
 
+    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments){
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments);
+    }
+
     public UserDto setId(Long id){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setFirstName(String firstName) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setLastName(String lastName) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setWorkNumber(int workNumber) {
-            return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                    registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setBirthdayDate(LocalDate birthdayDate) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setBirthdayDate(Department department) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setWorkStatus(WorkStatus workStatus) {
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
     }
@@ -118,39 +97,9 @@ public record UserDto (
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
     }
 
-    public UserDto setRecruitmentCompany(String recruitmentCompany) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setRegistryDate(String registryDate) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setAdmissionDate(LocalDate admissionDate) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
     public UserDto setIsActive(boolean value) {
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, value, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setUserRole(UserRole userRole) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setEmail(String email) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setAvailableForVacation(boolean value) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, value, updatedAt, userEquipments);
     }
 
     public UserDto setDepartment(Department department) {
@@ -158,29 +107,6 @@ public record UserDto (
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
     }
 
-    public UserDto setContactNumber(String email) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
 
-    public UserDto setPassword(String password) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setIsAvailableForVacation(boolean value) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, value, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setUpdatedAt(String updatedAt) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
-
-    public UserDto setUserEquipments(Set<UserEquipment> userEquipments) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
-                registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments);
-    }
 
 }

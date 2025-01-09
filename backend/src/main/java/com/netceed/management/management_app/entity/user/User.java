@@ -51,12 +51,12 @@ public class User {
     @JoinColumn(name = "shift_id")
     private Shift shift;
     private String recruitmentCompany;
-    private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+    private String registryDate;
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate admissionDate;
     private boolean isActive = true;
     @Enumerated(EnumType.STRING)
-    private UserRole userRole = UserRole.EMPLOYEE;
+    private UserRole userRole;
     @Email
     @NotBlank(message = "Email is mandatory")
     private String email;
@@ -75,7 +75,7 @@ public class User {
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
 
-        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, Department department, UserRole userRole, String nif , Shift shift, String recruitmentCompany, String contactNumber, Set<UserEquipment> equipments){
+        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif , Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments){
             this.firstName = firstName;
             this.id = id;
             this.lastName = lastName;
@@ -85,24 +85,31 @@ public class User {
             this.email = email;
             this.password = password;
             this.admissionDate = admissionDate;
+            this.isActive = isActive;
             this.contactNumber = contactNumber;
             this.userRole = userRole;
             this.nif = nif;
             this.shift = shift;
             this.recruitmentCompany = recruitmentCompany;
-            this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+            this.registryDate = registryDate;
             this.userEquipments = equipments;
     }
 
-    public User(String firstName, String lastName, LocalDate admissionDate, String email, String nif, String password, UserRole userRole){
+    public User(String firstName, String lastName, LocalDate admissionDate, String email, String nif, int workNumber, String password, String contactNumber, Set<UserEquipment> userEquipments){
         this.firstName = firstName;
         this.lastName = lastName;
         this.admissionDate = admissionDate;
         this.email = email;
         this.nif = nif;
+        this.workNumber = workNumber;
         this.password = password;
-        this.userRole = userRole;
+        this.userRole = UserRole.EMPLOYEE;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        this.isActive = true;
+        this.workStatus = WorkStatus.AVAILABLE;
+        this.contactNumber = contactNumber;
+        this.userEquipments = userEquipments;
+        this.isAvailableForVacation = false;
     }
 
     public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
@@ -124,27 +131,5 @@ public class User {
             this.contactNumber = contactNumber;
             this.password = password;
             this.updatedAt = updatedAt;
-    }
-
-    public User(Long id, String firstName, String lastName, int workNumber, String nif, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments) {
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.workNumber = workNumber;
-            this.nif = nif;
-            this.birthdayDate = birthdayDate;
-            this.department = department;
-            this.shift = shift;
-            this.registryDate = registryDate;
-            this.admissionDate = admissionDate;
-            this.workStatus = workStatus;
-            this.recruitmentCompany = recruitmentCompany;
-            this.isActive = isActive;
-            this.userRole = userRole;
-            this.email = email;
-            this.contactNumber = contactNumber;
-            this.password = password;
-            this.updatedAt = updatedAt;
-            this.userEquipments = userEquipments;
     }
 }
