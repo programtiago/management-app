@@ -2,11 +2,12 @@
     <mat-card-header style="display: flex; align-content: center; justify-content: center;">
         <mat-card-title>Insert a new User</mat-card-title>
     </mat-card-header>
-    <div class="choice-type-assignment-equipment">
+    <div class="choice-type-assignment">
         <mat-card-content>
             <mat-form-field appearance="outline" floatLabel="always">
-                <mat-label>Choose the type of equipment assignment</mat-label>
+                <mat-label>Choose the type of assignment</mat-label>
                 <mat-select [(value)]="typeAssignmentSelected" (selectionChange)="valueChoosedChanged($event)">
+                    <mat-option [value]="'EQU'">Equipment</mat-option>
                     <mat-option [value]="'DEP'">Department</mat-option>
                     <mat-option [value]="'LOC'">Location</mat-option>
                     <mat-option [value]="'NO'">None</mat-option>
@@ -16,9 +17,24 @@
     </mat-card-content>     
     </div>
     </mat-card>
-    <div class="form-fill-data">
-        <mat-card *ngIf="typeAssignmentSelected != null">
+    
+    <mat-card>
+        <!-- Depends on the type assignment selected -->
+        <div *ngIf="typeAssignmentSelected == 'EQU'" class="choice-value-assignment">
+            <mat-card-content>
+                <mat-form-field appearance="outline" floatLabel="always">
+                    <mat-label>Choose the equipment to assign</mat-label>
+                    <mat-select [(value)]="equipmentSelected" (selectionChange)="valueChoosedChanged($event)">
+                        <mat-option *ngFor="let equipment of equipmentsAvailable" [value]="equipment">{{equipment.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </mat-card-content>     
+        </div>
+    </mat-card>
+
+        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelected != null">
         <mat-card-content>
+            <div class="form-fill-data">
             <mat-card>
                 <form [formGroup]="employeeRegister">
                 <mat-stepper [linear]="isLinear" #stepper>
@@ -147,6 +163,6 @@
                 </mat-stepper>                
             </form> 
         </mat-card>
+        </div>
         </mat-card-content>
     </mat-card>
-</div>

@@ -33,7 +33,7 @@ export class UsersListComponent implements OnInit{
   questionForActivate: string = "This will activate the account user. Would u like to proceed ?";
   questionForDesativate: string = "This will deactivate the user account. Would u like to proceed ?";
 
-  displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', 'department', 'registryDate', 'isActive', 
+  displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', /*'department',*/ 'registryDate', 'isActive', 
     'userRole',  'email', 'contactNumber', 'birthdayDate', 'actions'
   ]
 
@@ -138,7 +138,7 @@ export class UsersListComponent implements OnInit{
       })
     }
 
-  openMenuForEquipmentAssignment(user: User){
+    openMenuForEquipmentAssignment(user: User){
       this.adminService.getEquipmentsAvailable().subscribe({
         next: (res) => {
           this.equipmentsAvailable = res;

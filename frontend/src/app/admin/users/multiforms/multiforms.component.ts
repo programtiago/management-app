@@ -3,9 +3,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/user/userRole';
-import { DatePipe, Location } from '@angular/common';
+import { DatePipe, Location, NgTemplateOutlet } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectChange } from '@angular/material/select';
+import { Equipment } from '../../../model/equipment/equiment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-multiforms',
@@ -13,6 +15,9 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrl: './multiforms.component.scss'
 })
 export class MultiformsComponent implements OnInit{
+
+  equipmentsAvailable: Equipment[] = [];
+  equipmentSelected!: Equipment;
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -34,7 +39,9 @@ export class MultiformsComponent implements OnInit{
   isLinear = false;
 
   ngOnInit(): void {
-    
+    this.adminService.getEquipmentsAvailable().subscribe((res) => {
+      this.equipmentsAvailable = res;
+    })
   }
 
   employeeRegister = this.formBuilder.group({
@@ -42,7 +49,9 @@ export class MultiformsComponent implements OnInit{
       firstName: this.formBuilder.control('', Validators.required),
       lastName: this.formBuilder.control('', Validators.required),
       birthdayDate: this.formBuilder.control(null),
-      nif: this.formBuilder.control('', Validators.required)
+      nif: this.formBuilder.control('', Validators.required),
+      registryDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm'),
+
     }),
 
     contact: this.formBuilder.group({
@@ -52,10 +61,10 @@ export class MultiformsComponent implements OnInit{
 
     professionalData: this.formBuilder.group({
       workNumber: this.formBuilder.control('', Validators.required),
-      department: this.formBuilder.control('', Validators.required),
+      department: this.formBuilder.control(null, Validators.required),
       admissionDate: this.formBuilder.control('', Validators.required),
       recruitmentCompany: this.formBuilder.control('', Validators.required),
-      shiftType: this.formBuilder.control('', Validators.required)
+      shiftType: this.formBuilder.control('', Validators.required),
     }),
     
     security: this.formBuilder.group({
@@ -71,6 +80,8 @@ export class MultiformsComponent implements OnInit{
       birthdayDate: this.datePipe.transform(this.employeeRegister.value.basic?.birthdayDate, 'dd/MM/yyyy'),
       email: this.employeeRegister.value.contact?.email,
       contactNumber: this.employeeRegister.value.contact?.contactNumber,
+      registryDate: this.employeeRegister.value.basic?.registryDate,
+      nif: this.employeeRegister.value.basic?.nif,
       workNumber: this.employeeRegister.value.professionalData?.workNumber,
       department: this.employeeRegister.value.professionalData?.department,
       admissionDate: this.datePipe.transform(this.employeeRegister.value.professionalData?.admissionDate, 'dd/MM/yyyy'),
@@ -80,16 +91,33 @@ export class MultiformsComponent implements OnInit{
       password: this.employeeRegister.value.security?.password
     };
 
-    this.adminService.createUser(employeeRegisterFormData).subscribe(
-      (res) => {
-        this.onSucess();
-        console.log("User submited sucessfully: ", res)
-      },
-      (error) => {
-        this.onError();
-        console.error("Error submiting user: ", error)
-      }
-    )
+    if (this.typeAssignmentSelected === 'EQU'){
+      this.adminService.createUserAndAssignToEquipment(employeeRegisterFormData, this.equipmentSelected.id).subscribe(
+        (res) => {
+          console.log("Data: ", employeeRegisterFormData)
+          this.onSucess();
+          console.log("User submited sucessfully: ", res)
+        },
+        (error) => {
+          console.log("Data: ", employeeRegisterFormData)
+          this.onError();
+          console.error("Error submiting user: ", error)
+        })
+    }else if (this.typeAssignmentSelected === 'DEP'){
+      console.log('DEP TYPE ASSINGMENT....')
+    }else if (this.typeAssignmentSelected === 'LOC'){
+      console.log('LOC TYPE ASSINGMENT....')
+    }else{
+      this.adminService.createUser(employeeRegisterFormData).subscribe(
+        (res) => {
+          this.onSucess();
+          console.log("User submited sucessfully: ", res)
+        },
+        (error) => {
+          this.onError();
+          console.error("Error submiting user: ", error)
+        })
+    }
   }
 
   onCancel(){

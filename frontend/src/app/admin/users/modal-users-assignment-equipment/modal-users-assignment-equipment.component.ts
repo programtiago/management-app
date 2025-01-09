@@ -185,8 +185,8 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
               this.errorMessage = error.error.errors
               this.onError(this.errorMessage)
             }  
-        }) 
         }
+      )}
     }
     
   onChangeMultipleEquipments(event: MatCheckboxChange){

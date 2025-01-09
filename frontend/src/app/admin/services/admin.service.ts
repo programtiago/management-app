@@ -7,6 +7,7 @@ import { Equipment } from '../../model/equipment/equiment';
 import { UserEquipment } from '../../model/user-equipment/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
 import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
+import { CreateUserAssignEquipmentRequest } from '../../model/user/CreateUserAssignEquipmentRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AdminService {
   private readonly BASE_API_URL_USER_EQUIPMENTS = '/api/v1/user-equipments'
 
   constructor(private httpClient: HttpClient) { }
+
 
   listUsers(){
     return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}`)
@@ -33,6 +35,10 @@ export class AdminService {
     return this.httpClient.post<User>(`${this.BASE_API_URL_USERS}`, userData)
   }
 
+  createUserAndAssignToEquipment(newUser: any, equipmentId: number){
+    return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USERS}/${equipmentId}`, newUser)
+  }
+
   deactivateUser(userId: number){
     return this.httpClient.put(`${this.BASE_API_URL_USERS}/deactivate/` + userId, {})
   }
@@ -45,10 +51,12 @@ export class AdminService {
     return this.httpClient.put<User>(`${this.BASE_API_URL_USERS}/` + userId, user);
   }
 
-
   deleteUserById(userId: number){
     return this.httpClient.delete(`${this.BASE_API_URL_USERS}/` + userId)
   }
+
+
+
 
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
@@ -62,6 +70,8 @@ export class AdminService {
   getTotalEmployeesForDepartment(departmentId: number){
     return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
   }
+
+
 
   getEquipments(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())
@@ -116,6 +126,7 @@ export class AdminService {
   returnEquipmentFromUser(userId: number, equipmentId: number){
     return this.httpClient.delete(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`)
   }
+
 
   private handleError(error: HttpErrorResponse){
     console.error('An error occurred:', error);

@@ -6,9 +6,14 @@
         display: table;
     }
 
+    mat-cell:nth-child(7),
+    mat-header-cell:nth-child(7) {
+        flex: 0 0 19%;
+    }
+
     mat-cell:nth-child(8),
     mat-header-cell:nth-child(8) {
-        flex: 0 0 19%;
+        flex: 0 0 12%;
     }
 
     mat-cell:nth-child(4),
@@ -16,10 +21,11 @@
         flex: 0 0 8%;
     }
 
-    mat-cell:nth-child(11),
-    mat-header-cell:nth-child(11) {
+    mat-cell:nth-child(10),
+    mat-header-cell:nth-child(10) {
         flex: 0 0 12%;
     }
+
 }
 
 @media only screen and (min-width: 2000px){
