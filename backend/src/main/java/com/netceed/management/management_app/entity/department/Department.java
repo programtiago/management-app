@@ -31,7 +31,8 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private Set<User> users;
 
-    public Department(String value, String description, int totalEmployees, Set<User> users){
+    public Department(Long id, String value, String description, int totalEmployees, Set<User> users){
+        this.id = id;
         this.value = value;
         this.description = description;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));

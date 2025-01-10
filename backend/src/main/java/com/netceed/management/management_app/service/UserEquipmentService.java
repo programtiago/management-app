@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -48,10 +49,25 @@ public class UserEquipmentService{
 
             Optional<UserEquipment> userEquipmentFound = userEquipmentRepository.findUserEquipmentByEquipmentId(equipmentId);
 
-        UserEquipment assigment = new UserEquipment();
-        boolean equipmentAssignment;
+            UserEquipment assigment = new UserEquipment();
+
+            boolean equipmentAssignment;
+
+            
+
         if (userEquipmentFound.isEmpty()){
-                assigment.setAssignedDate(LocalDateTime.now());
+                String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss"));
+
+                /*
+                try{
+                    dateTimeFormatted = LocalDateTime.parse(dateTime, dtf).withNano(0);
+                }catch (DateTimeParseException e) {
+                    System.out.println("Could not parse date-time: " + e.getMessage());
+                }
+
+                 */
+                
+                assigment.setAssignedDate(dateTime);
                 assigment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber());
                 assigment.setEquipment(equipment);
                 assigment.setUser(user);
@@ -93,7 +109,7 @@ public class UserEquipmentService{
 
                     userEquipment.setUser(user);
                     userEquipment.setEquipment(equipment);
-                    userEquipment.setAssignedDate(LocalDateTime.now());
+                    //userEquipment.setAssignedDate(LocalDateTime.now());
                     userEquipments.add(userEquipment);
 
                     equipmentRepository.save(equipment);

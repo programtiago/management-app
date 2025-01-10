@@ -14,7 +14,7 @@ public class DepartmentMapper {
     }
 
     public Department toEntity(DepartmentDto departmentDto){
-        Department department = new Department(departmentDto.value(), departmentDto.description(), departmentDto.totalEmployees(), departmentDto.users());
+        Department department = new Department(departmentDto.id(), departmentDto.value(), departmentDto.description(), departmentDto.totalEmployees(), departmentDto.users());
 
         if (departmentDto.id() != null)
         {
