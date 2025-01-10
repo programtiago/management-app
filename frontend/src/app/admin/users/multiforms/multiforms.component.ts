@@ -3,11 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/user/userRole';
-import { DatePipe, Location, NgTemplateOutlet } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-multiforms',
@@ -16,8 +15,11 @@ import { Observable } from 'rxjs';
 })
 export class MultiformsComponent implements OnInit{
 
+  selectedEquipmentId: number = 0;
+
   equipmentsAvailable: Equipment[] = [];
-  equipmentSelected!: Equipment;
+  //equipmentSelected!: Equipment;
+  equipmentSelectedId: number = 0;
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -92,7 +94,7 @@ export class MultiformsComponent implements OnInit{
     };
 
     if (this.typeAssignmentSelected === 'EQU'){
-      this.adminService.createUserAndAssignToEquipment(employeeRegisterFormData, this.equipmentSelected.id).subscribe(
+      this.adminService.createUserAndAssignToEquipment(employeeRegisterFormData, this.equipmentSelectedId).subscribe(
         (res) => {
           console.log("Data: ", employeeRegisterFormData)
           this.onSucess();
@@ -138,6 +140,8 @@ export class MultiformsComponent implements OnInit{
         value: event.value,
         text: event.source.triggerValue
       };
+      
+
       this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
     }
 

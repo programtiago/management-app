@@ -87,8 +87,8 @@ export class AdminService {
     return this.httpClient.get<Equipment>(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
   }
 
-  deleteEquipmentById(equipmentId: number){
-    return this.httpClient.delete(`${this.BASE_API_URL_EQUIPMENTS}/${equipmentId}`)
+  deactivateEquipmentById(equipmentId: number){
+    return this.httpClient.put(`${this.BASE_API_URL_EQUIPMENTS}/deactivate/${equipmentId}`, {})
   }
 
   //Normal post equipment object

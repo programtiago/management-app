@@ -20,19 +20,25 @@
     
     <mat-card>
         <!-- Depends on the type assignment selected -->
-        <div *ngIf="typeAssignmentSelected == 'EQU'" class="choice-value-assignment">
+        <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length != 0" class="choice-value-assignment">
             <mat-card-content>
                 <mat-form-field appearance="outline" floatLabel="always">
                     <mat-label>Choose the equipment to assign</mat-label>
-                    <mat-select [(value)]="equipmentSelected" (selectionChange)="valueChoosedChanged($event)">
-                        <mat-option *ngFor="let equipment of equipmentsAvailable" [value]="equipment">{{equipment.description}}</mat-option>
+                    <mat-select [(value)]="equipmentSelectedId" (selectionChange)="valueChoosedChanged($event)">
+                        <mat-option *ngFor="let equipment of equipmentsAvailable" [value]="equipment.id">{{equipment.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-            </mat-card-content>     
+        </mat-card-content>     
         </div>
-    </mat-card>
 
-        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelected != null">
+        <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length == 0" class="choice-value-assignment">
+            <mat-card-content>
+                <h1 style="display: flex; justify-content: center; align-content: center; color: red">There is no equipments available to assign !</h1>
+            </mat-card-content>
+        </div>
+    </mat-card>    
+
+        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelectedId != 0">
         <mat-card-content>
             <div class="form-fill-data">
             <mat-card>

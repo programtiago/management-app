@@ -39,12 +39,12 @@ export class EquipmentsListComponent implements OnInit{
       var userEquipmentsEmpty : boolean = this.userEquipmentsOfEquipmentSelected.length === 0;
 
       if (userEquipmentsEmpty){
-        this.adminService.deleteEquipmentById(equipmentId).subscribe(
+        this.adminService.deactivateEquipmentById(equipmentId).subscribe(
           () => {
             this.snackbar.open('Equipment deleted successfully', 'Close', 
               { duration: 3000, verticalPosition: 'top', horizontalPosition: 'right' });
+              this.onRefresh();
           });
-          this.onRefresh();
       }else if (!userEquipmentsEmpty){
           const dialogRef = this.dialog.open(ModalQuestionDeleteEquipmentComponent, {
             height: '220px',
