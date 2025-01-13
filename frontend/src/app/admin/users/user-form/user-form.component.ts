@@ -25,9 +25,10 @@ export class UserFormComponent implements OnInit{
     this.userUpdateForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       lastName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      birthdayDate: ['', [Validators.required]],
-      workNumber: [null, [Validators.required, Validators.min(3000), Validators.max(100000)]],
-      department: ['', Validators.required],
+      birthdayDate: ['', Validators.required],
+      workNumber: ['', [Validators.required, Validators.min(3000), Validators.max(100000)]],
+      nif: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      recruitmentCompany: ['', Validators.required],
       userRole: ['', Validators.required],
       email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       contactNumber: ['', [Validators.required, Validators.minLength(9)]],
@@ -45,7 +46,8 @@ export class UserFormComponent implements OnInit{
         lastName: res.lastName,
         birthdatyDate: res.birthdayDate,
         workNumber: res.workNumber,
-        department: res.department.id,
+        nif: res.nif,
+        recruitmentCompany: res.recruitmentCompany,
         userRole: res.userRole,
         email: res.email,
         contactNumber: res.contactNumber,
@@ -57,11 +59,9 @@ export class UserFormComponent implements OnInit{
   onUpdate(): void{
     this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe((res) => {
       this.onSucessUpdatedUser();
-      this.router.navigateByUrl("")
-      if (res == null)
-        this.onError()
-      else
-        console.log(res)
+    }, error => {
+      console.log(error)
+      this.onError();
     })
   }
 
@@ -75,6 +75,6 @@ export class UserFormComponent implements OnInit{
   }
 
   private onError(){
-    this.matSnackBar.open('Error trying to create user', '', { duration: 5000 });
+    this.matSnackBar.open('Error trying to update user', '', { duration: 5000 });
   }
 }

@@ -48,7 +48,8 @@ export class AdminService {
   }
 
   updateUser(user: User, userId: number){
-    return this.httpClient.put<User>(`${this.BASE_API_URL_USERS}/` + userId, user);
+    return this.httpClient.put<User>(`${this.BASE_API_URL_USERS}/` + userId, user)
+      .pipe(catchError(this.handleError));
   }
 
   deleteUserById(userId: number){
@@ -129,12 +130,30 @@ export class AdminService {
 
 
   private handleError(error: HttpErrorResponse){
-    console.error('An error occurred:', error);
+    if (error.error instanceof ErrorEvent) {
+      // Client-side error
+      console.error('An error occurred:', error.error.message);
+  }else{
+    // Server-side error
+    console.error(
+      `Backend returned code ${error.status}, ` +
+      `body was: ${error.error}`);
 
-    if (error.error.errors instanceof ErrorEvent){
-      return throwError('A client-side error occurred: ' + error.error.message);
-    }else{
-      return throwError(`Server returned code: ${error.status}, error message is: ${error.error.errors}`)
+      switch (error.status){
+        case 400:
+          console.log("Bad request")
+          break;
+        case 404:
+          console.log("Not found")
+          break;
+        case 500:
+          console.log("Internal server error")
+          break;
+        default:
+          console.log("Error code: " + error.status)
+          break;
+      }
     }
+      return throwError('Something bad happened; please try again later.');
   }
 }

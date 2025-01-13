@@ -7,6 +7,7 @@ export interface User {
     firstName: string,
     lastName: string,
     workNumber: number,
+    recruitmentCompany: string, 
     birthdayDate: string,
     nif: string,
     department: Department,
