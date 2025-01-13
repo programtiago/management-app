@@ -34,8 +34,6 @@ public record UserDto (
     Shift shift,
     @NotNull
     String recruitmentCompany,
-    @NotBlank
-    @NotNull
     String registryDate,
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     LocalDate admissionDate,

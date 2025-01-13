@@ -57,9 +57,11 @@ public class UserService {
                     user.setFirstName(userUpdate.firstName());
                     user.setLastName(userUpdate.lastName());
                     user.setUserRole(userUpdate.userRole());
-                    user.setActive(userUpdate.isActive());
                     user.setWorkNumber(userUpdate.workNumber());
+                    user.setNif(userUpdate.nif());
+                    user.setRegistryDate(user.getRegistryDate());
                     user.setContactNumber(userUpdate.contactNumber());
+                    user.setRecruitmentCompany(userUpdate.recruitmentCompany());
                     user.setEmail(userUpdate.email());
                     user.setDepartment(userUpdate.department());
                     user.setPassword(userUpdate.password());

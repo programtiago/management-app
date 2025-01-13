@@ -106,6 +106,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user.setLastName("Silva");
 		user.setEmail("programtiago@gmail.com");
 		user.setWorkNumber(30035);
+		user.setNif("215032150");
 		user.setRegistryDate(LocalDateTime.of(2025, 1, 5, 12, 20).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 		user.setBirthdayDate(LocalDate.of(1996,5,2));
 		user.setPassword("tiago123");
@@ -122,6 +123,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user2.setLastName("Rodrigues");
 		user2.setEmail("antonio.rodrigues@gmail.com");
 		user2.setWorkNumber(85456);
+		user2.setNif("523532351");
 		user2.setRegistryDate(LocalDateTime.of(2025, 1, 6, 13, 45).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 		user2.setBirthdayDate(LocalDate.of(1985,10,22));
 		user2.setPassword("antonio123");
@@ -138,6 +140,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user3.setLastName("Antunes");
 		user3.setEmail("maria.antunes@gmail.com");
 		user3.setWorkNumber(80037);
+		user3.setNif("328132302");
 		user3.setRegistryDate(LocalDateTime.of(2025, 1, 8, 17, 5).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 		user3.setBirthdayDate(LocalDate.of(1991,2,12));
 		user3.setPassword("maria123");
@@ -154,6 +157,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user4.setLastName("Bastos");
 		user4.setEmail("daniel.bastos@gmail.com");
 		user4.setWorkNumber(85231);
+		user4.setNif("223532810");
 		user4.setRegistryDate(LocalDateTime.of(2025, 1, 4, 11, 27).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 		user4.setBirthdayDate(LocalDate.of(1998,1,1));
 		user4.setPassword("daniel123");
