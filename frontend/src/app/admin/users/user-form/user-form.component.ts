@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { UserRole } from '../../../model/user/userRole';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDatepickerInput } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-user-form',
@@ -17,10 +18,13 @@ export class UserFormComponent implements OnInit{
   userId!: any
   userSelected: any;
   userUpdateForm!: FormGroup;
+  //birthdayDate!: Date;
+
+  @ViewChild('datePickerInput') datePickerInput!: MatDatepickerInput<Date>;
 
   constructor(private fb: FormBuilder, private adminService: AdminService,
     private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute,
-    private router: Router
+    private router: Router, private datePipe: DatePipe
   ){
     this.userUpdateForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -36,16 +40,23 @@ export class UserFormComponent implements OnInit{
     })
   }  
 
+  loadDate(){
+   
+  }
+
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
 
     this.adminService.getUserById(this.userId).subscribe((res) => {
       this.userSelected = res;
+
+      let birthdayDate: Date = new Date(res.birthdayDate)
+      
       this.userUpdateForm.patchValue({
         firstName: res.firstName,
         lastName: res.lastName,
-        birthdatyDate: res.birthdayDate,
         workNumber: res.workNumber,
+        birthdayDate: birthdayDate,
         nif: res.nif,
         recruitmentCompany: res.recruitmentCompany,
         userRole: res.userRole,
@@ -57,9 +68,13 @@ export class UserFormComponent implements OnInit{
   }
 
   onUpdate(): void{
-    this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe((res) => {
+    console.log("A enviar a data para atualizar: ", this.datePipe.transform(this.userUpdateForm.value.birthdayDate, 'dd/MM/yyyy'))
+    //this.userUpdateForm.value.birthdayDate = this.datePipe.transform(this.userUpdateForm.value.birthdayDate, 'dd/MM/yyyy'); 
+    this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe(() => {
+      console.log("Valores da form: " + this.userUpdateForm.value.birthdayDate)
       this.onSucessUpdatedUser();
     }, error => {
+      console.log("Valores da form: ", this.userUpdateForm.value.birthdayDate)
       console.log(error)
       this.onError();
     })
@@ -78,3 +93,4 @@ export class UserFormComponent implements OnInit{
     this.matSnackBar.open('Error trying to update user', '', { duration: 5000 });
   }
 }
+

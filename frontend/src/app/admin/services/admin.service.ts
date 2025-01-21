@@ -7,7 +7,6 @@ import { Equipment } from '../../model/equipment/equiment';
 import { UserEquipment } from '../../model/user-equipment/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
 import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
-import { CreateUserAssignEquipmentRequest } from '../../model/user/CreateUserAssignEquipmentRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -137,7 +136,7 @@ export class AdminService {
     // Server-side error
     console.error(
       `Backend returned code ${error.status}, ` +
-      `body was: ${error.error}`);
+      `body was: ${error.error.errors}`);
 
       switch (error.status){
         case 400:

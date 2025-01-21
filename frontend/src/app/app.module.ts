@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,8 +9,12 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { UserFormComponent } from './admin/users/user-form/user-form.component';
 import { MultiformsComponent } from './admin/users/multiforms/multiforms.component';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+
+registerLocaleData(localePt, 'pt')
 
 @NgModule({
   declarations: [
@@ -21,10 +25,10 @@ import { DatePipe } from '@angular/common';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppMaterialModule
+    AppMaterialModule,
   ],
   providers: [provideHttpClient(), provideAnimations(), DatePipe, 
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-PT'},
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-PT'}
   ],
   bootstrap: [AppComponent]
 })

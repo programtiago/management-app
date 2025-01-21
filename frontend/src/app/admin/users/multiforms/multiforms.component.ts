@@ -50,7 +50,7 @@ export class MultiformsComponent implements OnInit{
     basic: this.formBuilder.group({
       firstName: this.formBuilder.control('', Validators.required),
       lastName: this.formBuilder.control('', Validators.required),
-      birthdayDate: this.formBuilder.control(null),
+      birthdayDate: this.formBuilder.control(''),
       nif: this.formBuilder.control('', Validators.required),
       registryDate: this.datePipe.transform(new Date(), 'dd/MM/yyyy HH:mm'),
 
@@ -80,6 +80,7 @@ export class MultiformsComponent implements OnInit{
       firstName: this.employeeRegister.value.basic?.firstName,
       lastName: this.employeeRegister.value.basic?.lastName,
       birthdayDate: this.datePipe.transform(this.employeeRegister.value.basic?.birthdayDate, 'dd/MM/yyyy'),
+      //birthdayDate: this.employeeRegister.value.basic?.birthdayDate,
       email: this.employeeRegister.value.contact?.email,
       contactNumber: this.employeeRegister.value.contact?.contactNumber,
       registryDate: this.employeeRegister.value.basic?.registryDate,

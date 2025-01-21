@@ -133,7 +133,7 @@
                                 <mat-label>User</mat-label>
                                 <mat-select [(value)]="selectedUserId" formControlName="user">
                                     <mat-option *ngFor="let user of users" [value]="user.id">
-                                        {{user.workNumber + " - " + user.firstName + " " + user.lastName + " - " + user.department.value}}
+                                        {{user.workNumber + " - " + user.firstName + " " + user.lastName }}
                                     </mat-option>
                                 </mat-select>
                             <!--container element that represents the type of creation desired Ex: insert equipment to a user, to a location, or neither of them-->

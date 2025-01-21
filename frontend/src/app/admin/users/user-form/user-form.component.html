@@ -13,7 +13,13 @@
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput placeholder="Work Number" type="number" formControlName="workNumber">
             </mat-form-field>
-
+            
+            <mat-form-field class="full-width" appearance="outline">
+                <input matInput [matDatepicker]="picker" placeholder="Birthday Date" formControlName="birthdayDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+              
             <mat-form-field class="full-width" appearance="outline">
                 <input matInput placeholder="Nif" formControlName="nif">
             </mat-form-field>
