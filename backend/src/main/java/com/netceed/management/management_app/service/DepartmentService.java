@@ -3,8 +3,11 @@ package com.netceed.management.management_app.service;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.department.DepartmentDto;
 import com.netceed.management.management_app.entity.department.DepartmentMapper;
+import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
+import com.netceed.management.management_app.repository.UserDepartmentRepository;
+import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,11 @@ import java.util.stream.Collectors;
 public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
+    private final UserRepository userRepository;
+    private final UserDepartmentRepository userDepartmentRepository;
+
     private final DepartmentMapper departmentMapper;
+    private final UserDepartmentMapper userDepartmentMapper;
 
     public List<DepartmentDto> getAllDepartments() {
        return departmentRepository.findAll()
@@ -56,5 +63,4 @@ public class DepartmentService {
 
         return departmentMapper.toDto(department);
     }
-
 }

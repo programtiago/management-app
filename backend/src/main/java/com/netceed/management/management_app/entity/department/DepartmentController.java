@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.entity.department;
 
+import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.service.DepartmentService;
+import com.netceed.management.management_app.service.UserDepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
+    private final UserDepartmentService userDepartmentService;
 
     @GetMapping
     public List<DepartmentDto> getAllDepartments() throws Exception {
@@ -42,6 +45,11 @@ public class DepartmentController {
     }
 
      */
+
+    @PostMapping("/{departmentId}/user/{userId}")
+    public UserDepartmentDto assignUserToDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
+        return userDepartmentService.assignUserToDepartment(userId, departmentId);
+    }
 
     @PutMapping("/{id}")
     public void update(@RequestBody @Valid DepartmentDto department, @PathVariable Long id){

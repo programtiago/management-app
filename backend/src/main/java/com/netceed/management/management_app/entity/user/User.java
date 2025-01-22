@@ -72,27 +72,27 @@ public class User {
     @JsonIgnore
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
-        public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif , Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments){
-            this.firstName = firstName;
-            this.id = id;
-            this.lastName = lastName;
-            this.workNumber = workNumber;
-            this.birthdayDate = birthdayDate;
-            this.department = department;
-            this.email = email;
-            this.password = password;
-            this.admissionDate = admissionDate;
-            this.isActive = isActive;
-            this.contactNumber = contactNumber;
-            this.userRole = userRole;
-            this.nif = nif;
-            this.shift = shift;
-            this.recruitmentCompany = recruitmentCompany;
-            this.registryDate = registryDate;
-            this.userEquipments = equipments;
+    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.workNumber = workNumber;
+        this.birthdayDate = birthdayDate;
+        this.department = department;
+        this.email = email;
+        this.password = password;
+        this.admissionDate = admissionDate;
+        this.isActive = isActive;
+        this.contactNumber = contactNumber;
+        this.userRole = userRole;
+        this.nif = nif;
+        this.shift = shift;
+        this.recruitmentCompany = recruitmentCompany;
+        this.registryDate = registryDate;
+        this.userEquipments = equipments;
     }
 
-    public User(String firstName, String lastName, LocalDate admissionDate, String email, String nif, int workNumber, String password, String contactNumber, Set<UserEquipment> userEquipments){
+    public User(String firstName, String lastName, LocalDate admissionDate, String email, String nif, int workNumber, String password, String contactNumber, Set<UserEquipment> userEquipments) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.admissionDate = admissionDate;
@@ -110,23 +110,23 @@ public class User {
     }
 
     public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
-            this.id = id;
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.nif = nif;
-            this.workNumber = workNumber;
-            this.birthdayDate = birthdayDate;
-            this.department = department;
-            this.workStatus = workStatus;
-            this.shift = shift;
-            this.recruitmentCompany = recruitmentCompany;
-            this.registryDate = registryDate;
-            this.admissionDate = admissionDate;
-            this.isActive = active;
-            this.userRole = userRole;
-            this.email = email;
-            this.contactNumber = contactNumber;
-            this.password = password;
-            this.updatedAt = updatedAt;
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nif = nif;
+        this.workNumber = workNumber;
+        this.birthdayDate = birthdayDate;
+        this.department = department;
+        this.workStatus = workStatus;
+        this.shift = shift;
+        this.recruitmentCompany = recruitmentCompany;
+        this.registryDate = registryDate;
+        this.admissionDate = admissionDate;
+        this.isActive = active;
+        this.userRole = userRole;
+        this.email = email;
+        this.contactNumber = contactNumber;
+        this.password = password;
+        this.updatedAt = updatedAt;
     }
 }

@@ -1,7 +1,6 @@
 package com.netceed.management.management_app.entity.department.userDepartment;
 
 import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +28,5 @@ public class UserDepartment {
     private Department department;
     @Column(nullable = false)
     private LocalDateTime assignedDate;
-    private LocalDateTime returnDate;
     private String comments;
 }
