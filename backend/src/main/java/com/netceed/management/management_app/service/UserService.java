@@ -6,10 +6,8 @@ import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
-import com.netceed.management.management_app.entity.user.WorkStatus;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
-import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,14 +25,11 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    private final DepartmentRepository departmentRepository;
     private final EquipmentRepository equipmentRepository;
 
     private final UserMapper userMapper;
     private final EquipmentMapper equipmentMapper;
 
-    private final EquipmentService equipmentService;
     private final UserEquipmentService userEquipmentService;
 
     public List<UserDto> getAllUsers() {
@@ -61,6 +56,7 @@ public class UserService {
                     user.setNif(userUpdate.nif());
                     user.setRegistryDate(user.getRegistryDate());
                     user.setContactNumber(userUpdate.contactNumber());
+                    user.setBirthdayDate(userUpdate.birthdayDate());
                     user.setRecruitmentCompany(userUpdate.recruitmentCompany());
                     user.setEmail(userUpdate.email());
                     user.setDepartment(userUpdate.department());
@@ -149,6 +145,8 @@ public class UserService {
        if (emailAlreadyExists){
            throw new IllegalArgumentException("Email " +  newUser.email() + " already belong to a user");
        }
+
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
        User savedUser = new User();
        if (equipmentFound.id() != null){

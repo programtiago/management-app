@@ -18,9 +18,6 @@ export class UserFormComponent implements OnInit{
   userId!: any
   userSelected: any;
   userUpdateForm!: FormGroup;
-  //birthdayDate!: Date;
-
-  @ViewChild('datePickerInput') datePickerInput!: MatDatepickerInput<Date>;
 
   constructor(private fb: FormBuilder, private adminService: AdminService,
     private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute,
@@ -40,9 +37,6 @@ export class UserFormComponent implements OnInit{
     })
   }  
 
-  loadDate(){
-   
-  }
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -51,7 +45,8 @@ export class UserFormComponent implements OnInit{
       this.userSelected = res;
 
       let birthdayDate: Date = new Date(res.birthdayDate)
-      
+      console.log("Data loadded: ", birthdayDate)
+
       this.userUpdateForm.patchValue({
         firstName: res.firstName,
         lastName: res.lastName,
@@ -68,14 +63,12 @@ export class UserFormComponent implements OnInit{
   }
 
   onUpdate(): void{
-    console.log("A enviar a data para atualizar: ", this.datePipe.transform(this.userUpdateForm.value.birthdayDate, 'dd/MM/yyyy'))
-    //this.userUpdateForm.value.birthdayDate = this.datePipe.transform(this.userUpdateForm.value.birthdayDate, 'dd/MM/yyyy'); 
     this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe(() => {
-      console.log("Valores da form: " + this.userUpdateForm.value.birthdayDate)
+      this.userUpdateForm.value.birthdayDate = this.datePipe.transform(this.userUpdateForm.value.birthdayDate, "dd-MM-yyyy")
+      console.log("Data nascimento a atualizar", this.userUpdateForm.value.birthdayDate)
       this.onSucessUpdatedUser();
     }, error => {
-      console.log("Valores da form: ", this.userUpdateForm.value.birthdayDate)
-      console.log(error)
+      console.log("Data nascimento a atualizar", this.userUpdateForm.value.birthdayDate)
       this.onError();
     })
   }

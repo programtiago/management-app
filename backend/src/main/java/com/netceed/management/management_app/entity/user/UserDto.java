@@ -26,7 +26,6 @@ public record UserDto (
     String lastName,
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     int workNumber,
-    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
     LocalDate birthdayDate,
     Department department,
     @Enumerated(EnumType.STRING)

@@ -8,7 +8,6 @@ import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,8 +36,6 @@ public class User {
     private String lastName;
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     private int workNumber;
-    @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
-    @Past
     private LocalDate birthdayDate;
     @Length(min = 9, max = 9)
     private String nif;

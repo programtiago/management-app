@@ -10,7 +10,7 @@ export interface User {
     recruitmentCompany: string, 
     birthdayDate: Date,
     nif: string,
-    department: Department,
+    department: Department | null,
     admissionDate: string,
     registryDate: string,
     isActive: boolean,

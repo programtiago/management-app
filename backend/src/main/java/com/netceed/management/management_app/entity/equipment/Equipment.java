@@ -1,14 +1,13 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -73,5 +72,16 @@ public class Equipment {
         this.model = model;
         this.type = category;
         this.workstation = workstation;
+    }
+
+    //Create equipment and assign it to a User, Department, Locatione etc
+    public Equipment(String description, String serialNumber, String brand, String model, String category, Set<UserEquipment> userEquipment, String unity){
+        this.description = description;
+        this.serialNumber = serialNumber;
+        this.brand = brand;
+        this.model = model;
+        this.type = category;
+        this.unity = unity;
+        this.userEquipments = userEquipment;
     }
 }

@@ -109,7 +109,7 @@ public class UserEquipmentService{
 
                     userEquipment.setUser(user);
                     userEquipment.setEquipment(equipment);
-                    //userEquipment.setAssignedDate(LocalDateTime.now());
+                    userEquipment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                     userEquipments.add(userEquipment);
 
                     equipmentRepository.save(equipment);
