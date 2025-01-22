@@ -40,7 +40,10 @@ export class EquipmentFormComponent implements OnInit{
       model: [''],
       user: [''],
       category: [''],
-      unity: ['']
+      unity: [''],
+      registryDate: [new Date().toString()],
+      statusEquipment: [StatusEquipment.IN_USE],
+      isActive: [true]
     })
     
     //Form to send the data equipment only with no assign
