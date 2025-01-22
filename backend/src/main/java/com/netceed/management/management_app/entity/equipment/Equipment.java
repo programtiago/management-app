@@ -1,13 +1,14 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,7 +26,6 @@ public class Equipment {
     private String description;
     @NotNull
     private String serialNumber;
-    private String macAddress;
     @NotNull
     private String brand;
     @NotNull
@@ -44,23 +44,22 @@ public class Equipment {
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
-    public Equipment(Long id, String description, String serialNumber, String macAddress, String brand,
+    public Equipment(Long id, String description, String serialNumber, String brand,
                      String model, String type, String location, String workstation,
-                     String unity, String registryDate, StatusEquipment statusEquipment, boolean isActive, String statusPhysic) {
+                     String unity, boolean isActive, String statusPhysic) {
         this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
-        this.macAddress = macAddress;
         this.brand = brand;
         this.model = model;
         this.type = type;
         this.location = location;
         this.workstation = workstation;
         this.unity = unity;
-        this.registryDate = registryDate;
+        this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.userEquipments = new HashSet<>();
         this.isActive = isActive;
-        this.statusEquipment = statusEquipment;
+        this.statusEquipment = StatusEquipment.AVAILABLE;
         this.statusPhysic = statusPhysic;
     }
 
@@ -72,16 +71,5 @@ public class Equipment {
         this.model = model;
         this.type = category;
         this.workstation = workstation;
-    }
-
-    //Create equipment and assign it to a User, Department, Locatione etc
-    public Equipment(String description, String serialNumber, String brand, String model, String category, Set<UserEquipment> userEquipment, String unity){
-        this.description = description;
-        this.serialNumber = serialNumber;
-        this.brand = brand;
-        this.model = model;
-        this.type = category;
-        this.unity = unity;
-        this.userEquipments = userEquipment;
     }
 }

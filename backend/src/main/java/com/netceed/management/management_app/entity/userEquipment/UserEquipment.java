@@ -6,8 +6,6 @@ import com.netceed.management.management_app.entity.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,14 +22,13 @@ public class UserEquipment {
     private User user;
 
     @ManyToOne
-    //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
 
     @Column(nullable = false)
-    @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
+    //@JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     private String assignedDate;
-    @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
+    //@JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     private String returnDate;
 
     private String comments;

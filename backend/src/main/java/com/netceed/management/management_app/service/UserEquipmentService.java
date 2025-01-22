@@ -4,7 +4,6 @@ import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
-import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.entity.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.user.UserMapper;
@@ -13,13 +12,11 @@ import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,9 +30,7 @@ public class UserEquipmentService{
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
 
-    private final EquipmentMapper equipmentMapper;
     private final UserEquipmentMapper userEquipmentMapper;
-    private final UserMapper userMapper;
 
     public List<UserEquipmentDto> getAll() {
         return userEquipmentRepository.findAll()
@@ -43,6 +38,8 @@ public class UserEquipmentService{
                 .collect(Collectors.toList());
     }
 
+    /***************************** Assign a existent equipment to a existent user *************************************/
+    //Both of the objects have to exist before to create the assignment
     public UserEquipmentDto assignEquipmentToUser(Long userId, Long equipmentId){
             User user = userRepository.findById(userId).orElseThrow();
             Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();
@@ -51,23 +48,8 @@ public class UserEquipmentService{
 
             UserEquipment assigment = new UserEquipment();
 
-            boolean equipmentAssignment;
-
-            
-
-        if (userEquipmentFound.isEmpty()){
-                String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss"));
-
-                /*
-                try{
-                    dateTimeFormatted = LocalDateTime.parse(dateTime, dtf).withNano(0);
-                }catch (DateTimeParseException e) {
-                    System.out.println("Could not parse date-time: " + e.getMessage());
-                }
-
-                 */
-                
-                assigment.setAssignedDate(dateTime);
+            if (userEquipmentFound.isEmpty()){
+                assigment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
                 assigment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber());
                 assigment.setEquipment(equipment);
                 assigment.setUser(user);
@@ -76,18 +58,14 @@ public class UserEquipmentService{
                 userRepository.save(user);
 
                 equipment.setStatusEquipment(StatusEquipment.IN_USE);
-                equipment.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
+                equipmentRepository.save(equipment);
+
+                equipment.getUserEquipments().add(assigment);
                 userEquipmentRepository.save(assigment);
-
-                equipmentAssignment = equipment.getUserEquipments().add(assigment);
-
-                if (equipmentAssignment)
-                    equipmentRepository.save(equipment);
+            }else{
+                throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
             }
-        else{
-            throw new IllegalArgumentException("The equipment with the id " + equipmentId + " is already in use by other user");
-        }
 
         return userEquipmentMapper.toDto(assigment);
     }
@@ -109,7 +87,7 @@ public class UserEquipmentService{
 
                     userEquipment.setUser(user);
                     userEquipment.setEquipment(equipment);
-                    userEquipment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+                    userEquipment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
                     userEquipments.add(userEquipment);
 
                     equipmentRepository.save(equipment);

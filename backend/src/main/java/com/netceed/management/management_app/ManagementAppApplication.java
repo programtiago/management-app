@@ -194,7 +194,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		scanner.setUnity("Refurb");
 		scanner.setType("Scanners");
 		scanner.setModel("DS2208");
-		scanner.setMacAddress("");
 		scanner.setBrand("Zebra");
 		scanner.setStatusPhysic("New");
 		scanner.setStatusEquipment(StatusEquipment.AVAILABLE);
@@ -216,7 +215,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		printer.setUnity("Refurb");
 		printer.setType("Printers");
 		printer.setModel("B-FV4T");
-		printer.setMacAddress("");
 		printer.setBrand("Toshiba");
 		printer.setStatusPhysic("New");
 		printer.setStatusEquipment(StatusEquipment.AVAILABLE);
@@ -238,7 +236,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		screen.setUnity("Refurb");
 		screen.setType("Screens");
 		screen.setModel("222B1TC/00");
-		screen.setMacAddress("");
 		screen.setBrand("Philips");
 		screen.setStatusPhysic("New");
 		screen.setStatusEquipment(StatusEquipment.AVAILABLE);
@@ -260,7 +257,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		wifiPen.setUnity("Refurb");
 		wifiPen.setType("USB Adapter");
 		wifiPen.setModel("AC1300");
-		wifiPen.setMacAddress("");
 		wifiPen.setBrand("TP-link");
 		wifiPen.setStatusPhysic("New");
 		wifiPen.setStatusEquipment(StatusEquipment.AVAILABLE);
@@ -282,7 +278,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setUnity("Refurb");
 		desktop.setType("Desktops");
 		desktop.setModel("OPT3040MFF-SB16-R6");
-		desktop.setMacAddress("");
 		desktop.setBrand("Dell");
 		desktop.setStatusPhysic("Used");
 		desktop.setStatusEquipment(StatusEquipment.AVAILABLE);

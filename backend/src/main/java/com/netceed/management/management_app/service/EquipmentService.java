@@ -13,10 +13,10 @@ import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
-import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -88,7 +88,6 @@ public class EquipmentService {
                    equipment.setDescription(equipmentDto.description());
                    equipment.setStatusPhysic(equipmentDto.finalCondition());
                    equipment.setWorkstation(equipmentDto.workstation());
-                   equipment.setMacAddress(equipmentDto.macAddress());
                    equipment.setLocation(equipmentDto.location());
                    equipment.setSerialNumber(equipmentDto.serialNumber());
                    equipment.setType(equipmentDto.type());

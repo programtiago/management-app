@@ -146,8 +146,6 @@ public class UserService {
            throw new IllegalArgumentException("Email " +  newUser.email() + " already belong to a user");
        }
 
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
        User savedUser = new User();
        if (equipmentFound.id() != null){
            UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.department(), newUser.shift(), newUser.recruitmentCompany(), newUser.admissionDate(),
