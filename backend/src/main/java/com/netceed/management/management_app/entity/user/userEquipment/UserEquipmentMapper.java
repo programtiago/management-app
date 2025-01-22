@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.entity.userEquipment;
+package com.netceed.management.management_app.entity.user.userEquipment;
 
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ public class UserEquipmentMapper {
             return null;
         }
 
-        return new UserEquipmentDto(userEquipment.getId(), userEquipment.getUser(), userEquipment.getEquipment(), userEquipment.getAssignedDate(), userEquipment.getReturnDate(),
+        return new UserEquipmentDto(userEquipment.getId(), userEquipment.getUser(), userEquipment.getEquipment(), userEquipment.getAssignedDateTime(), userEquipment.getReturnDateTime(),
                 userEquipment.getComments());
     }
 
@@ -30,7 +30,7 @@ public class UserEquipmentMapper {
     public List<UserEquipmentDto> convertListUserEquipmentsToDto(List<UserEquipment> userEquipments){
         List<UserEquipmentDto> userEquipmentsDtos = new ArrayList<>();
         for (UserEquipment userEquipment : userEquipments){
-            UserEquipmentDto userEquipmentDto = new UserEquipmentDto(userEquipment.getId(), userEquipment.getUser(), userEquipment.getEquipment(), userEquipment.getAssignedDate(), userEquipment.getReturnDate(), userEquipment.getComments());
+            UserEquipmentDto userEquipmentDto = new UserEquipmentDto(userEquipment.getId(), userEquipment.getUser(), userEquipment.getEquipment(), userEquipment.getAssignedDateTime(), userEquipment.getReturnDateTime(), userEquipment.getComments());
             userEquipmentsDtos.add(userEquipmentDto);
         }
         return userEquipmentsDtos;

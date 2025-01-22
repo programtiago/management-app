@@ -1,12 +1,10 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
-import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipmentDto;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipmentMapper;
-import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
@@ -49,7 +47,7 @@ public class UserEquipmentService{
             UserEquipment assigment = new UserEquipment();
 
             if (userEquipmentFound.isEmpty()){
-                assigment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+                assigment.setAssignedDateTime(LocalDateTime.now());
                 assigment.setComments("Equipment " + equipment.getDescription() + " with the SN " + equipment.getSerialNumber());
                 assigment.setEquipment(equipment);
                 assigment.setUser(user);
@@ -87,7 +85,7 @@ public class UserEquipmentService{
 
                     userEquipment.setUser(user);
                     userEquipment.setEquipment(equipment);
-                    userEquipment.setAssignedDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+                    userEquipment.setAssignedDateTime(LocalDateTime.now());
                     userEquipments.add(userEquipment);
 
                     equipmentRepository.save(equipment);

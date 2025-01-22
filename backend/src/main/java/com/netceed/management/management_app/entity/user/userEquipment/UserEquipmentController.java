@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.entity.userEquipment;
+package com.netceed.management.management_app.entity.user.userEquipment;
 
 import com.netceed.management.management_app.service.UserEquipmentService;
 import lombok.RequiredArgsConstructor;

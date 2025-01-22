@@ -3,8 +3,9 @@ package com.netceed.management.management_app.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.department.Department;
+import com.netceed.management.management_app.entity.department.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.shift.Shift;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -64,13 +65,12 @@ public class User {
     private String password;
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
     private String updatedAt;
-    /*
-    @ManyToMany(mappedBy = "users")
-    private Set<UserEquipment> equipments = new HashSet<>();
-     */
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<UserDepartment> userDepartments = new HashSet<>();
 
         public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif , Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments){
             this.firstName = firstName;

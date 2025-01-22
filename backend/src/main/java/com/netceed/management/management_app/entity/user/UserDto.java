@@ -3,7 +3,7 @@ package com.netceed.management.management_app.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.shift.Shift;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;

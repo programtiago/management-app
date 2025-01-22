@@ -1,7 +1,8 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.department.userDepartment.UserDepartment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

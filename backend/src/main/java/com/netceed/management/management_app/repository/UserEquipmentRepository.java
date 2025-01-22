@@ -1,6 +1,6 @@
 package com.netceed.management.management_app.repository;
 
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

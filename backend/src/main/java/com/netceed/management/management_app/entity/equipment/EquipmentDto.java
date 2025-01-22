@@ -1,6 +1,6 @@
 package com.netceed.management.management_app.entity.equipment;
 
-import com.netceed.management.management_app.entity.userEquipment.UserEquipment;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
