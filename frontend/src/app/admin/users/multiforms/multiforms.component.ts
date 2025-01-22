@@ -97,14 +97,10 @@ export class MultiformsComponent implements OnInit{
     if (this.typeAssignmentSelected === 'EQU'){
       this.adminService.createUserAndAssignToEquipment(employeeRegisterFormData, this.equipmentSelectedId).subscribe(
         (res) => {
-          console.log("Data: ", employeeRegisterFormData)
           this.onSucess();
-          console.log("User submited sucessfully: ", res)
         },
         (error) => {
-          console.log("Data: ", employeeRegisterFormData)
           this.onError();
-          console.error("Error submiting user: ", error)
         })
     }else if (this.typeAssignmentSelected === 'DEP'){
       console.log('DEP TYPE ASSINGMENT....')
@@ -114,11 +110,9 @@ export class MultiformsComponent implements OnInit{
       this.adminService.createUser(employeeRegisterFormData).subscribe(
         (res) => {
           this.onSucess();
-          console.log("User submited sucessfully: ", res)
         },
         (error) => {
           this.onError();
-          console.error("Error submiting user: ", error)
         })
     }
   }

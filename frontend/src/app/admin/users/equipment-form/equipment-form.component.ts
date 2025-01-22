@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CreateEquipmentAssignUserRequest } from '../../../model/equipment/equipment-create-assign-user';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { StatusEquipment } from '../../../model/equipment/status-equipment';
 
 @Component({
   selector: 'app-equipment-form',
@@ -29,7 +31,7 @@ export class EquipmentFormComponent implements OnInit{
   categorys: string[] = ['Scanner', 'Desktop', 'Printer', 'Dockstation', 'Screen', 'Laptop']
   workstations: string[] = ['Unity A', 'Unity B', 'Unity C']
 
-  constructor(private adminSerice: AdminService, private fb: FormBuilder, private router: Router, private location: Location, ){
+  constructor(private adminSerice: AdminService, private fb: FormBuilder, private router: Router, private location: Location, private snackBar: MatSnackBar){
     //Form to send the data equipment with assignment 
     this.createEquipmentAndAssignToUserForm = this.fb.group({
       description: [''],
@@ -38,7 +40,7 @@ export class EquipmentFormComponent implements OnInit{
       model: [''],
       user: [''],
       category: [''],
-      unity: [''], 
+      unity: ['']
     })
     
     //Form to send the data equipment only with no assign
@@ -48,7 +50,10 @@ export class EquipmentFormComponent implements OnInit{
       brand: [''],
       model: [''],
       category: [''],
-      unity: [''], 
+      unity: [''],
+      registryDate: [new Date().toUTCString()],
+      statusEquipment: [StatusEquipment.AVAILABLE],
+      isActive: [true]
     })
   }
 
@@ -80,10 +85,11 @@ export class EquipmentFormComponent implements OnInit{
       if (this.createEquipmentForm.valid){
         this.adminSerice.createEquipmentWithNoAssign(newEquipment).subscribe((res) => {
           if (res != null){
+            this.onSucess();
             this.router.navigateByUrl("admin/equipments")
           }
         }), (error: any) => {
-          console.log(error)
+          this.onError();
         }
       }
     }
@@ -95,7 +101,6 @@ export class EquipmentFormComponent implements OnInit{
       if (this.createEquipmentAndAssignToUserForm.valid){
         this.adminSerice.createEquipmentAndAssignToUser(newEquipment, userId).subscribe((res) => {
           if (res != null){
-
             this.router.navigateByUrl("admin/equipments")
           }
         }), (error: any) => {
@@ -107,5 +112,14 @@ export class EquipmentFormComponent implements OnInit{
 
   onCancel(){
     this.location.back();
+  }
+
+  private onSucess(){
+    this.snackBar.open('Equipment created sucessfully', '', { duration: 2000})
+    this.onCancel();
+  }
+
+  private onError(){
+    this.snackBar.open('Error saving equipment', 'X', { duration: 2000})
   }
 }

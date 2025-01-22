@@ -225,23 +225,23 @@
                         <form [formGroup]="createEquipmentForm">
                             <mat-form-field appearance="outline" floatLabel="always">
                                 <mat-label>Description</mat-label>
-                                <input matInput formControlName="description">
+                                <input matInput formControlName="description" required>
                             </mat-form-field>
                 
                             <mat-form-field appearance="outline" floatLabel="always">
                                 <mat-label>S/N</mat-label>
-                                <input matInput formControlName="serialNumber">
+                                <input matInput formControlName="serialNumber" required>
                             <!--container element that represents the fields that have to be filled. Depending on the option selected above.-->
                             </mat-form-field>
         
                             <mat-form-field appearance="outline" floatLabel="always">
                                 <mat-label>Brand</mat-label>
-                                <input matInput formControlName="brand">
+                                <input matInput formControlName="brand" required>
                             </mat-form-field>
         
                             <mat-form-field appearance="outline" floatLabel="always">
                                 <mat-label>Model</mat-label>
-                                <input matInput formControlName="model">
+                                <input matInput formControlName="model" required>
                             </mat-form-field>
         
                             <mat-form-field appearance="outline" floatLabel="always">

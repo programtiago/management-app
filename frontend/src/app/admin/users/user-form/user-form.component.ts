@@ -64,11 +64,8 @@ export class UserFormComponent implements OnInit{
 
   onUpdate(): void{
     this.adminService.updateUser(this.userUpdateForm.value, this.userId).subscribe(() => {
-      this.userUpdateForm.value.birthdayDate = this.datePipe.transform(this.userUpdateForm.value.birthdayDate, "dd-MM-yyyy")
-      console.log("Data nascimento a atualizar", this.userUpdateForm.value.birthdayDate)
       this.onSucessUpdatedUser();
     }, error => {
-      console.log("Data nascimento a atualizar", this.userUpdateForm.value.birthdayDate)
       this.onError();
     })
   }

@@ -1,4 +1,5 @@
 import { User } from "../user/user";
+import { StatusEquipment } from "./status-equipment";
 
 export interface CreateEquipmentAssignUserRequest{
     id: number,
@@ -8,5 +9,7 @@ export interface CreateEquipmentAssignUserRequest{
     model: string,
     category: string,
     user: User,
-    unity: string
+    unity: string,
+    registryDate: string,
+    statusEquipment: StatusEquipment
 }
