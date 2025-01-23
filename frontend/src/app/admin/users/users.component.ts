@@ -15,8 +15,7 @@ export class UsersComponent {
 
   users$: Observable<User[]>;
   
-  constructor(private adminService: AdminService, private dialog: MatDialog, private snackbar: MatSnackBar
-  ){
+  constructor(private adminService: AdminService, private dialog: MatDialog){
     this.users$ = this.adminService.listUsers().pipe(
       catchError(error => {
         this.onError('Error loading the users.')

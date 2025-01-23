@@ -24,6 +24,7 @@ import { EquipmentFormComponent } from './users/equipment-form/equipment-form.co
 import { ModalQuestionDeleteEquipmentComponent } from './users/modal-question-delete-equipment/modal-question-delete-equipment.component';
 import { ModalViewUserOwnerEquipmentComponent } from './users/modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
 import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-assignment-term/modal-generate-assignment-term.component';
+import { ModalAssignmentDepartmentUserComponent } from './departments/modal-assignment-department-user/modal-assignment-department-user.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-ass
     EquipmentFormComponent,
     ModalQuestionDeleteEquipmentComponent,
     ModalViewUserOwnerEquipmentComponent,
-    ModalGenerateAssignmentTermComponent
+    ModalGenerateAssignmentTermComponent,
+    ModalAssignmentDepartmentUserComponent
   ],
   imports: [
     CommonModule,
@@ -53,8 +55,6 @@ import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-ass
     AppMaterialModule,
     SharedModule
   ],
-  providers: [
-    //{provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions}
-  ]
+  providers: []
 })
 export class AdminModule { }

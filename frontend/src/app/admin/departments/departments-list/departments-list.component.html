@@ -10,8 +10,8 @@
         <mat-card-actions style="justify-content: flex-end;">
             <button [matMenuTriggerFor]="menu" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>more_vert</mat-icon></button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                        <mat-icon>dialpad</mat-icon>
+                    <button mat-menu-item (click)="openModalAssignmentDepartmentUser(department.id)">
+                        <mat-icon>assignment_ind</mat-icon>
                         <span>Assign employee</span> <!--This will allow the admin to assign a employee to a department-->
                     </button>
                     <button mat-menu-item>
@@ -21,10 +21,14 @@
                     <button mat-menu-item>
                         <mat-icon>voicemail</mat-icon>
                         <span>Track Department</span> <!--This will allow the admin to see all the movements of employees inside a department-->
-                    </button>           
+                    </button>   
+                    <button mat-menu-item>
+                        <mat-icon>voicemail</mat-icon>
+                        <span>Track Department</span> <!--This will allow the admin to see all the movements of employees inside a department-->
+                    </button>          
                 </mat-menu>
-            <button (click)="onUpdate()" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit</mat-icon></button>
-            <button (click)="onDelete(department.id)" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete</mat-icon></button>
+            <button (click)="onUpdate()" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>edit_outline</mat-icon></button>
+            <button (click)="onDelete(department.id)" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>delete_outline</mat-icon></button>
         </mat-card-actions>
     </mat-card>
 </div>

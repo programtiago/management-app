@@ -1,4 +1,4 @@
-import { Department } from "../department"
+import { Department } from "../department/department"
 import { UserEquipment } from "../user-equipment/user-equipment"
 import { UserRole } from "./userRole"
 

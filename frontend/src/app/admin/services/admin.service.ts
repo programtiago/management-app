@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user/user';
 import { catchError, first, Observable, throwError } from 'rxjs';
-import { Department } from '../../model/department';
+import { Department } from '../../model/department/department';
 import { Equipment } from '../../model/equipment/equiment';
 import { UserEquipment } from '../../model/user-equipment/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
@@ -61,6 +61,10 @@ export class AdminService {
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());
+  }
+
+  getDepartmentById(departmentId: number){
+    return this.httpClient.get<Department>(`${this.BASE_API_URL_DEPARTMENTS}/${departmentId}`)
   }
 
   deleteDepartmentById(departmentId: number){

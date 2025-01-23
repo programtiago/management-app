@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { catchError, Observable, of } from 'rxjs';
-import { Department } from '../../model/department';
+import { Department } from '../../model/department/department';
 import { AdminService } from '../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';

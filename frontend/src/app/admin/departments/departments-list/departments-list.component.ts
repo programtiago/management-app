@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Department } from '../../../model/department';
+import { Department } from '../../../model/department/department';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalInfoDeleteComponent } from '../modal-info-delete/modal-info-delete.component';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { ModalAssignmentDepartmentUserComponent } from '../modal-assignment-department-user/modal-assignment-department-user.component';
 
 @Component({
   selector: 'app-departments-list',
@@ -15,6 +16,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 export class DepartmentsListComponent implements OnInit{
 
   @Input() departments: Department[] = []
+  selectedDepartment! : Department | null;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar
@@ -41,8 +43,15 @@ export class DepartmentsListComponent implements OnInit{
   }
 
 
-  openMenuForDepartments(){
-    
+  openModalAssignmentDepartmentUser(departmentId: number){
+    this.adminService.getDepartmentById(departmentId).subscribe((res) => {
+      this.selectedDepartment = res;
+    })
+    const dialogRef = this.dialog.open(ModalAssignmentDepartmentUserComponent, {
+      height: '300px',
+      width: '500px',
+      data: this.selectedDepartment
+    })
   }
 
   onUpdate(){
