@@ -16,7 +16,7 @@ import { ModalAssignmentDepartmentUserComponent } from '../modal-assignment-depa
 export class DepartmentsListComponent implements OnInit{
 
   @Input() departments: Department[] = []
-  selectedDepartment! : Department | null;
+  selectedDepartment : any;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar
@@ -43,14 +43,15 @@ export class DepartmentsListComponent implements OnInit{
   }
 
 
-  openModalAssignmentDepartmentUser(departmentId: number){
-    this.adminService.getDepartmentById(departmentId).subscribe((res) => {
+  openModalAssignmentDepartmentUser(department: Department){
+    this.adminService.getDepartmentById(department.id).subscribe((res) => {
       this.selectedDepartment = res;
+      console.log(res)
     })
     const dialogRef = this.dialog.open(ModalAssignmentDepartmentUserComponent, {
-      height: '300px',
-      width: '500px',
-      data: this.selectedDepartment
+      height: '600px',
+      width: '950px',
+      data: department
     })
   }
 

@@ -10,7 +10,7 @@
         <mat-card-actions style="justify-content: flex-end;">
             <button [matMenuTriggerFor]="menu" style="margin-top: 20px; display: flex;" mat-icon-button><mat-icon>more_vert</mat-icon></button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="openModalAssignmentDepartmentUser(department.id)">
+                    <button mat-menu-item (click)="openModalAssignmentDepartmentUser(department)">
                         <mat-icon>assignment_ind</mat-icon>
                         <span>Assign employee</span> <!--This will allow the admin to assign a employee to a department-->
                     </button>

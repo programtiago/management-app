@@ -71,6 +71,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserDepartment> userDepartments = new HashSet<>();
+    //@Enumerated(EnumType.STRING)
+    //private Gender gender;
 
     public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;

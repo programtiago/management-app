@@ -46,10 +46,14 @@ public class DepartmentController {
 
      */
 
+
+    /*
     @PostMapping("/{departmentId}/user/{userId}")
     public UserDepartmentDto assignUserToDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
         return userDepartmentService.assignUserToDepartment(userId, departmentId);
     }
+
+     */
 
     @PutMapping("/{id}")
     public void update(@RequestBody @Valid DepartmentDto department, @PathVariable Long id){

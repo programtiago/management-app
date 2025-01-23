@@ -24,8 +24,7 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
   
   selectedEquipment!: Equipment;
   selectedEquipment$?: Observable<Equipment>;
-
-
+  
   userEquipment!: UserEquipment;
   userEquipments: UserEquipment[] = []
 
@@ -65,13 +64,6 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
           return of ([])
         })
         );
-
-        this.equipmentsAvailable$ = this.adminService.getEquipmentsAvailable().pipe(
-          catchError(error => {
-            this.onError("Error loading equipments " + error.error.errors);
-            return of ([])
-          })
-          );
     }
 
     ngOnInit(): void {
@@ -115,7 +107,6 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
           this.adminService.assignEquipmentToUser(this.data.id, this.selectedEquipmentId).subscribe({
             next: (res) => {
               this.userEquipment = res;
-              console.log("Resposta" + res)
               if (res.id != null){
                 this.snackbar.open('Equipment assigned sucessfully', 'X', { duration: 2000 });
                 this.dialogRef.close();

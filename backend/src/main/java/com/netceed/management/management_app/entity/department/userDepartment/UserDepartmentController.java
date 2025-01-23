@@ -2,8 +2,9 @@ package com.netceed.management.management_app.entity.department.userDepartment;
 
 import com.netceed.management.management_app.service.UserDepartmentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/user-departments")
@@ -11,4 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserDepartmentController {
 
     private final UserDepartmentService userDepartmentService;
+
+    //This endpoint will allow to send array of longs. Can have 1 element only or more
+    @PostMapping("/{departmentId}/users")
+    public List<UserDepartmentDto> assignUserToDepartments(@PathVariable Long departmentId, @RequestBody List<Long> usersId){
+        return userDepartmentService.assignUserToDepartments(departmentId, usersId);
+    }
 }

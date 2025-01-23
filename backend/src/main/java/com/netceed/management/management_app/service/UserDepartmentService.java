@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +28,7 @@ public class UserDepartmentService {
     private final UserDepartmentMapper userDepartmentMapper;
 
     //If user exists and department we can assign user to department
+    /*
     public UserDepartmentDto assignUserToDepartment(Long userId, Long departmentId){
         Optional<User> user = userRepository.findById(userId);
         Optional<Department> department = departmentRepository.findById(departmentId);
@@ -47,6 +50,37 @@ public class UserDepartmentService {
         departmentRepository.save(departmentFound);
 
         return userDepartmentMapper.toDto(userDepartment);
+    }
+     */
+
+    public List<UserDepartmentDto> assignUserToDepartments(Long departmentId, List<Long> usersId) {
+        Optional<Department> departmentOpt = departmentRepository.findById(departmentId);
+        List<UserDepartment> userDepartments = new ArrayList<>();
+
+        if (departmentOpt.isPresent()) {
+            Department department = departmentOpt.get();
+            for (Long userId : usersId) {
+                Optional<User> userOpt = userRepository.findById(userId);
+                if (userOpt.isPresent()) {
+                    User user = userOpt.get();
+
+                    UserDepartment userDepartment = new UserDepartment();
+
+                    userDepartment.setDepartment(department);
+                    userDepartment.setUser(user);
+                    userDepartment.setAssignedDate(LocalDateTime.now());
+                    userDepartment.setComments("User " + user.getFirstName() + " " + user.getLastName() + " with work number " + user.getWorkNumber() + " was assigned to department " + department.getDescription() + " at " +
+                            userDepartment.getAssignedDate());
+                    userDepartments.add(userDepartment);
+
+                    departmentRepository.save(department);
+                }
+            }
+        }
+        List<UserDepartment> assignmentsDepartmentToUsers = userDepartmentRepository.saveAll(userDepartments);
+        List<UserDepartmentDto> assignmentsDepartmentToUsersDto = userDepartmentMapper.convertListDepartmentToListDepartmentDto(assignmentsDepartmentToUsers);
+
+        return assignmentsDepartmentToUsersDto;
     }
 
 }
