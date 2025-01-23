@@ -1,15 +1,13 @@
 package com.netceed.management.management_app;
 
+import com.netceed.management.management_app.entity.building.Building;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserRole;
-import com.netceed.management.management_app.repository.DepartmentRepository;
-import com.netceed.management.management_app.repository.EquipmentRepository;
-import com.netceed.management.management_app.repository.ShiftRepository;
-import com.netceed.management.management_app.repository.UserRepository;
+import com.netceed.management.management_app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,6 +30,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 	private final ShiftRepository shiftRepository;
 	private final DepartmentRepository departmentRepository;
 	private final EquipmentRepository equipmentRepository;
+	private final BuildingRepository buildingRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagementAppApplication.class, args);
@@ -39,6 +38,22 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
+		Building buildingA = new Building();
+
+		buildingA.setDescription("BUILDING A");
+		buildingA.setActive(true);
+		buildingA.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
+		Building buildingB = new Building();
+
+		buildingB.setDescription("BUILDING B");
+		buildingB.setActive(true);
+		buildingB.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
+		buildingRepository.save(buildingA);
+		buildingRepository.save(buildingB);
+
 		Shift generalShift = new Shift("General", LocalTime.of(9,0,0), LocalTime.of(18,0, 0), true);
 		Shift morningShift = new Shift("Morning", LocalTime.of(7,0,0), LocalTime.of(15,30, 0), true);
 		Shift afternoonShift = new Shift("Afternoon", LocalTime.of(15,30,0), LocalTime.of(0,0, 0), true);

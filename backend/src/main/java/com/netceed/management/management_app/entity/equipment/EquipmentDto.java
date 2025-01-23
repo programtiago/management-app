@@ -25,11 +25,6 @@ public record EquipmentDto(Long id, @NotNull String description, @NotNull String
         return new EquipmentDto(id, description, serialNumber, brand, model, type, location, workstation,
                 unity, registryDateValue, usersEquipments, isActive, statusEquipment, finalCondition);
     }
-
-    public static EquipmentDto createNewEquipmentAndAssignToEntity(Long id, String description, String serialNumber, String brand, String model, String location, String type, String unity, String registryDate, String workstation, Set<UserEquipment> userEquipments,
-                                                                   boolean isActive, StatusEquipment statusEquipment, String finalCondition){
-        return new EquipmentDto(id, description, serialNumber, brand, model, location, type, unity, registryDate, workstation, userEquipments, isActive, statusEquipment, finalCondition);
-    }
 }
 
 

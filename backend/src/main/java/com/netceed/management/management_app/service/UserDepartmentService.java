@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,22 +25,26 @@ public class UserDepartmentService {
 
     private final UserDepartmentMapper userDepartmentMapper;
 
+    //If user exists and department we can assign user to department
     public UserDepartmentDto assignUserToDepartment(Long userId, Long departmentId){
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        Department department = departmentRepository.findById(departmentId).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+        Optional<User> user = userRepository.findById(userId);
+        Optional<Department> department = departmentRepository.findById(departmentId);
 
         UserDepartment userDepartment = new UserDepartment();
 
-        userDepartment.setDepartment(department);
-        userDepartment.setUser(user);
+        Department departmentFound = department.get();
+        User userFound = user.get();
+
+        userDepartment.setDepartment(departmentFound);
+        userDepartment.setUser(userFound);
         userDepartment.setAssignedDate(LocalDateTime.now());
-        userDepartment.setComments("User " + user.getFirstName() + " " + user.getLastName() + " with work number " + user.getWorkNumber() + " was assigned to department " + department.getDescription() + " at " +
+        userDepartment.setComments("User " + user.get().getFirstName() + " " + user.get().getLastName() + " with work number " + user.get().getWorkNumber() + " was assigned to department " + department.get().getDescription() + " at " +
                 userDepartment.getAssignedDate());
 
         userDepartmentRepository.save(userDepartment);
 
-        department.setTotalEmployees(department.getTotalEmployees() + 1);
-        departmentRepository.save(department);
+        department.get().setTotalEmployees(department.get().getTotalEmployees() + 1);
+        departmentRepository.save(departmentFound);
 
         return userDepartmentMapper.toDto(userDepartment);
     }

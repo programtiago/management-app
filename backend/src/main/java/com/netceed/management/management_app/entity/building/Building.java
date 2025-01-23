@@ -1,0 +1,34 @@
+package com.netceed.management.management_app.entity.building;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+/**  Physic space that represents the building - A corporation can have multiple buildings -> Building A, Building B.
+Each Building can have multiple distinct locations. Building A -> Location AY, Location AX    Building B -> Location AS, Location AJ
+Each Building has one department at least
+Each Department can have the same Location
+ **/
+public class Building {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
+    private String description;
+    @NotNull
+    private boolean isActive;
+    @NotNull
+    private String registryDate;
+}
