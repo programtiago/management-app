@@ -55,10 +55,6 @@ export class DepartmentsListComponent implements OnInit{
     })
   }
 
-  onUpdate(){
-    
-  }
-
   onDelete(departmentId: number){
     const dialogRef = this.dialog.open(ModalInfoDeleteComponent, {
       height: '160px',

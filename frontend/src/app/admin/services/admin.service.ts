@@ -7,6 +7,7 @@ import { Equipment } from '../../model/equipment/equiment';
 import { UserEquipment } from '../../model/user-equipment/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
 import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
+import { UserDepartment } from '../../model/department/user-department/user-department';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class AdminService {
   private readonly BASE_API_URL_DEPARTMENTS = '/api/v1/departments'
   private readonly BASE_API_URL_EQUIPMENTS = '/api/v1/equipments'
   private readonly BASE_API_URL_USER_EQUIPMENTS = '/api/v1/user-equipments'
+  private readonly BASE_API_URL_USER_DEPARTMENTS = '/api/v1/user-departments'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -75,6 +77,10 @@ export class AdminService {
     return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
   }
 
+  assignEmployeeToDepartment(departmentId: number, selectedUsersIds: number[]){
+    return this.httpClient.post<UserDepartment[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users`, selectedUsersIds);
+  }
+
 
 
   getEquipments(){
@@ -113,7 +119,6 @@ export class AdminService {
   }
 
   assignMultipleEquipmentsToUser(userId: number, equipmentsIds: number[]){
-    console.log("Equipments ids : " + equipmentsIds)
     return this.httpClient.post<UserEquipment[]>(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipments`,
       equipmentsIds
     )

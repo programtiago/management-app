@@ -4,51 +4,26 @@
 <div class="container-table-users">
     <mat-card>
         <mat-toolbar color="primary" style="display: flex; align-items: center; justify-content: center;">Users Available</mat-toolbar>
-        <mat-card-content>
+        <mat-card-content class="users-card-content">
             <div *ngIf="users$ | async as users; else loading">
-                <mat-table [dataSource]="users">
-                    <ng-container matColumnDef="select">
-                        <mat-header-cell *matHeaderCellDef>
-                          <mat-checkbox (change)="$event ? toggleAllRows() : null"
-                                        [checked]="selection.hasValue() && isAllSelected()"
-                                        [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                        >
-                          </mat-checkbox>
-                        </mat-header-cell>
-                        <mat-cell *matCellDef="let row">
-                          <mat-checkbox (click)="$event.stopPropagation()"
-                                        (change)="$event ? selection.toggle(row) : null"
-                                        [checked]="selection.isSelected(row)"
-                                        >
-                          </mat-checkbox>
-                        </mat-cell>
-                    </ng-container>
-
-                    <ng-container matColumnDef="firstName">
-                        <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-                        <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
-                      </ng-container>
-                    
-                      <ng-container matColumnDef="lastName">
-                        <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-                        <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
-                      </ng-container>     
-                  
-                      <ng-container matColumnDef="workNumber">
-                        <mat-header-cell *matHeaderCellDef> Work Number </mat-header-cell>
-                        <mat-cell *matCellDef="let user"> {{ user.workNumber }} </mat-cell>
-                      </ng-container>
-                    
-                      <ng-container matColumnDef="admissionDate">
-                        <mat-header-cell *matHeaderCellDef> Admission Date </mat-header-cell>
-                        <mat-cell *matCellDef="let user"> {{ user.admissionDate }} </mat-cell>
-                      </ng-container>
-
-                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
+              <div *ngFor="let user of users; let i = index">
+                <mat-card class="user-card">
+                  <mat-checkbox [id]="user.id.toString()" (change)="selectionUsers($event, user.id)" style="margin-left: 5px;"></mat-checkbox>   
+                  <mat-card-title style="margin-left: 15px">{{user.firstName + " " + user.lastName}}</mat-card-title>
+                  <mat-card-subtitle style="margin-left: 15px;">{{user.workNumber}}</mat-card-subtitle>
+                  <mat-card-content> 
+                    <p>{{user.recruitmentCompany}}</p>
+                    <p>{{user.registryDate}}</p>
+                    <p>{{user.email}}</p> 
+                  </mat-card-content>
+                </mat-card>
+              </div>
             </div>
         </mat-card-content>
+        <mat-card-actions style="display: flex; align-content: center; justify-content: center;">  
+          <button mat-raised-button color="warn"><mat-icon></mat-icon>Cancel</button>
+          <button (click)="assignDepartmentToUser()" mat-raised-button color="primary"><mat-icon></mat-icon>Submit</button>
+        </mat-card-actions>
         <ng-template #loading>
             <div class="loading-spinner">
                 <mat-spinner></mat-spinner>
