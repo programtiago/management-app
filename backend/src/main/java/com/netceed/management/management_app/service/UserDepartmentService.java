@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +53,11 @@ public class UserDepartmentService {
         return userDepartmentMapper.toDto(userDepartment);
     }
      */
+
+    public List<UserDepartmentDto> getAllAssignments(){
+        return userDepartmentRepository.findAll().stream().map(userDepartmentMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
     public List<UserDepartmentDto> assignUserToDepartments(Long departmentId, List<Long> usersId) {
         Optional<Department> departmentOpt = departmentRepository.findById(departmentId);

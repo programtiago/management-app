@@ -13,6 +13,10 @@ public class UserDepartmentController {
 
     private final UserDepartmentService userDepartmentService;
 
+    @GetMapping
+    public List<UserDepartmentDto> getAll(){
+        return userDepartmentService.getAllAssignments();
+    }
     //This endpoint will allow to send array of longs. Can have 1 element only or more
     @PostMapping("/{departmentId}/users")
     public List<UserDepartmentDto> assignUserToDepartments(@PathVariable Long departmentId, @RequestBody List<Long> usersId){
