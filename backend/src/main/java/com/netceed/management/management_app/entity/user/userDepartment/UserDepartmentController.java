@@ -1,4 +1,4 @@
-package com.netceed.management.management_app.entity.department.userDepartment;
+package com.netceed.management.management_app.entity.user.userDepartment;
 
 import com.netceed.management.management_app.service.UserDepartmentService;
 import lombok.RequiredArgsConstructor;

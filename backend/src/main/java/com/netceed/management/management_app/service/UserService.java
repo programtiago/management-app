@@ -130,6 +130,7 @@ public class UserService {
                 .toList();
     }
 
+
     /****** Create a user object. After assigns the user object to the equipment_id given ******/
     //public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
     public UserEquipmentDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {

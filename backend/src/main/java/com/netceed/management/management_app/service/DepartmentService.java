@@ -3,11 +3,8 @@ package com.netceed.management.management_app.service;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.department.DepartmentDto;
 import com.netceed.management.management_app.entity.department.DepartmentMapper;
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentMapper;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
-import com.netceed.management.management_app.repository.UserDepartmentRepository;
-import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,5 @@
 package com.netceed.management.management_app.entity.department;
 
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.service.DepartmentService;
 import com.netceed.management.management_app.service.UserDepartmentService;
 import jakarta.validation.Valid;
@@ -42,15 +41,6 @@ public class DepartmentController {
         }
 
         return departmentService.create(newDepartment);
-    }
-
-     */
-
-
-    /*
-    @PostMapping("/{departmentId}/user/{userId}")
-    public UserDepartmentDto assignUserToDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
-        return userDepartmentService.assignUserToDepartment(userId, departmentId);
     }
 
      */

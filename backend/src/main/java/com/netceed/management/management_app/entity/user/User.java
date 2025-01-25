@@ -3,7 +3,7 @@ package com.netceed.management.management_app.entity.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartment;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
@@ -74,13 +74,13 @@ public class User {
     //@Enumerated(EnumType.STRING)
     //private Gender gender;
 
-    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, Department department, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
+    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        this.department = department;
+        //this.department = department;
         this.email = email;
         this.password = password;
         this.admissionDate = admissionDate;
@@ -111,14 +111,14 @@ public class User {
         this.isAvailableForVacation = false;
     }
 
-    public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nif = nif;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        this.department = department;
+        //this.department = department;
         this.workStatus = workStatus;
         this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;

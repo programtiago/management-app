@@ -1,11 +1,10 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartment;
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentDto;
-import com.netceed.management.management_app.entity.department.userDepartment.UserDepartmentMapper;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentMapper;
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.UserDepartmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -79,10 +78,13 @@ public class UserDepartmentService {
                             userDepartment.getAssignedDate());
                     userDepartments.add(userDepartment);
 
-                    departmentRepository.save(department);
                 }
             }
+            department.setTotalEmployees(usersId.size() + department.getTotalEmployees());
+
+            departmentRepository.save(department);
         }
+
         List<UserDepartment> assignmentsDepartmentToUsers = userDepartmentRepository.saveAll(userDepartments);
         List<UserDepartmentDto> assignmentsDepartmentToUsersDto = userDepartmentMapper.convertListDepartmentToListDepartmentDto(assignmentsDepartmentToUsers);
 
