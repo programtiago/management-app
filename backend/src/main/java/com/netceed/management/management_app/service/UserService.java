@@ -150,7 +150,7 @@ public class UserService {
        User savedUser = new User();
        if (equipmentFound.id() != null){
            UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.department(), newUser.shift(), newUser.recruitmentCompany(), newUser.admissionDate(),
-                   newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments());
+                   newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments());
 
            savedUser = userRepository.save(userMapper.toEntity(userToSave));
        }

@@ -37,7 +37,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		/*
 		Building buildingA = new Building();
 
 		buildingA.setDescription("BUILDING A");

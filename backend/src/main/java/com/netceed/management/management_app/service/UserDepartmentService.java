@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.department.Department;
+import com.netceed.management.management_app.entity.user.UserDto;
+import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentMapper;
@@ -26,6 +28,7 @@ public class UserDepartmentService {
     private final UserRepository userRepository;
 
     private final UserDepartmentMapper userDepartmentMapper;
+    private final UserMapper userMapper;
 
     //If user exists and department we can assign user to department
     /*
@@ -90,5 +93,12 @@ public class UserDepartmentService {
 
         return assignmentsDepartmentToUsersDto;
     }
+
+    public List<UserDto> getAllEmployeesFromDepartmentId(Long departmentId){
+        List<User> usersByDepartment = userRepository.findAllUsersByDepartmentId(departmentId);
+
+        return userMapper.convertListUserToDto(usersByDepartment);
+    }
+
 
 }
