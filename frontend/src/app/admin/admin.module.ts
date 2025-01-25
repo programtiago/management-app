@@ -25,6 +25,7 @@ import { ModalQuestionDeleteEquipmentComponent } from './users/modal-question-de
 import { ModalViewUserOwnerEquipmentComponent } from './users/modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
 import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-assignment-term/modal-generate-assignment-term.component';
 import { ModalAssignmentDepartmentUserComponent } from './departments/modal-assignment-department-user/modal-assignment-department-user.component';
+import { ModalUsersDepartmentComponent } from './departments/modal-users-department/modal-users-department.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ModalAssignmentDepartmentUserComponent } from './departments/modal-assi
     ModalQuestionDeleteEquipmentComponent,
     ModalViewUserOwnerEquipmentComponent,
     ModalGenerateAssignmentTermComponent,
-    ModalAssignmentDepartmentUserComponent
+    ModalAssignmentDepartmentUserComponent,
+    ModalUsersDepartmentComponent
   ],
   imports: [
     CommonModule,

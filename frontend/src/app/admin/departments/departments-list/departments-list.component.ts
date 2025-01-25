@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalInfoDeleteComponent } from '../modal-info-delete/modal-info-delete.component';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ModalAssignmentDepartmentUserComponent } from '../modal-assignment-department-user/modal-assignment-department-user.component';
+import { User } from '../../../model/user/user';
 
 @Component({
   selector: 'app-departments-list',
@@ -17,6 +18,8 @@ export class DepartmentsListComponent implements OnInit{
 
   @Input() departments: Department[] = []
   selectedDepartment : any;
+
+  usersDepartment: User[] = []
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar
@@ -52,6 +55,15 @@ export class DepartmentsListComponent implements OnInit{
       height: '600px',
       width: '950px',
       data: department
+    })
+
+    
+  }
+
+  getAllEmployees(departmentId: number){
+    this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
+      this.usersDepartment = res;
+      console.log(res)
     })
   }
 

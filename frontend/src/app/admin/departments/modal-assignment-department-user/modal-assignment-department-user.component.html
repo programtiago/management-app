@@ -21,7 +21,7 @@
             </div>
         </mat-card-content>
         <mat-card-actions style="display: flex; align-content: center; justify-content: center;">  
-          <button mat-raised-button color="warn"><mat-icon></mat-icon>Cancel</button>
+          <button mat-raised-button (click)="dialogRef.close()" color="warn"><mat-icon></mat-icon>Cancel</button>
           <button (click)="assignDepartmentToUser()" mat-raised-button color="primary"><mat-icon></mat-icon>Submit</button>
         </mat-card-actions>
         <ng-template #loading>

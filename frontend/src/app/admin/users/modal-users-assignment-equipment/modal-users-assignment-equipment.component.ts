@@ -151,7 +151,6 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
       if (!this.canChooseMultipleEquipments){
         this.adminService.getEquipmentById(this.selectedEquipmentId).subscribe((res) => {
           this.selectedEquipment = res;
-          console.log(res)
           if (res.id != null)
             this.canLoadInformationCardAssignment = true
           })

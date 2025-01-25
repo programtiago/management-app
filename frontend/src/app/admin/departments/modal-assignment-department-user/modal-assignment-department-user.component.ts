@@ -83,9 +83,10 @@ export class ModalAssignmentDepartmentUserComponent{
     this.adminService.assignEmployeeToDepartment(this.data.id, this.selectedUserIds).subscribe((res) => {
       if (res != null){
         if (this.selectedUserIds.length < 2){
-          this.snackBar.open(this.selectedUserIds.length + " employee was assigned to the department: " + this.data.value)
+          this.snackBar.open(this.selectedUserIds.length + " employee was assigned to the department: " + this.data.value, 'X')
+        }else{
+          this.snackBar.open(this.selectedUserIds.length + " employees were assigned to the department: " + this.data.value, 'X')
         }
-        this.snackBar.open(this.selectedUserIds.length + " employees were assigned to the department: " + this.data.value, 'Close')
         this.dialogRef.close();
       }
     });

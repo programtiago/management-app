@@ -14,7 +14,7 @@
                         <mat-icon>assignment_ind</mat-icon>
                         <span>Assign employee</span> <!--This will allow the admin to assign a employee to a department-->
                     </button>
-                    <button mat-menu-item>
+                    <button (click)="getAllEmployees(department.id)" mat-menu-item>
                         <mat-icon>voicemail</mat-icon> 
                         <span>View all employees</span>  <!--This will allow the admin to see the employees of each department-->
                     </button>   

@@ -77,6 +77,10 @@ export class AdminService {
     return this.httpClient.get(`${this.BASE_API_URL_DEPARTMENTS}/totalEmployees/` + departmentId)
   }
 
+  getEmployeesByDepartmentId(departmentId: number){
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users`)
+  }
+
   assignEmployeeToDepartment(departmentId: number, selectedUsersIds: number[]){
     return this.httpClient.post<UserDepartment[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users`, selectedUsersIds);
   }
