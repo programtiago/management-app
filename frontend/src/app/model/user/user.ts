@@ -1,4 +1,5 @@
 import { Department } from "../department/department"
+import { UserDepartment } from "../department/user-department/user-department"
 import { UserEquipment } from "../user-equipment/user-equipment"
 import { UserRole } from "./userRole"
 
@@ -10,7 +11,7 @@ export interface User {
     recruitmentCompany: string, 
     birthdayDate: Date,
     nif: string,
-    department: Department | null,
+    department: Department,
     admissionDate: string,
     registryDate: string,
     isActive: boolean,
@@ -19,5 +20,6 @@ export interface User {
     contactNumber: string
     updatedAt: string,
     password: string,
-    userEquipments: UserEquipment[]
+    userEquipments: UserEquipment[],
+    userDepartments: UserDepartment[]
 }

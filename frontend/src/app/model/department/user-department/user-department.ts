@@ -1,10 +1,10 @@
-import { Equipment } from "../../equipment/equiment";
 import { User } from "../../user/user";
+import { Department } from "../department";
 
 export interface UserDepartment{
     id: number,
     user: User,
-    equipment: Equipment,
+    department: Department,
     assignedDate: Date,
     comments: string
 }

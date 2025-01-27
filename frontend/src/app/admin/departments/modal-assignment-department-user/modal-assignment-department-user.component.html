@@ -7,18 +7,19 @@
         <mat-card-content class="users-card-content">
             <div *ngIf="users$ | async as users; else loading">
               <div *ngFor="let user of users; let i = index">
-                <mat-card class="user-card">
-                  <mat-checkbox [id]="user.id.toString()" (change)="selectionUsers($event, user.id)" style="margin-left: 5px;"></mat-checkbox>   
-                  <mat-card-title style="margin-left: 15px">{{user.firstName + " " + user.lastName}}</mat-card-title>
-                  <mat-card-subtitle style="margin-left: 15px;">{{user.workNumber}}</mat-card-subtitle>
-                  <mat-card-content> 
-                    <p>{{user.recruitmentCompany}}</p>
-                    <p>{{user.registryDate}}</p>
-                    <p>{{user.email}}</p> 
-                  </mat-card-content>
-                </mat-card>
+                  <mat-card class="user-card">
+                    <mat-checkbox [id]="user.id.toString()" (change)="selectionUsers($event, user.id)" style="margin-left: 5px;"></mat-checkbox>   
+                    <mat-card-title style="margin-left: 15px">{{user.firstName + " " + user.lastName}}</mat-card-title>
+                    <mat-card-subtitle style="margin-left: 15px;">{{user.workNumber}}</mat-card-subtitle>
+                    <mat-card-content> 
+                      <p>{{user.recruitmentCompany}}</p>
+                      <p>{{user.registryDate}}</p>
+                      <p>{{user.email}}</p> 
+                      <p>Department: {{user.department}}</p>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
               </div>
-            </div>
         </mat-card-content>
         <mat-card-actions style="display: flex; align-content: center; justify-content: center;">  
           <button mat-raised-button (click)="dialogRef.close()" color="warn"><mat-icon></mat-icon>Cancel</button>

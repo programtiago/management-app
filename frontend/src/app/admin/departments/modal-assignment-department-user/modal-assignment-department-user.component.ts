@@ -10,13 +10,14 @@ import {SelectionModel} from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserDepartment } from '../../../model/department/user-department/user-department';
 
 @Component({
   selector: 'app-modal-assignment-department-user',
   templateUrl: './modal-assignment-department-user.component.html',
   styleUrl: './modal-assignment-department-user.component.scss'
 })
-export class ModalAssignmentDepartmentUserComponent{
+export class ModalAssignmentDepartmentUserComponent implements OnInit{
 
   users: User[] = [];
   users$?: Observable<User[]>;
@@ -26,6 +27,9 @@ export class ModalAssignmentDepartmentUserComponent{
   displayedColumns: string[] = ['select', 'firstName', 'lastName', 'workNumber', 'admissionDate'];
   dataSource = new MatTableDataSource<User>(this.users);
   selection = new SelectionModel<User>(true, []);
+
+  usersDepartment: UserDepartment[] = []
+  employeeAlreadyOnADepartment: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalAssignmentDepartmentUserComponent>, public dialog: MatDialog,
       @Inject(MAT_DIALOG_DATA) public data: Department, private adminService: AdminService, private snackBar: MatSnackBar){
@@ -39,6 +43,9 @@ export class ModalAssignmentDepartmentUserComponent{
         return of([])
       })
     )
+  }
+  ngOnInit(): void {
+   
   }
 
   onError(errorMsg: string){

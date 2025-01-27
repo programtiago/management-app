@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { User } from '../../../model/user/user';
+import { AdminService } from '../../services/admin.service';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-modal-users-department',
@@ -7,4 +11,20 @@ import { Component } from '@angular/core';
 })
 export class ModalUsersDepartmentComponent {
 
+  displayedColumns: string[] = ['firstName', 'lastName', 'workNumber', 'isActive', 'userRole']
+
+  departmentSelectedHasEmployees: boolean = false;
+
+  constructor(public dialogRef: MatDialogRef<ModalUsersDepartmentComponent>,
+      @Inject(MAT_DIALOG_DATA) public users: User[], private adminService: AdminService){
+        for (let i = 0; i < users.length; i++){
+          if (users[i].id == null || users[i].id == undefined || this.users.length == 0){
+            this.departmentSelectedHasEmployees = false;
+          }
+          this.departmentSelectedHasEmployees = true;
+        }
+        if (this.departmentSelectedHasEmployees == false){
+          this.dialogRef.updateSize('400px', '350px')
+        }
+      }
 }

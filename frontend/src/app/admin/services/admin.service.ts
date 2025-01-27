@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '../../model/user/user';
-import { catchError, first, Observable, throwError } from 'rxjs';
+import { catchError, delay, first, Observable, tap, throwError } from 'rxjs';
 import { Department } from '../../model/department/department';
 import { Equipment } from '../../model/equipment/equiment';
 import { UserEquipment } from '../../model/user-equipment/user-equipment';
@@ -59,7 +59,6 @@ export class AdminService {
 
 
 
-
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());
@@ -85,7 +84,10 @@ export class AdminService {
     return this.httpClient.post<UserDepartment[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users`, selectedUsersIds);
   }
 
-
+  //Endpoint to get All assignments between User Object and Department
+  getAllUserDepartments(){
+    return this.httpClient.get<UserDepartment[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}`);
+  }
 
   getEquipments(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())

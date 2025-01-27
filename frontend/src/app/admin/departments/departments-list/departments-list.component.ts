@@ -1,13 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Department } from '../../../model/department/department';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalInfoDeleteComponent } from '../modal-info-delete/modal-info-delete.component';
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { ModalAssignmentDepartmentUserComponent } from '../modal-assignment-department-user/modal-assignment-department-user.component';
 import { User } from '../../../model/user/user';
+import { ModalUsersDepartmentComponent } from '../modal-users-department/modal-users-department.component';
+import { UserDepartment } from '../../../model/department/user-department/user-department';
 
 @Component({
   selector: 'app-departments-list',
@@ -19,11 +21,23 @@ export class DepartmentsListComponent implements OnInit{
   @Input() departments: Department[] = []
   selectedDepartment : any;
 
-  usersDepartment: User[] = []
+  usersOnDepartment: User[] = []
+  userAssignmentsDepartment: UserDepartment[] = []
+  canShowEmployeesFromDepartment: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
-    private adminService: AdminService, private snackBar: MatSnackBar
-  ){}
+    private adminService: AdminService, private snackBar: MatSnackBar){
+  
+    this.adminService.getAllUserDepartments().subscribe((res) => {
+      if (res != null){
+        this.userAssignmentsDepartment = res;
+        console.log("ASSIGNMENTS TO DEPARTMENT: ", this.userAssignmentsDepartment)
+      }else{
+        console.log("THERE IS NO ASSIGNMENTS TO SHOW")
+      }
+    })
+  }
+
 
   ngOnInit(): void {
     this.adminService.listDepartments().subscribe((res) => {
@@ -55,15 +69,20 @@ export class DepartmentsListComponent implements OnInit{
       height: '600px',
       width: '950px',
       data: department
-    })
-
-    
+    })   
   }
 
-  getAllEmployees(departmentId: number){
-    this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
-      this.usersDepartment = res;
-      console.log(res)
+  openModalWithAllEmployeesByDepartment(departmentId: number){
+     this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
+      if (res != null){
+        this.usersOnDepartment = res;
+        console.log(res)
+      }
+      const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
+        height: '550px',
+        width: '900px',
+        data: this.usersOnDepartment
+      });   
     })
   }
 
