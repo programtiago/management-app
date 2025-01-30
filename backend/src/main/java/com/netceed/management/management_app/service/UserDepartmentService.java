@@ -1,12 +1,15 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.department.Department;
+import com.netceed.management.management_app.entity.department.DepartmentDto;
+import com.netceed.management.management_app.entity.department.DepartmentMapper;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentMapper;
 import com.netceed.management.management_app.entity.user.User;
+import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.UserDepartmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -17,6 +20,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +32,7 @@ public class UserDepartmentService {
     private final UserRepository userRepository;
 
     private final UserDepartmentMapper userDepartmentMapper;
+    private final DepartmentMapper departmentMapper;
     private final UserMapper userMapper;
 
     //If user exists and department we can assign user to department
@@ -89,15 +94,55 @@ public class UserDepartmentService {
         }
 
         List<UserDepartment> assignmentsDepartmentToUsers = userDepartmentRepository.saveAll(userDepartments);
-        List<UserDepartmentDto> assignmentsDepartmentToUsersDto = userDepartmentMapper.convertListDepartmentToListDepartmentDto(assignmentsDepartmentToUsers);
 
-        return assignmentsDepartmentToUsersDto;
+        return userDepartmentMapper.convertListDepartmentToListDepartmentDto(assignmentsDepartmentToUsers);
     }
 
     public List<UserDto> getAllEmployeesFromDepartmentId(Long departmentId){
         List<User> usersByDepartment = userRepository.findAllUsersByDepartmentId(departmentId);
 
         return userMapper.convertListUserToDto(usersByDepartment);
+    }
+
+    public void removeUserFromDepartment(Long departmentId, Long userId){
+        Optional<DepartmentDto> departmentDto = departmentRepository.findById(departmentId).map(departmentMapper::toDto);
+        Optional<UserDto> userDto = userRepository.findById(userId).map(userMapper::toDto);
+        //UserDepartment assignmentToRemove = null;
+        //UserDepartmentDto userDepartmentAssignmentDto;
+        UserDepartment userDepartmentAssignment = new UserDepartment();
+
+        if (departmentDto.isPresent()){
+            if (userDto.isPresent()){
+                //Check if assignment exists with departmentId and userId given
+                userDepartmentAssignment = userDepartmentRepository.findUserDepartmentByUserAndDepartment(departmentId, userId);
+
+                if (userDepartmentAssignment == null)
+                    throw new NullPointerException("No assignment found for this department and user ! ");
+
+                /*
+                if (userDepartmentAssignmentDto.id() != null){
+                    assignmentToRemove = userDepartmentMapper.toEntity(userDepartmentAssignmentDto);
+                }else{
+                    throw new NullPointerException("No assignment found ! ");
+                }
+                 */
+
+                //if assingment exists
+                User userToRemove = userMapper.toEntity(userDto.get());
+                Department departmentUser = departmentMapper.toEntity(departmentDto.get());
+
+                //userToRemove.setDepartment(null);
+                //departmentUser.setUsers(null);
+
+                //remove assingment from table user_department
+                userDepartmentRepository.deleteById(userDepartmentAssignment.getId());
+
+                //decrease totalEmployees after deleting the assignment
+                departmentUser.setTotalEmployees(departmentUser.getTotalEmployees() - 1);
+            }else{
+                throw new ResourceNotFoundException("User with id " + userDto.get().id() + " not found");
+            }
+        }
     }
 
 

@@ -7,6 +7,7 @@ import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserRole;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -38,6 +39,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		/*
+
 		Building buildingA = new Building();
 
 		buildingA.setDescription("BUILDING A");
@@ -65,13 +67,13 @@ public class ManagementAppApplication implements CommandLineRunner {
 		Department itDepartment = new Department();
 		itDepartment.setValue("IT");
 		itDepartment.setDescription("Information Technology");
-		//itDepartment.setTotalEmployees(0);
+		itDepartment.setTotalEmployees(0);
 		itDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department logisticDepartment = new Department();
 		logisticDepartment.setValue("LOG");
 		logisticDepartment.setDescription("Logistic");
-		//logisticDepartment.setTotalEmployees(0);
+		logisticDepartment.setTotalEmployees(0);
 		logisticDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department qualityControlDepartment = new Department();
@@ -83,31 +85,31 @@ public class ManagementAppApplication implements CommandLineRunner {
 		Department purchasingDepartment = new Department();
 		purchasingDepartment.setValue("PCHG");
 		purchasingDepartment.setDescription("Purchasing");
-		//purchasingDepartment.setTotalEmployees(0);
+		purchasingDepartment.setTotalEmployees(0);
 		purchasingDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department humanResourcesDepartment = new Department();
 		humanResourcesDepartment.setValue("HR");
 		humanResourcesDepartment.setDescription("Human Resources");
-		//humanResourcesDepartment.setTotalEmployees(0);
+		humanResourcesDepartment.setTotalEmployees(0);
 		humanResourcesDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department developmentDepartment = new Department();
 		developmentDepartment.setValue("DVL");
 		developmentDepartment.setDescription("Development");
-		//developmentDepartment.setTotalEmployees(0);
+		developmentDepartment.setTotalEmployees(0);
 		developmentDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department administrationDepartment = new Department();
 		administrationDepartment.setValue("ADMIN");
 		administrationDepartment.setDescription("Administration");
-		//administrationDepartment.setTotalEmployees(0);
+		administrationDepartment.setTotalEmployees(0);
 		administrationDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department productionDepartment = new Department();
 		productionDepartment.setValue("PROD");
 		productionDepartment.setDescription("Production");
-		//productionDepartment.setTotalEmployees(0);
+		productionDepartment.setTotalEmployees(0);
 		productionDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		List<Department> departments = new ArrayList<>(Arrays.asList(itDepartment, logisticDepartment, qualityControlDepartment, purchasingDepartment, humanResourcesDepartment, developmentDepartment,
@@ -302,12 +304,13 @@ public class ManagementAppApplication implements CommandLineRunner {
 		Set<Equipment> desktopEquipment = new HashSet<>();
 		desktopEquipment.add(desktop);
 
-		/*
 		Set<UserEquipment> setUserEquipment1 = new HashSet<>();
+
 		UserEquipment userEquipment1 = new UserEquipment();
+
 		userEquipment1.setEquipment(scanner);
 		userEquipment1.setUser(user2);
-		userEquipment1.setAssignedDate(LocalDateTime.of(12,12,30, 12, 30));
+		userEquipment1.setAssignedDateTime(LocalDateTime.of(12,12,30, 12, 30));
 		userEquipment1.setComments("First equipment assignment");
 		setUserEquipment1.add(userEquipment1);
 

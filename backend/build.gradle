@@ -47,11 +47,6 @@ dependencies {
 
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testRuntimeOnly 'io.swagger.core.v3:swagger-annotations:2.2.20'
-
-
-
-
-
 }
 
 tasks.named('test') {

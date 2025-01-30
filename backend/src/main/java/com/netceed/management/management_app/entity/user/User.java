@@ -80,7 +80,6 @@ public class User {
         this.lastName = lastName;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        //this.department = department;
         this.email = email;
         this.password = password;
         this.admissionDate = admissionDate;
@@ -118,7 +117,6 @@ public class User {
         this.nif = nif;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        //this.department = department;
         this.workStatus = workStatus;
         this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;

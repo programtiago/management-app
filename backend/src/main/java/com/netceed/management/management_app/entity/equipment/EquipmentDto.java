@@ -10,7 +10,7 @@ public record EquipmentDto(Long id, @NotNull String description, @NotNull String
                            @NotNull String unity, @NotNull String registryDate, Set<UserEquipment> usersEquipments, @NotNull boolean isActive,
                            @NotNull StatusEquipment statusEquipment, String finalCondition) {
 
-    //Create equipment object and assign to a user object
+
     public EquipmentDto setId(Long id) {
         return new EquipmentDto(id, description, serialNumber, brand, model, type, location, workstation,
                 unity, registryDate, usersEquipments, isActive, statusEquipment, finalCondition);
