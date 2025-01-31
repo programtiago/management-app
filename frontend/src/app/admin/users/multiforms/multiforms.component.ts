@@ -79,8 +79,7 @@ export class MultiformsComponent implements OnInit{
     const employeeRegisterFormData = {
       firstName: this.employeeRegister.value.basic?.firstName,
       lastName: this.employeeRegister.value.basic?.lastName,
-      birthdayDate: this.datePipe.transform(this.employeeRegister.value.basic?.birthdayDate, 'dd/MM/yyyy'),
-      //birthdayDate: this.employeeRegister.value.basic?.birthdayDate,
+      birthdayDate: this.employeeRegister.value.basic?.birthdayDate,
       email: this.employeeRegister.value.contact?.email,
       contactNumber: this.employeeRegister.value.contact?.contactNumber,
       registryDate: this.employeeRegister.value.basic?.registryDate,

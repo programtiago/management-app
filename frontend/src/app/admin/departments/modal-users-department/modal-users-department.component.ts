@@ -2,7 +2,6 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../model/user/user';
 import { AdminService } from '../../services/admin.service';
-import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-modal-users-department',
@@ -11,7 +10,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 })
 export class ModalUsersDepartmentComponent {
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'workNumber', 'isActive', 'userRole']
+  displayedColumns: string[] = ['firstName', 'lastName', 'workNumber', 'isActive', 'userRole', 'actions']
 
   departmentSelectedHasEmployees: boolean = false;
 
@@ -27,4 +26,10 @@ export class ModalUsersDepartmentComponent {
           this.dialogRef.updateSize('400px', '350px')
         }
       }
+
+      removeUserFromDepartment(userId: number){
+
+      }
+
+
 }

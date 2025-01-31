@@ -1,8 +1,9 @@
 <mat-toolbar>
-    <mat-toolbar-row *ngIf="departmentSelectedHasEmployees">Users From Department</mat-toolbar-row>
-    <mat-toolbar-row *ngIf="!departmentSelectedHasEmployees">No Users</mat-toolbar-row>
+    <mat-toolbar-row style="display: flex; align-content: center; justify-content: center;" *ngIf="departmentSelectedHasEmployees">Users From Department</mat-toolbar-row>
+    <mat-toolbar-row style="display: flex; align-content: center; justify-content: center;" *ngIf="!departmentSelectedHasEmployees">No Users</mat-toolbar-row>
 </mat-toolbar>
-<mat-card>
+<div>
+  <mat-card>
     <mat-card-content *ngIf="departmentSelectedHasEmployees">
         <mat-table [dataSource]="users" *ngIf="users; else loading;">
             <ng-container matColumnDef="firstName">
@@ -37,6 +38,16 @@
                 <mat-header-cell class="userRole_header_cell" *matHeaderCellDef> Role </mat-header-cell>
                 <mat-cell class="userRole_cell" *matCellDef="let user"> {{ user.userRole }} </mat-cell>
             </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let user">
+                <button mat-mini-fab color="warn" aria-label="Remove user from department">
+                  <mat-icon (click)="removeUserFromDepartment(user.id)">delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
           
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -49,7 +60,8 @@
     </mat-card-content>
     <mat-card-content>
       <div *ngIf="!departmentSelectedHasEmployees">
-        <h1 style="color: red;">No employees to show on this department !</h1>
+        <h1 style="display: flex; align-content: center; justify-content: center;" style="color: red;">No employees to show on this department !</h1>
       </div>
     </mat-card-content>
 </mat-card>
+</div>

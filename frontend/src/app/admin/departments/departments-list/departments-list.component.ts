@@ -20,30 +20,26 @@ export class DepartmentsListComponent implements OnInit{
 
   @Input() departments: Department[] = []
   selectedDepartment : any;
+  departmentId!: number;
 
   usersOnDepartment: User[] = []
   userAssignmentsDepartment: UserDepartment[] = []
   canShowEmployeesFromDepartment: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private dialog: MatDialog,
+  constructor(private route: ActivatedRoute, private dialog: MatDialog,
     private adminService: AdminService, private snackBar: MatSnackBar){
   
     this.adminService.getAllUserDepartments().subscribe((res) => {
       if (res != null){
         this.userAssignmentsDepartment = res;
-        console.log("ASSIGNMENTS TO DEPARTMENT: ", this.userAssignmentsDepartment)
-      }else{
-        console.log("THERE IS NO ASSIGNMENTS TO SHOW")
       }
     })
   }
 
-
   ngOnInit(): void {
-    this.adminService.listDepartments().subscribe((res) => {
-      this.departments = res;
-    })  
- 
+    this.adminService.listDepartments().subscribe(departments => {
+      this.departments = departments;
+    });
   }
 
   onError(errorMsg: string){
@@ -58,7 +54,6 @@ export class DepartmentsListComponent implements OnInit{
       this.departments = res;
     });
   }
-
 
   openModalAssignmentDepartmentUser(department: Department){
     this.adminService.getDepartmentById(department.id).subscribe((res) => {
@@ -76,13 +71,13 @@ export class DepartmentsListComponent implements OnInit{
      this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
       if (res != null){
         this.usersOnDepartment = res;
-        console.log(res)
+        const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
+          height: '550px',
+          width: '900px',
+          data: this.usersOnDepartment,
+          disableClose: false
+        });   
       }
-      const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
-        height: '550px',
-        width: '900px',
-        data: this.usersOnDepartment
-      });   
     })
   }
 
