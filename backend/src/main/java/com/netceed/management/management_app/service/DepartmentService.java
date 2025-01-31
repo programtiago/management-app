@@ -41,7 +41,7 @@ public class DepartmentService {
         return departmentRepository.findById(id)
                 .map(department -> {
                     department.setDescription(departmentUpdate.description());
-                    department.setValue(departmentUpdate.value());
+                    department.setCodeValue(departmentUpdate.value());
                     department.setTotalEmployees(departmentUpdate.totalEmployees());
 
                     return departmentRepository.save(department);
@@ -49,7 +49,7 @@ public class DepartmentService {
     }
 
     public boolean valueDepartmentExists(String value) {
-        return departmentRepository.findByValue(value).isPresent();
+        return departmentRepository.findByCodeValue(value).isPresent();
     }
 
     public DepartmentDto create(Department department) {

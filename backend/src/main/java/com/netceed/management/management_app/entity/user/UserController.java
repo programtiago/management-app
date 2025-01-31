@@ -63,9 +63,4 @@ public class UserController {
     public UserDto activateAccount(@PathVariable Long id){
         return userService.activateAccount(id);
     }
-
-    @GetMapping("/department/{id}")
-    public List<UserDto> getUsersByDepartment(@PathVariable Long id){
-        return userService.getUsersByDepartment(id);
-    }
 }

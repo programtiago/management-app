@@ -1,7 +1,6 @@
 package com.netceed.management.management_app.entity.department;
 
 import com.netceed.management.management_app.service.DepartmentService;
-import com.netceed.management.management_app.service.UserDepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,6 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
-    private final UserDepartmentService userDepartmentService;
 
     @GetMapping
     public List<DepartmentDto> getAllDepartments() throws Exception {
@@ -29,21 +27,6 @@ public class DepartmentController {
     public DepartmentDto getById(@PathVariable Long id){
         return departmentService.getById(id);
     }
-
-    /*
-    @PostMapping("/new")
-    public DepartmentDto create(@RequestBody @Valid DepartmentDto newDepartment){
-        //Each department code has to be different - Department code associate only one department ?? maybe in future this changes
-        boolean codeDepartmentAlreadyExists = departmentService.valueDepartmentExists(newDepartment.value());
-
-        if (codeDepartmentAlreadyExists){
-            throw new IllegalArgumentException("Department Value " + newDepartment.value() + " already exists.");
-        }
-
-        return departmentService.create(newDepartment);
-    }
-
-     */
 
     @PutMapping("/{id}")
     public void update(@RequestBody @Valid DepartmentDto department, @PathVariable Long id){

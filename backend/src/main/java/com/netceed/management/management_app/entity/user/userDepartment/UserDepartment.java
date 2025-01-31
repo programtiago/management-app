@@ -3,30 +3,32 @@ package com.netceed.management.management_app.entity.user.userDepartment;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.user.User;
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Table(name = "TB_USER_DEPARTMENT")
 public class UserDepartment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
-    @JoinColumn(name = "department_id", nullable = false)
+    @JoinColumn(name = "department_id")
     private Department department;
-    @Column(nullable = false)
-    private LocalDateTime assignedDate;
+
+    private LocalDateTime assignmentDateTime;
     private String comments;
 }

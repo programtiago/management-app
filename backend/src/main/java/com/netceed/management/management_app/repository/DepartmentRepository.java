@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
-    Optional<Department> findByValue(String valueCode);
+    Optional<Department> findByCodeValue(String valueCode);
 
     //@Query("select count(p) from User u join u.id p where u.department_id=:department_id")
-    @Query("SELECT COUNT(id) FROM User u where u.department.id= ?1")
+    @Query("SELECT totalEmployees FROM Department d where d.id = ?1")
     int getTotalOfEmployeesByDepartment(@Param("id") Long id);
 }

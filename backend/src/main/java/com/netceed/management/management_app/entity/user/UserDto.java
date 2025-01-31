@@ -28,7 +28,6 @@ public record UserDto (
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
     int workNumber,
     LocalDate birthdayDate,
-    Department department,
     @Enumerated(EnumType.STRING)
     WorkStatus workStatus,
     Shift shift,
@@ -56,16 +55,15 @@ public record UserDto (
     Set<UserDepartment> userDepartments
 ){
 
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
-                   boolean isAvailableForVacation, String updatedAt,
-                   Set<UserEquipment> userEquipments, Set<UserDepartment> userDepartments) {
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate,WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
+                   boolean isAvailableForVacation, String updatedAt, Set<UserEquipment> userEquipments,  Set<UserDepartment> userDepartments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        this.department = department;
         this.workStatus = workStatus;
+        this.userDepartments = userDepartments;
         this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
@@ -79,35 +77,31 @@ public record UserDto (
         this.password = password;
         this.updatedAt = updatedAt;
         this.userEquipments = userEquipments;
-        this.userDepartments = userDepartments;
     }
 
-    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Department department, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
+    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
                                                        Set<UserDepartment> userDepartments){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
-                admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments,userDepartments);
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, userDepartments);
     }
 
     public UserDto setId(Long id){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments);
     }
 
     public UserDto setShift(Shift shift) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments);
     }
 
     public UserDto setIsActive(boolean value) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, value, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments);
     }
 
     public UserDto setDepartment(Department department) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, department, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments);
     }
-
-
-
 }

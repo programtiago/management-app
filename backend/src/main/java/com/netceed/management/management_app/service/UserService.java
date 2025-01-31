@@ -59,7 +59,7 @@ public class UserService {
                     user.setBirthdayDate(userUpdate.birthdayDate());
                     user.setRecruitmentCompany(userUpdate.recruitmentCompany());
                     user.setEmail(userUpdate.email());
-                    user.setDepartment(userUpdate.department());
+                    user.setUserDepartments(userUpdate.userDepartments());
                     user.setPassword(userUpdate.password());
                     user.setWorkStatus(userUpdate.workStatus());
                     user.setAvailableForVacation(userUpdate.isAvailableForVacation());
@@ -124,12 +124,6 @@ public class UserService {
         return userMapper.toDto(userToActivate);
     }
 
-    public List<UserDto> getUsersByDepartment(Long id) {
-        return userRepository.findAll().stream()
-                .filter(user -> user.getDepartment().getId().equals(id)).map(userMapper::toDto)
-                .toList();
-    }
-
 
     /****** Create a user object. After assigns the user object to the equipment_id given ******/
     //public UserDto createUserForEquipment(UserDto newUser, Long equipmentId) throws IllegalArgumentException {
@@ -149,7 +143,7 @@ public class UserService {
 
        User savedUser = new User();
        if (equipmentFound.id() != null){
-           UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.department(), newUser.shift(), newUser.recruitmentCompany(), newUser.admissionDate(),
+           UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.shift(), newUser.recruitmentCompany(), newUser.admissionDate(),
                    newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments());
 
            savedUser = userRepository.save(userMapper.toEntity(userToSave));

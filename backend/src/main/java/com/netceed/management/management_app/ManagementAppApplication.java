@@ -64,50 +64,59 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 		shiftRepository.saveAll(shifts);
 
+
 		Department itDepartment = new Department();
-		itDepartment.setValue("IT");
+		itDepartment.setId(1L);
+		itDepartment.setCodeValue("IT");
 		itDepartment.setDescription("Information Technology");
 		itDepartment.setTotalEmployees(0);
 		itDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department logisticDepartment = new Department();
-		logisticDepartment.setValue("LOG");
+		logisticDepartment.setId(2L);
+		logisticDepartment.setCodeValue("LOG");
 		logisticDepartment.setDescription("Logistic");
 		logisticDepartment.setTotalEmployees(0);
 		logisticDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department qualityControlDepartment = new Department();
-		qualityControlDepartment.setValue("QC");
+		qualityControlDepartment.setId(3L);
+		qualityControlDepartment.setCodeValue("QC");
 		qualityControlDepartment.setDescription("Quality Control");
-		//qualityControlDepartment.setTotalEmployees(0);
+		qualityControlDepartment.setTotalEmployees(0);
 		qualityControlDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department purchasingDepartment = new Department();
-		purchasingDepartment.setValue("PCHG");
+		purchasingDepartment.setId(4L);
+		purchasingDepartment.setCodeValue("PCHG");
 		purchasingDepartment.setDescription("Purchasing");
 		purchasingDepartment.setTotalEmployees(0);
 		purchasingDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department humanResourcesDepartment = new Department();
-		humanResourcesDepartment.setValue("HR");
+		humanResourcesDepartment.setId(5L);
+		humanResourcesDepartment.setCodeValue("HR");
 		humanResourcesDepartment.setDescription("Human Resources");
 		humanResourcesDepartment.setTotalEmployees(0);
 		humanResourcesDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department developmentDepartment = new Department();
-		developmentDepartment.setValue("DVL");
+		developmentDepartment.setId(6L);
+		developmentDepartment.setCodeValue("DVL");
 		developmentDepartment.setDescription("Development");
 		developmentDepartment.setTotalEmployees(0);
 		developmentDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department administrationDepartment = new Department();
-		administrationDepartment.setValue("ADMIN");
+		administrationDepartment.setId(7L);
+		administrationDepartment.setCodeValue("ADMIN");
 		administrationDepartment.setDescription("Administration");
 		administrationDepartment.setTotalEmployees(0);
 		administrationDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		Department productionDepartment = new Department();
-		productionDepartment.setValue("PROD");
+		productionDepartment.setId(8L);
+		productionDepartment.setCodeValue("PROD");
 		productionDepartment.setDescription("Production");
 		productionDepartment.setTotalEmployees(0);
 		productionDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
@@ -116,6 +125,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 				administrationDepartment, productionDepartment));
 
 		departmentRepository.saveAll(departments);
+
 
 		User user = new User();
 
@@ -132,6 +142,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//user.setShift(morningShift);
 		user.setRecruitmentCompany("INTERN");
 		user.setContactNumber("913562547");
+		user.setUpdatedAt(null);
 		//user.setDepartment(itDepartment);
 
 		User user2 = new User();
@@ -149,6 +160,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//user2.setShift(generalShift);
 		user2.setRecruitmentCompany("ADECO");
 		user2.setContactNumber("913254123");
+		user2.setUpdatedAt(null);
 		//user2.setDepartment(itDepartment);
 
 		User user3 = new User();
@@ -166,6 +178,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//user3.setShift(afternoonShift);
 		user3.setRecruitmentCompany("SYNERGIE");
 		user3.setContactNumber("965214655");
+		user3.setUpdatedAt(null);
 		//user3.setDepartment(productionDepartment);
 
 		User user4 = new User();
@@ -183,6 +196,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//user4.setShift(nightShift);
 		user4.setRecruitmentCompany("RANDSTAD");
 		user4.setContactNumber("915236214");
+		user4.setUpdatedAt(null);
 		//user4.setDepartment(developmentDepartment);
 
 		Set<User> scannerUsers = new HashSet<>();
@@ -301,8 +315,11 @@ public class ManagementAppApplication implements CommandLineRunner {
 		desktop.setActive(true);
 		desktop.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
 
+
 		Set<Equipment> desktopEquipment = new HashSet<>();
 		desktopEquipment.add(desktop);
+
+		equipmentRepository.saveAll(desktopEquipment);
 
 		Set<UserEquipment> setUserEquipment1 = new HashSet<>();
 
@@ -315,9 +332,10 @@ public class ManagementAppApplication implements CommandLineRunner {
 		setUserEquipment1.add(userEquipment1);
 
 		//scanner.setUserEquipments(setUserEquipment1);
-		equipmentRepository.saveAll(desktopEquipment);
+
 		userRepository.saveAll(desktopUsers);
 
 		 */
+
 	}
 }

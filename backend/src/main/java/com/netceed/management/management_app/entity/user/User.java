@@ -2,9 +2,8 @@ package com.netceed.management.management_app.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.shift.Shift;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -40,9 +39,6 @@ public class User {
     private LocalDate birthdayDate;
     @Length(min = 9, max = 9)
     private String nif;
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
     @Enumerated(EnumType.STRING)
     private WorkStatus workStatus = WorkStatus.AVAILABLE;
     @ManyToOne
@@ -68,13 +64,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    private Set<UserDepartment> userDepartments = new HashSet<>();
-    //@Enumerated(EnumType.STRING)
-    //private Gender gender;
 
-    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserDepartment> userDepartments = new HashSet<>();
+
+
+    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments, Set<UserDepartment> userDepartments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

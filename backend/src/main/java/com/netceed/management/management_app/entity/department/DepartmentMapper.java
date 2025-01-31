@@ -10,11 +10,11 @@ public class DepartmentMapper {
             return null;
         }
 
-        return new DepartmentDto(department.getId(), department.getValue(), department.getDescription(), department.getRegistryDate(), department.getTotalEmployees(), department.getUsers());
+        return new DepartmentDto(department.getId(), department.getCodeValue(), department.getDescription(), department.getRegistryDate(), department.getTotalEmployees());
     }
 
     public Department toEntity(DepartmentDto departmentDto){
-        Department department = new Department(departmentDto.id(), departmentDto.value(), departmentDto.description(), departmentDto.totalEmployees(), departmentDto.users());
+        Department department = new Department(departmentDto.id(), departmentDto.value(), departmentDto.description(), departmentDto.totalEmployees());
 
         if (departmentDto.id() != null)
         {
