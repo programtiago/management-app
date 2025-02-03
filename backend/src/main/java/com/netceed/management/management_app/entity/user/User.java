@@ -25,6 +25,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "TB_USER")
 public class User {
 
     @Id

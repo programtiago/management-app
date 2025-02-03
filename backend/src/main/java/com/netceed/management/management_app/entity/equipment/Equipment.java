@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "TB_DEPARTMENT")
+@Table(name = "TB_EQUIPMENT")
 public class Equipment {
 
     @Id

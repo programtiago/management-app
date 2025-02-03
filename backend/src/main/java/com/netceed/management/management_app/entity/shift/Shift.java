@@ -12,6 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "TB_SHIFT")
 public class Shift {
 
     @Id
@@ -31,6 +32,7 @@ public class Shift {
         this.description = description;
         this.startTimeShift = startTimeShift;
         this.endTimeShift = endTimeShift;
+        this.status = status;
     }
 
 }

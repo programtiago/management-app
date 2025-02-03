@@ -38,8 +38,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
-
 		Building buildingA = new Building();
 
 		buildingA.setDescription("BUILDING A");
@@ -65,67 +63,73 @@ public class ManagementAppApplication implements CommandLineRunner {
 		shiftRepository.saveAll(shifts);
 
 
-		Department itDepartment = new Department();
-		itDepartment.setId(1L);
-		itDepartment.setCodeValue("IT");
-		itDepartment.setDescription("Information Technology");
-		itDepartment.setTotalEmployees(0);
-		itDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		Department itDepartment = new Department("IT", "Information Technology", 0);
 
-		Department logisticDepartment = new Department();
-		logisticDepartment.setId(2L);
-		logisticDepartment.setCodeValue("LOG");
-		logisticDepartment.setDescription("Logistic");
-		logisticDepartment.setTotalEmployees(0);
-		logisticDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		//itDepartment.setId(1L);
+		//itDepartment.setCodeValue("IT");
+		//itDepartment.setDescription("Information Technology");
+		//itDepartment.setTotalEmployees(0);
+		//itDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-		Department qualityControlDepartment = new Department();
-		qualityControlDepartment.setId(3L);
-		qualityControlDepartment.setCodeValue("QC");
-		qualityControlDepartment.setDescription("Quality Control");
-		qualityControlDepartment.setTotalEmployees(0);
-		qualityControlDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		Department logisticDepartment = new Department("LOG", "Logistic", 0);
+		//logisticDepartment.setId(2L);
+		//logisticDepartment.setCodeValue("LOG");
+		//logisticDepartment.setDescription("Logistic");
+		//logisticDepartment.setTotalEmployees(0);
+		//logisticDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-		Department purchasingDepartment = new Department();
-		purchasingDepartment.setId(4L);
-		purchasingDepartment.setCodeValue("PCHG");
-		purchasingDepartment.setDescription("Purchasing");
-		purchasingDepartment.setTotalEmployees(0);
-		purchasingDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		Department qualityControlDepartment = new Department("QC", "Quality Control", 0);
 
-		Department humanResourcesDepartment = new Department();
-		humanResourcesDepartment.setId(5L);
-		humanResourcesDepartment.setCodeValue("HR");
-		humanResourcesDepartment.setDescription("Human Resources");
-		humanResourcesDepartment.setTotalEmployees(0);
-		humanResourcesDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		//qualityControlDepartment.setId(3L);
+		//qualityControlDepartment.setCodeValue("QC");
+		//qualityControlDepartment.setDescription("Quality Control");
+		//qualityControlDepartment.setTotalEmployees(0);
+		//qualityControlDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-		Department developmentDepartment = new Department();
-		developmentDepartment.setId(6L);
-		developmentDepartment.setCodeValue("DVL");
-		developmentDepartment.setDescription("Development");
-		developmentDepartment.setTotalEmployees(0);
-		developmentDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		Department purchasingDepartment = new Department("PCHG", "Purchasing", 0);
 
-		Department administrationDepartment = new Department();
-		administrationDepartment.setId(7L);
-		administrationDepartment.setCodeValue("ADMIN");
-		administrationDepartment.setDescription("Administration");
-		administrationDepartment.setTotalEmployees(0);
-		administrationDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		//purchasingDepartment.setId(4L);
+		//purchasingDepartment.setCodeValue("PCHG");
+		//purchasingDepartment.setDescription("Purchasing");
+		//purchasingDepartment.setTotalEmployees(0);
+		//purchasingDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-		Department productionDepartment = new Department();
-		productionDepartment.setId(8L);
-		productionDepartment.setCodeValue("PROD");
-		productionDepartment.setDescription("Production");
-		productionDepartment.setTotalEmployees(0);
-		productionDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		Department humanResourcesDepartment = new Department("HR", "Human Resources", 0);
+
+		//humanResourcesDepartment.setId(5L);
+		//humanResourcesDepartment.setCodeValue("HR");
+		//humanResourcesDepartment.setDescription("Human Resources");
+		//humanResourcesDepartment.setTotalEmployees(0);
+		//humanResourcesDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
+		Department developmentDepartment = new Department("DVL", "Development", 0);
+
+		//developmentDepartment.setId(6L);
+		//developmentDepartment.setCodeValue("DVL");
+		//developmentDepartment.setDescription("Development");
+		//developmentDepartment.setTotalEmployees(0);
+		//developmentDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
+		Department administrationDepartment = new Department("ADMIN", "Administration", 0);
+
+		//administrationDepartment.setId(7L);
+		//administrationDepartment.setCodeValue("ADMIN");
+		//administrationDepartment.setDescription("Administration");
+		//administrationDepartment.setTotalEmployees(0);
+		//administrationDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
+		Department productionDepartment = new Department("PROD", "Production", 0);
+
+		//productionDepartment.setId(8L);
+		//productionDepartment.setCodeValue("PROD");
+		//productionDepartment.setDescription("Production");
+		//productionDepartment.setTotalEmployees(0);
+		//productionDepartment.setRegistryDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
 		List<Department> departments = new ArrayList<>(Arrays.asList(itDepartment, logisticDepartment, qualityControlDepartment, purchasingDepartment, humanResourcesDepartment, developmentDepartment,
 				administrationDepartment, productionDepartment));
 
 		departmentRepository.saveAll(departments);
-
 
 		User user = new User();
 
@@ -139,7 +143,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user.setPassword("tiago123");
 		user.setAdmissionDate(LocalDate.now());
 		user.setUserRole(UserRole.EMPLOYEE);
-		//user.setShift(morningShift);
+		user.setShift(morningShift);
 		user.setRecruitmentCompany("INTERN");
 		user.setContactNumber("913562547");
 		user.setUpdatedAt(null);
@@ -157,7 +161,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user2.setPassword("antonio123");
 		user2.setAdmissionDate(LocalDate.now());
 		user2.setUserRole(UserRole.ADMIN);
-		//user2.setShift(generalShift);
+		user2.setShift(generalShift);
 		user2.setRecruitmentCompany("ADECO");
 		user2.setContactNumber("913254123");
 		user2.setUpdatedAt(null);
@@ -175,7 +179,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user3.setPassword("maria123");
 		user3.setAdmissionDate(LocalDate.now());
 		user3.setUserRole(UserRole.EMPLOYEE);
-		//user3.setShift(afternoonShift);
+		user3.setShift(afternoonShift);
 		user3.setRecruitmentCompany("SYNERGIE");
 		user3.setContactNumber("965214655");
 		user3.setUpdatedAt(null);
@@ -193,7 +197,7 @@ public class ManagementAppApplication implements CommandLineRunner {
 		user4.setPassword("daniel123");
 		user4.setAdmissionDate(LocalDate.now());
 		user4.setUserRole(UserRole.EMPLOYEE);
-		//user4.setShift(nightShift);
+		user4.setShift(nightShift);
 		user4.setRecruitmentCompany("RANDSTAD");
 		user4.setContactNumber("915236214");
 		user4.setUpdatedAt(null);
@@ -334,8 +338,6 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//scanner.setUserEquipments(setUserEquipment1);
 
 		userRepository.saveAll(desktopUsers);
-
-		 */
 
 	}
 }
