@@ -69,7 +69,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
-
     public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments, Set<UserDepartment> userDepartments) {
         this.id = id;
         this.firstName = firstName;

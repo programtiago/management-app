@@ -3,7 +3,6 @@ package com.netceed.management.management_app.entity.user.userDepartment;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.user.User;
 import jakarta.persistence.*;
-import jakarta.validation.Constraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

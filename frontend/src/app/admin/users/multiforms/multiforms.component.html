@@ -37,7 +37,6 @@
             </mat-card-content>
         </div>
 
-
         <!-- Depends on the type assignment selected -->
         <div *ngIf="typeAssignmentSelected == 'LOC'" class="choice-value-assignment">
             <mat-card-content>
@@ -55,9 +54,8 @@
             <mat-card-content>
                 <mat-form-field appearance="outline" floatLabel="always">
                     <mat-label>Choose the equipment to assign</mat-label>
-                    <mat-select>
-                        <mat-option>IT</mat-option>
-                        <mat-option>LOG</mat-option>
+                    <mat-select [(value)]="departmentSelectedId" (selectionChange)="valueChoosedChanged($event)">
+                        <mat-option *ngFor="let department of departments" [value]="department.id">{{department.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
         </mat-card-content>     
@@ -196,9 +194,7 @@
         </mat-card-content>
     </mat-card>
 
-
-
-        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelectedId != 0">
+        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelectedId != 0 || departmentSelectedId != 0">
         <mat-card-content>
             <div class="form-fill-data">
             <mat-card>

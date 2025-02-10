@@ -27,9 +27,7 @@ export class ModalUsersDepartmentComponent {
         }
       }
 
-      removeUserFromDepartment(userId: number){
+    removeUserFromDepartment(userId: number){
 
-      }
-
-
+    }
 }

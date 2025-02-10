@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity.user;
 
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -46,10 +48,16 @@ public class UserController {
         return userService.create(newUser);
     }
 
-    @PostMapping("/{equipmentId}")
+    @PostMapping("equipment/{equipmentId}")
     @Transactional
     public UserEquipmentDto createUserWithAssignmentToEquipment(@RequestBody @Valid UserDto newUser, @PathVariable("equipmentId") Long equipmentId) throws NoSuchFieldException, BadRequestException {
         return userService.createUserForEquipment(newUser, equipmentId);
+    }
+
+    @PostMapping("department/{departmentId}")
+    @Transactional
+    public UserDepartmentDto createUserWithAssignmentToDepartment(@RequestBody @Valid UserDto newUser, @PathVariable("departmentId") Long departmentId) throws NoSuchFieldException, BadRequestException {
+        return userService.createUserForDepartment(newUser, departmentId);
     }
 
     //Method responsible for changing status of the user   boolean true -> false
@@ -62,5 +70,9 @@ public class UserController {
     @PutMapping("/activate/{id}")
     public UserDto activateAccount(@PathVariable Long id){
         return userService.activateAccount(id);
+    }
+    @GetMapping("/department/{departmentId}")
+    public Set<User> getUsersByDepartmentId(@PathVariable Long departmentId) {
+        return userService.getEmployeesByDepartmentId(departmentId);
     }
 }

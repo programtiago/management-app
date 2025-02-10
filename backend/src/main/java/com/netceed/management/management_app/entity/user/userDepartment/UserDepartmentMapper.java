@@ -35,4 +35,14 @@ public class UserDepartmentMapper {
         }
         return userDepartmentsDtos;
     }
+
+    public List<UserDepartmentDto> convertListUserDepartmentToListUserDepartmentDto(List<UserDepartment> userDepartments){
+        List<UserDepartmentDto> userDepartmentsDtos = new ArrayList<>();
+
+        for (UserDepartment userDepartment : userDepartments){
+            UserDepartmentDto userEquipmentDto = new UserDepartmentDto(userDepartment.getId(), userDepartment.getUser(), userDepartment.getDepartment(), userDepartment.getAssignmentDateTime(), userDepartment.getComments());
+            userDepartmentsDtos.add(userEquipmentDto);
+        }
+        return userDepartmentsDtos;
+    }
 }

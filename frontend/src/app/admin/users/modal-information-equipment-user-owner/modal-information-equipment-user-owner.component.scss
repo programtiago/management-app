@@ -34,6 +34,11 @@
         flex: 0 0 13%;
     }
 
+    mat-cell:nth-child(6),
+    mat-header-cell:nth-child(6) {
+        flex: 0 0 13%;
+    }
+
     .mat-mdc-table{
       width: 1200px;
     }

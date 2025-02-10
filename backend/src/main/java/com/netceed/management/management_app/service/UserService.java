@@ -1,13 +1,18 @@
 package com.netceed.management.management_app.service;
 
+import com.netceed.management.management_app.entity.department.Department;
+import com.netceed.management.management_app.entity.department.DepartmentDto;
+import com.netceed.management.management_app.entity.department.DepartmentMapper;
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
+import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,11 +32,14 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
+    private final DepartmentRepository departmentRepository;
 
     private final UserMapper userMapper;
     private final EquipmentMapper equipmentMapper;
+    private final DepartmentMapper departmentMapper;
 
     private final UserEquipmentService userEquipmentService;
+    private final UserDepartmentService userDepartmentService;
 
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
@@ -150,5 +159,36 @@ public class UserService {
        }
 
        return userEquipmentService.assignEquipmentToUser(savedUser.getId(), equipmentId);
+    }
+
+    /****** Create a user object. After assigns the user object to the department_id given ******/
+    public UserDepartmentDto createUserForDepartment(UserDto newUser, Long departmentId){
+        Department department = departmentRepository.findById(departmentId).orElseThrow();
+        DepartmentDto departmentFound = departmentMapper.toDto(department);
+
+        boolean workNumberAlreadyExists = userRepository.findByWorkNumber(newUser.workNumber()).isPresent();
+        boolean emailAlreadyExists = userRepository.findByEmail(newUser.email()).isPresent();
+
+        if (workNumberAlreadyExists){
+            throw new IllegalArgumentException("Work Number " +  newUser.workNumber() + " already belong to a user");
+        }
+        if (emailAlreadyExists){
+            throw new IllegalArgumentException("Email " +  newUser.email() + " already belong to a user");
+        }
+
+        User savedUser = new User();
+        if (departmentFound.id() != null){
+            UserDto userToSave = UserDto.createNewUserAssignDepartment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.shift(),
+                    newUser.recruitmentCompany(), newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(),
+                    newUser.userEquipments(), newUser.userDepartments());
+
+            savedUser = userRepository.save(userMapper.toEntity(userToSave));
+        }
+
+        return userDepartmentService.assignDepartmentToUser(savedUser.getId(), departmentId);
+    }
+
+    public Set<User> getEmployeesByDepartmentId(Long departmentId) {
+        return userRepository.findAllByDepartmentId(departmentId);
     }
 }

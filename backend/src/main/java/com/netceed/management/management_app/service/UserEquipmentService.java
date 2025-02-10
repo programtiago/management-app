@@ -1,11 +1,15 @@
 package com.netceed.management.management_app.service;
 
+import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.user.User;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
+import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
+import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;

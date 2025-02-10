@@ -87,14 +87,6 @@ public class UserDepartmentService {
                     if (userDepartmentAssignment == null)
                         throw new NullPointerException("No assignment found for this department and user ! ");
 
-                /*
-                if (userDepartmentAssignmentDto.id() != null){
-                    assignmentToRemove = userDepartmentMapper.toEntity(userDepartmentAssignmentDto);
-                }else{
-                    throw new NullPointerException("No assignment found ! ");
-                }
-                 */
-
                     //if assingment exists
                     User userToRemove = userMapper.toEntity(userDto.get());
                     Department departmentUser = departmentMapper.toEntity(departmentDto.get());
@@ -108,5 +100,27 @@ public class UserDepartmentService {
                     throw new ResourceNotFoundException("User with id " + userDto.get().id() + " not found");
                 }
         }
+    }
+
+    /***************************** Assign a existent department to a existent user *************************************/
+    //Both of the objects have to exist before to create the assignment
+    public UserDepartmentDto assignDepartmentToUser(Long userId, Long departmentId){
+        User user = userRepository.findById(userId).orElseThrow();
+        Department department = departmentRepository.findById(departmentId).orElseThrow();
+
+        UserDepartment assigment = new UserDepartment();
+
+        assigment.setAssignmentDateTime(LocalDateTime.now());
+        assigment.setComments("User: " + user.getFirstName() + " " + user.getLastName() + " with work number " + user.getWorkNumber() + " was assigned to department " + department.getCodeValue() + " at " + assigment.getAssignmentDateTime() );
+        assigment.setDepartment(department);
+        assigment.setUser(user);
+
+        department.setTotalEmployees(department.getTotalEmployees() + 1);
+
+        departmentRepository.save(department);
+
+        userDepartmentRepository.save(assigment);
+
+        return userDepartmentMapper.toDto(assigment);
     }
 }

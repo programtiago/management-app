@@ -7,6 +7,7 @@ import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
+import { Department } from '../../../model/department/department';
 
 @Component({
   selector: 'app-multiforms',
@@ -15,11 +16,14 @@ import { Equipment } from '../../../model/equipment/equiment';
 })
 export class MultiformsComponent implements OnInit{
 
-  selectedEquipmentId: number = 0;
+  //selectedEquipmentId: number = 0;
 
   equipmentsAvailable: Equipment[] = [];
   //equipmentSelected!: Equipment;
   equipmentSelectedId: number = 0;
+
+  departments: Department[] = [];
+  departmentSelectedId: number = 0;
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -43,6 +47,10 @@ export class MultiformsComponent implements OnInit{
   ngOnInit(): void {
     this.adminService.getEquipmentsAvailable().subscribe((res) => {
       this.equipmentsAvailable = res;
+    })
+
+    this.adminService.listDepartments().subscribe((res) => {
+      this.departments = res;
     })
   }
 
@@ -102,7 +110,9 @@ export class MultiformsComponent implements OnInit{
           this.onError();
         })
     }else if (this.typeAssignmentSelected === 'DEP'){
-      console.log('DEP TYPE ASSINGMENT....')
+      this.adminService.createUserAndAssignToDepartment(employeeRegisterFormData, this.departmentSelectedId).subscribe((res) => {
+        console.log('USER WITH ID ' + res.user.id + " CREATED AND ASSIGNED TO DEPARTMENT " + res.department.description)
+      })
     }else if (this.typeAssignmentSelected === 'LOC'){
       console.log('LOC TYPE ASSINGMENT....')
     }else{

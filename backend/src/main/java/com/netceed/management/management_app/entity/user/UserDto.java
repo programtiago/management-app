@@ -85,6 +85,12 @@ public record UserDto (
                 admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, userDepartments);
     }
 
+    public static UserDto createNewUserAssignDepartment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
+                                                       Set<UserDepartment> userDepartments){
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+                admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, userDepartments);
+    }
+
     public UserDto setId(Long id){
         return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments);

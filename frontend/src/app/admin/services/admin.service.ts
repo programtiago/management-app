@@ -37,7 +37,11 @@ export class AdminService {
   }
 
   createUserAndAssignToEquipment(newUser: any, equipmentId: number){
-    return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USERS}/${equipmentId}`, newUser)
+    return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USERS}/equipment/${equipmentId}`, newUser)
+  }
+  
+  createUserAndAssignToDepartment(newUser: any, departmentId: number){
+    return this.httpClient.post<UserDepartment>(`${this.BASE_API_URL_USERS}/department/${departmentId}`, newUser)
   }
 
   deactivateUser(userId: number){
