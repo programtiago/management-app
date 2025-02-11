@@ -86,7 +86,6 @@ export class ModalAssignmentDepartmentUserComponent implements OnInit{
     }
 
   assignDepartmentToUser(){
-    console.log("DEPARTMENT ID: ", this.data.id + "\nUSER IDS: " + " [ " + this.selectedUserIds + " ] ")
     this.adminService.assignEmployeeToDepartment(this.data.id, this.selectedUserIds).subscribe((res) => {
       if (res != null){
         if (this.selectedUserIds.length < 2){

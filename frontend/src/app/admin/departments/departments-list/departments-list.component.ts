@@ -10,6 +10,7 @@ import { ModalAssignmentDepartmentUserComponent } from '../modal-assignment-depa
 import { User } from '../../../model/user/user';
 import { ModalUsersDepartmentComponent } from '../modal-users-department/modal-users-department.component';
 import { UserDepartment } from '../../../model/department/user-department/user-department';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-departments-list',
@@ -19,6 +20,7 @@ import { UserDepartment } from '../../../model/department/user-department/user-d
 export class DepartmentsListComponent implements OnInit{
 
   @Input() departments: Department[] = []
+  departments$!: Observable<Department[]>;
   selectedDepartment : any;
   departmentId!: number;
 
@@ -49,7 +51,7 @@ export class DepartmentsListComponent implements OnInit{
     })
   }
 
-  refresh(){
+  loadDepartments(){
     this.adminService.listDepartments().subscribe((res) => {
       this.departments = res;
     });
@@ -58,13 +60,18 @@ export class DepartmentsListComponent implements OnInit{
   openModalAssignmentDepartmentUser(department: Department){
     this.adminService.getDepartmentById(department.id).subscribe((res) => {
       this.selectedDepartment = res;
-      console.log(res)
     })
     const dialogRef = this.dialog.open(ModalAssignmentDepartmentUserComponent, {
-      height: '600px',
+      height: '750px',
       width: '950px',
       data: department
-    })   
+    })
+
+    // Subscribe to afterClosed() to reload departments once the dialog is closed
+    dialogRef.afterClosed().subscribe(res => {
+      this.loadDepartments();
+    })
+
   }
 
   openModalWithAllEmployeesByDepartment(departmentId: number){
@@ -97,7 +104,7 @@ export class DepartmentsListComponent implements OnInit{
                 verticalPosition: 'top',
                 horizontalPosition: 'center'
               });
-              this.refresh();
+              this.loadDepartments();
             },
             () => this.onError("It wasn't possible to delete the department. Please try again or check your internet connection"))}
       })
