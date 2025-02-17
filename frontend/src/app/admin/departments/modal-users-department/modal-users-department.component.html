@@ -24,12 +24,12 @@
             <ng-container matColumnDef="isActive">
                 <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
                 <mat-cell *matCellDef="let user">
-                  <div *ngIf="user.isActive == true">
-                    <button mat-raised-button style="background-color: green;">Ativo</button>
+                  <div *ngIf="user.active == true">
+                    <h3 style="color: green;">Ativo</h3>
                   </div>
         
-                  <div *ngIf="user.isActive == false">
-                    <button class="btn-user-status" mat-raised-button color="warn">Desativo</button>
+                  <div *ngIf="user.active == false">
+                    <h3 style="color: red;">Inativo</h3>
                   </div>
                 </mat-cell>
             </ng-container>
@@ -65,3 +65,6 @@
     </mat-card-content>
 </mat-card>
 </div>
+<mat-card-actions class="actions" style="display: flex; align-content: center; justify-content: center;">
+  <button mat-raised-button color="warn" (click)="onClose()">Cancelar</button>
+</mat-card-actions>

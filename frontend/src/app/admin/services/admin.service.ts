@@ -28,6 +28,10 @@ export class AdminService {
       .pipe(first());
   }
 
+  listUsersAvailableAssignToDepartment(){
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/available-for-department`)
+  }
+
   getUserById(id: number){
     return this.httpClient.get<User>(`${this.BASE_API_URL_USERS}/` + id)
   }
@@ -62,7 +66,6 @@ export class AdminService {
   }
 
 
-
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());
@@ -81,7 +84,7 @@ export class AdminService {
   }
 
   getEmployeesByDepartmentId(departmentId: number){
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users`)
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/department/${departmentId}`)
   }
 
   assignEmployeeToDepartment(departmentId: number, selectedUsersIds: number[]){
@@ -92,6 +95,11 @@ export class AdminService {
   getAllUserDepartments(){
     return this.httpClient.get<UserDepartment[]>(`${this.BASE_API_URL_USER_DEPARTMENTS}`);
   }
+
+  getAssignmentUserToDepartment(departmentId: number, userId: number){
+    return this.httpClient.get<UserDepartment>(`${this.BASE_API_URL_USER_DEPARTMENTS}/department/${departmentId}/user/${userId}`);
+  }
+
 
   getEquipments(){
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())

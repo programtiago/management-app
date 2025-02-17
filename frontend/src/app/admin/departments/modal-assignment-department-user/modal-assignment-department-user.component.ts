@@ -19,6 +19,7 @@ import { UserDepartment } from '../../../model/department/user-department/user-d
 })
 export class ModalAssignmentDepartmentUserComponent implements OnInit{
 
+  //users that doesnt have a assignment to a department
   users: User[] = [];
   users$?: Observable<User[]>;
   selectedUserIds: number[] = []; //Ids that will be sended on the request to assign user/s to department
@@ -29,15 +30,14 @@ export class ModalAssignmentDepartmentUserComponent implements OnInit{
   selection = new SelectionModel<User>(true, []);
 
   usersDepartment: UserDepartment[] = []
-  employeeAlreadyOnADepartment: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalAssignmentDepartmentUserComponent>, public dialog: MatDialog,
       @Inject(MAT_DIALOG_DATA) public data: Department, private adminService: AdminService, private snackBar: MatSnackBar){
-    this.adminService.listUsers().subscribe((res) => {
-    this.users = res;
-    })
+        this.adminService.listUsersAvailableAssignToDepartment().subscribe((res) => {
+        this.users = res;
+      })
 
-    this.users$ = this.adminService.listUsers().pipe(
+    this.users$ = this.adminService.listUsersAvailableAssignToDepartment().pipe(
       catchError(error => {
         this.onError(error);
         return of([])
@@ -45,7 +45,6 @@ export class ModalAssignmentDepartmentUserComponent implements OnInit{
     )
   }
   ngOnInit(): void {
-   
   }
 
   onError(errorMsg: string){
@@ -86,7 +85,7 @@ export class ModalAssignmentDepartmentUserComponent implements OnInit{
     }
 
   assignDepartmentToUser(){
-    this.adminService.assignEmployeeToDepartment(this.data.id, this.selectedUserIds).subscribe((res) => {
+      this.adminService.assignEmployeeToDepartment(this.data.id, this.selectedUserIds).subscribe((res) => {
       if (res != null){
         if (this.selectedUserIds.length < 2){
           this.snackBar.open(this.selectedUserIds.length + " employee was assigned to the department: " + this.data.value, 'X')

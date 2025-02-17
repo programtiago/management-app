@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../model/user/user';
-import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-modal-users-department',
@@ -15,19 +14,27 @@ export class ModalUsersDepartmentComponent {
   departmentSelectedHasEmployees: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalUsersDepartmentComponent>,
-      @Inject(MAT_DIALOG_DATA) public users: User[], private adminService: AdminService){
+      @Inject(MAT_DIALOG_DATA) public users: User[]){
         for (let i = 0; i < users.length; i++){
+          console.log(users[i])
           if (users[i].id == null || users[i].id == undefined || this.users.length == 0){
             this.departmentSelectedHasEmployees = false;
           }
           this.departmentSelectedHasEmployees = true;
         }
+        /*
         if (this.departmentSelectedHasEmployees == false){
           this.dialogRef.updateSize('400px', '350px')
         }
+          */
+        console.log(this.users)
       }
 
     removeUserFromDepartment(userId: number){
 
+    }
+
+    onClose(){
+      this.dialogRef.close();
     }
 }
