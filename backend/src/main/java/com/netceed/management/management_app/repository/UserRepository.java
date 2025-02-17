@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository <User, Long> {
     Optional<User> findByEmail(String email);
     @Query("SELECT u FROM User u JOIN UserDepartment ud ON u.id = ud.user.id WHERE ud.department.id = :departmentId")
     Set<User> findAllByDepartmentId(@Param("departmentId") Long departmentId);
+    @Query("SELECT u FROM User u WHERE u.userAlreadyOnDepartment = false")
+    List<User> findByUserAlreadyOnDepartmentTrue();
 }

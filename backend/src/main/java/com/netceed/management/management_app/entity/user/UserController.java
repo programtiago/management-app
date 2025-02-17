@@ -75,4 +75,10 @@ public class UserController {
     public Set<User> getUsersByDepartmentId(@PathVariable Long departmentId) {
         return userService.getEmployeesByDepartmentId(departmentId);
     }
+
+    /************************Return a List of users available to assign to a department *********************/
+    @GetMapping("/available-for-department")
+    public List<UserDto> getUsersAvailableAssignToDepartment(){
+        return userService.getUsersAvailableAssignToDepartment();
+    }
 }

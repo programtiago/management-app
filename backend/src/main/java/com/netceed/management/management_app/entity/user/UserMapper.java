@@ -16,7 +16,7 @@ public class UserMapper {
 
         return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(), user.getWorkStatus(), user.getShift(),
                 user.getRecruitmentCompany(), user.getRegistryDate(), user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getNif(), user.getContactNumber(), user.getPassword(),
-                user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments());
+                user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments(), user.isUserAlreadyOnDepartment());
     }
 
     public User toEntity(UserDto userDto){
@@ -39,7 +39,8 @@ public class UserMapper {
         for (User user : users){
             UserDto userDto = new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(),
                     user.getWorkStatus(), user.getShift(), user.getRecruitmentCompany(), user.getRegistryDate(),
-                    user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getNif(), user.getContactNumber(), user.getPassword(), user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments());
+                    user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getNif(), user.getContactNumber(), user.getPassword(), user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments(),
+                    user.isUserAlreadyOnDepartment());
             userDtos.add(userDto);
         }
         return userDtos;
@@ -52,6 +53,7 @@ public class UserMapper {
 
         return new UserDto(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(),
                 userDto.workStatus(), userDto.shift(), userDto.recruitmentCompany(), userDto.registryDate(),
-                userDto.admissionDate(), userDto.isActive(), userDto.userRole(), userDto.email(), userDto.nif(), userDto.contactNumber(), userDto.password(), userDto.isAvailableForVacation(), userDto.updatedAt(), userDto.userEquipments(), userDto.userDepartments());
+                userDto.admissionDate(), userDto.isActive(), userDto.userRole(), userDto.email(), userDto.nif(), userDto.contactNumber(), userDto.password(), userDto.isAvailableForVacation(), userDto.updatedAt(), userDto.userEquipments(), userDto.userDepartments(),
+                userDto.userAlreadyOnDepartment());
     }
 }

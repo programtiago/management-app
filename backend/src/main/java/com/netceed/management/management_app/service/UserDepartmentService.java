@@ -50,6 +50,7 @@ public class UserDepartmentService {
                     Optional<User> userOpt = userRepository.findById(userId);
                     if (userOpt.isPresent()) {
                         User user = userOpt.get();
+                        user.setUserAlreadyOnDepartment(true);
 
                         UserDepartment userDepartment = new UserDepartment();
 
@@ -65,6 +66,8 @@ public class UserDepartmentService {
                 department.setTotalEmployees(usersId.size() + department.getTotalEmployees());
 
                 departmentRepository.save(department);
+            }else{
+                throw new ResourceNotFoundException("Department resource does not exists with id " + departmentId);
             }
 
             List<UserDepartment> assignmentsDepartmentToUsers = userDepartmentRepository.saveAll(userDepartments);
@@ -82,7 +85,7 @@ public class UserDepartmentService {
             if (departmentDto.isPresent()) {
                 if (userDto.isPresent()) {
                     //Check if assignment exists with departmentId and userId given
-                    userDepartmentAssignment = userDepartmentRepository.findUserDepartmentByUserAndDepartment(departmentId, userId);
+                    userDepartmentAssignment = userDepartmentRepository.findUserDepartmentByUserIdAndDepartmentId(departmentId, userId);
 
                     if (userDepartmentAssignment == null)
                         throw new NullPointerException("No assignment found for this department and user ! ");
@@ -122,5 +125,25 @@ public class UserDepartmentService {
         userDepartmentRepository.save(assigment);
 
         return userDepartmentMapper.toDto(assigment);
+    }
+
+    public UserDepartmentDto getAssignmentByUserIdAndDepartmentId(Long departmentId, Long userId){
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        Optional<User> user = userRepository.findById(userId);
+
+        UserDepartmentDto assignmentDto = null;
+
+        if (department.isPresent() && user.isPresent()){
+            UserDepartment assignment;
+            assignment = userDepartmentRepository.findUserDepartmentByUserIdAndDepartmentId(departmentId, userId);
+            assignmentDto = userDepartmentMapper.toDto(assignment);
+        }
+
+        if (assignmentDto == null){
+            throw new ResourceNotFoundException("No assignment found with departmentId " + departmentId + " and userId " + userId);
+        }
+
+        return assignmentDto;
+
     }
 }

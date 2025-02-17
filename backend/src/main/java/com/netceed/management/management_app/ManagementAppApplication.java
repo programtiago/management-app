@@ -287,7 +287,5 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//scanner.setUserEquipments(setUserEquipment1);
 
 		userRepository.saveAll(desktopUsers);
-
-
 	}
 }

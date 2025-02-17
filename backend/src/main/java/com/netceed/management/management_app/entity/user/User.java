@@ -65,7 +65,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
-
+    private boolean userAlreadyOnDepartment;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserDepartment> userDepartments = new HashSet<>();
 

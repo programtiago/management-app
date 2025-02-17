@@ -29,4 +29,9 @@ public class UserDepartmentController {
     public void removeUserFromDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
         userDepartmentService.removeUserFromDepartment(departmentId, userId);
     }
+
+    @GetMapping("/department/{departmentId}/user/{userId}")
+    public UserDepartmentDto getAssignmentUserToDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
+        return userDepartmentService.getAssignmentByUserIdAndDepartmentId(departmentId, userId);
+    }
 }
