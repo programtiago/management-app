@@ -91,6 +91,7 @@ export class DepartmentsListComponent implements OnInit{
 
   openModalWithAllEmployeesByDepartment(departmentId: number){
      this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
+      console.log(res)
       if (res != null){
         this.usersOnDepartment = res;
         const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
