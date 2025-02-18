@@ -95,10 +95,11 @@ public class UserDepartmentService {
                     //remove assingment from table user_department
                     userDepartmentRepository.deleteById(userDepartmentAssignment.getId());
 
-                    //decrease totalEmployees after deleting the assignment
+                    //decrease totalEmployees after deleting the assignment and save it
                     departmentUser.setTotalEmployees(departmentUser.getTotalEmployees() - 1);
                     departmentRepository.save(departmentUser);
 
+                    //user becomes available for assignment a department
                     userToRemoveFromDepartment.setUserAlreadyOnDepartment(false);
                     userRepository.save(userToRemoveFromDepartment);
                 } else {

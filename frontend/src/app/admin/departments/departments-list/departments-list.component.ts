@@ -50,7 +50,6 @@ export class DepartmentsListComponent implements OnInit{
   checkIfExistsAvailableEmployeesForDepartment(): Promise<boolean>{
     return new Promise((resolve, reject) => {
       this.adminService.listUsersAvailableAssignToDepartment().subscribe((res) => {
-        console.log("EMPLOYEES AVAILABLE: ", res)
         if (res == null || res.length == 0){
           this.existsEmployeesAvailable = false;
           resolve(false);
@@ -110,6 +109,10 @@ export class DepartmentsListComponent implements OnInit{
           data: { users: this.usersOnDepartment, departmentId: departmentId },
           disableClose: false
         });   
+
+        dialogRef.afterClosed().subscribe(() => {
+          this.loadDepartments();
+        });
       }else{
         this.usersOnDepartment = []
         this.onError("No employees to show on this department ! ")

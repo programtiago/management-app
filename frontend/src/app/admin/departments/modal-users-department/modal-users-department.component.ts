@@ -19,6 +19,8 @@ export class ModalUsersDepartmentComponent {
   departmentSelectedHasEmployees: boolean = false;
   departments: Department[] = []
 
+  isLoading: boolean = false;
+
   constructor(public dialogRef: MatDialogRef<ModalUsersDepartmentComponent>,
       @Inject(MAT_DIALOG_DATA) public data: { users: User[], departmentId: number }, private dialog: MatDialog, private adminService: AdminService, 
       private snackBar: MatSnackBar){
@@ -36,16 +38,24 @@ export class ModalUsersDepartmentComponent {
 
 
   removeUserFromDepartment(departmentId: number, userId: number){
+    this.isLoading = true;
+    //copies the original array to originalUsers if something fails can reset the UI
+    const originalUsers = [...this.data.users];
+    this.data.users = this.data.users.filter(user => user.id != userId)
     this.adminService.removeUserFromDepartment(departmentId, userId).pipe(
       catchError(error => {
         const statusCode = error.status;  
         this.onError(`Error ${statusCode}: Unable to remove user from department`);
-          return of(null)
+        // Revert the UI update if the request fails
+        this.data.users = originalUsers;
+        this.isLoading = false;
+        return of(null)
         })
-      ).subscribe()
+      ).subscribe(() => {
         this.dialogRef.close();
         this.loadDepartments();
         this.snackBar.open("User removed from department sucessfully ! ", "X")
+      });
     }
 
     //reload departments after delete a employee from department
