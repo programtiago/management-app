@@ -92,7 +92,7 @@ export class DepartmentsListComponent implements OnInit{
   openModalWithAllEmployeesByDepartment(departmentId: number){
      this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
       console.log(res)
-      if (res != null){
+      if (res.length > 0){
         this.usersOnDepartment = res;
         const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
           height: '420px',
@@ -102,6 +102,7 @@ export class DepartmentsListComponent implements OnInit{
         });   
       }
       this.usersOnDepartment = []
+      this.onError("No employees to show on this department ! ")
     })
   }
 

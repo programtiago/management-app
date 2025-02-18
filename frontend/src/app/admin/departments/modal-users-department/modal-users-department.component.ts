@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../../../model/user/user';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-modal-users-department',
@@ -14,7 +15,7 @@ export class ModalUsersDepartmentComponent {
   departmentSelectedHasEmployees: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<ModalUsersDepartmentComponent>,
-      @Inject(MAT_DIALOG_DATA) public users: User[]){
+      @Inject(MAT_DIALOG_DATA) public users: User[], private dialog: MatDialog){
         for (let i = 0; i < users.length; i++){
           console.log(users[i])
           if (users[i].id == null || users[i].id == undefined || this.users.length == 0){
@@ -22,12 +23,9 @@ export class ModalUsersDepartmentComponent {
           }
           this.departmentSelectedHasEmployees = true;
         }
-        /*
         if (this.departmentSelectedHasEmployees == false){
-          this.dialogRef.updateSize('400px', '350px')
+          this.onError("No employees to show on this department !")
         }
-          */
-        console.log(this.users)
       }
 
     removeUserFromDepartment(userId: number){
@@ -36,5 +34,12 @@ export class ModalUsersDepartmentComponent {
 
     onClose(){
       this.dialogRef.close();
+    }
+
+    onError(errorMsg: string){
+      this.dialog.open(ErrorDialogComponent, {
+            data: 
+              errorMsg
+      })
     }
 }

@@ -1,6 +1,5 @@
 <mat-toolbar>
     <mat-toolbar-row style="display: flex; align-content: center; justify-content: center;" *ngIf="departmentSelectedHasEmployees">Users From Department</mat-toolbar-row>
-    <mat-toolbar-row style="display: flex; align-content: center; justify-content: center;" *ngIf="!departmentSelectedHasEmployees">No Users</mat-toolbar-row>
 </mat-toolbar>
 <div>
   <mat-card>
@@ -58,13 +57,9 @@
           </div>
         </ng-template>
     </mat-card-content>
-    <mat-card-content>
-      <div *ngIf="!departmentSelectedHasEmployees">
-        <h1 style="display: flex; align-content: center; justify-content: center;" style="color: red;">No employees to show on this department !</h1>
-      </div>
-    </mat-card-content>
 </mat-card>
-</div>
 <mat-card-actions class="actions" style="display: flex; align-content: center; justify-content: center;">
   <button mat-raised-button color="warn" (click)="onClose()">Cancelar</button>
 </mat-card-actions>
+</div>
+
