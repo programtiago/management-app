@@ -47,16 +47,23 @@ export class DepartmentsListComponent implements OnInit{
     });
   }
 
-  checkIfExistsAvailableEmployeesForDepartment():boolean{
-    this.adminService.listUsersAvailableAssignToDepartment().subscribe((res) => {
-      if (res.length == 0){
+  checkIfExistsAvailableEmployeesForDepartment(): Promise<boolean>{
+    return new Promise((resolve, reject) => {
+      this.adminService.listUsersAvailableAssignToDepartment().subscribe((res) => {
+        console.log("EMPLOYEES AVAILABLE: ", res)
+        if (res == null || res.length == 0){
+          this.existsEmployeesAvailable = false;
+          resolve(false);
+        }else{
+          this.existsEmployeesAvailable = true;
+          resolve(true);
+        }
+      }, (error) => {
         this.existsEmployeesAvailable = false;
-        this.onError("No employees available to assign !")
-      }else if (res.length > 0){
-        this.existsEmployeesAvailable = true;
-      }
-    })
-    return this.existsEmployeesAvailable;
+        this.onError("Error checking available employees !")
+        reject(false);
+      });
+    });
   }
 
   onError(errorMsg: string){
@@ -72,11 +79,12 @@ export class DepartmentsListComponent implements OnInit{
     });
   }
 
-  openModalAssignmentDepartmentUser(department: Department){
-      if (this.checkIfExistsAvailableEmployeesForDepartment()){
-        this.adminService.getDepartmentById(department.id).subscribe((res) => {
-          this.selectedDepartment = res;
-        })
+  async openModalAssignmentDepartmentUser(department: Department){
+    const exists = await this.checkIfExistsAvailableEmployeesForDepartment(); //method to handle assyncronous operation
+
+    if (exists){
+      this.adminService.getDepartmentById(department.id).subscribe((res) => {
+        this.selectedDepartment = res;
         const dialogRef = this.dialog.open(ModalAssignmentDepartmentUserComponent, {
           height: '750px',
           width: '950px',
@@ -84,25 +92,28 @@ export class DepartmentsListComponent implements OnInit{
         })
         // Subscribe to afterClosed() to reload departments once the dialog is closed
         dialogRef.afterClosed().subscribe(res => {
-        this.loadDepartments();
-      })
+          this.loadDepartments();
+        });
+      });
+    }else{
+      this.onError("No employees available to assign !")
     }
   }
 
   openModalWithAllEmployeesByDepartment(departmentId: number){
-     this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
-      console.log(res)
+    this.adminService.getEmployeesByDepartmentId(departmentId).subscribe((res) => {
       if (res.length > 0){
         this.usersOnDepartment = res;
         const dialogRef = this.dialog.open(ModalUsersDepartmentComponent, {
           height: '420px',
           width: '900px',
-          data: this.usersOnDepartment,
+          data: { users: this.usersOnDepartment, departmentId: departmentId },
           disableClose: false
         });   
+      }else{
+        this.usersOnDepartment = []
+        this.onError("No employees to show on this department ! ")
       }
-      this.usersOnDepartment = []
-      this.onError("No employees to show on this department ! ")
     })
   }
 

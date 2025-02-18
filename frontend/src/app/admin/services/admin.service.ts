@@ -65,6 +65,13 @@ export class AdminService {
     return this.httpClient.delete(`${this.BASE_API_URL_USERS}/` + userId)
   }
 
+  removeUserFromDepartment(departmentId: number, userId: number){
+    return this.httpClient.delete(`${this.BASE_API_URL_USER_DEPARTMENTS}/${departmentId}/users/${userId}`).pipe(
+      catchError(error => {
+        return throwError(error)
+      })
+    )
+  }
 
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)

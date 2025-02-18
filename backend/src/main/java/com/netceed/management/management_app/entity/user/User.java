@@ -26,7 +26,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Table(name = "TB_USER")
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,5 @@
 package com.netceed.management.management_app.entity.user.userDepartment;
 
-import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.service.UserDepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

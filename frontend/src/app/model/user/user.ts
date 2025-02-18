@@ -20,6 +20,7 @@ export interface User {
     contactNumber: string
     updatedAt: string,
     password: string,
+    departmentId: number,
     userEquipments: UserEquipment[],
     userDepartments: UserDepartment[]
 }

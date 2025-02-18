@@ -1,5 +1,7 @@
 package com.netceed.management.management_app.entity.user;
 
+import com.netceed.management.management_app.entity.trackaudit.TrackAudit;
+import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.service.UserService;
@@ -21,6 +23,7 @@ import java.util.Set;
 public class UserController {
 
     private final UserService userService;
+    private final TrackAuditService trackAuditService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

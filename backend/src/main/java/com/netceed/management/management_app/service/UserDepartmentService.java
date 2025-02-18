@@ -78,9 +78,7 @@ public class UserDepartmentService {
         public void removeUserFromDepartment (Long departmentId, Long userId){
             Optional<DepartmentDto> departmentDto = departmentRepository.findById(departmentId).map(departmentMapper::toDto);
             Optional<UserDto> userDto = userRepository.findById(userId).map(userMapper::toDto);
-            //UserDepartment assignmentToRemove = null;
-            //UserDepartmentDto userDepartmentAssignmentDto;
-            UserDepartment userDepartmentAssignment = new UserDepartment();
+            UserDepartment userDepartmentAssignment = null;
 
             if (departmentDto.isPresent()) {
                 if (userDto.isPresent()) {
@@ -91,7 +89,7 @@ public class UserDepartmentService {
                         throw new NullPointerException("No assignment found for this department and user ! ");
 
                     //if assingment exists
-                    User userToRemove = userMapper.toEntity(userDto.get());
+                    User userToRemoveFromDepartment = userMapper.toEntity(userDto.get());
                     Department departmentUser = departmentMapper.toEntity(departmentDto.get());
 
                     //remove assingment from table user_department
@@ -99,6 +97,10 @@ public class UserDepartmentService {
 
                     //decrease totalEmployees after deleting the assignment
                     departmentUser.setTotalEmployees(departmentUser.getTotalEmployees() - 1);
+                    departmentRepository.save(departmentUser);
+
+                    userToRemoveFromDepartment.setUserAlreadyOnDepartment(false);
+                    userRepository.save(userToRemoveFromDepartment);
                 } else {
                     throw new ResourceNotFoundException("User with id " + userDto.get().id() + " not found");
                 }

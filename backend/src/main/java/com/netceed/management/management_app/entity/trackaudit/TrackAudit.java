@@ -1,6 +1,8 @@
 package com.netceed.management.management_app.entity.trackaudit;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,8 +21,16 @@ public class TrackAudit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long entityId; //depending wich type of entity we are working
+    @NotBlank
     private String action; //CREATE, UPDATE, DELETE
+    @NotNull
     private LocalDateTime actionDateTime;
+    @NotBlank
     private String entity; //EQUIPMENT, DEPARTMENT, USER...
+
+    public TrackAudit(String action, LocalDateTime actionDateTime, String entity){
+        this.action = action;
+        this.actionDateTime = actionDateTime;
+        this.entity = entity;
+    }
 }
