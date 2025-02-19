@@ -8,6 +8,7 @@ import { UserEquipment } from '../../model/user-equipment/user-equipment';
 import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipment-create-assign-user';
 import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
 import { UserDepartment } from '../../model/department/user-department/user-department';
+import { HistoryLog } from '../../model/history-log/history-log';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +20,23 @@ export class AdminService {
   private readonly BASE_API_URL_EQUIPMENTS = '/api/v1/equipments'
   private readonly BASE_API_URL_USER_EQUIPMENTS = '/api/v1/user-equipments'
   private readonly BASE_API_URL_USER_DEPARTMENTS = '/api/v1/user-departments'
+  private readonly BASE_API_URL_HISTORY_LOGS = '/api/v1/track-audits'
 
   constructor(private httpClient: HttpClient) { }
 
-
-  listUsers(){
+  listAllUsers(){
     return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}`)
       .pipe(first());
+  }
+
+  listUsersActive(){
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/active`)
+      .pipe(first());
+  }
+
+  listUsersNotActive(){
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/not-active`)
+    .pipe(first());
   }
 
   listUsersAvailableAssignToDepartment(){
@@ -62,7 +73,7 @@ export class AdminService {
   }
 
   deleteUserById(userId: number){
-    return this.httpClient.delete(`${this.BASE_API_URL_USERS}/` + userId)
+    return this.httpClient.put(`${this.BASE_API_URL_USERS}/delete/` + userId, {})
   }
 
   removeUserFromDepartment(departmentId: number, userId: number){
@@ -161,6 +172,9 @@ export class AdminService {
     return this.httpClient.delete(`${this.BASE_API_URL_USER_EQUIPMENTS}/${userId}/equipment/${equipmentId}`)
   }
 
+  getAllHistoryLogs():Observable<HistoryLog[]>{
+    return this.httpClient.get<HistoryLog[]>(`${this.BASE_API_URL_HISTORY_LOGS}`)
+  }
 
   private handleError(error: HttpErrorResponse){
     if (error.error instanceof ErrorEvent) {

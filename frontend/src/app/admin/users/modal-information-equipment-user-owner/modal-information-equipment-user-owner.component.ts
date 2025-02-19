@@ -27,17 +27,16 @@ export class ModalInformationEquipmentUserOwnerComponent implements OnInit{
   constructor(
     public dialogRef: MatDialogRef<ModalInformationEquipmentUserOwnerComponent>,
     public dialogDeleteEquipmentFromUser: MatDialogRef<ModalConfirmationRemoveEquipmentUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private adminService: AdminService, private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: { userId: number, userEquipments: any}, private adminService: AdminService, private dialog: MatDialog,
     private snackbar: MatSnackBar
   ) {
-   this.adminService.getEquipmentsByUserId(data.at(0)).subscribe((res) => {
-    console.log("EQUIPAMENTOS DO USUARIO", res)
+   this.adminService.getEquipmentsByUserId(data.userId).subscribe((res) => {
     this.userEquipments = res
    })
 
-   this.adminService.getUserById(data.at(0)).subscribe((res) => {
+   this.adminService.getUserById(data.userId).subscribe((res) => {
     this.selectedUser = res
-    this.selectedUserId = data.at(0)
+    this.selectedUserId = data.userId
    })
   }
 
@@ -89,7 +88,7 @@ export class ModalInformationEquipmentUserOwnerComponent implements OnInit{
   }
 
   refresh(){
-    this.adminService.getEquipmentsByUserId(this.data.at(0)).subscribe((res) => {
+    this.adminService.getEquipmentsByUserId(this.data.userId).subscribe((res) => {
       this.userEquipments = res;
     })
   }

@@ -47,6 +47,18 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public List<UserDto> getAllUsersActivate() {
+        return userRepository.findByUsersActive()
+                .stream().map(userMapper::toDto).filter(UserDto::isActive)
+                .collect(Collectors.toList());
+    }
+
+    public List<UserDto> getAllUsersNotActivate() {
+        return userRepository.findByUsersNotActive()
+                .stream().map(userMapper::toDto).filter(UserDto::isActive)
+                .collect(Collectors.toList());
+    }
+
     public UserDto getById(Long id){
         return userRepository.findById(id).map(userMapper::toDto).orElseThrow(() -> new ResourceNotFoundException("User resource not found with id " + id));
     }

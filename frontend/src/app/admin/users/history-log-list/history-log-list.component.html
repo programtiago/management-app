@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title>
+        <mat-toolbar color="primary">
+            <mat-toolbar-row style="display: flex; justify-content: center; align-content: center;">History Logs</mat-toolbar-row>
+        </mat-toolbar>
+    </mat-card-title>
+    <mat-card-content>
+        <mat-table [dataSource]="historyLogs">
+            <ng-container matColumnDef="user">
+              <mat-header-cell style="font-weight: 600;" *matHeaderCellDef> User </mat-header-cell>
+              <mat-cell class="hover-row" *matCellDef="let historyLog"> {{ historyLog.username }} </mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="action">
+              <mat-header-cell style="font-weight: 600;" class="lastName_header_cell" *matHeaderCellDef> Action </mat-header-cell>
+              <mat-cell class="lastName_cell" *matCellDef="let historyLog"> {{ historyLog.action }} </mat-cell>
+            </ng-container>     
+        
+            <ng-container matColumnDef="timestamp">
+              <mat-header-cell style="font-weight: 600;" *matHeaderCellDef> Timestamp </mat-header-cell>
+              <mat-cell class="workNumber_cell"*matCellDef="let historyLog"> {{ historyLog.actionDateTime }} </mat-cell>
+            </ng-container>
+          
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card>
+

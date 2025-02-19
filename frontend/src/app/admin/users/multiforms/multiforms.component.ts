@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
 import { Department } from '../../../model/department/department';
+import { UserDepartment } from '../../../model/department/user-department/user-department';
 
 @Component({
   selector: 'app-multiforms',
@@ -24,6 +25,8 @@ export class MultiformsComponent implements OnInit{
 
   departments: Department[] = [];
   departmentSelectedId: number = 0;
+
+  userDepartment!: UserDepartment;
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -111,7 +114,10 @@ export class MultiformsComponent implements OnInit{
         })
     }else if (this.typeAssignmentSelected === 'DEP'){
       this.adminService.createUserAndAssignToDepartment(employeeRegisterFormData, this.departmentSelectedId).subscribe((res) => {
-        console.log('USER WITH ID ' + res.user.id + " CREATED AND ASSIGNED TO DEPARTMENT " + res.department.description)
+        this.userDepartment = res;
+        if (this.userDepartment.id != null){
+          this.snackBar.open("USER WITH ID " + res.user.id + " CREATED AND ASSIGNED TO DEPARTMENT " + res.department.description, "X")
+        }
       })
     }else if (this.typeAssignmentSelected === 'LOC'){
       console.log('LOC TYPE ASSINGMENT....')
@@ -131,7 +137,7 @@ export class MultiformsComponent implements OnInit{
   }
 
   private onSucess(){
-    this.snackBar.open('User created sucessfully', '', { duration: 2000})
+    this.snackBar.open('User created sucessfully [ ' + this.employeeRegister.value.professionalData?.workNumber + " ] " + this.employeeRegister.value.basic?.firstName + " " + this.employeeRegister.value.basic?.lastName, 'X', { duration: 2000})
     this.onCancel();
   }
 

@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentsComponent } from './departments/departments.component';
 import { EquipmentsComponent } from './users/equipments/equipments.component';
 import { EquipmentFormComponent } from './users/equipment-form/equipment-form.component';
+import { HistoryLogListComponent } from './users/history-log-list/history-log-list.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'equipments', component: EquipmentsComponent},
   { path: 'new-equipment', component: EquipmentFormComponent},
   { path: 'departments', component: DepartmentsComponent},
+  { path: 'logs', component: HistoryLogListComponent}
  
 ];
 

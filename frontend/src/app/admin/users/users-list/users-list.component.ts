@@ -57,7 +57,7 @@ export class UsersListComponent implements OnInit{
   }
 
   refresh(){
-    this.adminService.listUsers().subscribe((res) => {
+    this.adminService.listAllUsers().subscribe((res) => {
       this.users = res;
     });
   }
@@ -66,6 +66,7 @@ export class UsersListComponent implements OnInit{
     this.router.navigate(['admin/new'])
   }
 
+  /*
   onChangeUserStatus(user: User){
     this.selectedUserId = user.id;
 
@@ -111,6 +112,42 @@ export class UsersListComponent implements OnInit{
       }
     })
   }
+  */
+
+  
+  onChangeUserStatus(user: User){
+    this.selectedUserId = user.id;
+
+    if (user.isActive == false){
+      this.questionForChangingStatus = this.questionForActivate;
+    }else if (user.isActive == true){
+      this.questionForChangingStatus = this.questionForDesativate;
+    }
+
+    const dialogRef = this.dialog.open(ModalInformationComponent, {
+      height: '200px',
+      width: '400px',
+      data: [this.questionForChangingStatus, this.selectedUserId]
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result){
+        if (user.isActive == false){
+          this.adminService.activateUser(user.id).subscribe(
+            () => {
+              this.snackBar.open('User activated sucessfully !', 'X', {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'center'
+              });
+              this.refresh();
+            },
+            () => this.onError('Occurred a error. Please try again or check your internet connection')
+          )
+        }
+      }
+    })
+  }
 
   onUpdate(userId: number){
     this.router.navigate(['admin/edit', userId]);
@@ -118,23 +155,23 @@ export class UsersListComponent implements OnInit{
 
   onDelete(userId: number){
     const dialogRef = this.dialog.open(ModalDeleteuserInfoComponent, {
-      height: '160px',
+      height: '180px',
       width: '400px',
-      data: 'Are you sure that u want to delete this user ?'
+      data: 'Are you sure that u want to deactivate this user ?'
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result){
           this.adminService.deleteUserById(userId).subscribe(
             () => {
-              this.snackBar.open('User deleted sucessfully !', 'X', {
+              this.snackBar.open('User deactivated sucessfully !', 'X', {
                 duration: 5000,
                 verticalPosition: 'top',
                 horizontalPosition: 'center'
               });
               this.refresh();
             },
-            () => this.onError("It wasn't possible to delete the user because there are equipments attached !"))}
+            () => this.onError(this.errorMessage))}
       })
     }
 
@@ -162,12 +199,17 @@ export class UsersListComponent implements OnInit{
     //Information Modal that renders all the equipments by user. 
     openModalViewEquipmentUserOwner(userId: number){
       this.adminService.getUserById(userId).subscribe((res) => {
-        this.selectedUserId = res.id  //store id in a variable
-        this.userEquipmentsByUser.push(...res.userEquipments) //store the objects user Equipments by user
-      })
-      this.selectedUserId = userId
-      this.dialog.open(ModalInformationEquipmentUserOwnerComponent, {
-        data: [this.selectedUserId, this.userEquipmentsByUser]
-      })
-    }
+        if (res.userEquipments.length > 0){
+          this.selectedUserId = res.id  //store id in a variable
+          this.userEquipmentsByUser = res.userEquipments //store the objects user Equipments by user
+          this.dialog.open(ModalInformationEquipmentUserOwnerComponent, {
+            data: { userId: this.selectedUserId, userEquipments: this.userEquipmentsByUser }
+          });
+        }else{
+          this.onError("There are no equipments available for this user !")
+        }
+      }, (error) => {
+        this.onError("Error fetching equipments ! ")
+    });
+  }
 }

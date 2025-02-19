@@ -10,11 +10,12 @@
           <button mat-menu-item [matMenuTriggerFor]="users">Users</button>
           <button mat-menu-item [matMenuTriggerFor]="departments">Departments</button>
           <button mat-menu-item [matMenuTriggerFor]="equipments">Equipments</button>
+          <button mat-menu-item [matMenuTriggerFor]="logs">Logs</button>
         </mat-menu>
 
         <mat-menu #users="matMenu">
           <button mat-menu-item [routerLink]="['admin/new']">Add User</button>
-          <button mat-menu-item [routerLink]="['admin/users']">List Users</button>
+          <button mat-menu-item [routerLink]="['admin/users']">List All Users</button>
         </mat-menu>
 
         <mat-menu #departments="matMenu">
@@ -25,6 +26,10 @@
         <mat-menu #equipments="matMenu">
           <button mat-menu-item [routerLink]="['admin/new-equipment']">Add Equipment</button>
           <button mat-menu-item [routerLink]="['admin/equipments']">List Equipments</button>
+        </mat-menu>
+
+        <mat-menu #logs="matMenu">
+          <button mat-menu-item [routerLink]="['admin/logs']">View All Logs</button>
         </mat-menu>
       
         <button mat-button>

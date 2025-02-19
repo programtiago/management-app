@@ -1,7 +1,6 @@
 package com.netceed.management.management_app.repository;
 
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +18,8 @@ public interface UserRepository extends JpaRepository <User, Long> {
     Set<User> findAllByDepartmentId(@Param("departmentId") Long departmentId);
     @Query("SELECT u FROM User u WHERE u.userAlreadyOnDepartment = false")
     List<User> findByUserAlreadyOnDepartmentTrue();
+    @Query("SELECT u FROM User u WHERE u.isActive = true")
+    List<User> findByUsersActive();
+    @Query("SELECT u FROM User u WHERE u.isActive = false")
+    List<User> findByUsersNotActive();
 }

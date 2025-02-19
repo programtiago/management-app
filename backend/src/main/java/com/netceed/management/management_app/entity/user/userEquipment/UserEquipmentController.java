@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity.user.userEquipment;
 
+import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.service.UserEquipmentService;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class UserEquipmentController {
 
     private final UserEquipmentService userEquipmentService;
+    private final TrackAuditService trackAuditService;
 
     @GetMapping
     public List<UserEquipmentDto> getAllAssignments(){
@@ -39,7 +41,16 @@ public class UserEquipmentController {
 
     @PostMapping("/{userId}/equipments")
     public List<UserEquipmentDto> assignMultipleEquipmentsToUser(@PathVariable @Param("userId") Long userId, @RequestBody List<Long> equipmentsId){
-        return userEquipmentService.assignEquipmentsToUser(userId, equipmentsId);
+        List<UserEquipmentDto> userEquipmentAssignmentsList = userEquipmentService.assignEquipmentsToUser(userId, equipmentsId);
+
+        for (UserEquipmentDto userEquipmentDto : userEquipmentAssignmentsList) {
+            if (!userEquipmentAssignmentsList.isEmpty()){
+                trackAuditService.logAction(equipmentsId, "Assigned equipment with the serial  " + userEquipmentDto.equipment().getSerialNumber() + " to user [ " + userEquipmentDto.user().getWorkNumber() + " ] - " +
+                        userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName(), "testusername", "UserEquipment");
+            }
+        }
+
+        return userEquipmentAssignmentsList;
     }
 
     @DeleteMapping("/{userId}/equipment/{equipmentId}")

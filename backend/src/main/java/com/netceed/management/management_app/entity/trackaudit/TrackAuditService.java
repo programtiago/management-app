@@ -16,9 +16,10 @@ public class TrackAuditService {
     public List<TrackAudit> getAllTrackAudits(){
         return trackAuditRepository.findAll();
     }
-    public void logAction(String action, String username, String entity){
+    public void logAction(List<Long> entitysId, String action, String username, String entity){
         TrackAudit trackAudit = new TrackAudit();
         trackAudit.setEntity(entity);
+        trackAudit.setEntitysId(entitysId);
         trackAudit.setAction(action);
         trackAudit.setUsername(username);
         trackAudit.setActionDateTime(LocalDateTime.now());

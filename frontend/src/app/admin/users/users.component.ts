@@ -4,7 +4,6 @@ import { catchError, Observable, of } from 'rxjs';
 import { User } from '../../model/user/user';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +15,7 @@ export class UsersComponent {
   users$: Observable<User[]>;
   
   constructor(private adminService: AdminService, private dialog: MatDialog){
-    this.users$ = this.adminService.listUsers().pipe(
+    this.users$ = this.adminService.listAllUsers().pipe(
       catchError(error => {
         this.onError('Error loading the users.')
         return of([])

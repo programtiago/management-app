@@ -26,6 +26,7 @@ import { ModalViewUserOwnerEquipmentComponent } from './users/modal-view-user-ow
 import { ModalGenerateAssignmentTermComponent } from './admin/modal-generate-assignment-term/modal-generate-assignment-term.component';
 import { ModalAssignmentDepartmentUserComponent } from './departments/modal-assignment-department-user/modal-assignment-department-user.component';
 import { ModalUsersDepartmentComponent } from './departments/modal-users-department/modal-users-department.component';
+import { HistoryLogListComponent } from './users/history-log-list/history-log-list.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { ModalUsersDepartmentComponent } from './departments/modal-users-departm
     ModalViewUserOwnerEquipmentComponent,
     ModalGenerateAssignmentTermComponent,
     ModalAssignmentDepartmentUserComponent,
-    ModalUsersDepartmentComponent
+    ModalUsersDepartmentComponent,
+    HistoryLogListComponent
   ],
   imports: [
     CommonModule,

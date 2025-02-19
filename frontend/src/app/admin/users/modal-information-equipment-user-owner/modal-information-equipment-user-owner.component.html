@@ -1,5 +1,4 @@
-<h2 *ngIf="userEquipments.length > 0" style="display: flex; justify-content: center; align-content: center;">Equipments {{selectedUser?.firstName + " " + selectedUser?.lastName}}</h2>
-<h2 *ngIf="userEquipments.length < 1" style="color:red; display: flex; justify-content: center; align-content: center;">Error equipments</h2>
+<h1 mat-dialog-title style="display: flex; align-content: center; justify-content: center;">Equipments for user {{selectedUser?.firstName + " " + selectedUser?.lastName}}</h1>
 <mat-dialog-content>
   <mat-table *ngIf="userEquipments.length > 0" [dataSource]="userEquipments" class="mat-elevation-z8">
     <ng-container matColumnDef="description">

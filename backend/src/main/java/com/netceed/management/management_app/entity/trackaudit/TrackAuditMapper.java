@@ -3,6 +3,7 @@ package com.netceed.management.management_app.entity.trackaudit;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -13,11 +14,11 @@ public class TrackAuditMapper {
             return null;
         }
 
-        return new TrackAuditDto(trackAudit.getId(), trackAudit.getAction(), trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
+        return new TrackAuditDto(trackAudit.getId(), trackAudit.getEntitysId(), trackAudit.getAction(), trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
     }
 
     public TrackAudit toEntity(TrackAuditDto trackAuditDto){
-        TrackAudit trackAudit = new TrackAudit(trackAuditDto.id(), trackAuditDto.action(), trackAuditDto.actionDateTime(),
+        TrackAudit trackAudit = new TrackAudit(trackAuditDto.id(), trackAuditDto.entityId(), trackAuditDto.action(), trackAuditDto.actionDateTime(),
                 trackAuditDto.username(), trackAuditDto.entity());
 
         if (trackAuditDto.id() != null){
@@ -30,7 +31,7 @@ public class TrackAuditMapper {
     public List<TrackAuditDto> convertListTrackAuditToListTrackAuditDto(List<TrackAudit> trackAudits){
         List<TrackAuditDto> trackAuditDtos = new ArrayList<>();
         for (TrackAudit trackAudit : trackAudits){
-            TrackAuditDto trackAuditDto = new TrackAuditDto(trackAudit.getId(), trackAudit.getAction(),
+            TrackAuditDto trackAuditDto = new TrackAuditDto(trackAudit.getId(), trackAudit.getEntitysId(), trackAudit.getAction(),
                     trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
             trackAuditDtos.add(trackAuditDto);
         }
