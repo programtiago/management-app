@@ -79,9 +79,14 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-        userRepository.save(userMapper.toEntity(newUser));
+            newUser = UserDto.createNewUserWithNoAssign(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
+                    newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password());
 
-        return userMapper.toDto(userMapper.toEntity(newUser));
+            //userToSave = userRepository.save(userMapper.toEntity(newUser));
+            userRepository.save(userMapper.toEntity(newUser));
+
+            //return userMapper.toDto(userMapper.toEntity(newUser));
+            return newUser;
     }
 
     public boolean checkIfGivenWorkNumberExists(int workNumber) {
@@ -180,7 +185,7 @@ public class UserService {
         if (departmentFound.id() != null){
             UserDto userToSave = UserDto.createNewUserAssignDepartment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.shift(),
                     newUser.recruitmentCompany(), newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(),
-                    newUser.userEquipments(), newUser.userDepartments());
+                    newUser.userDepartments());
 
             savedUser = userRepository.save(userMapper.toEntity(userToSave));
         }

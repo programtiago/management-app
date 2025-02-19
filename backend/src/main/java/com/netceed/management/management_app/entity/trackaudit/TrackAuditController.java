@@ -17,9 +17,4 @@ public class TrackAuditController {
     public List<TrackAuditDto> getAll(){
         return trackAuditMapper.convertListTrackAuditToListTrackAuditDto(trackAuditService.getAllTrackAudits());
     }
-
-    @PostMapping
-    public TrackAuditDto create(@RequestBody TrackAudit trackAudit){
-        return trackAuditMapper.toDto(trackAuditService.create(trackAudit));
-    }
 }

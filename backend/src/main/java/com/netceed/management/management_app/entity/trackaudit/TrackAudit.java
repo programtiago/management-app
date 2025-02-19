@@ -26,6 +26,8 @@ public class TrackAudit {
     @NotNull
     private LocalDateTime actionDateTime;
     @NotBlank
+    private String username;
+    @NotBlank
     private String entity; //EQUIPMENT, DEPARTMENT, USER...
 
     public TrackAudit(String action, LocalDateTime actionDateTime, String entity){

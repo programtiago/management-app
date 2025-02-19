@@ -4,6 +4,7 @@ import com.netceed.management.management_app.repository.TrackAuditRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,8 +16,13 @@ public class TrackAuditService {
     public List<TrackAudit> getAllTrackAudits(){
         return trackAuditRepository.findAll();
     }
+    public void logAction(String action, String username, String entity){
+        TrackAudit trackAudit = new TrackAudit();
+        trackAudit.setEntity(entity);
+        trackAudit.setAction(action);
+        trackAudit.setUsername(username);
+        trackAudit.setActionDateTime(LocalDateTime.now());
 
-    public TrackAudit create(TrackAudit trackAuditDto){
-        return trackAuditRepository.save(trackAuditDto);
+        trackAuditRepository.save(trackAudit);
     }
 }

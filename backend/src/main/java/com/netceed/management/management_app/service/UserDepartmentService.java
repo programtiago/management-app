@@ -41,34 +41,34 @@ public class UserDepartmentService {
     /***************************** Assign a existent user to a existent department *************************************/
     //Both of the objects have to exist before to create the assignment
     public List<UserDepartmentDto> assignUserToDepartments (Long departmentId, List<Long> usersId){
-            Optional<Department> departmentOpt = departmentRepository.findById(departmentId);
-            List<UserDepartment> userDepartments = new ArrayList<>();
+        Optional<Department> departmentOpt = departmentRepository.findById(departmentId);
+        List<UserDepartment> userDepartments = new ArrayList<>();
 
-            if (departmentOpt.isPresent()) {
-                Department department = departmentOpt.get();
+        if (departmentOpt.isPresent()) {
+            Department department = departmentOpt.get();
                 for (Long userId : usersId) {
                     Optional<User> userOpt = userRepository.findById(userId);
-                    if (userOpt.isPresent()) {
-                        User user = userOpt.get();
-                        user.setUserAlreadyOnDepartment(true);
+                        if (userOpt.isPresent()) {
+                            User user = userOpt.get();
+                            user.setUserAlreadyOnDepartment(true);
 
-                        UserDepartment userDepartment = new UserDepartment();
+                            UserDepartment userDepartment = new UserDepartment();
 
-                        userDepartment.setDepartment(department);
-                        userDepartment.setUser(user);
-                        userDepartment.setAssignmentDateTime(LocalDateTime.now());
-                        userDepartment.setComments("User " + user.getFirstName() + " " + user.getLastName() + " with work number " + user.getWorkNumber() + " was assigned to department " + department.getDescription() + " at " +
-                                userDepartment.getAssignmentDateTime());
-                        userDepartments.add(userDepartment);
+                            userDepartment.setDepartment(department);
+                            userDepartment.setUser(user);
+                            userDepartment.setAssignmentDateTime(LocalDateTime.now());
+                            userDepartment.setComments("User " + user.getFirstName() + " " + user.getLastName() + " with work number " + user.getWorkNumber() + " was assigned to department " + department.getDescription() + " at " +
+                                    userDepartment.getAssignmentDateTime());
+                            userDepartments.add(userDepartment);
 
-                    }
+                        }
                 }
                 department.setTotalEmployees(usersId.size() + department.getTotalEmployees());
 
                 departmentRepository.save(department);
-            }else{
-                throw new ResourceNotFoundException("Department resource does not exists with id " + departmentId);
-            }
+        }else{
+            throw new ResourceNotFoundException("Department resource does not exists with id " + departmentId);
+        }
 
             List<UserDepartment> assignmentsDepartmentToUsers = userDepartmentRepository.saveAll(userDepartments);
 

@@ -5,6 +5,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record TrackAuditDto(Long id, @NotBlank String action, @NotNull LocalDateTime actionDateTime, @NotBlank String entity) {
+public record TrackAuditDto(Long id, @NotBlank String action, @NotNull LocalDateTime actionDateTime, @NotBlank String username, @NotBlank String entity) {
 
 }

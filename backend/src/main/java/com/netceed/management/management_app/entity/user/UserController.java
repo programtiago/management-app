@@ -1,6 +1,5 @@
 package com.netceed.management.management_app.entity.user;
 
-import com.netceed.management.management_app.entity.trackaudit.TrackAudit;
 import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
