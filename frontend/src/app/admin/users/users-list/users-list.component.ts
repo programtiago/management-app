@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../model/user/user';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInformationComponent } from '../../modal-information/modal-information.component';
 import { AdminService } from '../../services/admin.service';
@@ -12,6 +12,7 @@ import { ModalInformationEquipmentUserOwnerComponent } from '../modal-informatio
 import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Equipment } from '../../../model/equipment/equiment';
 import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/modal-history-log-byuser.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-users-list',
@@ -21,6 +22,8 @@ import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/moda
 export class UsersListComponent implements OnInit{
 
   @Input() users: User[] = []
+  dataSource = new MatTableDataSource<User>(this.users);
+  searchResult: undefined | User[]
 
   userEquipmentsByUser: UserEquipment[] = [];
 
@@ -39,7 +42,7 @@ export class UsersListComponent implements OnInit{
   ]
 
   constructor(private router: Router, private dialog: MatDialog,
-    private adminService: AdminService, private snackBar: MatSnackBar
+    private adminService: AdminService, private snackBar: MatSnackBar, private activeRoute: ActivatedRoute
   ){
     this.adminService.getEquipmentsAvailable().subscribe((res) =>  {
       this.equipmentsAvailable = res;
@@ -223,6 +226,14 @@ export class UsersListComponent implements OnInit{
       height: '50%',
       enterAnimationDuration: 1000,
       exitAnimationDuration: 2000
+    })
+  }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.adminService.searchUsers(filterValue).subscribe((res) => {
+      this.users = res;
+      this.dataSource.data = this.users;
     })
   }
 }

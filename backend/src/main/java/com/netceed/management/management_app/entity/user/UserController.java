@@ -126,4 +126,10 @@ public class UserController {
     public List<UserDto> getUsersAvailableAssignToDepartment(){
         return userService.getUsersAvailableAssignToDepartment();
     }
+
+
+    @GetMapping("/search")
+    public List<UserDto> searchUser(@RequestParam("keyword") String keyword){
+        return userService.search(keyword);
+    }
 }

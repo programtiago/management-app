@@ -212,4 +212,8 @@ public class UserService {
 
         return userMapper.convertListUserToDto(users);
     }
+
+    public List<UserDto> search(String query){
+        return userMapper.convertListUserToDto(userRepository.findByKeyword(query));
+    }
 }

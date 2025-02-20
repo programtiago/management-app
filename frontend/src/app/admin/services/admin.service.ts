@@ -84,6 +84,11 @@ export class AdminService {
     )
   }
 
+  searchUsers(keyword: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/search?keyword=${keyword}`)
+      .pipe(catchError(this.handleError));
+  }
+
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());

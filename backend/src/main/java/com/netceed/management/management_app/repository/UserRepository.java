@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface UserRepository extends JpaRepository <User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByWorkNumber(int workNumber);
     Optional<User> findByEmail(String email);
     @Query("SELECT u FROM User u JOIN UserDepartment ud ON u.id = ud.user.id WHERE ud.department.id = :departmentId")
@@ -22,4 +22,6 @@ public interface UserRepository extends JpaRepository <User, Long> {
     List<User> findByUsersActive();
     @Query("SELECT u FROM User u WHERE u.isActive = false")
     List<User> findByUsersNotActive();
+    @Query("SELECT u FROM User u WHERE u.firstName LIKE %:value% OR u.lastName LIKE %:value% OR u.email LIKE %:value%")
+    List<User> findByKeyword(@Param("value") String value);
 }
