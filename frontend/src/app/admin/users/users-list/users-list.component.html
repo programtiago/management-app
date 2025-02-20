@@ -80,6 +80,10 @@
           <mat-icon>delete</mat-icon>
         </button>
 
+        <button (click)="openModalHistoryLogByUserId(user.id)" mat-mini-fab color="primary" aria-label="View user history">
+          <mat-icon>history</mat-icon>
+        </button>
+
         <button [matMenuTriggerFor]="menu" mat-icon-button color="primary">
           <mat-icon>more_vert</mat-icon>
         </button>

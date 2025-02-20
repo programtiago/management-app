@@ -65,6 +65,7 @@ public class UserController {
     }
 
     @PostMapping
+    @Transactional
     public UserDto create(@RequestBody @Valid UserDto newUser) throws NoSuchFieldException {
         UserDto userDto = userService.create(newUser);
 

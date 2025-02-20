@@ -26,4 +26,12 @@ public class TrackAuditService {
 
         trackAuditRepository.save(trackAudit);
     }
+
+    public List<TrackAudit> getTrackAuditsByUserEntity(){
+        return trackAuditRepository.getAllTrackAuditsByUserEntity();
+    }
+
+    public List<TrackAudit> getTrackAuditsByEntitysId(List<Long> entitysId){
+        return trackAuditRepository.findAllTrackAuditsByEntitysId(entitysId);
+    }
 }

@@ -94,10 +94,8 @@ public class UserService {
             newUser = UserDto.createNewUserWithNoAssign(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
                     newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password());
 
-            //userToSave = userRepository.save(userMapper.toEntity(newUser));
             userRepository.save(userMapper.toEntity(newUser));
 
-            //return userMapper.toDto(userMapper.toEntity(newUser));
             return newUser;
     }
 

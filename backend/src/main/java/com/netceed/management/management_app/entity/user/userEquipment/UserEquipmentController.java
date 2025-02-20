@@ -7,6 +7,7 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -36,7 +37,14 @@ public class UserEquipmentController {
 
     @PostMapping("/{userId}/equipment/{equipmentId}")
     public UserEquipmentDto assignEquipmentToUser(@PathVariable @Param("userId") Long userId, @PathVariable @Param("equipmentId") Long equipmentId) throws BadRequestException {
-        return userEquipmentService.assignEquipmentToUser(userId, equipmentId);
+        UserEquipmentDto assignmentUserToEquipment = userEquipmentService.assignEquipmentToUser(userId, equipmentId);
+
+        if (assignmentUserToEquipment != null){
+            trackAuditService.logAction(Collections.singletonList(assignmentUserToEquipment.id()), "Assigned equipment with the serial  " + assignmentUserToEquipment.equipment().getSerialNumber() + " to user [ " + assignmentUserToEquipment.user().getWorkNumber() + " ] - " +
+                    assignmentUserToEquipment.user().getFirstName() + " " + assignmentUserToEquipment.user().getLastName(), "testusername", "UserEquipment");
+        }
+
+        return assignmentUserToEquipment;
     }
 
     @PostMapping("/{userId}/equipments")
@@ -45,7 +53,7 @@ public class UserEquipmentController {
 
         for (UserEquipmentDto userEquipmentDto : userEquipmentAssignmentsList) {
             if (!userEquipmentAssignmentsList.isEmpty()){
-                trackAuditService.logAction(equipmentsId, "Assigned equipment with the serial  " + userEquipmentDto.equipment().getSerialNumber() + " to user [ " + userEquipmentDto.user().getWorkNumber() + " ] - " +
+                trackAuditService.logAction(Collections.singletonList(userEquipmentDto.id()), "Assigned equipment with the serial  " + userEquipmentDto.equipment().getSerialNumber() + " to user [ " + userEquipmentDto.user().getWorkNumber() + " ] - " +
                         userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName(), "testusername", "UserEquipment");
             }
         }

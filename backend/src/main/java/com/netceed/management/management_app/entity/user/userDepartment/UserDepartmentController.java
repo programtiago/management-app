@@ -27,8 +27,11 @@ public class UserDepartmentController {
     public List<UserDepartmentDto> assignUsersToDepartment(@PathVariable Long departmentId, @RequestBody List<Long> usersId){
         List<UserDepartmentDto> userDepartmentDtoList = userDepartmentService.assignUserToDepartments(departmentId, usersId);
 
-        if (!userDepartmentDtoList.isEmpty()){
-            trackAuditService.logAction(usersId, "Assignment of a user or multiple users to a department", "testUsername", "UserDepartment");
+        for (UserDepartmentDto userDepartmentDto : userDepartmentDtoList){
+            if (userDepartmentDto != null){
+                trackAuditService.logAction(Collections.singletonList(userDepartmentDto.id()), "Assignment of user [ " + userDepartmentDto.user().getWorkNumber() + " ] - " + userDepartmentDto.user().getFirstName() + " " +
+                        userDepartmentDto.user().getLastName(), "testUsername", "UserDepartment");
+            }
         }
 
         return userDepartmentDtoList;

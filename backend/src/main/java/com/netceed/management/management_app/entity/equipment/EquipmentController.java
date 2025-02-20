@@ -65,7 +65,7 @@ public class EquipmentController {
         Equipment equipmentObj = equipmentService.update(equipment, id);
 
         if (equipmentObj != null){
-            trackAuditService.logAction(Collections.singletonList(equipmentObj.getId()), "Updated equipment with serial " + equipmentObj.getSerialNumber(), "testUsername", "UserEquipment");
+            trackAuditService.logAction(Collections.singletonList(equipmentObj.getId()), "Updated equipment with serial " + equipmentObj.getSerialNumber(), "testUsername", "Equipment");
         }
     }
 

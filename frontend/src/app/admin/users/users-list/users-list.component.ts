@@ -11,6 +11,7 @@ import { ModalUsersAssignmentEquipmentComponent } from '../modal-users-assignmen
 import { ModalInformationEquipmentUserOwnerComponent } from '../modal-information-equipment-user-owner/modal-information-equipment-user-owner.component';
 import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Equipment } from '../../../model/equipment/equiment';
+import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/modal-history-log-byuser.component';
 
 @Component({
   selector: 'app-users-list',
@@ -211,5 +212,17 @@ export class UsersListComponent implements OnInit{
       }, (error) => {
         this.onError("Error fetching equipments ! ")
     });
+  }
+
+  openModalHistoryLogByUserId(userId: number){
+    console.log(userId);
+    this.dialog.open(ModalHistoryLogByuserComponent, {
+      disableClose: true,
+      autoFocus: false,
+      width: '50%',
+      height: '50%',
+      enterAnimationDuration: 1000,
+      exitAnimationDuration: 2000
+    })
   }
 }
