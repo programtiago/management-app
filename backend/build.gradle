@@ -30,9 +30,10 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
 	//implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.17.2'
 	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.17.2'
-	//implementation group: 'org.flywaydb', name: 'flyway-core', version: '10.10.0'
+	implementation group: 'org.flywaydb', name: 'flyway-core', version: '10.20.1'
 
-    testImplementation 'junit:junit:4.13.1'
+
+	testImplementation 'junit:junit:4.13.1'
 	testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.26.3'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

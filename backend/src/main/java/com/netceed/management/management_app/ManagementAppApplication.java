@@ -4,6 +4,7 @@ import com.netceed.management.management_app.entity.building.Building;
 import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
+import com.netceed.management.management_app.entity.location.Location;
 import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserRole;
@@ -13,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.time.LocalDate;
@@ -25,19 +25,20 @@ import java.util.*;
 @SpringBootApplication
 @RequiredArgsConstructor
 @EnableWebMvc
-@EnableAspectJAutoProxy
-public class ManagementAppApplication implements CommandLineRunner {
+public class ManagementAppApplication{
 
 	private final UserRepository userRepository;
 	private final ShiftRepository shiftRepository;
 	private final DepartmentRepository departmentRepository;
 	private final EquipmentRepository equipmentRepository;
 	private final BuildingRepository buildingRepository;
+	private final LocationRepository locationRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManagementAppApplication.class, args);
 	}
 
+	/*
 	@Override
 	public void run(String... args) throws Exception {
 		Building buildingA = new Building();
@@ -289,5 +290,16 @@ public class ManagementAppApplication implements CommandLineRunner {
 		//scanner.setUserEquipments(setUserEquipment1);
 
 		userRepository.saveAll(desktopUsers);
+
+		Location location = new Location();
+
+		location.setDescription("IT 2.1");
+		location.setRegistryDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")));
+
+		locationRepository.save(location);
+
+
 	}
+
+	 */
 }

@@ -24,7 +24,7 @@ public class Building {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private String description;
+    private String description; //BUILDING A : ADMINISTRATIVE BUILDING   BUILDING B: FACTORY BUILDING
     @NotNull
     private boolean isActive;
     @NotNull

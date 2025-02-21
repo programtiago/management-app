@@ -67,29 +67,20 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.updateModalAssignmentSize(); 
       this.equipmentsAvailable$.subscribe((res) => {
         this.equipmentsAvailable = res;
         console.log(res)
       })
     }
 
-    updateModalAssignmentSize():void{
-      if (this.equipmentsAvailable.length < 1){
-        this.dialogRef.updateSize(this.widthModalAssingment, this.heightModalAssignment)
-      }   
-    }
-
     clear(){
       this.cMultiCtrl.reset();
       this.wasClearedMatSelect = true;
-      this.dialogRef.updateSize('750px', '400px') 
     }
 
     clearMultipleSelection(){
       this.cMultiCtrl.reset(); 
       if (this.cMultiCtrl.value == null){
-        this.dialogRef.updateSize('750px', '400px') 
         this.canLoadInformationCardAssignment = false
       }
     }
@@ -153,10 +144,8 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
           this.selectedEquipment = res;
           if (res.id != null)
             this.canLoadInformationCardAssignment = true
-          })
-          
+          })   
       }
-      this.dialogRef.updateSize('750px', '600px') //if loads the equipment information withou error updates modal size
     }
 
      //For choosing multiple equipments 
@@ -168,7 +157,6 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
               this.selectedMultipleEquipmentsList = res;
               if (res != null){
                 this.canLoadInformationCardAssignment = true;
-                this.dialogRef.updateSize('750px', '850px') 
               }
             },
             error: (error) => {

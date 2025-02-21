@@ -1,7 +1,5 @@
 package com.netceed.management.management_app.entity.location;
 
-import com.netceed.management.management_app.entity.building.BuildingDto;
-import com.netceed.management.management_app.entity.department.DepartmentDto;
 import com.netceed.management.management_app.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +19,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public LocationDto create(@RequestBody String description, @RequestBody DepartmentDto departmentDto, @RequestBody BuildingDto buildingDto){
-        return locationService.createLocation(departmentDto.id(), buildingDto.id(), description);
+    public LocationDto create(@RequestBody Location location){
+        return locationService.create(location);
     }
 }

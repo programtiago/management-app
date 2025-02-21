@@ -23,15 +23,13 @@ public class LocationMapper {
             return null;
         }
 
-        return new LocationDto(location.getId(), location.getDepartmentName(), location.getDescription(), location.getRegistryDate(), location.getBuildingName(),
-                location.getBuilding(), location.getDepartment());
+        return new LocationDto(location.getId(), location.getDescription(), location.getRegistryDate());
     }
 
     public List<LocationDto> convertListLocationToDto(List<Location> locations){
         List<LocationDto> locationsDto = new ArrayList<>();
         for (Location location : locations){
-            LocationDto locationDto = new LocationDto(location.getId(),location.getDepartmentName(), location.getDescription(), location.getRegistryDate(), location.getBuildingName(),
-                    location.getBuilding(), location.getDepartment());
+            LocationDto locationDto = new LocationDto(location.getId(),location.getDescription(), location.getRegistryDate());
             locationsDto.add(locationDto);
         }
         return locationsDto;

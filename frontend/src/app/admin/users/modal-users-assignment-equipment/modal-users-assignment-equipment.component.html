@@ -64,10 +64,12 @@
       </div>
     </div>
     </mat-card-content>
+    <!--
     <mat-card-actions style="justify-content: center; align-content: center">
       <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
       <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
   </mat-card-actions>   
+  -->
   </mat-card>
 </div>
 <div *ngIf="canChooseMultipleEquipments && canLoadInformationCardAssignment && this.cMultiCtrl.value != null">
@@ -88,8 +90,8 @@
       <p>Email: {{data.email}}</p>
     </div>
   </mat-card>
-  <mat-card-actions style="justify-content: center; align-content: center">
-    <button (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
-    <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
-</mat-card-actions>   
 </div>
+<mat-card-actions style="justify-content: center; align-content: center">
+  <button *ngIf="this.cMultiCtrl.value != null" (click)="onConfirm(true)" mat-raised-button color="primary">Confirm</button>
+  <button (click)="onConfirm(false)" mat-raised-button color="warn">Cancel</button>
+</mat-card-actions>   

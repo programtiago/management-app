@@ -80,7 +80,7 @@
           <mat-icon>edit</mat-icon>
         </button>
 
-        <button (click)="onDelete(user.id)" mat-mini-fab color="accent" aria-label="Delete user">
+        <button *ngIf="user.isActive" (click)="onDelete(user.id)" mat-mini-fab color="accent" aria-label="Delete user">
           <mat-icon>delete</mat-icon>
         </button>
 

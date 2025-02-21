@@ -31,6 +31,11 @@ public class LocationService {
         return locationMapper.convertListLocationToDto(locationRepository.findAll());
     }
 
+    public LocationDto create(Location location){
+        return locationMapper.toDto(locationRepository.save(location));
+    }
+
+    /*
     public LocationDto createLocation(Long departmentId, Long buildingId, String description){
         DepartmentDto departmentDto = departmentMapper.toDto(departmentRepository.findById(departmentId).orElseThrow(() -> new RuntimeException("No department found with department id " + departmentId)));
         BuildingDto buildingDto = buildingMapper.toDto(buildingRepository.findById(buildingId).orElseThrow(() -> new RuntimeException("No department found with department id " + departmentId)));
@@ -46,4 +51,6 @@ public class LocationService {
 
         return locationMapper.toDto(location);
     }
+
+     */
 }

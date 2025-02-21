@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `TB_USER` (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(20) NOT NULL,
+    lastName VARCHAR(20) NOT NULL,
+    birthdayDate DATE,
+    admissionDate DATE NOT NULL,
+    contactNumber VARCHAR(9) NOT NULL,
+    email VARCHAR(50),
+    isActive BIT NOT NULL,
+    isAvailableForVacation BIT NOT NULL,
+    nif VARCHAR(9) NOT NULL,
+    password VARCHAR(30),
+    recruitmentCompany VARCHAR(20) NOT NULL,
+    registryDate VARCHAR NOT NULL,
+    updatedAt VARCHAR(18),
+    userAlreadyOnDepartment BIT NOT NULL,
+    userRole VARCHAR(15) NOT NULL,
+    workNumber INTEGER NOT NULL,
+    workStatus VARCHAR(20) NOT NULL
+);
