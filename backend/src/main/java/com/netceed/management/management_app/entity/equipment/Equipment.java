@@ -26,23 +26,34 @@ public class Equipment {
     @NotNull
     private String description;
     @NotNull
+    @Column(name = "serial_number", nullable = false, length = 20)
     private String serialNumber;
     @NotNull
+    @Column(nullable = false, length = 20)
     private String brand;
     @NotNull
+    @Column(nullable = false, length = 20)
     private String model;
+    @Column(nullable = false, length = 10)
     private String type; //SCANNER, SCREEN, MOUSE, DESKTOP
+    @Column(nullable = false, length = 20)
     private String location; //PROD -> Packaging  Department
+    @Column(nullable = false, length = 20)
     private String workstation; //There are multiple workstation inside a location
+    @Column(nullable = false, length = 20)
     private String unity; //Packaging, Housing, Test, whatever...
     @NotNull
+    @Column(name = "registry_date", nullable = false, length = 20)
     private String registryDate;
     @OneToMany(mappedBy = "equipment")
     @JsonIgnore
     private Set<UserEquipment> userEquipments;
+    @Column(name = "is_active", nullable = false, length = 20)
     private boolean isActive;
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_equipment", nullable = false, length = 20)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
+    @Column(name = "status_physic", nullable = false, length = 20)
     private String statusPhysic; //The equipment returns and we make a intern validation to be assigned to other user
 
     public Equipment(Long id, String description, String serialNumber, String brand,

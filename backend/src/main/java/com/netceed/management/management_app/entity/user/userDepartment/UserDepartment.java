@@ -28,6 +28,9 @@ public class UserDepartment {
     @JoinColumn(name = "department_id")
     private Department department;
 
+    @Column(name = "assignment_date_time", nullable = false, length = 19)
     private LocalDateTime assignmentDateTime;
+
+    @Column(length = 50)
     private String comments;
 }

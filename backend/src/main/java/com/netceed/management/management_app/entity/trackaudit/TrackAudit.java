@@ -24,15 +24,20 @@ public class TrackAudit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @Column(name = "entitys_id", nullable = false)
     private List<Long> entitysId;
     @NotBlank
+    @Column(nullable = false, length = 100)
     private String action; //CREATE, UPDATE, DELETE
     @NotNull
     @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
+    @Column(name = "action_date_time", nullable = false, length = 20)
     private LocalDateTime actionDateTime;
     @NotBlank
+    @Column(nullable = false, length = 15)
     private String username;
     @NotBlank
+    @Column(nullable = false, length = 15)
     private String entity; //EQUIPMENT, DEPARTMENT, USER...
 
     public TrackAudit(List<Long> entitysId, String action, LocalDateTime actionDateTime, String entity, String username){

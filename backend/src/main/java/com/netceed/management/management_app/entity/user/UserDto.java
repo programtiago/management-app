@@ -30,7 +30,6 @@ public record UserDto (
     LocalDate birthdayDate,
     @Enumerated(EnumType.STRING)
     WorkStatus workStatus,
-    Shift shift,
     @NotNull
     String recruitmentCompany,
     String registryDate,
@@ -56,7 +55,7 @@ public record UserDto (
     boolean userAlreadyOnDepartment
 ){
 
-    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate,WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
+    public UserDto(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate,WorkStatus workStatus, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean isActive, UserRole userRole, String email, String nif, String contactNumber, String password,
                    boolean isAvailableForVacation, String updatedAt, Set<UserEquipment> userEquipments,  Set<UserDepartment> userDepartments, boolean userAlreadyOnDepartment) {
         this.id = id;
         this.firstName = firstName;
@@ -65,7 +64,6 @@ public record UserDto (
         this.birthdayDate = birthdayDate;
         this.workStatus = workStatus;
         this.userDepartments = userDepartments;
-        this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
         this.admissionDate = admissionDate;
@@ -81,40 +79,40 @@ public record UserDto (
         this.userAlreadyOnDepartment = userAlreadyOnDepartment;
     }
 
-    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
+    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
                                                        Set<UserDepartment> userDepartments, boolean userAlreadyOnDepartment){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, null, userAlreadyOnDepartment);
     }
 
-    public static UserDto createNewUserAssignDepartment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, Shift shift, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt,
+    public static UserDto createNewUserAssignDepartment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt,
                                                        Set<UserDepartment> userDepartments){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, shift, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, null, userDepartments, true);
     }
 
     public static UserDto createNewUserWithNoAssign(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, null, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
                 admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, null, null, null, false);
     }
 
     public UserDto setId(Long id){
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments, userAlreadyOnDepartment);
     }
 
     public UserDto setShift(Shift shift) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments, userAlreadyOnDepartment);
     }
 
     public UserDto setIsActive(boolean value) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, recruitmentCompany,
                 registryDate, admissionDate, value, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments, userAlreadyOnDepartment);
     }
 
     public UserDto setDepartment(Department department) {
-        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, shift, recruitmentCompany,
+        return new UserDto(id, firstName, lastName, workNumber, birthdayDate, workStatus, recruitmentCompany,
                 registryDate, admissionDate, isActive, userRole, email, nif, contactNumber, password, isAvailableForVacation, updatedAt, userEquipments, userDepartments, userAlreadyOnDepartment);
     }
 }

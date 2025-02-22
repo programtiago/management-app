@@ -28,12 +28,15 @@ public class UserEquipment {
     @JoinColumn(name = "equipment_id", nullable = false)
     private Equipment equipment;
 
-    @Column(nullable = false)
+    @Column(name = "assigned_date_time", nullable = false)
     @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     private LocalDateTime assignedDateTime;
+
+    @Column(name = "return_date_time", nullable = false)
     @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     private LocalDateTime returnDateTime;
 
+    @Column(length = 50)
     private String comments;
 
 }

@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS TB_HISTORY (
+    id BIGINT NOT NULL PRIMARY KEY,
+    entitys_id BIGINT NOT NULL,
+    action VARCHAR(100) NOT NULL,
+    action_date_time DATE NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    entity VARCHAR(20) NOT NULL
+)

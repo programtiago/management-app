@@ -16,7 +16,7 @@ public class UserMapper {
             return null;
         }
 
-        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(), user.getWorkStatus(), user.getShift(),
+        return new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(), user.getWorkStatus(),
                 user.getRecruitmentCompany(), user.getRegistryDate(), user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getNif(), user.getContactNumber(), user.getPassword(),
                 user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments(), user.isUserAlreadyOnDepartment());
     }
@@ -29,7 +29,7 @@ public class UserMapper {
 
         }
 
-        user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.nif(), userDto.workNumber(), userDto.birthdayDate(), userDto.workStatus(), userDto.shift(),
+        user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.nif(), userDto.workNumber(), userDto.birthdayDate(), userDto.workStatus(),
                 userDto.recruitmentCompany(), userDto.registryDate(), userDto.admissionDate(), userDto.isActive(), userDto.userRole(),  userDto.email(), userDto.contactNumber(), userDto.password(),
                 userDto.updatedAt());
 
@@ -40,7 +40,7 @@ public class UserMapper {
         List<UserDto> userDtos = new ArrayList<>();
         for (User user : users){
             UserDto userDto = new UserDto(user.getId(), user.getFirstName(), user.getLastName(), user.getWorkNumber(), user.getBirthdayDate(),
-                    user.getWorkStatus(), user.getShift(), user.getRecruitmentCompany(), user.getRegistryDate(),
+                    user.getWorkStatus(), user.getRecruitmentCompany(), user.getRegistryDate(),
                     user.getAdmissionDate(), user.isActive(), user.getUserRole(), user.getEmail(), user.getNif(), user.getContactNumber(), user.getPassword(), user.isAvailableForVacation(), user.getUpdatedAt(), user.getUserEquipments(), user.getUserDepartments(),
                     user.isUserAlreadyOnDepartment());
             userDtos.add(userDto);
@@ -54,7 +54,7 @@ public class UserMapper {
         }
 
         return new UserDto(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(),
-                userDto.workStatus(), userDto.shift(), userDto.recruitmentCompany(), userDto.registryDate(),
+                userDto.workStatus(), userDto.recruitmentCompany(), userDto.registryDate(),
                 userDto.admissionDate(), userDto.isActive(), userDto.userRole(), userDto.email(), userDto.nif(), userDto.contactNumber(), userDto.password(), userDto.isAvailableForVacation(), userDto.updatedAt(), userDto.userEquipments(), userDto.userDepartments(),
                 userDto.userAlreadyOnDepartment());
     }

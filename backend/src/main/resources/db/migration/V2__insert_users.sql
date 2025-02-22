@@ -1,3 +1,3 @@
-INSERT INTO TB_USER (id, firstName, lastName, birthdayDate, admissionDate, contactNumber, email, isActive, isAvailableForVacation, nif, password, recruitmentCompany,
-    registryDate, updatedAt, userAlreadyOnDepartment, userRole, workNumber, workStatus) VALUES (1, 'Tiago', 'Silva', '1996-05-02', '2025-02-21', '939123123', 'programtiago@gmail.com',
-    true, false, '123456789', 'tiago123', 'INTERN', CURRENT_TIMESTAMP, null, false, 'ADMIN', 65425, 'AVAILABLE')
+INSERT INTO TB_USER (id, first_name, last_name, birthday_date, admission_date, contact_number, email, is_active, is_available_for_vacation, nif, password, recruitment_company,
+    registry_date, updated_at, user_already_on_department, user_role, work_number, work_status) VALUES (1, 'Tiago', 'Silva', '1996-05-02', '2025-02-21', '939123123', 'programtiago@gmail.com',
+    true, false, '123456789', 'tiago123', 'INTERN', '21-02-2025 15:38:23', null, false, 'ADMIN', 65425, 'AVAILABLE')

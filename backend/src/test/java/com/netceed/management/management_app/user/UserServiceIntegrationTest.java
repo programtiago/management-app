@@ -71,15 +71,14 @@ public class UserServiceIntegrationTest {
         userRepository.deleteAll();
 
         testUser1 = new User(1L, "Tiago", "Silva", 80056, LocalDate.of(1996, 05, 02), "223035556", WorkStatus.AVAILABLE,
-                null, "Adeco", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 05, 12), true,
-                UserRole.ADMIN, "programtiago@gmail.com", "912341245", "tiago123", false, null, null, null);
+                "Adeco", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 05, 12), true,
+                UserRole.ADMIN, "programtiago@gmail.com", "912341245", "tiago123", false, null, null, false, null);
 
-        testUser2 = new User(2L, "Elaine", "Cruz", 30038, LocalDate.of(1998, 06, 16), "448035556", WorkStatus.AVAILABLE,
-                null, "Adeco", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 05, 12), true,
-                UserRole.EMPLOYEE, "elaine.cruz@gmail.com", "965214523", "elaine123", false, null, null, null);
+        testUser2 = new User(2L, "Elaine", "Cruz", 30038, LocalDate.of(1998, 06, 16), "448035556", WorkStatus.AVAILABLE, "Adeco", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 05, 12), true,
+                UserRole.EMPLOYEE, "elaine.cruz@gmail.com", "965214523", "elaine123", false, null, null, false , null);
 
-        nonExistentTestUserOnTheList = new User(3L, "Rui", "Salgado", 60054, LocalDate.of(1987, 04, 16), "448025530", WorkStatus.AVAILABLE, null, "Adeco",
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 10, 30), true, UserRole.EMPLOYEE, "rui.salgado@gmail.com", "965214536", "rui123", false, null, null, null);
+        nonExistentTestUserOnTheList = new User(3L, "Rui", "Salgado", 60054, LocalDate.of(1987, 04, 16), "448025530", WorkStatus.AVAILABLE, "Adeco",
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 10, 30), true, UserRole.EMPLOYEE, "rui.salgado@gmail.com", "965214536", "rui123", false, null, null, false, null);
 
         testEquipment1 = new Equipment("Monitor XXL", "asfasd231321321213", "BRANDY", "MODELX", "Monitors", "Development");
 
@@ -110,7 +109,7 @@ public class UserServiceIntegrationTest {
     @Test
     void testCreateUserWithNoAssign() throws Exception{
         // Create User
-        UserDto userDto = new UserDto(4L, "Fernando", "Castro", 80032, LocalDate.of(1996, 05, 02), WorkStatus.AVAILABLE, null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23), true, UserRole.ADMIN, "fernando.castro@gmail.com", "754035557", "965217898", "fernando123", false, null, null, null);
+        UserDto userDto = new UserDto(4L, "Fernando", "Castro", 80032, LocalDate.of(1996, 05, 02), WorkStatus.AVAILABLE, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23), true, UserRole.ADMIN, "fernando.castro@gmail.com", "754035557", "965217898", "fernando123", false, null, null, null, false);
 
         UserDto createdUserDto = userService.create(userDto);
 
@@ -126,9 +125,8 @@ public class UserServiceIntegrationTest {
     @Test
     void testCreationOfUserWithAssignmentEquipment() throws BadRequestException {
 
-        UserDto userDto = new UserDto(7L, "António", "Amadeu", 60032, LocalDate.of(1965, 3, 23), WorkStatus.AVAILABLE,
-                null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2021, 11, 12),
-                true, UserRole.EMPLOYEE, "antonio.amadeu@gmail.com",  "244035541", "915302412", "antonio123", false, null, null, null);
+        UserDto userDto = new UserDto(7L, "António", "Amadeu", 60032, LocalDate.of(1965, 3, 23), WorkStatus.AVAILABLE, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2021, 11, 12),
+                true, UserRole.EMPLOYEE, "antonio.amadeu@gmail.com",  "244035541", "915302412", "antonio123", false, null, null, null, false);
 
         UserEquipmentDto userEquipmentDto = userService.createUserForEquipment(userDto, testEquipment1.getId());
 
@@ -226,9 +224,8 @@ public class UserServiceIntegrationTest {
     void shouldThrowExceptionWhenAgeIsLessThan18(){
         LocalDate underageBirthday = LocalDate.now().minusYears(17).plusDays(1); // 17 years and 1 day old
 
-        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, underageBirthday, WorkStatus.AVAILABLE,
-                null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23),
-                true, UserRole.ADMIN, "fernado.silva@gmail.com", "745035582", "965217898", "fernando123", false, null, null, null);
+        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, underageBirthday, WorkStatus.AVAILABLE, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2022, 01, 23),
+                true, UserRole.ADMIN, "fernado.silva@gmail.com", "745035582", "965217898", "fernando123", false, null, null, null, false);
 
 
         BirthayDateException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), BirthayDateException.class);
@@ -248,8 +245,7 @@ public class UserServiceIntegrationTest {
 
     @Test
     void shouldThrowExceptionWhenEmailAlreadyExists(){
-        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, LocalDate.of(1997, 2, 12), null,
-                null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2), true, UserRole.EMPLOYEE, "320335541", "965217898", "asfdasds", null, false, null, null, null);
+        UserDto userDto = new UserDto(5L, "sadas", "asdasdas", 80030, LocalDate.of(1997, 2, 12), null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2), true, UserRole.EMPLOYEE, "320335541", "965217898", "asfdasds", null, false, null, null, null, false);
 
 
         EmailAlreadyExistsException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), EmailAlreadyExistsException.class);
@@ -268,9 +264,8 @@ public class UserServiceIntegrationTest {
 
     @Test
     void shouldThrowExceptionWhenWorkNumberAlreadyExists(){
-        UserDto userDto = new UserDto(5L, "xxxxx", "yyyyy", 80054, LocalDate.of(2000, 9, 30), WorkStatus.AVAILABLE,
-                null, null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2),
-                true, UserRole.ADMIN, "yyyyyyyyyyyyyyy123@gmail.com", "550335522", "912317421", "teste123xx", false, null, null, null);
+        UserDto userDto = new UserDto(5L, "xxxxx", "yyyyy", 80054, LocalDate.of(2000, 9, 30), WorkStatus.AVAILABLE, "ADDECO", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2024, 1, 2),
+                true, UserRole.ADMIN, "yyyyyyyyyyyyyyy123@gmail.com", "550335522", "912317421", "teste123xx", false, null, null, null, false);
 
         IllegalArgumentException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), IllegalArgumentException.class);
 
@@ -304,9 +299,8 @@ public class UserServiceIntegrationTest {
     /******************* workNumber > 100000 **************************/
     @Test
     void shouldThrowExceptionWhenWorkNumberIsGreaterThanHundredThousand() {
-        UserDto userDto = new UserDto(5L, "Catarina", "Almeida", 100001, LocalDate.of(1989, 10, 10), null,
-                null, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 5, 27),
-                true, UserRole.ADMIN, "yyyyyyyysadjpoasjdasyyyyyyy123@gmail.com", "442254855", "912365419", "safasdoajsdia", false, null, null, null);
+        UserDto userDto = new UserDto(5L, "Catarina", "Almeida", 100001, LocalDate.of(1989, 10, 10), WorkStatus.AVAILABLE, "INTERN", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), LocalDate.of(2023, 5, 27),
+                true, UserRole.ADMIN, "yyyyyyyysadjpoasjdasyyyyyyy123@gmail.com", "442254855", "912365419", "safasdoajsdia", false, null, null, null, false);
 
         ConstraintViolationException throwable = Assertions.catchThrowableOfType(() -> userService.create(userDto), ConstraintViolationException.class);
 

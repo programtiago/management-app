@@ -25,9 +25,6 @@ public class Shift {
     private LocalTime endTimeShift; //GENERAL: 18:00 AM  MORNING: 15:30 PM  AFTERNOON: 00:00 AM OF NEXT DAY  NIGHT: 07:00 AM OF NEXT DAY
     private boolean status; //ACTIVE, NOT ACTIVE
 
-    @OneToMany(mappedBy = "shift")
-    private Set<User> users;
-
     public Shift(String description, LocalTime startTimeShift, LocalTime endTimeShift, boolean status){
         this.description = description;
         this.startTimeShift = startTimeShift;

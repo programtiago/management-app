@@ -24,9 +24,12 @@ public class Building {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @Column(nullable = false, length = 50)
     private String description; //BUILDING A : ADMINISTRATIVE BUILDING   BUILDING B: FACTORY BUILDING
     @NotNull
+    @Column(name = "is_active", nullable = false)
     private boolean isActive;
     @NotNull
+    @Column(name = "registry_date", nullable = false, length = 19)
     private String registryDate;
 }

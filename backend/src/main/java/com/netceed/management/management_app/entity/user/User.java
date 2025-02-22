@@ -2,7 +2,6 @@ package com.netceed.management.management_app.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
@@ -32,44 +31,55 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "The First Name is mandatory")
+    @Column(name = "first_name", nullable = false, length = 20)
     private String firstName;
     @NotBlank(message = "The Last Name is mandatory")
+    @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
     @Range(min = 30000, max = 100000, message = "The Work Number must be between 3000 and 100000")
+    @Column(name = "work_number", nullable = false, length = 9)
     private int workNumber;
+    @Column(name = "birthday_date", nullable = false)
     private LocalDate birthdayDate;
     @Length(min = 9, max = 9)
     private String nif;
     @Enumerated(EnumType.STRING)
+    @Column(name = "work_status", nullable = false)
     private WorkStatus workStatus = WorkStatus.AVAILABLE;
-    @ManyToOne
-    @JoinColumn(name = "shift_id")
-    private Shift shift;
+    @Column(name = "recruitment_company", nullable = false)
     private String recruitmentCompany;
+    @Column(name = "registry_date", nullable = false, length = 19)
     private String registryDate;
     @JsonFormat(pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING)
+    @Column(name = "admission_date", nullable = false)
     private LocalDate admissionDate;
+    @Column(name = "is_active", nullable = false)
     private boolean isActive = true;
     @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
     private UserRole userRole;
     @Email
     @NotBlank(message = "Email is mandatory")
     private String email;
     @NotBlank(message = "The Contact Number is mandatory")
     @Size(min = 9, max = 9)
+    @Column(name = "contact_number", nullable = false)
     private String contactNumber;
     @NotBlank(message = "The Password is mandatory")
     private String password;
+    @Column(name = "is_available_for_vacation", nullable = false)
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
+    @Column(name = "updated_at", nullable = false)
     private String updatedAt;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private Set<UserEquipment> userEquipments = new HashSet<>();
+    @Column(name = "user_already_on_department", nullable = false)
     private boolean userAlreadyOnDepartment;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
-    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, Shift shift, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments, Set<UserDepartment> userDepartments) {
+    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -82,7 +92,6 @@ public class User{
         this.contactNumber = contactNumber;
         this.userRole = userRole;
         this.nif = nif;
-        this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
         this.userEquipments = equipments;
@@ -105,7 +114,7 @@ public class User{
         this.isAvailableForVacation = false;
     }
 
-    public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, WorkStatus workStatus, Shift shift, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
+    public User(Long id, String firstName, String lastName, String nif, int workNumber, LocalDate birthdayDate, WorkStatus workStatus, String recruitmentCompany, String registryDate, LocalDate admissionDate, boolean active, UserRole userRole, String email, String contactNumber, String password, String updatedAt) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -113,7 +122,6 @@ public class User{
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
         this.workStatus = workStatus;
-        this.shift = shift;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
         this.admissionDate = admissionDate;
