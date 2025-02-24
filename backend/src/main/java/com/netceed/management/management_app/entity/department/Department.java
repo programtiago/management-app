@@ -26,7 +26,7 @@ public class Department {
     @Column(name = "code_value", nullable = false, length = 5)
     private String codeValue;
     @NotBlank(message = "description is required")
-    @Column(nullable = false, length = 50)
+    @Column(name = "description", nullable = false, length = 50)
     private String description;
     @Column(name = "registry_date", nullable = false, length = 19)
     private String registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));

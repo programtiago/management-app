@@ -40,7 +40,7 @@ public class UserEquipmentController {
         UserEquipmentDto assignmentUserToEquipment = userEquipmentService.assignEquipmentToUser(userId, equipmentId);
 
         if (assignmentUserToEquipment != null){
-            trackAuditService.logAction(Collections.singletonList(assignmentUserToEquipment.id()), "Assigned equipment with the serial  " + assignmentUserToEquipment.equipment().getSerialNumber() + " to user [ " + assignmentUserToEquipment.user().getWorkNumber() + " ] - " +
+            trackAuditService.logAction(assignmentUserToEquipment.id(), "Assigned equipment with the serial  " + assignmentUserToEquipment.equipment().getSerialNumber() + " to user [ " + assignmentUserToEquipment.user().getWorkNumber() + " ] - " +
                     assignmentUserToEquipment.user().getFirstName() + " " + assignmentUserToEquipment.user().getLastName(), "testusername", "UserEquipment");
         }
 
@@ -53,7 +53,7 @@ public class UserEquipmentController {
 
         for (UserEquipmentDto userEquipmentDto : userEquipmentAssignmentsList) {
             if (!userEquipmentAssignmentsList.isEmpty()){
-                trackAuditService.logAction(Collections.singletonList(userEquipmentDto.id()), "Assigned equipment with the serial  " + userEquipmentDto.equipment().getSerialNumber() + " to user [ " + userEquipmentDto.user().getWorkNumber() + " ] - " +
+                trackAuditService.logAction(userEquipmentDto.id(), "Assigned equipment with the serial  " + userEquipmentDto.equipment().getSerialNumber() + " to user [ " + userEquipmentDto.user().getWorkNumber() + " ] - " +
                         userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName(), "testusername", "UserEquipment");
             }
         }

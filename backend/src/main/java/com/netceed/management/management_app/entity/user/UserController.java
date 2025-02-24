@@ -9,7 +9,6 @@ import jakarta.validation.Valid;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -51,7 +50,7 @@ public class UserController {
 
         if (userDto != null){
             this.deactivateAccount(id);
-            trackAuditService.logAction(Collections.singletonList(userDto.id()),"User [ " + userDto.workNumber() + " ] - " + userDto.firstName() + " " + userDto.lastName() + " was deactivated ",  "testUsername", "User");
+            trackAuditService.logAction(userDto.id(),"User [ " + userDto.workNumber() + " ] - " + userDto.firstName() + " " + userDto.lastName() + " was deactivated ",  "testUsername", "User");
         }
     }
 
@@ -60,7 +59,7 @@ public class UserController {
         User userObj = userService.update(user, id);
 
         if (userObj != null){
-            trackAuditService.logAction(Collections.singletonList(userObj.getId()), "Updated data of user [ " + userObj.getWorkNumber() + " ] " + userObj.getFirstName() + " " + userObj.getLastName() , "testUsername", "User");
+            trackAuditService.logAction(userObj.getId(), "Updated data of user [ " + userObj.getWorkNumber() + " ] " + userObj.getFirstName() + " " + userObj.getLastName() , "testUsername", "User");
         }
     }
 
@@ -69,9 +68,12 @@ public class UserController {
     public UserDto create(@RequestBody @Valid UserDto newUser) throws NoSuchFieldException {
         UserDto userDto = userService.create(newUser);
 
+        /*
         if (userDto != null){
-            trackAuditService.logAction(Collections.singletonList(userDto.id()), "Created user [ " + userDto.workNumber() + " ] " + userDto.firstName() + " " + userDto.lastName() , "testUsername", "User");
+            trackAuditService.logAction(userDto.id(), "Created user [ " + userDto.workNumber() + " ] " + userDto.firstName() + " " + userDto.lastName() , "testUsername", "User");
         }
+         */
+
         return userDto;
     }
 
@@ -81,7 +83,7 @@ public class UserController {
         UserEquipmentDto userEquipmentDto = userService.createUserForEquipment(newUser, equipmentId);
 
         if (userEquipmentDto != null){
-            trackAuditService.logAction(Collections.singletonList(userEquipmentDto.id()), "Created user [ " + userEquipmentDto.user().getWorkNumber() + " ] " + userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName() + " and assigned equipment with serial " + userEquipmentDto.equipment().getSerialNumber() , "testUsername", "UserEquipment");
+            trackAuditService.logAction(userEquipmentDto.id(), "Created user [ " + userEquipmentDto.user().getWorkNumber() + " ] " + userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName() + " and assigned equipment with serial " + userEquipmentDto.equipment().getSerialNumber() , "testUsername", "UserEquipment");
         }
 
         return userEquipmentDto;
@@ -93,7 +95,7 @@ public class UserController {
         UserDepartmentDto userDepartmentDto = userService.createUserForDepartment(newUser, departmentId);
 
         if (userDepartmentDto != null){
-            trackAuditService.logAction(Collections.singletonList(userDepartmentDto.id()), "Created user [ " + userDepartmentDto.user().getWorkNumber() + " ] " + userDepartmentDto.user().getFirstName() + " " + userDepartmentDto.user().getLastName() + " and assigned to department with code " + userDepartmentDto.department().getCodeValue() , "testUsername", "UserDepartment");
+            trackAuditService.logAction(userDepartmentDto.id(), "Created user [ " + userDepartmentDto.user().getWorkNumber() + " ] " + userDepartmentDto.user().getFirstName() + " " + userDepartmentDto.user().getLastName() + " and assigned to department with code " + userDepartmentDto.department().getCodeValue() , "testUsername", "UserDepartment");
         }
 
         return userDepartmentDto;
@@ -111,7 +113,7 @@ public class UserController {
         UserDto userDto = userService.activateAccount(id);
 
         if (userDto != null){
-            trackAuditService.logAction(Collections.singletonList(userDto.id()), "Activated user [ " + userDto.workNumber() + " ] " + userDto.firstName() + " " + userDto.lastName(), "testUsername", "User");
+            trackAuditService.logAction(userDto.id(), "Activated user [ " + userDto.workNumber() + " ] " + userDto.firstName() + " " + userDto.lastName(), "testUsername", "User");
         }
 
         return userDto;

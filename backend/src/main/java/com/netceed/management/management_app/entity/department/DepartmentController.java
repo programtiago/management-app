@@ -35,7 +35,7 @@ public class DepartmentController {
     @PutMapping("/{id}")
     public void update(@RequestBody @Valid DepartmentDto department, @PathVariable Long id){
         departmentService.update(department, id);
-        trackAuditService.logAction(Collections.singletonList(department.id()), "Updated data of department with code " + department.value(), "testUsername", "Department");
+        trackAuditService.logAction(department.id(), "Updated data of department with code " + department.value(), "testUsername", "Department");
     }
 
     @DeleteMapping("/{id}")
@@ -43,7 +43,7 @@ public class DepartmentController {
         DepartmentDto departmentDto = departmentService.getById(id);
 
         departmentService.deleteById(id);
-        trackAuditService.logAction(Collections.singletonList(departmentDto.id()), "Deleted department with code " + departmentDto.value(), "testUsername", "Department");
+        trackAuditService.logAction(departmentDto.id(), "Deleted department with code " + departmentDto.value(), "testUsername", "Department");
     }
 
     @GetMapping("/totalEmployees/{id}")

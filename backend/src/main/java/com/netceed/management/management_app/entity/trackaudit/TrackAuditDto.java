@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-public record TrackAuditDto(@NotNull Long id, @NotNull List<Long> entityId, @NotBlank String action, @NotNull @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss") LocalDateTime actionDateTime, @NotBlank String username, @NotBlank String entity) {
+public record TrackAuditDto(Long id, @NotNull Long entityId, @NotBlank String action, @NotNull @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss") LocalDateTime actionDateTime, @NotBlank String username, @NotBlank String entity) {
 
 }

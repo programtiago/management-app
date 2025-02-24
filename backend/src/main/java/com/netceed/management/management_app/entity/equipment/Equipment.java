@@ -29,18 +29,18 @@ public class Equipment {
     @Column(name = "serial_number", nullable = false, length = 20)
     private String serialNumber;
     @NotNull
-    @Column(nullable = false, length = 20)
+    @Column(name = "brand", nullable = false, length = 20)
     private String brand;
     @NotNull
-    @Column(nullable = false, length = 20)
+    @Column(name = "model", nullable = false, length = 20)
     private String model;
-    @Column(nullable = false, length = 10)
+    @Column(name = "type", nullable = false, length = 10)
     private String type; //SCANNER, SCREEN, MOUSE, DESKTOP
-    @Column(nullable = false, length = 20)
+    @Column(name = "location", nullable = false, length = 20)
     private String location; //PROD -> Packaging  Department
-    @Column(nullable = false, length = 20)
+    @Column(name = "workstation", nullable = false, length = 20)
     private String workstation; //There are multiple workstation inside a location
-    @Column(nullable = false, length = 20)
+    @Column(name = "unity", nullable = false, length = 20)
     private String unity; //Packaging, Housing, Test, whatever...
     @NotNull
     @Column(name = "registry_date", nullable = false, length = 20)

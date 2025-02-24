@@ -5,9 +5,11 @@ CREATE TABLE IF NOT EXISTS TB_EQUIPMENT (
     brand VARCHAR(20)  NOT NULL,
     model VARCHAR(25) NOT NULL,
     type VARCHAR(15) NOT NULL,
+    location VARCHAR(20),
     workstation VARCHAR(10),
+    unity VARCHAR(10),
     registry_date VARCHAR(19),
-    isActive BIT,
+    is_active BIT,
     status_equipment VARCHAR(20),
     status_physic VARCHAR(20),
     CONSTRAINT chk_status_equipment CHECK (status_equipment IN ('AVAILABLE', 'ASSIGNED', 'MAINTENANCE', 'RETIRED'))

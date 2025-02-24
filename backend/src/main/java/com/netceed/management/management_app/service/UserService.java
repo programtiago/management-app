@@ -6,6 +6,8 @@ import com.netceed.management.management_app.entity.department.DepartmentMapper;
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
+import com.netceed.management.management_app.entity.trackaudit.TrackAudit;
+import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
@@ -33,6 +35,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final EquipmentRepository equipmentRepository;
     private final DepartmentRepository departmentRepository;
+
+    private final TrackAuditService trackAuditService;
 
     private final UserMapper userMapper;
     private final EquipmentMapper equipmentMapper;
@@ -91,10 +95,14 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-            newUser = UserDto.createNewUserWithNoAssign(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
+            newUser = UserDto.createNewUserWithNoAssign(null, newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
                     newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password());
 
-            userRepository.save(userMapper.toEntity(newUser));
+            User savedUser = userRepository.save(userMapper.toEntity(newUser));
+
+            if (savedUser.getId() != null){
+                trackAuditService.logAction(savedUser.getId(), "Created user [ " + savedUser.getWorkNumber() + " ] " + savedUser.getFirstName() + " " + savedUser.getLastName() , "testUsername", "User");
+            }
 
             return newUser;
     }

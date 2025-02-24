@@ -14,7 +14,7 @@ public class TrackAuditMapper {
             return null;
         }
 
-        return new TrackAuditDto(trackAudit.getId(), trackAudit.getEntitysId(), trackAudit.getAction(), trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
+        return new TrackAuditDto(trackAudit.getId(), trackAudit.getEntityId(), trackAudit.getAction(), trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
     }
 
     public TrackAudit toEntity(TrackAuditDto trackAuditDto){
@@ -31,7 +31,7 @@ public class TrackAuditMapper {
     public List<TrackAuditDto> convertListTrackAuditToListTrackAuditDto(List<TrackAudit> trackAudits){
         List<TrackAuditDto> trackAuditDtos = new ArrayList<>();
         for (TrackAudit trackAudit : trackAudits){
-            TrackAuditDto trackAuditDto = new TrackAuditDto(trackAudit.getId(), trackAudit.getEntitysId(), trackAudit.getAction(),
+            TrackAuditDto trackAuditDto = new TrackAuditDto(trackAudit.getId(), trackAudit.getEntityId(), trackAudit.getAction(),
                     trackAudit.getActionDateTime(), trackAudit.getUsername(), trackAudit.getEntity());
             trackAuditDtos.add(trackAuditDto);
         }

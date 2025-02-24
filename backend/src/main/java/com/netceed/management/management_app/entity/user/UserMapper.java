@@ -29,9 +29,8 @@ public class UserMapper {
 
         }
 
-        user = new User(userDto.id(), userDto.firstName(), userDto.lastName(), userDto.nif(), userDto.workNumber(), userDto.birthdayDate(), userDto.workStatus(),
-                userDto.recruitmentCompany(), userDto.registryDate(), userDto.admissionDate(), userDto.isActive(), userDto.userRole(),  userDto.email(), userDto.contactNumber(), userDto.password(),
-                userDto.updatedAt());
+        user = new User(userDto.firstName(), userDto.lastName(), userDto.workNumber(), userDto.birthdayDate(), userDto.email(), userDto.password(),
+                userDto.admissionDate(), userDto.isActive(), userDto.contactNumber(), userDto.userRole(), userDto.nif(), userDto.recruitmentCompany(), userDto.registryDate(), userDto.userEquipments());
 
         return user;
     }

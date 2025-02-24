@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByUsersNotActive();
     @Query("SELECT u FROM User u WHERE u.firstName LIKE %:value% OR u.lastName LIKE %:value% OR u.email LIKE %:value%")
     List<User> findByKeyword(@Param("value") String value);
+    @Query(value = "SELECT u FROM User u ORDER BY u.id DESC LIMIT 1")
+    Optional<User> findLastRecord();
 }

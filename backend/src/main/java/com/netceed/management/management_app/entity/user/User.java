@@ -41,6 +41,7 @@ public class User{
     private int workNumber;
     @Column(name = "birthday_date", nullable = false)
     private LocalDate birthdayDate;
+    @Column(name = "nif", nullable = false, length = 9)
     @Length(min = 9, max = 9)
     private String nif;
     @Enumerated(EnumType.STRING)
@@ -60,12 +61,14 @@ public class User{
     private UserRole userRole;
     @Email
     @NotBlank(message = "Email is mandatory")
+    @Column(name = "email", nullable = false, length = 55)
     private String email;
     @NotBlank(message = "The Contact Number is mandatory")
     @Size(min = 9, max = 9)
     @Column(name = "contact_number", nullable = false)
     private String contactNumber;
     @NotBlank(message = "The Password is mandatory")
+    @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "is_available_for_vacation", nullable = false)
     private boolean isAvailableForVacation; //the user (employee) has to be 6 months plus admission date to  be able to take vacations
@@ -81,6 +84,24 @@ public class User{
 
     public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.workNumber = workNumber;
+        this.birthdayDate = birthdayDate;
+        this.email = email;
+        this.password = password;
+        this.admissionDate = admissionDate;
+        this.isActive = isActive;
+        this.contactNumber = contactNumber;
+        this.userRole = userRole;
+        this.nif = nif;
+        this.recruitmentCompany = recruitmentCompany;
+        this.registryDate = registryDate;
+        this.userEquipments = equipments;
+    }
+
+
+    public User(String firstName, String lastName, int workNumber, LocalDate birthdayDate, String email, String password, LocalDate admissionDate, boolean isActive, String contactNumber, UserRole userRole, String nif, String recruitmentCompany, String registryDate, Set<UserEquipment> equipments) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.workNumber = workNumber;

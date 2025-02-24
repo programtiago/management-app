@@ -23,8 +23,8 @@ public class TrackAuditController {
         return trackAuditMapper.convertListTrackAuditToListTrackAuditDto(trackAuditService.getTrackAuditsByUserEntity());
     }
 
-    @GetMapping("/by-entitys")
-    public List<TrackAuditDto> getTrackAuditsByEntitysIds(@RequestBody List<Long> entitysId){
-        return trackAuditMapper.convertListTrackAuditToListTrackAuditDto(trackAuditService.getTrackAuditsByEntitysId(entitysId));
+    @GetMapping("/by-entity")
+    public List<TrackAuditDto> getTrackAuditsByEntityId(@RequestBody Long entityId){
+        return trackAuditMapper.convertListTrackAuditToListTrackAuditDto(trackAuditService.getTrackAuditsByEntityId(entityId));
     }
 }

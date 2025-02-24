@@ -53,7 +53,7 @@ public class EquipmentService {
 
         Equipment savedEquipment = equipmentRepository.save(equipmentMapper.toEntity(newEquipment));
 
-        if (userFound.id() != null){
+        if (userFound != null){
             equipmentRepository.save(savedEquipment);
         }
 

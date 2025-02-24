@@ -41,7 +41,7 @@ public class EquipmentController {
         EquipmentDto equipmentDto = equipmentService.create(newEquipment);
 
         if (equipmentDto != null){
-            trackAuditService.logAction(Collections.singletonList(equipmentDto.id()), "Created equipment with serial " + equipmentDto.serialNumber(), "testUsername", "Equipment");
+            trackAuditService.logAction(equipmentDto.id(), "Created equipment with serial " + equipmentDto.serialNumber(), "testUsername", "Equipment");
         }
 
         return equipmentDto;
@@ -54,7 +54,7 @@ public class EquipmentController {
         UserEquipmentDto userEquipmentDto = equipmentService.createEquipmentForUser(equipment, userId);
 
         if (userEquipmentDto != null){
-            trackAuditService.logAction(Collections.singletonList(userEquipmentDto.id()), "Created equipment with serial " + userEquipmentDto.equipment().getSerialNumber() + " and assigned to [ " + userEquipmentDto.user().getWorkNumber() + "] - " + userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName(), "testUsername", "UserEquipment");
+            trackAuditService.logAction(userEquipmentDto.id(), "Created equipment with serial " + userEquipmentDto.equipment().getSerialNumber() + " and assigned to [ " + userEquipmentDto.user().getWorkNumber() + "] - " + userEquipmentDto.user().getFirstName() + " " + userEquipmentDto.user().getLastName(), "testUsername", "UserEquipment");
         }
 
         return userEquipmentDto;
@@ -65,7 +65,7 @@ public class EquipmentController {
         Equipment equipmentObj = equipmentService.update(equipment, id);
 
         if (equipmentObj != null){
-            trackAuditService.logAction(Collections.singletonList(equipmentObj.getId()), "Updated equipment with serial " + equipmentObj.getSerialNumber(), "testUsername", "Equipment");
+            trackAuditService.logAction(equipmentObj.getId(), "Updated equipment with serial " + equipmentObj.getSerialNumber(), "testUsername", "Equipment");
         }
     }
 
@@ -75,7 +75,7 @@ public class EquipmentController {
 
         if (equipmentDto != null) {
             equipmentService.delete(id);
-            trackAuditService.logAction(Collections.singletonList(equipmentDto.id()), "Deleted equipment with serial ", "testUsername", "Equipment");
+            trackAuditService.logAction(equipmentDto.id(), "Deleted equipment with serial ", "testUsername", "Equipment");
         }
     }
 

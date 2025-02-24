@@ -29,7 +29,7 @@ public class UserDepartmentController {
 
         for (UserDepartmentDto userDepartmentDto : userDepartmentDtoList){
             if (userDepartmentDto != null){
-                trackAuditService.logAction(Collections.singletonList(userDepartmentDto.id()), "Assignment of user [ " + userDepartmentDto.user().getWorkNumber() + " ] - " + userDepartmentDto.user().getFirstName() + " " +
+                trackAuditService.logAction(userDepartmentDto.id(), "Assignment of user [ " + userDepartmentDto.user().getWorkNumber() + " ] - " + userDepartmentDto.user().getFirstName() + " " +
                         userDepartmentDto.user().getLastName(), "testUsername", "UserDepartment");
             }
         }
@@ -40,7 +40,7 @@ public class UserDepartmentController {
     @DeleteMapping("/{departmentId}/users/{userId}")
     public void removeUserFromDepartment(@PathVariable Long departmentId, @PathVariable Long userId){
         userDepartmentService.removeUserFromDepartment(departmentId, userId);
-        trackAuditService.logAction(Collections.singletonList(userId), "Removed user from department", "testUsername", "UserDepartment");
+        trackAuditService.logAction(userId, "Removed user from department", "testUsername", "UserDepartment");
     }
 
     @GetMapping("/department/{departmentId}/user/{userId}")
