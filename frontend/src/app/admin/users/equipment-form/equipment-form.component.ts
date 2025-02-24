@@ -41,6 +41,7 @@ export class EquipmentFormComponent implements OnInit{
       user: [''],
       category: [''],
       unity: [''],
+      type: ['TYPE'],
       registryDate: [new Date().toString()],
       statusEquipment: [StatusEquipment.IN_USE],
       isActive: [true]
@@ -54,6 +55,7 @@ export class EquipmentFormComponent implements OnInit{
       model: [''],
       category: [''],
       unity: [''],
+      type: ['TYPE'],
       registryDate: [new Date().toUTCString()],
       statusEquipment: [StatusEquipment.AVAILABLE],
       isActive: [true]

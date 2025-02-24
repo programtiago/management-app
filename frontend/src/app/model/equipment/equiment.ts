@@ -10,6 +10,7 @@ export interface Equipment{
     location: string,
     function: string,
     unity: string,
+    type: string,
     registryDate: string,
     allocationDateTime: Date,
     returningDateTime: Date,
