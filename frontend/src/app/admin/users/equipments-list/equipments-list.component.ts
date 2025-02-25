@@ -7,6 +7,7 @@ import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { ModalQuestionDeleteEquipmentComponent } from '../modal-question-delete-equipment/modal-question-delete-equipment.component';
 import { ModalViewUserOwnerEquipmentComponent } from '../modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
 import { User } from '../../../model/user/user';
+import { StatusEquipment } from '../../../model/equipment/status-equipment';
 
 @Component({
   selector: 'app-equipments-list',
@@ -19,7 +20,8 @@ export class EquipmentsListComponent implements OnInit{
   userEquipmentsOfEquipmentSelected: UserEquipment[] = []
   userOwnerEquipment!: User;
 
-  statusEquipment: string = ""
+  //statusEquipment: string = ""
+  statusEquipment = StatusEquipment;
 
   displayedColumns: String[] = ['brand', 'model', 'description', 'serialNumber', 'registryDate', 'status', 'actions']
 

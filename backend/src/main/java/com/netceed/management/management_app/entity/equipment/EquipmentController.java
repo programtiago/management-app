@@ -40,10 +40,6 @@ public class EquipmentController {
     public EquipmentDto createEquipment(@RequestBody @Valid EquipmentDto newEquipment) throws NoSuchFieldException {
         EquipmentDto equipmentDto = equipmentService.create(newEquipment);
 
-        if (equipmentDto != null){
-            trackAuditService.logAction(equipmentDto.id(), "Created equipment with serial " + equipmentDto.serialNumber(), "testUsername", "Equipment");
-        }
-
         return equipmentDto;
     }
 
@@ -75,7 +71,7 @@ public class EquipmentController {
 
         if (equipmentDto != null) {
             equipmentService.delete(id);
-            trackAuditService.logAction(equipmentDto.id(), "Deleted equipment with serial ", "testUsername", "Equipment");
+            trackAuditService.logAction(equipmentDto.id(), "Deleted equipment with serial " + equipmentDto.serialNumber(), "testUsername", "Equipment");
         }
     }
 

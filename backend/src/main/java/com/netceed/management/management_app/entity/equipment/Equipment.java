@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.entity.equipment;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.netceed.management.management_app.entity.equipment.converters.StatusEquipmentConverter;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -50,7 +51,7 @@ public class Equipment {
     private Set<UserEquipment> userEquipments;
     @Column(name = "is_active", nullable = false, length = 20)
     private boolean isActive;
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = StatusEquipmentConverter.class)
     @Column(name = "status_equipment", nullable = false, length = 20)
     private StatusEquipment statusEquipment = StatusEquipment.AVAILABLE; //Depends. We can create a Equipment and not assign it to no one
     @Column(name = "status_physic", nullable = false, length = 20)
@@ -58,7 +59,7 @@ public class Equipment {
 
     public Equipment(Long id, String description, String serialNumber, String brand,
                      String model, String type, String location, String workstation,
-                     String unity, boolean isActive, String statusPhysic) {
+                     String unity, boolean isActive, StatusEquipment statusEquipment, String statusPhysic) {
         this.id = id;
         this.description = description;
         this.serialNumber = serialNumber;
@@ -71,7 +72,7 @@ public class Equipment {
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
         this.userEquipments = new HashSet<>();
         this.isActive = isActive;
-        this.statusEquipment = StatusEquipment.AVAILABLE;
+        this.statusEquipment = statusEquipment;
         this.statusPhysic = statusPhysic;
     }
 

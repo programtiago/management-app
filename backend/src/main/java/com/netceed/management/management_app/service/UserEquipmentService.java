@@ -1,15 +1,12 @@
 package com.netceed.management.management_app.service;
 
-import com.netceed.management.management_app.entity.department.Department;
 import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
-import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
-import com.netceed.management.management_app.repository.DepartmentRepository;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
@@ -31,6 +28,7 @@ public class UserEquipmentService{
     private final EquipmentRepository equipmentRepository;
 
     private final UserEquipmentMapper userEquipmentMapper;
+    private final EquipmentMapper equipmentMapper;
 
     public List<UserEquipmentDto> getAll() {
         return userEquipmentRepository.findAll()
@@ -57,7 +55,7 @@ public class UserEquipmentService{
                 user.getUserEquipments().add(assigment);
                 userRepository.save(user);
 
-                equipment.setStatusEquipment(StatusEquipment.IN_USE);
+                equipment.setStatusEquipment(equipmentMapper.convertStatusEquipmentValue(StatusEquipment.IN_USE.getValue()));
 
                 equipmentRepository.save(equipment);
 
@@ -81,7 +79,7 @@ public class UserEquipmentService{
                 Optional<Equipment> equipmentOpt = equipmentRepository.findById(equipmentId);
                 if (equipmentOpt.isPresent()){ //Checks if the given id it's present on the db
                     Equipment equipment = equipmentOpt.get();
-                    equipment.setStatusEquipment(StatusEquipment.IN_USE);
+                    equipment.setStatusEquipment(equipmentMapper.convertStatusEquipmentValue(StatusEquipment.IN_USE.getValue()));
 
                     UserEquipment userEquipment = new UserEquipment(); //object instanciate each assignment
 
@@ -112,7 +110,7 @@ public class UserEquipmentService{
             throw new IllegalArgumentException("The id equipment id " + equipmentId + " doesn't belong to the user id " + userId);
         }
 
-        equipment.setStatusEquipment(StatusEquipment.AVAILABLE); //changes the status of the object given
+        equipment.setStatusEquipment(equipmentMapper.convertStatusEquipmentValue(StatusEquipment.AVAILABLE.getValue())); //changes the status of the object given
         equipmentRepository.save(equipment);
         userEquipmentRepository.deleteById(userEquipment.getId());
 

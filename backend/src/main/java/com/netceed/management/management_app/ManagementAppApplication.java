@@ -1,26 +1,10 @@
 package com.netceed.management.management_app;
 
-import com.netceed.management.management_app.entity.building.Building;
-import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.equipment.Equipment;
-import com.netceed.management.management_app.entity.equipment.StatusEquipment;
-import com.netceed.management.management_app.entity.location.Location;
-import com.netceed.management.management_app.entity.shift.Shift;
-import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserRole;
-import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
 @SpringBootApplication
 @RequiredArgsConstructor

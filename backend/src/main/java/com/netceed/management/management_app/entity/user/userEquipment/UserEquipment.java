@@ -36,7 +36,7 @@ public class UserEquipment {
     @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     private LocalDateTime returnDateTime;
 
-    @Column(length = 50)
+    @Column(length = 100)
     private String comments;
 
 }

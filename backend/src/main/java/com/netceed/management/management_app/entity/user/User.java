@@ -29,6 +29,7 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
     @NotBlank(message = "The First Name is mandatory")
     @Column(name = "first_name", nullable = false, length = 20)

@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS TB_EQUIPMENT (
     is_active BIT,
     status_equipment VARCHAR(20),
     status_physic VARCHAR(20),
-    CONSTRAINT chk_status_equipment CHECK (status_equipment IN ('AVAILABLE', 'ASSIGNED', 'MAINTENANCE', 'RETIRED'))
+    CONSTRAINT chk_status_equipment CHECK (status_equipment IN ('Available', 'Not Available', 'For Warranty', 'In Use'))
 );
 

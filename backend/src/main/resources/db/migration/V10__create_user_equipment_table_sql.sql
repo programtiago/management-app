@@ -4,7 +4,7 @@ CREATE TABLE TB_USER_EQUIPMENT (
     equipment_id BIGINT NOT NULL,
     assigned_date_time TIMESTAMP NOT NULL,
     return_date_time TIMESTAMP,
-    comments VARCHAR(50),
+    comments VARCHAR(100),
     FOREIGN KEY (user_id) REFERENCES TB_USER(id),
     FOREIGN KEY (equipment_id) REFERENCES TB_EQUIPMENT(id)
 )

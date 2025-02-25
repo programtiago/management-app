@@ -1,6 +1,7 @@
 package com.netceed.management.management_app.service;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.UserDto;
@@ -29,6 +30,7 @@ public class EquipmentService {
     private final UserMapper userMapper;
 
     private final UserEquipmentService userEquipmentService;
+    private final TrackAuditService trackAuditService;
 
     //The resource is not deleted from the repo. The flag isActive controls if the equipment can be shown as available
     public void delete(Long id) {
@@ -62,7 +64,11 @@ public class EquipmentService {
 
     //Create simple equipment object without assigning to anyone or anywhere
     public EquipmentDto create(EquipmentDto equipment) {
-        equipmentRepository.save(equipmentMapper.toEntity(equipment));
+        Equipment equipmentToSave = equipmentRepository.save(equipmentMapper.toEntity(equipment));
+
+        if (equipmentToSave.getId() != null){
+            trackAuditService.logAction(equipmentToSave.getId(), "Created equipment with serial " + equipmentToSave.getSerialNumber(), "testUsername", "Equipment");
+        }
 
         return equipmentMapper.toDto(equipmentMapper.toEntity(equipment));
     }

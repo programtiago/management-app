@@ -1,4 +1,5 @@
 import { UserEquipment } from "../user-equipment/user-equipment";
+import { StatusEquipment } from "./status-equipment";
 
 export interface Equipment{
     id: number,
@@ -14,7 +15,7 @@ export interface Equipment{
     registryDate: string,
     allocationDateTime: Date,
     returningDateTime: Date,
-    statusEquipment: string,
+    statusEquipment: StatusEquipment,
     finalCondition: string,
     usersEquipments: UserEquipment[]
 }
