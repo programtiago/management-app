@@ -6,6 +6,9 @@ import com.netceed.management.management_app.entity.user.userEquipment.UserEquip
 import com.netceed.management.management_app.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -24,9 +27,16 @@ public class UserController {
     private final UserService userService;
     private final TrackAuditService trackAuditService;
 
+    /*
     @GetMapping
     public List<UserDto> getAllUsers() throws Exception {
         return userService.getAllUsers();
+    }
+     */
+
+    @GetMapping
+    public UserPageDto getAllUsers(@RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) throws Exception {
+        return userService.getAllUsers(page, pageSize);
     }
 
     @GetMapping("/active")

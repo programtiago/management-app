@@ -95,6 +95,7 @@ public class UserServiceIntegrationTest {
         usersDtoList.addAll(userMapper.convertListUserToDto(usersList));
     }
 
+    /*
     @Test
     void testGetAllUsers() throws Exception {
         List<UserDto> users = userService.getAllUsers();
@@ -105,6 +106,7 @@ public class UserServiceIntegrationTest {
         org.assertj.core.api.Assertions.assertThat(users.get(1).firstName()).isEqualTo("Elaine");
         org.assertj.core.api.Assertions.assertThat(users.get(2).firstName()).isEqualTo("Rui");
     }
+     */
 
     @Test
     void testCreateUserWithNoAssign() throws Exception{

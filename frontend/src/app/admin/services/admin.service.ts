@@ -9,6 +9,7 @@ import { CreateEquipmentAssignUserRequest } from '../../model/equipment/equipmen
 import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-normal';
 import { UserDepartment } from '../../model/department/user-department/user-department';
 import { HistoryLog } from '../../model/history-log/history-log';
+import { UserPage } from '../../model/user/user-page';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) { }
 
-  listAllUsers(){
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}`)
+  listAllUsers(page = 0, pageSize = 10){
+    return this.httpClient.get<UserPage>(`${this.BASE_API_URL_USERS}`, { params: { page, pageSize } })
       .pipe(first());
   }
 

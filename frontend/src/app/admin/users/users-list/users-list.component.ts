@@ -13,6 +13,7 @@ import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Equipment } from '../../../model/equipment/equiment';
 import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/modal-history-log-byuser.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { UserPage } from '../../../model/user/user-page';
 
 @Component({
   selector: 'app-users-list',
@@ -52,7 +53,7 @@ export class UsersListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.refresh()
+    //this.refresh()
   }
 
   onError(errorMsg: string){
@@ -64,7 +65,7 @@ export class UsersListComponent implements OnInit{
 
   refresh(){
     this.adminService.listAllUsers().subscribe((res) => {
-      this.users = res;
+      this.users = res.content;
     });
   }
 

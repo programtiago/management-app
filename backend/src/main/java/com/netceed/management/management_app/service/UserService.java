@@ -11,6 +11,7 @@ import com.netceed.management.management_app.entity.trackaudit.TrackAuditService
 import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
+import com.netceed.management.management_app.entity.user.UserPageDto;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
@@ -19,6 +20,8 @@ import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,11 +48,20 @@ public class UserService {
     private final UserEquipmentService userEquipmentService;
     private final UserDepartmentService userDepartmentService;
 
+    public UserPageDto getAllUsers(int page, int pageSize){
+        Page<User> pageUser = userRepository.findAll(PageRequest.of(page, pageSize));
+        List<UserDto> users = pageUser.get().map(userMapper::toDto).toList();
+
+        return new UserPageDto(users, pageUser.getTotalElements(), pageUser.getTotalPages());
+    }
+
+    /*
     public List<UserDto> getAllUsers() {
         return userRepository.findAll()
                 .stream().map(userMapper::toDto)
                 .collect(Collectors.toList());
     }
+     */
 
     public List<UserDto> getAllUsersActivate() {
         return userRepository.findByUsersActive()
