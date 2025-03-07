@@ -1,5 +1,6 @@
 package com.netceed.management.management_app.entity.department;
 
+import com.netceed.management.management_app.entity.building.buildingAllocation.BuildingAllocation;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity

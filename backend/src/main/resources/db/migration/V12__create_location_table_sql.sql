@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS TB_LOCATION (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(50) NOT NULL,
+    registry_date VARCHAR(19) NOT NULL,
+    is_active BIT NOT NULL,
+    is_available BIT NOT NULL
+);

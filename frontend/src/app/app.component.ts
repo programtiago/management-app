@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MY_DATE_FORMATS } from './utils/custom-date-format';
 
@@ -13,7 +13,5 @@ import { MY_DATE_FORMATS } from './utils/custom-date-format';
 export class AppComponent {
 
   constructor(){}
-
-  title = 'frontend';
 
 }

@@ -17,35 +17,23 @@ import java.time.format.DateTimeFormatter;
 public class Location {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //private String departmentName;
     @NotBlank
+    @Column(name = "description", length = 50, nullable = false)
     private String description;
     @NotBlank
+    @Column(name = "registry_date", nullable = false)
     private String registryDate;
-    //private String buildingName;
-    /*
-    @ManyToOne
-    @JoinColumn(name = "building_id")
-    private Building building;
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
-     */
-    public Location(Long id, String description){
+    @Column(name = "is_active")
+    private boolean active;
+    @Column(name = "is_available")
+    private boolean available;
+    public Location(Long id, String description, boolean active, boolean available){
         this.id = id;
         this.description = description;
-        this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));;
-    }
-
-    /*
-    public Location(String description, Department department, Building building){
-        this.departmentName = department.getDescription();
-        this.description = description;
         this.registryDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
-        this.buildingName = building.getDescription();
+        this.active = active;
+        this.available = available;
     }
-     */
-
 }

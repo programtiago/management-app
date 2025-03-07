@@ -19,8 +19,7 @@ export class EquipmentsListComponent implements OnInit{
   @Input() equipments: Equipment[] = [];
   userEquipmentsOfEquipmentSelected: UserEquipment[] = []
   userOwnerEquipment!: User;
-
-  //statusEquipment: string = ""
+  
   statusEquipment = StatusEquipment;
 
   displayedColumns: String[] = ['brand', 'model', 'description', 'serialNumber', 'registryDate', 'status', 'actions']
@@ -31,7 +30,7 @@ export class EquipmentsListComponent implements OnInit{
 
   onRefresh(){
     this.adminService.getEquipments().subscribe((res) => {
-      this.equipments = res;
+      this.equipments = res.content;
     })
   }
 

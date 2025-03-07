@@ -5,11 +5,13 @@ import com.netceed.management.management_app.entity.user.userEquipment.UserEquip
 import com.netceed.management.management_app.service.EquipmentService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -21,8 +23,8 @@ public class EquipmentController {
     private final TrackAuditService trackAuditService;
 
     @GetMapping
-    public List<EquipmentDto> getAll(){
-        return equipmentService.getAllEquipments();
+    public EquipmentPageDto getAll(@RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize){
+        return equipmentService.getAllEquipments(page, pageSize);
     }
 
     //Return All Equipments StatusEquipment.AVAILABLE

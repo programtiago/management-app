@@ -10,6 +10,7 @@ import { CreateEquipmentRequest } from '../../model/equipment/equipment-create-n
 import { UserDepartment } from '../../model/department/user-department/user-department';
 import { HistoryLog } from '../../model/history-log/history-log';
 import { UserPage } from '../../model/user/user-page';
+import { EquipmentPage } from '../../model/equipment/equipment-page';
 
 @Injectable({
   providedIn: 'root'
@@ -125,8 +126,8 @@ export class AdminService {
   }
 
 
-  getEquipments(){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}`).pipe(first())
+  getEquipments(page = 0, pageSize = 10){
+    return this.httpClient.get<EquipmentPage>(`${this.BASE_API_URL_EQUIPMENTS}`, { params: { page, pageSize} }).pipe(first())
   }
 
   getEquipmentsAvailable(){

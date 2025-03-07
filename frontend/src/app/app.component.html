@@ -10,6 +10,8 @@
           <button mat-menu-item [matMenuTriggerFor]="users">Users</button>
           <button mat-menu-item [matMenuTriggerFor]="departments">Departments</button>
           <button mat-menu-item [matMenuTriggerFor]="equipments">Equipments</button>
+          <button mat-menu-item [matMenuTriggerFor]="locations">Buildings</button>
+          <button mat-menu-item [matMenuTriggerFor]="locations">Locations</button>
           <button mat-menu-item [matMenuTriggerFor]="logs">Logs</button>
         </mat-menu>
 
@@ -26,6 +28,16 @@
         <mat-menu #equipments="matMenu">
           <button mat-menu-item [routerLink]="['admin/new-equipment']">Add Equipment</button>
           <button mat-menu-item [routerLink]="['admin/equipments']">List Equipments</button>
+        </mat-menu>
+
+        <mat-menu #buildings="matMenu">
+          <button mat-menu-item [routerLink]="['']">Add Building</button>
+          <button mat-menu-item [routerLink]="['']">List All Buildings</button>
+        </mat-menu>
+
+        <mat-menu #locations="matMenu">
+          <button mat-menu-item [routerLink]="['']">Add Location</button>
+          <button mat-menu-item [routerLink]="['']">List All Locations</button>
         </mat-menu>
 
         <mat-menu #logs="matMenu">

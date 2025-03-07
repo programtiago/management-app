@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -77,12 +76,6 @@ public class UserController {
     @Transactional
     public UserDto create(@RequestBody @Valid UserDto newUser) throws NoSuchFieldException {
         UserDto userDto = userService.create(newUser);
-
-        /*
-        if (userDto != null){
-            trackAuditService.logAction(userDto.id(), "Created user [ " + userDto.workNumber() + " ] " + userDto.firstName() + " " + userDto.lastName() , "testUsername", "User");
-        }
-         */
 
         return userDto;
     }

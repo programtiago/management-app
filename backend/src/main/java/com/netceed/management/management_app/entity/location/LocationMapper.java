@@ -9,7 +9,7 @@ import java.util.List;
 public class LocationMapper {
 
     public Location toEntity(LocationDto locationDto){
-        Location location = new Location(locationDto.id(), locationDto.description());
+        Location location = new Location(locationDto.id(), locationDto.description(), locationDto.active(), locationDto.available());
 
         if (locationDto.id() != null){
             location.setId(locationDto.id());
@@ -23,13 +23,13 @@ public class LocationMapper {
             return null;
         }
 
-        return new LocationDto(location.getId(), location.getDescription(), location.getRegistryDate());
+        return new LocationDto(location.getId(), location.getDescription(), location.getRegistryDate(), location.isActive(), location.isAvailable());
     }
 
     public List<LocationDto> convertListLocationToDto(List<Location> locations){
         List<LocationDto> locationsDto = new ArrayList<>();
         for (Location location : locations){
-            LocationDto locationDto = new LocationDto(location.getId(),location.getDescription(), location.getRegistryDate());
+            LocationDto locationDto = new LocationDto(location.getId(),location.getDescription(), location.getRegistryDate(), location.isActive(), location.isAvailable());
             locationsDto.add(locationDto);
         }
         return locationsDto;

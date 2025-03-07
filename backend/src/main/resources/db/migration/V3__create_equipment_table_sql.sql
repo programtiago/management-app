@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS TB_EQUIPMENT (
     serial_number VARCHAR(25) NOT NULL,
     brand VARCHAR(20)  NOT NULL,
     model VARCHAR(25) NOT NULL,
-    type VARCHAR(15) NOT NULL,
+    type VARCHAR(30) NOT NULL,
     location VARCHAR(20),
     workstation VARCHAR(10),
     unity VARCHAR(10),

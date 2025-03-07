@@ -2,6 +2,9 @@ package com.netceed.management.management_app.entity.department;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class DepartmentMapper {
 
@@ -21,5 +24,15 @@ public class DepartmentMapper {
             department.setId(departmentDto.id());
         }
         return department;
+    }
+
+    public List<DepartmentDto> convertListBuildingAllocationToDto(List<Department> departments){
+        List<DepartmentDto> departmentsDtos = new ArrayList<>();
+        for (Department department : departments){
+            DepartmentDto departmentDto = new DepartmentDto(department.getId(), department.getCodeValue(), department.getDescription(), department.getRegistryDate(), department.getTotalEmployees());
+
+            departmentsDtos.add(departmentDto);
+        }
+        return departmentsDtos;
     }
 }

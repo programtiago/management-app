@@ -1,19 +1,18 @@
 package com.netceed.management.management_app.service;
 
-import com.netceed.management.management_app.entity.equipment.Equipment;
+import com.netceed.management.management_app.entity.equipment.*;
 import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.user.UserDto;
-import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.user.UserMapper;
-import com.netceed.management.management_app.entity.equipment.StatusEquipment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -73,10 +72,11 @@ public class EquipmentService {
         return equipmentMapper.toDto(equipmentMapper.toEntity(equipment));
     }
 
-    public List<EquipmentDto> getAllEquipments() {
-        return equipmentRepository.findByIsActiveTrue()
-                .stream().map(equipmentMapper::toDto)
-                .collect(Collectors.toList());
+    public EquipmentPageDto getAllEquipments(int page, int pageSize) {
+        Page<Equipment> pageEquipment = equipmentRepository.findAll(PageRequest.of(page, pageSize));
+        List<EquipmentDto> equipments = pageEquipment.get().map(equipmentMapper::toDto).toList();
+
+        return new EquipmentPageDto(equipments, pageEquipment.getTotalElements(), pageEquipment.getTotalPages());
     }
 
     public boolean serialNumberExists(String serialNumber) {

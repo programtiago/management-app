@@ -55,14 +55,6 @@ public class UserService {
         return new UserPageDto(users, pageUser.getTotalElements(), pageUser.getTotalPages());
     }
 
-    /*
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll()
-                .stream().map(userMapper::toDto)
-                .collect(Collectors.toList());
-    }
-     */
-
     public List<UserDto> getAllUsersActivate() {
         return userRepository.findByUsersActive()
                 .stream().map(userMapper::toDto).filter(UserDto::isActive)
