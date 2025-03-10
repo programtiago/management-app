@@ -38,8 +38,8 @@ export class ModalUsersAssignmentEquipmentComponent implements OnInit {
   selectedMultipleEquipmentsIds: number[] = []
   selectedMultipleEquipmentsList: Equipment[] = []
 
-  widthModalAssingment: string = '750px';
-  heightModalAssignment: string = '400px';
+  //widthModalAssingment: string = '750px';
+  //heightModalAssignment: string = '400px';
 
 
   @ViewChild('matRef') matRef!: MatSelect;

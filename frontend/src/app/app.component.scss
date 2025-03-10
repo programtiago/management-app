@@ -2,10 +2,17 @@
     max-height: 200px;
 }
 
+@media only screen and (min-width: 1537px) {
+    .app-view{
+        height: 94vh;
+    }
+}
 
-.app-view{
-    height: 100vh;
-    width: 100vw;
+
+@media only screen and (min-width: 700px) and (max-width: 1536px) {
+    .app-view{
+        height: 90vh;
+    }
 }
 
 .btn-navbar-container{

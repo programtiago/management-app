@@ -1,9 +1,12 @@
 @media only screen and (min-width: 700px) and (max-width: 1920px) {
-    .mat-mdc-table{
-        width: 100%;
-        max-width: 100%;
-        margin-bottom: 1rem;
-        display: table;
+    .card-equipments{
+        margin-top: 1rem;
+        color: red;
+    }
+
+    .mat-mdc-card-content{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: small;
     }
 
     mat-cell:nth-child(7),
@@ -23,9 +26,8 @@
 
     mat-cell:nth-child(10),
     mat-header-cell:nth-child(10) {
-        flex: 0 0 13%;
+        flex: 0 0 15%;
     }
-
 }
 
 @media only screen and (min-width: 2000px){
@@ -33,6 +35,10 @@
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
+    }
+
+    .dialog-equipment-assignment-user-style{
+        width: 75%;
     }
 
     mat-cell:nth-child(7),
@@ -67,4 +73,3 @@
     text-align: center;
     width: 100%;
 }
-

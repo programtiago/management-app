@@ -195,10 +195,13 @@ export class UsersListComponent implements OnInit{
 
       if (this.equipmentsAvailable.length != 0){
         const dialogRef = this.dialog.open(ModalUsersAssignmentEquipmentComponent, {
-          height: '70%',
-          width: '80%',
+          //height: '70%',
+          //width: '80%',
           autoFocus: false,
           hasBackdrop: false,
+          enterAnimationDuration: 1000,
+          exitAnimationDuration: 1000,
+          panelClass: ['dialog-equipment-assignment-user-style'],  
           data: user
         });
       }else{
