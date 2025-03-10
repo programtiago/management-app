@@ -8,6 +8,7 @@ import { ModalQuestionDeleteEquipmentComponent } from '../modal-question-delete-
 import { ModalViewUserOwnerEquipmentComponent } from '../modal-view-user-owner-equipment/modal-view-user-owner-equipment.component';
 import { User } from '../../../model/user/user';
 import { StatusEquipment } from '../../../model/equipment/status-equipment';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-equipments-list',
@@ -21,6 +22,8 @@ export class EquipmentsListComponent implements OnInit{
   userOwnerEquipment!: User;
   
   statusEquipment = StatusEquipment;
+
+  dataSource = new MatTableDataSource<Equipment>(this.equipments);
 
   displayedColumns: String[] = ['brand', 'model', 'description', 'serialNumber', 'registryDate', 'status', 'actions']
 
@@ -72,7 +75,16 @@ export class EquipmentsListComponent implements OnInit{
     })  
   }
 
+  
   openModalToAssignEquipmentToUser(){
     console.log('clicou')
+  }
+
+  applyFilter(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.adminService.searchEquipments(filterValue).subscribe((res) => {
+      this.equipments = res;
+      this.dataSource.data = this.equipments;
+    })
   }
 }

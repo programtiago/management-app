@@ -126,4 +126,8 @@ public class EquipmentService {
 
        return equipmentMapper.convertListEquipmentToDto(equipments);
     }
+
+    public List<EquipmentDto> search(String query){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findBKeywordSn(query));
+    }
 }

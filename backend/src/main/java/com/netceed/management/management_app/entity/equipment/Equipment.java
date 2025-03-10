@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.netceed.management.management_app.entity.equipment.converters.StatusEquipmentConverter;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +28,7 @@ public class Equipment {
     @NotNull
     private String description;
     @NotNull
-    @Column(name = "serial_number", nullable = false, length = 20)
+    @Column(name = "serial_number", unique = true, length = 20)
     private String serialNumber;
     @NotNull
     @Column(name = "brand", nullable = false, length = 20)

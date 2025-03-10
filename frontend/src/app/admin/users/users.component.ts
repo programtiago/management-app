@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AdminService } from '../services/admin.service';
 import { catchError, Observable, of, tap } from 'rxjs';
-import { User } from '../../model/user/user';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 import { UserPage } from '../../model/user/user-page';

@@ -13,7 +13,6 @@ import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Equipment } from '../../../model/equipment/equiment';
 import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/modal-history-log-byuser.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserPage } from '../../../model/user/user-page';
 
 @Component({
   selector: 'app-users-list',

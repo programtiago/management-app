@@ -82,4 +82,9 @@ public class EquipmentController {
     public List<EquipmentDto> findEquipmentsByIds(@RequestBody List<Long> equipmentsId){
         return equipmentService.findEquipmentsByIds(equipmentsId);
     }
+
+    @GetMapping("/search")
+    public List<EquipmentDto> searchEquipment(@RequestParam("keyword") String keyword){
+        return equipmentService.search(keyword);
+    }
 }

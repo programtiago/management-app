@@ -91,6 +91,12 @@ export class AdminService {
       .pipe(catchError(this.handleError));
   }
 
+  searchEquipments(keyword: string): Observable<Equipment[]> {
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/search?keyword=${keyword}`)
+      .pipe(catchError(this.handleError));
+
+  }
+
   listDepartments(){
     return this.httpClient.get<Department[]>(`${this.BASE_API_URL_DEPARTMENTS}`)
       .pipe(first());
