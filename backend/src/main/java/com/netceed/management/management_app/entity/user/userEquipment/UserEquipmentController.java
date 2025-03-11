@@ -44,6 +44,7 @@ public class UserEquipmentController {
         }
 
         return assignmentUserToEquipment;
+
     }
 
     @PostMapping("/{userId}/equipments")

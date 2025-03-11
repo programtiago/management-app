@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card class="card-container">
     <mat-card-header style="display: flex; align-content: center; justify-content: center;">
         <mat-card-title>Insert a new User</mat-card-title>
     </mat-card-header>
     <div class="choice-type-assignment">
         <mat-card-content>
-            <mat-form-field appearance="outline" floatLabel="always">
+            <mat-form-field appearance="outline" floatLabel="always" style="width: 100%;">
                 <mat-label>Choose the type of assignment</mat-label>
                 <mat-select [(value)]="typeAssignmentSelected" (selectionChange)="valueChoosedChanged($event)">
                     <mat-option [value]="'EQU'">Equipment</mat-option>
@@ -16,20 +16,61 @@
             </mat-form-field>
     </mat-card-content>     
     </div>
-    </mat-card>
+<!--</mat-card>-->
     
-    <mat-card>
+    <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length != 0" class="choice-value-assignment">
+        <mat-card class="card-table-equipments">
+                <mat-toolbar style="background-color: #1a1a1a; color: white;">
+                    <mat-toolbar-row style="display: flex; align-items: center;">
+                        <span style="flex: 1; text-align: center;">Equipments Available</span>
+                        <span class="filter-icon">
+                            <button mat-icon-button aria-label="Filter" [matMenuTriggerFor]="filterMenu">
+                                <mat-icon>filter_alt</mat-icon>
+                            </button>
+                        </span>
+                    </mat-toolbar-row>
+                </mat-toolbar>
+
+                <mat-menu #filterMenu="matMenu">
+                    <button mat-menu-item (click)="menuItemClicked('Item 1')">Item 1</button>
+                    <button mat-menu-item (click)="menuItemClicked('Item 2')">Item 2</button>
+                    <button mat-menu-item (click)="menuItemClicked('Item 3')">Item 3</button>
+                  </mat-menu>
         <!-- Depends on the type assignment selected -->
-        <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length != 0" class="choice-value-assignment">
             <mat-card-content>
-                <mat-form-field appearance="outline" floatLabel="always">
-                    <mat-label>Choose the equipment to assign</mat-label>
-                    <mat-select [(value)]="equipmentSelectedId" (selectionChange)="valueChoosedChanged($event)">
-                        <mat-option *ngFor="let equipment of equipmentsAvailable" [value]="equipment.id">{{equipment.description}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-        </mat-card-content>     
-        </div>
+                <mat-table [dataSource]="equipmentsAvailable">
+                    <ng-container matColumnDef="description">
+                        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                        <mat-cell *matCellDef="let equipment"> {{equipment.description}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="serialNumber">
+                        <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
+                        <mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type">
+                        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                        <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="registryDate">
+                        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+                        <mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <mat-paginator 
+                [pageSizeOptions]="[5,10,15]"
+                showFirstLastButtons
+                [length]="totalElements"
+                [pageSize]="pageSize"
+                (page)="onPageChange($event)"></mat-paginator>
+            </mat-card-content>
+        </mat-card>     
+    </div>
 
         <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length == 0" class="choice-value-assignment">
             <mat-card-content>
@@ -66,12 +107,10 @@
                 <h1 style="display: flex; justify-content: center; align-content: center; color: red">There is no equipments available to assign !</h1>
             </mat-card-content>
         </div>
-    </mat-card>  
     
     <mat-card *ngIf="typeAssignmentSelected == 'NO'">
         <mat-card-content>
             <div class="form-fill-data">
-            <mat-card>
                 <form [formGroup]="employeeRegister">
                 <mat-stepper [linear]="isLinear" #stepper>
                         <mat-step>
@@ -189,7 +228,6 @@
                             </mat-step>
                 </mat-stepper>                
             </form> 
-        </mat-card>
         </div>
         </mat-card-content>
     </mat-card>

@@ -9,6 +9,10 @@ import { MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
 import { Department } from '../../../model/department/department';
 import { UserDepartment } from '../../../model/department/user-department/user-department';
+import { StatusEquipment } from '../../../model/equipment/status-equipment';
+import { PageEvent } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
+import { EquipmentPage } from '../../../model/equipment/equipment-page';
 
 @Component({
   selector: 'app-multiforms',
@@ -17,16 +21,21 @@ import { UserDepartment } from '../../../model/department/user-department/user-d
 })
 export class MultiformsComponent implements OnInit{
 
-  //selectedEquipmentId: number = 0;
-
   equipmentsAvailable: Equipment[] = [];
-  //equipmentSelected!: Equipment;
   equipmentSelectedId: number = 0;
 
   departments: Department[] = [];
   departmentSelectedId: number = 0;
 
   userDepartment!: UserDepartment;
+
+  equipmentsAvailable$: Observable<EquipmentPage> | null = null;
+
+  pageIndex = 0;
+  pageSize = 10;
+  totalElements = 0;
+
+  displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -48,13 +57,23 @@ export class MultiformsComponent implements OnInit{
   isLinear = false;
 
   ngOnInit(): void {
-    this.adminService.getEquipmentsAvailable().subscribe((res) => {
-      this.equipmentsAvailable = res;
-    })
+    this.refreshEquipments();
+    this.refreshDepartments();    
+  }
 
+  refreshDepartments(){
     this.adminService.listDepartments().subscribe((res) => {
       this.departments = res;
     })
+  }
+
+  refreshEquipments(pageEvent: PageEvent = { length: 0, pageIndex: 0, pageSize: 10}){
+    this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
+      this.equipmentsAvailable = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE);
+      this.totalElements = res.totalElements;
+      this.pageSize = pageEvent.pageSize;
+      this.pageIndex = pageEvent.pageIndex;
+    });
   }
 
   employeeRegister = this.formBuilder.group({
@@ -150,9 +169,17 @@ export class MultiformsComponent implements OnInit{
         value: event.value,
         text: event.source.triggerValue
       };
-      
 
       this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
-    }
+  }
 
+  onPageChange(event: PageEvent){
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.refreshEquipments(event);
+  }
+
+  menuItemClicked(item: string){
+    console.log('Item clicked: ' + item);
+  }
 }

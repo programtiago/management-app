@@ -1,13 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 
 html, body {
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;    
 }
 
+
 .hover-row:hover{
     background-color: #F8F8FF;
 }
 
+.navbar-app {
+    background-color: #1a1a1a !important;
+    color: white !important;
+}
