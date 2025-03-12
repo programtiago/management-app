@@ -28,7 +28,13 @@
 
     .card-container{
         max-width: 75%;
-        margin: 2em auto;
+        max-height: 90%;
+        //margin: 2em auto;
+        margin: 2em 10em;
+        overflow: auto;
+        box-sizing: border-box;
+        position: absolute;
+        width: 100%;
     }
 
     .card-table-equipments{
@@ -56,4 +62,24 @@
 
 .filter-icon{
     margin-left: auto;
+}
+
+.mat-mdc-cell, .mat-mdc-header{
+    line-break: unset;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.mat-mdc-header-cell{
+    font-weight: bold;
+}
+
+mat-grid-tile {
+    text-align: center;
+    line-height: 100px; /* Center text vertically */
+    font-size: 20px;
+}
+
+mat-mdc-icon-button {
+    color: black !important;
 }

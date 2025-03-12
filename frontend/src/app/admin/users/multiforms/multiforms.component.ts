@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
@@ -13,6 +13,7 @@ import { StatusEquipment } from '../../../model/equipment/status-equipment';
 import { PageEvent } from '@angular/material/paginator';
 import { Observable } from 'rxjs';
 import { EquipmentPage } from '../../../model/equipment/equipment-page';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-multiforms',
@@ -21,8 +22,17 @@ import { EquipmentPage } from '../../../model/equipment/equipment-page';
 })
 export class MultiformsComponent implements OnInit{
 
+  allEquipments: Equipment[] = []; 
   equipmentsAvailable: Equipment[] = [];
   equipmentSelectedId: number = 0;
+  filteredEquipments: Equipment[] = [];
+
+  isFiltering: boolean = false; 
+
+  currentFilterValue: string = '';
+  currentFilterOperation: string = '';
+
+  dataSource = new MatTableDataSource<Equipment>(this.filteredEquipments);
 
   departments: Department[] = [];
   departmentSelectedId: number = 0;
@@ -31,15 +41,11 @@ export class MultiformsComponent implements OnInit{
 
   equipmentsAvailable$: Observable<EquipmentPage> | null = null;
 
+  @ViewChild('descriptionInput') descriptionInput!: ElementRef;
+
   pageIndex = 0;
   pageSize = 10;
   totalElements = 0;
-
-  displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
-
-  constructor(private formBuilder: FormBuilder, private adminService: AdminService,
-    private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
-  ){}
 
   //TEMPORARILY. Further we need to catch from the API
   UserRole = UserRole;
@@ -56,6 +62,15 @@ export class MultiformsComponent implements OnInit{
 
   isLinear = false;
 
+
+  filterLogoSymbolChoosed: string = 'filter_alt'; //Default icon if no menu option selected
+
+  displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
+
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService,
+    private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
+  ){}
+
   ngOnInit(): void {
     this.refreshEquipments();
     this.refreshDepartments();    
@@ -68,12 +83,19 @@ export class MultiformsComponent implements OnInit{
   }
 
   refreshEquipments(pageEvent: PageEvent = { length: 0, pageIndex: 0, pageSize: 10}){
-    this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
-      this.equipmentsAvailable = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE);
-      this.totalElements = res.totalElements;
-      this.pageSize = pageEvent.pageSize;
-      this.pageIndex = pageEvent.pageIndex;
+    
+    if (!this.isFiltering){
+      this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
+        this.equipmentsAvailable = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE);
+        this.allEquipments = this.equipmentsAvailable;
+        this.totalElements = res.totalElements;
+        this.pageSize = pageEvent.pageSize;
+        this.pageIndex = pageEvent.pageIndex;
+        this.dataSource.data = this.equipmentsAvailable
     });
+    }else{
+      this.updatePaginator();
+    }
   }
 
   employeeRegister = this.formBuilder.group({
@@ -176,10 +198,82 @@ export class MultiformsComponent implements OnInit{
   onPageChange(event: PageEvent){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.refreshEquipments(event);
+
+    if (this.isFiltering){
+      this.updatePaginator();
+    }else{
+      this.refreshEquipments(event);
+    }
+    return event;
   }
 
   menuItemClicked(item: string){
-    console.log('Item clicked: ' + item);
+    if (item == 'All'){
+      this.filterLogoSymbolChoosed = 'filter_alt';
+      //clear the value search and the propertie value
+      this.currentFilterValue = ''
+      this.currentFilterOperation = '' 
+      this.isFiltering = false;
+
+      //Reset pagination
+      this.pageIndex = 0;
+      this.pageSize = 10;
+
+      this.filteredEquipments = [...this.allEquipments];
+      this.totalElements = this.allEquipments.length;
+
+      this.refreshEquipments();
+      this.clearInput();
+
+    }else if (item == 'Contains'){
+      this.filterLogoSymbolChoosed = 'asterisk'
+    }else if (item == 'Starts With'){
+      this.filterLogoSymbolChoosed = 'flag'
+    }else if (item == 'Equals'){
+      this.filterLogoSymbolChoosed = 'equal'
+    }
+  }
+
+  clearInput(){
+    this.descriptionInput.nativeElement.value = '';
+  }
+
+  applyFilter(event: Event, filterPropertieOperation: string){
+    this.currentFilterValue = (event.target as HTMLInputElement).value;
+    this.currentFilterOperation = filterPropertieOperation;
+    this.pageIndex = 0;
+    this.applyFilterToEquipments();
+  }
+
+  applyFilterToEquipments(){
+    this.isFiltering = true;
+
+    if (this.currentFilterOperation === 'description'){
+      this.adminService.filterEquipmentsStartsWithDescription(this.currentFilterValue).subscribe((res) => {
+        this.filteredEquipments = res;
+        this.totalElements = this.filteredEquipments.length;
+        this.updatePaginator();
+      });
+    }else{
+      this.filteredEquipments = this.equipmentsAvailable.filter(equipment => {
+        return (equipment[this.currentFilterOperation as keyof Equipment] as unknown as string)
+        .toLowerCase()
+        .includes(this.currentFilterValue.toLowerCase());
+      });
+      this.totalElements = this.filteredEquipments.length;
+      this.pageIndex = 0;
+      this.updatePaginator();
+    }
+  }
+
+  updatePaginator(){
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+
+    if (this.isFiltering){
+      this.dataSource.data = this.filteredEquipments.slice(startIndex, endIndex)
+    }else{
+      this.dataSource.data = this.allEquipments.slice(startIndex, endIndex)
+    }
   }
 }

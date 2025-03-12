@@ -94,7 +94,14 @@ export class AdminService {
   searchEquipments(keyword: string): Observable<Equipment[]> {
     return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/search?keyword=${keyword}`)
       .pipe(catchError(this.handleError));
+  }
 
+  filterEquipmentsStartsWithDescription(description: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/startsWith?description=${description}`)
+  }
+
+  filterEquipmentsContainsDescription(description: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/contains?description=${description}`)
   }
 
   listDepartments(){

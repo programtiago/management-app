@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
-import { MatGridList } from '@angular/material/grid-list';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -47,7 +47,8 @@ import { MatPaginator } from '@angular/material/paginator';
     MatSnackBarModule,
     MatMenuModule,
     MatCheckbox,
-    MatPaginator
+    MatPaginator,
+    MatGridListModule
   ],
   exports: [
     MatToolbarModule,
@@ -71,7 +72,8 @@ import { MatPaginator } from '@angular/material/paginator';
     MatSnackBarModule,
     MatMenuModule,
     MatCheckbox,
-    MatPaginator
+    MatPaginator,
+    MatGridListModule
   ]
 })
 export class AppMaterialModule { }

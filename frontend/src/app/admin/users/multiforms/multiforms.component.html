@@ -1,4 +1,8 @@
 <mat-card class="card-container">
+    <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
     <mat-card-header style="display: flex; align-content: center; justify-content: center;">
         <mat-card-title>Insert a new User</mat-card-title>
     </mat-card-header>
@@ -18,65 +22,134 @@
     </div>
 <!--</mat-card>-->
     
-    <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length != 0" class="choice-value-assignment">
+    <div *ngIf="typeAssignmentSelected == 'EQU'" class="choice-value-assignment">
         <mat-card class="card-table-equipments">
                 <mat-toolbar style="background-color: #1a1a1a; color: white;">
                     <mat-toolbar-row style="display: flex; align-items: center;">
                         <span style="flex: 1; text-align: center;">Equipments Available</span>
                         <span class="filter-icon">
-                            <button mat-icon-button aria-label="Filter" [matMenuTriggerFor]="filterMenu">
-                                <mat-icon>filter_alt</mat-icon>
-                            </button>
                         </span>
                     </mat-toolbar-row>
                 </mat-toolbar>
 
                 <mat-menu #filterMenu="matMenu">
-                    <button mat-menu-item (click)="menuItemClicked('Item 1')">Item 1</button>
-                    <button mat-menu-item (click)="menuItemClicked('Item 2')">Item 2</button>
-                    <button mat-menu-item (click)="menuItemClicked('Item 3')">Item 3</button>
-                  </mat-menu>
-        <!-- Depends on the type assignment selected -->
+                    <button mat-menu-item (click)="menuItemClicked('All')"><mat-icon fontSet="material-symbols-outlined" matPrefix>filter_alt</mat-icon>All</button>
+                    <button mat-menu-item (click)="menuItemClicked('Contains')"><mat-icon fontSet="material-symbols-outlined" matPrefix>asterisk</mat-icon>Contains</button>
+                    <button mat-menu-item (click)="menuItemClicked('Starts With')"><mat-icon>flag</mat-icon>Starts With</button>
+                    <button mat-menu-item (click)="menuItemClicked('Equals')">
+                        <mat-icon fontSet="material-symbols-outlined" matPrefix>
+                            equal
+                        </mat-icon>
+                        Equals
+                    </button>
+                </mat-menu>
+
+                <mat-menu #filterMenuForDate="matMenu">
+                    <button mat-menu-item (click)="menuItemClicked('All')"><mat-icon fontSet="material-symbols-outlined" matPrefix>filter_alt</mat-icon>All</button>
+                    <button mat-menu-item (click)="menuItemClicked('Greater than or equal')">Smaller than or equal</button>
+                    <button mat-menu-item (click)="menuItemClicked('Greater than')"><mat-icon matPrefix>chevron_right</mat-icon>Greater than</button>
+                    <button mat-menu-item (click)="menuItemClicked('Less than or equal')">Greater than or equal</button>
+                    <button mat-menu-item (click)="menuItemClicked('Less than')"><mat-icon matPrefix>chevron_left</mat-icon>Smaller than</button>
+                    <button mat-menu-item (click)="menuItemClicked('Equals')">
+                        <mat-icon fontSet="material-symbols-outlined" matPrefix>equal</mat-icon><span>Equals</span>
+                    </button>
+                </mat-menu>
+
+            
+                  <div class="search-grid-container">
+                    <mat-grid-list cols="4" rowHeight="55px">
+                        <div class="form-field-search-description">
+                            <mat-grid-tile>
+                                <mat-form-field>
+                                        <button mat-icon-button matPrefix style="margin-top: 10px;" [mat-menu-trigger-for]="filterMenu">
+                                            <mat-icon fontSet="material-symbols-outlined">{{filterLogoSymbolChoosed}}</mat-icon>
+                                        </button>
+                                    <input #descriptionInput matInput (input)="applyFilter($event, 'description')">
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+                        
+                        <div class="form-field-search-serialNumber">
+                            <mat-grid-tile>
+                                <mat-form-field>
+                                    <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenu" style="margin-top: 10px;">
+                                        <mat-icon fontSet="material-symbols-outlined">filter_alt</mat-icon>
+                                    </button>
+                                    <input matInput>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+                        
+                        <div class="form-field-search-type">
+                            <mat-grid-tile>
+                                <mat-form-field>
+                                    <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenu" style="margin-top: 10px;">
+                                        <mat-icon fontSet="material-symbols-outlined">filter_alt</mat-icon>
+                                    </button>
+                                    <input matInput>
+                                </mat-form-field>
+                            </mat-grid-tile>
+                        </div>
+                        
+                        <mat-grid-tile>
+                            <mat-form-field>
+                                <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenuForDate" style="margin-top: 10px;">
+                                    <mat-icon fontSet="material-symbols-outlined">filter_alt</mat-icon>
+                                </button>
+                                <input matInput [matDatepicker]="picker">
+                                
+                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                    <mat-icon matDatepickerToggleIcon fontSet="material-symbols-outlined" style="color: black; margin-top: 5px;">calendar_month></mat-icon>
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
             <mat-card-content>
-                <mat-table [dataSource]="equipmentsAvailable">
-                    <ng-container matColumnDef="description">
-                        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-                        <mat-cell *matCellDef="let equipment"> {{equipment.description}} </mat-cell>
-                    </ng-container>
+                <mat-table [dataSource]="dataSource">
 
-                    <ng-container matColumnDef="serialNumber">
-                        <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
-                        <mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="description">
+                    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                    <mat-cell *matCellDef="let equipment"> {{equipment.description}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="type">
-                        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-                        <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="serialNumber">
+                    <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
+                    <mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </mat-cell>
+                </ng-container>
 
-                    <ng-container matColumnDef="registryDate">
-                        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
-                        <mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </mat-cell>
-                    </ng-container>
+                <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                    <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
+                </ng-container>
 
-                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
-                <mat-paginator 
+                <ng-container matColumnDef="registryDate">
+                    <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+                    <mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+            </mat-table>
+                
+            <mat-paginator 
                 [pageSizeOptions]="[5,10,15]"
                 showFirstLastButtons
                 [length]="totalElements"
                 [pageSize]="pageSize"
-                (page)="onPageChange($event)"></mat-paginator>
+                (page)="onPageChange($event)">
+            </mat-paginator>
             </mat-card-content>
         </mat-card>     
     </div>
-
+        <!--
         <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length == 0" class="choice-value-assignment">
             <mat-card-content>
                 <h1 style="display: flex; justify-content: center; align-content: center; color: red">There is no equipments available to assign !</h1>
             </mat-card-content>
         </div>
+        -->
 
         <!-- Depends on the type assignment selected -->
         <div *ngIf="typeAssignmentSelected == 'LOC'" class="choice-value-assignment">
@@ -101,12 +174,14 @@
                 </mat-form-field>
         </mat-card-content>     
         </div>
-
+        
+        <!--
         <div *ngIf="typeAssignmentSelected == 'EQU' && equipmentsAvailable.length == 0" class="choice-value-assignment">
             <mat-card-content>
                 <h1 style="display: flex; justify-content: center; align-content: center; color: red">There is no equipments available to assign !</h1>
             </mat-card-content>
         </div>
+        -->
     
     <mat-card *ngIf="typeAssignmentSelected == 'NO'">
         <mat-card-content>
