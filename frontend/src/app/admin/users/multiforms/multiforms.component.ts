@@ -1,19 +1,23 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ShiftType } from '../../../model/ShiftType';
 import { AdminService } from '../../services/admin.service';
 import { UserRole } from '../../../model/user/userRole';
 import { DatePipe, Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
-import { Department } from '../../../model/department/department';
-import { UserDepartment } from '../../../model/department/user-department/user-department';
 import { StatusEquipment } from '../../../model/equipment/status-equipment';
 import { PageEvent } from '@angular/material/paginator';
-import { Observable } from 'rxjs';
+import { config, Observable } from 'rxjs';
 import { EquipmentPage } from '../../../model/equipment/equipment-page';
 import { MatTableDataSource } from '@angular/material/table';
+import { Department } from '../../../model/department/department';
+import { UserDepartment } from '../../../model/department/user-department/user-department';
+import { ShiftType } from '../../../model/ShiftType';
+import { IconMapping } from '../../../model/filter/IconMapping';
+import { DateFilterOperation, FilterConfig, FilterOperation } from '../../../model/filter/FilterConfig';
+import { InputField } from '../../../model/filter/InputField';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-multiforms',
@@ -23,25 +27,35 @@ import { MatTableDataSource } from '@angular/material/table';
 export class MultiformsComponent implements OnInit{
 
   allEquipments: Equipment[] = []; 
-  equipmentsAvailable: Equipment[] = [];
-  equipmentSelectedId: number = 0;
   filteredEquipments: Equipment[] = [];
 
-  isFiltering: boolean = false; 
+  equipmentSelectedId: number = 0;
 
-  currentFilterValue: string = '';
-  currentFilterOperation: string = '';
+  isFiltering: boolean = false; //track if we are filtering some propertie from table equipments or not
+  canShowClearFilterForTypeEquipmentCategory: boolean = false;
 
-  dataSource = new MatTableDataSource<Equipment>(this.filteredEquipments);
+  currentFilterValue: string = ''; //keyword that we are filtering 
+  currentFilterOperation: string = ''; //description, type, sn, registryDate
+
+  dataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([])
 
   departments: Department[] = [];
   departmentSelectedId: number = 0;
 
   userDepartment!: UserDepartment;
 
+  equipmentsCategoryType: string[] = [ 'Desktop', 'Dock', 'Keyboard', 'Display', 'Notebook', 'Caliper', 'Pen Wifi', 'Printer', 'Scanner', 'Support Notebook', 
+    'Support Scanner', 'Cell Phone'
+  ];
+
   equipmentsAvailable$: Observable<EquipmentPage> | null = null;
 
   @ViewChild('descriptionInput') descriptionInput!: ElementRef;
+  @ViewChild('serialNumberInput') serialNumberInput!: ElementRef;
+  @ViewChild('equipmentTypeSelect') equipmentTypeSelect!: MatSelect;
+  @ViewChild('registryDateInput') registryDateInput!: ElementRef;
+
+  selectedEquipmentType: string = '';
 
   pageIndex = 0;
   pageSize = 10;
@@ -62,8 +76,79 @@ export class MultiformsComponent implements OnInit{
 
   isLinear = false;
 
+  activeFilterField: string = ''
 
-  filterLogoSymbolChoosed: string = 'filter_alt'; //Default icon if no menu option selected
+  filterLogoSymbolChoosedForDescriptionInput: string = 'filter_alt'; //Default icon if no menu option selected
+  filterLogoSymbolChoosedForSerialNumberInput: string = 'filter_alt';
+  filterLogoSymbolChoosedForTypeInput: string = 'filter_alt';
+  filterLogoSymbolChoosedForRegistryDateInput: string = 'filter_alt';
+
+  private readonly iconMap: IconMapping = {
+    'All': 'filter_alt',
+    'Contains': 'asterisk',
+    'Starts With': 'flag',
+    'Equals': 'equal'
+  };
+
+  private readonly dateIconMap: Record<DateFilterOperation, string> = {
+    'All': 'filter_alt',
+    'Greater Than': 'chevron_right',
+    'Less Than': 'chevron_left',
+    'Greater than or Equal': 'greater_than_or_equal',
+    'Less than or Equal': 'less_than_or_equal',
+    'Equals': 'equal'
+  }
+
+  private readonly inputFields: { [key: string]: InputField } = {
+    'description': {
+      input: this.descriptionInput,
+      iconKey: 'filterLogoSymbolChoosedForDescriptionInput',
+      filterProperty: 'description'
+    },
+    'serialNumber': {
+      input: this.serialNumberInput,
+      iconKey: 'filterLogoSymbolChoosedForSerialNumberInput',
+      filterProperty: 'serialNumber'
+    },
+    'type': {
+      input: this.equipmentTypeSelect,
+      iconKey: 'filterLogoSymbolChoosedForTypeInput',
+      filterProperty: 'type'
+    },
+    'registryDate': {
+      input: this.registryDateInput,
+      iconKey: 'filterLogoSymbolChoosedForRegistryDateInput',
+      filterProperty: 'registryDate'
+    }
+  };
+
+  private readonly filterConfigs: { [key: string]:  { [operation: string]: FilterConfig } } = {
+    'description': {
+      'Contains': {
+        icon: 'asterisk',
+        operation: 'Contains',
+        filterFn: (value: string) => this.adminService.filterEquipmentsContainsDescription(value)
+      },
+      'Starts With': {
+        icon: 'flag',
+        operation: 'Starts With',
+        filterFn: (value: string) => this.adminService.filterEquipmentsStartsWithDescription(value)
+      }
+    },
+    'serialNumber': {
+      'Contains': {
+        icon: 'asterisk',
+        operation: 'Contains',
+        filterFn: (value: string) => this.adminService.filterEquipmentsContainsSerialNumber(value)
+      },
+      'Starts With': {
+        icon: 'flag',
+        operation: 'Starts With',
+        filterFn: (value: string) => this.adminService.filterEquipmentsStartsWithSerialNumber(value)
+      }
+    }
+     
+  };
 
   displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
 
@@ -76,6 +161,41 @@ export class MultiformsComponent implements OnInit{
     this.refreshDepartments();    
   }
 
+  menuItemClickedDate(item: DateFilterOperation, fieldName: string):void{
+    switch(fieldName){
+      case 'registryDate':
+        this.filterLogoSymbolChoosedForRegistryDateInput = this.dateIconMap[item];
+        break;
+    }
+
+    if (item === 'All'){
+      if (this.currentFilterOperation === fieldName){
+        this.resetFilters();
+        this.registryDateInput.nativeElement.value = '';
+        this.refreshEquipments();
+      }
+    }
+  }
+
+  clearSelectTypeEquipmentFilter(){
+    this.equipmentTypeSelect.value = ''
+  }
+
+  resetFilters():void {
+    this.currentFilterValue = ''
+    this.currentFilterOperation = ''
+    this.isFiltering = false
+    this.pageIndex = 0;
+    this.pageSize = 10;
+
+    this.refreshEquipments();
+  }
+
+  updateDataSource(data: Equipment[]):void{
+    this.filteredEquipments = data;
+    this.updatePaginator();
+  }
+
   refreshDepartments(){
     this.adminService.listDepartments().subscribe((res) => {
       this.departments = res;
@@ -83,19 +203,18 @@ export class MultiformsComponent implements OnInit{
   }
 
   refreshEquipments(pageEvent: PageEvent = { length: 0, pageIndex: 0, pageSize: 10}){
-    
-    if (!this.isFiltering){
       this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
-        this.equipmentsAvailable = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE);
-        this.allEquipments = this.equipmentsAvailable;
+        this.dataSource.data = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE)
+        
         this.totalElements = res.totalElements;
         this.pageSize = pageEvent.pageSize;
         this.pageIndex = pageEvent.pageIndex;
-        this.dataSource.data = this.equipmentsAvailable
-    });
-    }else{
-      this.updatePaginator();
-    }
+
+        if (this.isFiltering){
+          this.allEquipments = [...this.dataSource.data];
+          this.filteredEquipments = [...this.dataSource.data]
+        }
+      });
   }
 
   employeeRegister = this.formBuilder.group({
@@ -198,82 +317,144 @@ export class MultiformsComponent implements OnInit{
   onPageChange(event: PageEvent){
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-
+    
     if (this.isFiltering){
       this.updatePaginator();
     }else{
       this.refreshEquipments(event);
     }
-    return event;
+    
   }
 
-  menuItemClicked(item: string){
-    if (item == 'All'){
-      this.filterLogoSymbolChoosed = 'filter_alt';
-      //clear the value search and the propertie value
-      this.currentFilterValue = ''
-      this.currentFilterOperation = '' 
-      this.isFiltering = false;
+  menuItemClicked(item: FilterOperation, fieldName: string):void{
+    const iconMap: Record<FilterOperation, string> = {
+      'All': 'filter_alt',
+      'Contains': 'asterisk',
+      'Starts With': 'flag',
+      'Equals': 'equal'
+    };
 
-      //Reset pagination
-      this.pageIndex = 0;
-      this.pageSize = 10;
-
-      this.filteredEquipments = [...this.allEquipments];
-      this.totalElements = this.allEquipments.length;
-
-      this.refreshEquipments();
-      this.clearInput();
-
-    }else if (item == 'Contains'){
-      this.filterLogoSymbolChoosed = 'asterisk'
-    }else if (item == 'Starts With'){
-      this.filterLogoSymbolChoosed = 'flag'
-    }else if (item == 'Equals'){
-      this.filterLogoSymbolChoosed = 'equal'
+    switch(fieldName) {
+      case 'description':
+          this.filterLogoSymbolChoosedForDescriptionInput = iconMap[item];
+          if (item === 'All'){
+            this.descriptionInput.nativeElement.value = ''
+          }else if (item === 'Contains'){
+            this.adminService.filterEquipmentsContainsDescription(this.descriptionInput.nativeElement.value).subscribe((res) => {
+              this.updateDataSource(res)
+            });
+            this.updatePaginator();
+          }else if (item === 'Starts With'){
+            this.adminService.filterEquipmentsStartsWithDescription(this.descriptionInput.nativeElement.value).subscribe((res) => {
+              this.updateDataSource(res)
+            })
+            this.updatePaginator();
+          } 
+          break;
+      case 'serialNumber':
+          this.filterLogoSymbolChoosedForSerialNumberInput = iconMap[item];
+          if (item === 'All'){
+            this.serialNumberInput.nativeElement.value = ''
+          }else if (item === 'Starts With'){
+            this.adminService.filterEquipmentsStartsWithSerialNumber(this.serialNumberInput.nativeElement.value).subscribe((res) => {
+              this.updateDataSource(res)
+            })
+            this.updatePaginator();
+          }else if (item === 'Contains'){
+            this.adminService.filterEquipmentsContainsSerialNumber(this.serialNumberInput.nativeElement.value).subscribe((res) => {
+              this.updateDataSource(res)
+            })
+            this.updatePaginator();
+          }
+          break;
+      case 'type':
+          this.filterLogoSymbolChoosedForTypeInput = iconMap[item];
+          if (item === 'All'){
+            this.equipmentTypeSelect.value = ''
+          }
+          break;
+      case 'registryDate':
+          this.filterLogoSymbolChoosedForRegistryDateInput = iconMap[item];
+          break;
     }
-  }
 
-  clearInput(){
-    this.descriptionInput.nativeElement.value = '';
-  }
+    if (item === 'All') {
+      if (this.currentFilterOperation === fieldName) {
+        this.resetFilters();
+    }
+  }}
 
-  applyFilter(event: Event, filterPropertieOperation: string){
+  applyFilter(event: Event, filterProperty: string){
     this.currentFilterValue = (event.target as HTMLInputElement).value;
-    this.currentFilterOperation = filterPropertieOperation;
+    this.currentFilterOperation = filterProperty;
     this.pageIndex = 0;
     this.applyFilterToEquipments();
   }
 
-  applyFilterToEquipments(){
-    this.isFiltering = true;
+  applyDateFilter(event: MatDatepickerInputEvent<any>, field: string) {
+    this.applyFilter(event.value, field);
+  }
 
-    if (this.currentFilterOperation === 'description'){
-      this.adminService.filterEquipmentsStartsWithDescription(this.currentFilterValue).subscribe((res) => {
-        this.filteredEquipments = res;
-        this.totalElements = this.filteredEquipments.length;
-        this.updatePaginator();
-      });
+  applyFilterToEquipments(){
+    this.isFiltering = true
+    this.pageIndex = 0
+
+    if (this.currentFilterOperation === 'registryDate'){
+      const dateValue = new Date(this.currentFilterValue)
+      const filterIcon = this.filterLogoSymbolChoosedForRegistryDateInput;
+
+      this.filteredEquipments = this.allEquipments.filter(equipment => {
+        const equipmentDate = new Date(equipment.registryDate)
+
+      switch(filterIcon){
+        case this.dateIconMap['Greater Than']:
+          return equipmentDate > dateValue;
+        case this.dateIconMap['Less Than']:
+          return equipmentDate < dateValue;
+        case this.dateIconMap['Greater than or Equal']:
+          return equipmentDate >= dateValue    
+        case this.dateIconMap['Less than or Equal']:
+          return equipmentDate <= dateValue;
+        case this.dateIconMap['Equals']:
+          return equipmentDate.getTime() === dateValue.getTime();
+        default:
+          return true;      
+      }
+    });
+      this.updateDataSource(this.filteredEquipments)
     }else{
-      this.filteredEquipments = this.equipmentsAvailable.filter(equipment => {
-        return (equipment[this.currentFilterOperation as keyof Equipment] as unknown as string)
-        .toLowerCase()
-        .includes(this.currentFilterValue.toLowerCase());
-      });
-      this.totalElements = this.filteredEquipments.length;
-      this.pageIndex = 0;
-      this.updatePaginator();
+      const field = this.inputFields[this.currentFilterOperation];
+      const currentIcon = (this as any)[field.iconKey];
+
+      const operation = Object.entries(this.filterConfigs[field.filterProperty])
+        .find(([_, config]) => config.icon === currentIcon)?.[0];
+
+      if (operation && this.currentFilterValue){
+        this.filterConfigs[field.filterProperty][operation].filterFn(this.currentFilterValue)
+          .subscribe(res => {
+            this.updateDataSource(res);
+          })
+      }  
+    }  
+  }
+
+  getEquipmentTypeSelected(event: MatSelectChange){
+    this.selectedEquipmentType = event.value;
+
+    if (this.selectedEquipmentType){
+      this.canShowClearFilterForTypeEquipmentCategory = true;
     }
   }
 
-  updatePaginator(){
-    const startIndex = this.pageIndex * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
+  setActiveFilter(fieldName: string){
+    this.activeFilterField = fieldName;
+  }
 
-    if (this.isFiltering){
-      this.dataSource.data = this.filteredEquipments.slice(startIndex, endIndex)
-    }else{
-      this.dataSource.data = this.allEquipments.slice(startIndex, endIndex)
-    }
+  updatePaginator(){
+      if (this.isFiltering){
+        const startIndex = this.pageIndex * this.pageSize;
+        const endIndex = Math.min(startIndex + this.pageSize, this.filteredEquipments.length);
+        this.dataSource.data = this.filteredEquipments.slice(startIndex, endIndex)
+      }
   }
 }

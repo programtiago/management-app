@@ -1444,31 +1444,31 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (360, 'Paquímetro Mitutoyo CD-20APX', 'B18352086', 'Mitutoyo', 'CD-20APX', 'Paquímetro', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (360, 'Paquímetro Mitutoyo CD-20APX', 'B18352086', 'Mitutoyo', 'CD-20APX', 'Caliper', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (361, 'Paquímetro Mitutoyo CD-20APX', 'B20149265', 'Mitutoyo', 'CD-20APX', 'Paquímetro', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (361, 'Paquímetro Mitutoyo CD-20APX', 'B20149265', 'Mitutoyo', 'CD-20APX', 'Caliper', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (362, 'Paquímetro Mitutoyo CD-20APX', 'B20150242', 'Mitutoyo', 'CD-20APX', 'Paquímetro', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (362, 'Paquímetro Mitutoyo CD-20APX', 'B20150242', 'Mitutoyo', 'CD-20APX', 'Caliper', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (363, 'Telemóvel Iphone 8 MQ6G2QL/A', 'FFNZV6QJC67', 'Apple', 'MQ6G2QL/A', 'Telemóvel', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (363, 'Telemóvel Iphone 8 MQ6G2QL/A', 'FFNZV6QJC67', 'Apple', 'MQ6G2QL/A', 'Cell Phone', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (364, 'Telemóvel Samsung S21+ 5G', 'R3CR30NLMGF', 'Samsung', 'S21+ 5G', 'Telemóvel', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (364, 'Telemóvel Samsung S21+ 5G', 'R3CR30NLMGF', 'Samsung', 'S21+ 5G', 'Cell Phone', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (365, 'Telemóvel Samsung S21+ 5G', 'R5CR31DM6LL', 'Samsung', 'S21+ 5G', 'Telemóvel', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (365, 'Telemóvel Samsung S21+ 5G', 'R5CR31DM6LL', 'Samsung', 'S21+ 5G', 'Cell Phone', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (366, 'Telemóvel Samsung S21+ 5G', 'RF8NC17W3JF', 'Samsung', 'S21+ 5G', 'Telemóvel', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (366, 'Telemóvel Samsung S21+ 5G', 'RF8NC17W3JF', 'Samsung', 'S21+ 5G', 'Cell Phone', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -1494,135 +1494,135 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
 -- MONITORS
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (372, 'Monitor HP U28 4K HDR ', '1CR1360F12', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (372, 'Monitor HP U28 4K HDR ', '1CR1360F12', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (373, 'Monitor HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (373, 'Display HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (374, 'Monitor HP U28 4K HDR ', '1CR1231LGQ', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (374, 'Monitor HP U28 4K HDR ', '1CR1231LGQ', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (375, 'Monitor HP U28 4K HDR ', '1CR1231LJH', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (375, 'Monitor HP U28 4K HDR ', '1CR1231LJH', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (376, 'Monitor HP U28 4K HDR ', '1CR1231LK1', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (376, 'Monitor HP U28 4K HDR ', '1CR1231LK1', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (377, 'Monitor HP U28 4K HDR ', '1CR1231M13', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (377, 'Monitor HP U28 4K HDR ', '1CR1231M13', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (378, 'Monitor HP U28 4K HDR ', '1CR1360F60', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (378, 'Monitor HP U28 4K HDR ', '1CR1360F60', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (379, 'Monitor HP U28 4K HDR ', '1CR1411R7Z', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (379, 'Monitor HP U28 4K HDR ', '1CR1411R7Z', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (380, 'Monitor HP U28 4K HDR ', '1CR1411R88', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (380, 'Monitor HP U28 4K HDR ', '1CR1411R88', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (381, 'Monitor HP U28 4K HDR ', '1CR1411R8J', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (381, 'Monitor HP U28 4K HDR ', '1CR1411R8J', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (382, 'Monitor HP U28 4K HDR ', '1CR2021CYM', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (382, 'Monitor HP U28 4K HDR ', '1CR2021CYM', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (383, 'Monitor HP U28 4K HDR ', '1CR2021CYX', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (383, 'Monitor HP U28 4K HDR ', '1CR2021CYX', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (384, 'Monitor HP U28 4K HDR ', '1Z980AAABB', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (384, 'Monitor HP U28 4K HDR ', '1Z980AAABB', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (385, 'Monitor HP U28 4K HDR ', '1Z980AAABB', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (385, 'Monitor HP U28 4K HDR ', '1Z980AAABB', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (386, 'Monitor HP U28 4K HDR ', '1CR2021CYW', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (386, 'Monitor HP U28 4K HDR ', '1CR2021CYW', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (387, 'Monitor HP U28 4K HDR ', '1CR2110GX3', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (387, 'Monitor HP U28 4K HDR ', '1CR2110GX3', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (388, 'Monitor HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (388, 'Monitor HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (389, 'Monitor HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (389, 'Monitor HP U28 4K HDR ', '1C1411RNK', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (390, 'Monitor HP U28 4K HDR ', '1CR2021CYW', 'HP', 'U28 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (390, 'Monitor HP U28 4K HDR ', '1CR2021CYW', 'HP', 'U28 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (391, 'Monitor HP U32 4K HDR ', '1CR20406FS', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (391, 'Monitor HP U32 4K HDR ', '1CR20406FS', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (392, 'Monitor HP U32 4K HDR ', '1CR23406RT', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (392, 'Monitor HP U32 4K HDR ', '1CR23406RT', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (393, 'Monitor HP U32 4K HDR ', '1CR23406R2', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (393, 'Monitor HP U32 4K HDR ', '1CR23406R2', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (394, 'Monitor HP U32 4K HDR ', '1CR23406QZ', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (394, 'Monitor HP U32 4K HDR ', '1CR23406QZ', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (395, 'Monitor HP U32 4K HDR ', '1CR23406QY', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (395, 'Monitor HP U32 4K HDR ', '1CR23406QY', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (396, 'Monitor HP U32 4K HDR ', '1CR23406QD', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (396, 'Monitor HP U32 4K HDR ', '1CR23406QD', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (397, 'Monitor HP U32 4K HDR ', '1CR23406L1', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (397, 'Monitor HP U32 4K HDR ', '1CR23406L1', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (398, 'Monitor HP U32 4K HDR ', '1CR23406HR', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (398, 'Monitor HP U32 4K HDR ', '1CR23406HR', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (399, 'Monitor HP U32 4K HDR ', '1CR23406QZ', 'HP', 'U32 4K HDR', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (399, 'Monitor HP U32 4K HDR ', '1CR23406QZ', 'HP', 'U32 4K HDR', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (400, 'Monitor Philips Briliance 328P6LJEB/00', 'AU5A1935000072', 'Philips', '328P6LJEB/00', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (400, 'Monitor Philips Briliance 328P6LJEB/00', 'AU5A1935000072', 'Philips', '328P6LJEB/00', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (401, 'Monitor Philips Briliance 328P6LJEB/00', 'AU5A2024000491', 'Philips', '328P6LJEB/00', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (401, 'Monitor Philips Briliance 328P6LJEB/00', 'AU5A2024000491', 'Philips', '328P6LJEB/00', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (402, 'Monitor Philips 288P6LJEB/00', 'AU5A2044000016', 'Philips', '288P6LJEB/00', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (402, 'Monitor Philips 288P6LJEB/00', 'AU5A2044000016', 'Philips', '288P6LJEB/00', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (403, 'Monitor Philips 288P6LJEB/00', 'AU5A2044000058', 'Philips', '288P6LJEB/00', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (403, 'Monitor Philips 288P6LJEB/00', 'AU5A2044000058', 'Philips', '288P6LJEB/00', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (404, 'Monitor Philips 288P6LJEB/00', '1CR2021BV7', 'Philips', '288P6LJEB/00', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (404, 'Monitor Philips 288P6LJEB/00', '1CR2021BV7', 'Philips', '288P6LJEB/00', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -1630,131 +1630,131 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (406, 'Monitor Philips 223V5L', 'UK0A12142030215', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (406, 'Monitor Philips 223V5L', 'UK0A12142030215', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (407, 'Monitor Philips 223V5L', 'UK0A2142030210', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (407, 'Monitor Philips 223V5L', 'UK0A2142030210', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (408, 'Monitor Philips 223V5L', 'UK0A2142030215', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (408, 'Monitor Philips 223V5L', 'UK0A2142030215', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (409, 'Monitor Philips 223V5L', 'UK0A2142030220', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (409, 'Monitor Philips 223V5L', 'UK0A2142030220', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (410, 'Monitor Philips 223V5L', 'UK0A2142030222', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (410, 'Monitor Philips 223V5L', 'UK0A2142030222', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (411, 'Monitor Philips 223V5L', 'UK0A2142030225', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (411, 'Monitor Philips 223V5L', 'UK0A2142030225', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (412, 'Monitor Philips 223V5L', 'UK0A2142030227', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (412, 'Monitor Philips 223V5L', 'UK0A2142030227', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (413, 'Monitor Philips 223V5L', 'UK0A2142030228', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (413, 'Monitor Philips 223V5L', 'UK0A2142030228', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (414, 'Monitor Philips 223V5L', 'UK0A2142030229', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (414, 'Monitor Philips 223V5L', 'UK0A2142030229', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (415, 'Monitor Philips 223V5L', 'UK0A2142030231', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (415, 'Monitor Philips 223V5L', 'UK0A2142030231', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (416, 'Monitor Philips 223V5L', 'UK0A2142030232', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (416, 'Monitor Philips 223V5L', 'UK0A2142030232', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (417, 'Monitor Philips 223V5L', 'UK0A2142030233', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (417, 'Monitor Philips 223V5L', 'UK0A2142030233', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (418, 'Monitor Philips 223V5L', 'UK0A2142030234', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (418, 'Monitor Philips 223V5L', 'UK0A2142030234', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (419, 'Monitor Philips 223V5L', 'UK0A2142030235', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (419, 'Monitor Philips 223V5L', 'UK0A2142030235', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (420, 'Monitor Philips 223V5L', 'UK0A2142030237', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (420, 'Monitor Philips 223V5L', 'UK0A2142030237', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (421, 'Monitor Philips 223V5L', 'UK0A2142030238', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (421, 'Monitor Philips 223V5L', 'UK0A2142030238', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (422, 'Monitor Philips 223V5L', 'UK0A2142030320', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (422, 'Monitor Philips 223V5L', 'UK0A2142030320', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (423, 'Monitor Philips 223V5L', 'UK0A2142030401', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (423, 'Monitor Philips 223V5L', 'UK0A2142030401', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (424, 'Monitor Philips 223V5L', 'UK0A2142030406', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (424, 'Monitor Philips 223V5L', 'UK0A2142030406', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (425, 'Monitor Philips 223V5L', 'UK0A2142030474', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (425, 'Monitor Philips 223V5L', 'UK0A2142030474', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (426, 'Monitor Philips 223V5L', 'UK0A2142030510', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (426, 'Monitor Philips 223V5L', 'UK0A2142030510', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (427, 'Monitor Philips 223V5L', 'UK10A214203020', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (427, 'Monitor Philips 223V5L', 'UK10A214203020', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (428, 'Monitor Philips 223V5L', 'UK0A2142030396', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (428, 'Monitor Philips 223V5L', 'UK0A2142030396', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (429, 'Monitor Philips 223V5L', 'UK0A2142030400', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (429, 'Monitor Philips 223V5L', 'UK0A2142030400', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (430, 'Monitor Philips 223V5L', 'UK0A2146000016', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (430, 'Monitor Philips 223V5L', 'UK0A2146000016', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (431, 'Monitor Philips 223V5L', 'UK0A2142030388', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (431, 'Monitor Philips 223V5L', 'UK0A2142030388', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (432, 'Monitor Philips 223V5L', 'UK0A2142030394', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (432, 'Monitor Philips 223V5L', 'UK0A2142030394', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (433, 'Monitor Philips 223V5L', 'UK0A2142030395', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (433, 'Monitor Philips 223V5L', 'UK0A2142030395', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (434, 'Monitor Philips 223V5L', 'UK0A2141008745', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (434, 'Monitor Philips 223V5L', 'UK0A2141008745', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (435, 'Monitor Philips 223V5L', 'UK0A2141008749', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (435, 'Monitor Philips 223V5L', 'UK0A2141008749', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (436, 'Monitor Philips 223V5L', 'UK0A2142030224', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (436, 'Monitor Philips 223V5L', 'UK0A2142030224', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (437, 'Monitor Philips 223V5L', 'UK0A2142030402', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (437, 'Monitor Philips 223V5L', 'UK0A2142030402', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -1762,15 +1762,15 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (439, 'Monitor Philips 223V5L', 'UK0A2142030223', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (439, 'Monitor Philips 223V5L', 'UK0A2142030223', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (440, 'Monitor Philips 223V5L', 'UK0A2142030385', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (440, 'Monitor Philips 223V5L', 'UK0A2142030385', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (441, 'Monitor Philips 223V5L', 'UK0A2142030384', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (441, 'Monitor Philips 223V5L', 'UK0A2142030384', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -1778,121 +1778,121 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (443, 'Monitor Philips 223V5L', 'UK0A2142030407', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (443, 'Monitor Philips 223V5L', 'UK0A2142030407', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (444, 'Monitor Philips 223V5L', 'UK0A2141008840', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (444, 'Monitor Philips 223V5L', 'UK0A2141008840', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (445, 'Monitor Philips 223V5L', 'UK0A2142030405', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (445, 'Monitor Philips 223V5L', 'UK0A2142030405', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (446, 'Monitor Philips 223V5L', 'UK0A2142030394', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (446, 'Monitor Philips 223V5L', 'UK0A2142030394', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (447, 'Monitor Philips 223V5L', 'UK0A2238002899', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (447, 'Monitor Philips 223V5L', 'UK0A2238002899', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (448, 'Monitor Philips 223V5L', 'UK0A2238002688', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (448, 'Monitor Philips 223V5L', 'UK0A2238002688', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (449, 'Monitor Philips 223V5L', 'UK0A2238002671', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (449, 'Monitor Philips 223V5L', 'UK0A2238002671', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (450, 'Monitor Philips 223V5L', 'UK0A2238002701', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (450, 'Monitor Philips 223V5L', 'UK0A2238002701', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (451, 'Monitor Philips 223V5L', 'UK0A2238002666', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (451, 'Monitor Philips 223V5L', 'UK0A2238002666', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (452, 'Monitor Philips 223V5L', 'UK0A2142030222', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (452, 'Monitor Philips 223V5L', 'UK0A2142030222', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (453, 'Monitor Philips 223V5L', 'UK0A2238002759', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (453, 'Monitor Philips 223V5L', 'UK0A2238002759', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (454, 'Monitor Philips 223V5L', 'UK0A2238002787', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (454, 'Monitor Philips 223V5L', 'UK0A2238002787', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (455, 'Monitor Philips 223V5L', 'UK0A2238002669', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (455, 'Monitor Philips 223V5L', 'UK0A2238002669', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (456, 'Monitor Philips 223V5L', 'UK0A2238002696', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (456, 'Monitor Philips 223V5L', 'UK0A2238002696', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (457, 'Monitor Philips 223V5L', 'UK0A2238002888', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (457, 'Monitor Philips 223V5L', 'UK0A2238002888', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (458, 'Monitor Philips 223V5L', 'UK0A2238002885', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (458, 'Monitor Philips 223V5L', 'UK0A2238002885', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (459, 'Monitor Philips 223V5L', 'UK0A2238002672', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (459, 'Monitor Philips 223V5L', 'UK0A2238002672', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (460, 'Monitor Philips 223V5L', 'UK0A2238002754', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (460, 'Monitor Philips 223V5L', 'UK0A2238002754', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (461, 'Monitor Philips 223V5L', 'UK0A2238002792', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (461, 'Monitor Philips 223V5L', 'UK0A2238002792', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (462, 'Monitor Philips 223V5L', 'UK0A2238002766', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (462, 'Monitor Philips 223V5L', 'UK0A2238002766', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (463, 'Monitor Philips 223V5L', 'UK0A2238002764', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (463, 'Monitor Philips 223V5L', 'UK0A2238002764', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (464, 'Monitor Philips 223V5L', 'UK0A2238002896', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (464, 'Monitor Philips 223V5L', 'UK0A2238002896', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (465, 'Monitor Philips 223V5L', 'UK0A2238002757', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (465, 'Monitor Philips 223V5L', 'UK0A2238002757', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (466, 'Monitor Philips 223V5L', 'UK0A2238002667', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (466, 'Monitor Philips 223V5L', 'UK0A2238002667', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (467, 'Monitor Philips 223V5L', 'UK0A2238002886', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (467, 'Monitor Philips 223V5L', 'UK0A2238002886', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (468, 'Monitor Philips 223V5L', 'UK0A2238002699', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (468, 'Monitor Philips 223V5L', 'UK0A2238002699', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (469, 'Monitor Philips 223V5L', 'UK0A2238002687', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (469, 'Monitor Philips 223V5L', 'UK0A2238002687', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (470, 'Monitor Philips 223V5L', 'UK0A2238002758', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (470, 'Monitor Philips 223V5L', 'UK0A2238002758', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (471, 'Monitor Philips 223V5L', 'UK0A2238002665', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (471, 'Monitor Philips 223V5L', 'UK0A2238002665', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (472, 'Monitor Philips 223V5L', 'UK0A2238002760', 'Philips', '223V5L', 'Monitor', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (472, 'Monitor Philips 223V5L', 'UK0A2238002760', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
   1, 'Available', 'New');

@@ -97,11 +97,23 @@ export class AdminService {
   }
 
   filterEquipmentsStartsWithDescription(description: string){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/startsWith?description=${description}`)
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/description/startsWith?description=${description}`)
   }
 
   filterEquipmentsContainsDescription(description: string){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/contains?description=${description}`)
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/description/contains?description=${description}`)
+  }
+
+  filterEquipmentsStartsWithSerialNumber(serialNumber: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/startsWith?description=${serialNumber}`)
+  }
+
+  filterEquipmentsContainsSerialNumber(serialNumber: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/contains?description=${serialNumber}`)
+  }
+
+  filterEquipmentsByType(type: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/type/?equals=${type}`)
   }
 
   listDepartments(){

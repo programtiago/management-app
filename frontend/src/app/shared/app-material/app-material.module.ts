@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MatSelect } from '@angular/material/select';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
@@ -48,7 +48,8 @@ import { MatPaginator } from '@angular/material/paginator';
     MatMenuModule,
     MatCheckbox,
     MatPaginator,
-    MatGridListModule
+    MatGridListModule,
+    FormsModule
   ],
   exports: [
     MatToolbarModule,
@@ -73,7 +74,8 @@ import { MatPaginator } from '@angular/material/paginator';
     MatMenuModule,
     MatCheckbox,
     MatPaginator,
-    MatGridListModule
+    MatGridListModule,
+    FormsModule
   ]
 })
 export class AppMaterialModule { }

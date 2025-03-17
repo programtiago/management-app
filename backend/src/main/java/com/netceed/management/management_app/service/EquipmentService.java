@@ -130,4 +130,24 @@ public class EquipmentService {
     public List<EquipmentDto> search(String query){
         return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findBKeywordSn(query));
     }
+
+    public List<EquipmentDto> searchEquipmentsStartsWithDescription(String description){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsStartsWithDescription(description));
+    }
+
+    public List<EquipmentDto> searchEquipmentsContainsDescription(String description){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsContainsDescription(description));
+    }
+
+    public List<EquipmentDto> searchEquipmentsStartsWithSerialNumber(String serialNumber){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsStartsWithSerialNumber(serialNumber));
+    }
+
+    public List<EquipmentDto> searchEquipmentsContainsSerialNumber(String serialNumber){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsContainsSerialNumber(serialNumber));
+    }
+
+    public List<EquipmentDto> searchEquipmentsByType(String type){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsByType(type));
+    }
 }

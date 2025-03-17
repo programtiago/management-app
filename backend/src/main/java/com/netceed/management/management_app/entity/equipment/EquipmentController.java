@@ -87,4 +87,24 @@ public class EquipmentController {
     public List<EquipmentDto> searchEquipment(@RequestParam("keyword") String keyword){
         return equipmentService.search(keyword);
     }
+
+    @GetMapping("/filter/description/startsWith")
+    public List<EquipmentDto> findEquipmentsStartWithDescription(@RequestParam("description") String description){
+        return equipmentService.searchEquipmentsStartsWithDescription(description);
+    }
+
+    @GetMapping("/filter/description/contains")
+    public List<EquipmentDto> findEquipmentsContainsDescription(@RequestParam("description") String description){
+        return equipmentService.searchEquipmentsContainsDescription(description);
+    }
+
+    @GetMapping("/filter/serialNumber/startsWith")
+    public List<EquipmentDto> findEquipmentsStartWithSerialNumber(@RequestParam("serialNumber") String serialNumber){
+        return equipmentService.searchEquipmentsStartsWithSerialNumber(serialNumber);
+    }
+
+    @GetMapping("/filter/type")
+    public List<EquipmentDto> findEquipmentsByType(@RequestParam("equals") String type){
+        return equipmentService.searchEquipmentsByType(type);
+    }
 }
