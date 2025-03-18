@@ -146,8 +146,14 @@ export class MultiformsComponent implements OnInit{
         operation: 'Starts With',
         filterFn: (value: string) => this.adminService.filterEquipmentsStartsWithSerialNumber(value)
       }
-    }
-     
+    },
+    'registryDate': {
+      'Equals': {
+        icon: 'equal',
+        operation: 'Equals',
+        filterFn: (value: string) => this.adminService.filterEquipmentsEqualsRegistryDate(value)
+      }
+    },
   };
 
   displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
@@ -178,7 +184,13 @@ export class MultiformsComponent implements OnInit{
   }
 
   clearSelectTypeEquipmentFilter(){
-    this.equipmentTypeSelect.value = ''
+    if (this.equipmentTypeSelect){
+      this.equipmentTypeSelect.value = ''
+      this.selectedEquipmentType = '';
+      this.isFiltering = false;
+      this.canShowClearFilterForTypeEquipmentCategory = false;
+      this.refreshEquipments();
+    }
   }
 
   resetFilters():void {
@@ -193,6 +205,8 @@ export class MultiformsComponent implements OnInit{
 
   updateDataSource(data: Equipment[]):void{
     this.filteredEquipments = data;
+    this.totalElements = data.length
+    this.pageIndex = 0;
     this.updatePaginator();
   }
 
@@ -306,12 +320,12 @@ export class MultiformsComponent implements OnInit{
   }
 
   valueChoosedChanged(event: MatSelectChange){
-      this.selectedValueCreationAssignmentType = {
-        value: event.value,
-        text: event.source.triggerValue
-      };
+    this.selectedValueCreationAssignmentType = {
+      value: event.value,
+      text: event.source.triggerValue
+    };
 
-      this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
+    this.selectedValueCreationAssignmentType = this.selectedValueCreationAssignmentType.text;
   }
 
   onPageChange(event: PageEvent){
@@ -339,32 +353,12 @@ export class MultiformsComponent implements OnInit{
           this.filterLogoSymbolChoosedForDescriptionInput = iconMap[item];
           if (item === 'All'){
             this.descriptionInput.nativeElement.value = ''
-          }else if (item === 'Contains'){
-            this.adminService.filterEquipmentsContainsDescription(this.descriptionInput.nativeElement.value).subscribe((res) => {
-              this.updateDataSource(res)
-            });
-            this.updatePaginator();
-          }else if (item === 'Starts With'){
-            this.adminService.filterEquipmentsStartsWithDescription(this.descriptionInput.nativeElement.value).subscribe((res) => {
-              this.updateDataSource(res)
-            })
-            this.updatePaginator();
           } 
           break;
       case 'serialNumber':
           this.filterLogoSymbolChoosedForSerialNumberInput = iconMap[item];
           if (item === 'All'){
             this.serialNumberInput.nativeElement.value = ''
-          }else if (item === 'Starts With'){
-            this.adminService.filterEquipmentsStartsWithSerialNumber(this.serialNumberInput.nativeElement.value).subscribe((res) => {
-              this.updateDataSource(res)
-            })
-            this.updatePaginator();
-          }else if (item === 'Contains'){
-            this.adminService.filterEquipmentsContainsSerialNumber(this.serialNumberInput.nativeElement.value).subscribe((res) => {
-              this.updateDataSource(res)
-            })
-            this.updatePaginator();
           }
           break;
       case 'type':
@@ -440,9 +434,16 @@ export class MultiformsComponent implements OnInit{
 
   getEquipmentTypeSelected(event: MatSelectChange){
     this.selectedEquipmentType = event.value;
+    this.isFiltering = true;
+    this.pageIndex = 0;
 
     if (this.selectedEquipmentType){
-      this.canShowClearFilterForTypeEquipmentCategory = true;
+      this.adminService.filterEquipmentsByType(this.selectedEquipmentType).subscribe((res) => {
+        this.filteredEquipments = res;
+        this.totalElements = res.length;
+        this.canShowClearFilterForTypeEquipmentCategory = true;
+        this.updatePaginator();
+      })
     }
   }
 
@@ -455,6 +456,8 @@ export class MultiformsComponent implements OnInit{
         const startIndex = this.pageIndex * this.pageSize;
         const endIndex = Math.min(startIndex + this.pageSize, this.filteredEquipments.length);
         this.dataSource.data = this.filteredEquipments.slice(startIndex, endIndex)
+
+        this.totalElements = this.filteredEquipments.length;
       }
   }
 }

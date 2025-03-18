@@ -16,7 +16,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -149,5 +148,9 @@ public class EquipmentService {
 
     public List<EquipmentDto> searchEquipmentsByType(String type){
         return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsByType(type));
+    }
+
+    public List<EquipmentDto> searchEquipmentsEqualsRegistryDate(String registryDate){
+        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findEquipmentsEqualsRegistryDate(registryDate));
     }
 }

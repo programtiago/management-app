@@ -439,31 +439,31 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (110, 'Teclado Microsoft Wired Keyboard 600', '0065818348830', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (110, 'Teclado Microsoft Wired Keyboard 600', '0065818348830', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '18-05-2024 12:22:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (111, 'Teclado Microsoft Wired Keyboard 600', '0065818348787', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (111, 'Teclado Microsoft Wired Keyboard 600', '0065818348787', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '18-05-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (112, 'Teclado Microsoft Wired Keyboard 600', '0065820086444', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (112, 'Teclado Microsoft Wired Keyboard 600', '0065820086444', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '18-05-2024 16:52:47',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (113, 'Teclado Microsoft Wired Keyboard 600', '0065820086443', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (113, 'Teclado Microsoft Wired Keyboard 600', '0065820086443', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '13-11-2023 09:23:03',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (114, 'Teclado Microsoft Wired Keyboard 600', '0065820086441', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (114, 'Teclado Microsoft Wired Keyboard 600', '0065820086441', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '13-11-2023 09:23:03',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (115, 'Teclado Microsoft Wired Keyboard 600', '0065820086445', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (115, 'Teclado Microsoft Wired Keyboard 600', '0065820086445', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '13-11-2023 09:23:03',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (116, 'Teclado Microsoft Wired Keyboard 600', '0065820086442', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (116, 'Teclado Microsoft Wired Keyboard 600', '0065820086442', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '13-11-2023 09:23:03',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -499,19 +499,19 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (125, 'Teclado Microsoft Wired Keyboard 600', '0065820086774', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (125, 'Teclado Microsoft Wired Keyboard 600', '0065820086774', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '06-11-2022 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (126, 'Teclado Microsoft Wired Keyboard 600', '0065820086777', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (126, 'Teclado Microsoft Wired Keyboard 600', '0065820086777', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '06-11-2022 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (127, 'Teclado Microsoft Wired Keyboard 600', '0065819884577', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (127, 'Teclado Microsoft Wired Keyboard 600', '0065819884577', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '06-11-2022 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (128, 'Teclado Microsoft Wired Keyboard 600', '0065819884574', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (128, 'Teclado Microsoft Wired Keyboard 600', '0065819884574', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '06-11-2022 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -527,19 +527,19 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (132, 'Teclado Microsoft Wired Keyboard 600', '0065819884526', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (132, 'Teclado Microsoft Wired Keyboard 600', '0065819884526', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '27-09-2024 12:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (133, 'Teclado Microsoft Wired Keyboard 600', '0065819884525', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (133, 'Teclado Microsoft Wired Keyboard 600', '0065819884525', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '27-09-2024 13:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (134, 'Teclado Microsoft Wired Keyboard 600', '0065819884527', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (134, 'Teclado Microsoft Wired Keyboard 600', '0065819884527', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '27-09-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (135, 'Teclado Microsoft Wired Keyboard 600', '0065819884528', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (135, 'Teclado Microsoft Wired Keyboard 600', '0065819884528', 'Microsoft', 'Wired 600', 'Keyboard', null, '', 'Refurb', '27-09-2024 17:52:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -623,43 +623,43 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (156, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200261', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (156, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200261', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (157, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200262', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (157, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200262', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (158, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200263', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (158, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200263', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (159, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200264', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (159, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200264', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (160, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200265', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (160, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200265', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (161, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800046', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (161, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800046', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (162, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800047', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (162, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800047', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (163, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800048', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (163, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800048', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 11:27:12',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (164, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800049', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (164, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800049', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 17:12:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (165, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800050', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (165, 'Base de Portátil Cooler Master', 'R9NBSE42K1210800050', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '03-07-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -671,25 +671,25 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (168, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200264', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (168, 'Base de Portátil Cooler Master', 'R9NBSE42K1210200264', 'Cooler Master', '', 'Support Notebook', null, '', 'Refurb', '21-03-2024 09:20:23',
   1, 'Available', 'New');
 
 -- DESKTOPS
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (169, 'Desktop Dell OPT3040MFF-SB16-R4', '125S7J2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (169, 'Desktop Dell OPT3040MFF-SB16-R4', '125S7J2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-03-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (170, 'Desktop Dell OPT3040MFF-SB16-R4', 'BPR90J2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (170, 'Desktop Dell OPT3040MFF-SB16-R4', 'BPR90J2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-03-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (171, 'Desktop Dell OPT3040MFF-SB16-R4', 'F1NYKG2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (171, 'Desktop Dell OPT3040MFF-SB16-R4', 'F1NYKG2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-03-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (172, 'Desktop Dell OPT3040MFF-SB16-R4', 'F1PZKG2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (172, 'Desktop Dell OPT3040MFF-SB16-R4', 'F1PZKG2', 'Dell', 'OPT3040MFF-SB16-R4', 'Desktop', null, '', 'Refurb', '21-03-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
@@ -1882,17 +1882,17 @@ INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, lo
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (469, 'Monitor Philips 223V5L', 'UK0A2238002687', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (469, 'Monitor Philips 223V5L', 'UK0A2238002687', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '02-12-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (470, 'Monitor Philips 223V5L', 'UK0A2238002758', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (470, 'Monitor Philips 223V5L', 'UK0A2238002758', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '02-12-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (471, 'Monitor Philips 223V5L', 'UK0A2238002665', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (471, 'Monitor Philips 223V5L', 'UK0A2238002665', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '02-12-2024 15:38:23',
   1, 'Available', 'New');
 
 INSERT INTO TB_EQUIPMENT (id, description, serial_number, brand, model, type, location, workstation, unity, registry_date,
- is_active, status_equipment, status_physic) VALUES (472, 'Monitor Philips 223V5L', 'UK0A2238002760', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '21-02-2025 15:38:23',
+ is_active, status_equipment, status_physic) VALUES (472, 'Monitor Philips 223V5L', 'UK0A2238002760', 'Philips', '223V5L', 'Display', null, '', 'Refurb', '02-12-2024 15:38:23',
   1, 'Available', 'New');

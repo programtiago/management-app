@@ -105,15 +105,19 @@ export class AdminService {
   }
 
   filterEquipmentsStartsWithSerialNumber(serialNumber: string){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/startsWith?description=${serialNumber}`)
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/startsWith?serialNumber=${serialNumber}`)
   }
 
   filterEquipmentsContainsSerialNumber(serialNumber: string){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/contains?description=${serialNumber}`)
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/serialNumber/contains?serialNumber=${serialNumber}`)
   }
 
   filterEquipmentsByType(type: string){
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/type/?equals=${type}`)
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/type?equals=${type}`)
+  }
+
+  filterEquipmentsEqualsRegistryDate(registryDate: string){
+    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/filter/registryDate?equals=${registryDate}`)
   }
 
   listDepartments(){

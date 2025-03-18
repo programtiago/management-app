@@ -107,4 +107,9 @@ public class EquipmentController {
     public List<EquipmentDto> findEquipmentsByType(@RequestParam("equals") String type){
         return equipmentService.searchEquipmentsByType(type);
     }
+
+    @GetMapping("/filter/registryDate")
+    public List<EquipmentDto> findEquipmentsEqualsRegistryDate(@RequestParam("equals") String registryDate){
+        return equipmentService.searchEquipmentsEqualsRegistryDate(registryDate);
+    }
 }

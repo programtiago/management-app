@@ -7,7 +7,7 @@ export type DateFilterOperation = 'All' | 'Equals' | 'Greater Than' | 'Less Than
 
 export interface FilterConfig {
     icon: string,
-    operation: FilterOperation,
+    operation: FilterOperation | DateFilterOperation,
     filterFn: (value: string) => Observable<Equipment[]>
 }
 
