@@ -1,6 +1,13 @@
 @media only screen and (min-width: 1537px) {
+
+    .card-container{
+        overflow: auto;
+        //position: absolute;
+        max-height: 90%;
+    }
+
     .card-table-equipments {
-        max-width: 95%;
+        max-width: 96%;
         display: flex;
         align-content: center;
         justify-content: center;
@@ -21,6 +28,11 @@
         width: 100%;
         margin: 0 auto;
     }
+
+    .form-fill-data{
+        width: 98%;
+        margin: 2em auto;
+    }
 }
 
 
@@ -29,7 +41,6 @@
     .card-container{
         max-width: 75%;
         max-height: 90%;
-        //margin: 2em auto;
         margin: 2em 10em;
         overflow: auto;
         box-sizing: border-box;
@@ -52,12 +63,18 @@
         width: 100%;
         margin: 0 auto;
     }
+
+    .form-fill-data{
+        width: 98%;
+        margin: 2em auto;
+    }
 }
     
 
 .btn-navigation-stepper{
     display: flex;
     justify-content: center;
+    transform: scale(1.5);
 }
 
 .filter-icon{
@@ -83,3 +100,8 @@ mat-grid-tile {
 mat-mdc-icon-button {
     color: black !important;
 }
+
+mat-cell:nth-child(1),
+    mat-header-cell:nth-child(1) {
+        flex: 0 0 10%;
+    }

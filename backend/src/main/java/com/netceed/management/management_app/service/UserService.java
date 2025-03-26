@@ -12,6 +12,7 @@ import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.entity.user.UserMapper;
 import com.netceed.management.management_app.entity.user.UserPageDto;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
+import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.DepartmentRepository;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -98,16 +100,20 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-            newUser = UserDto.createNewUserWithNoAssign(null, newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
+        /*
+            newUser = UserDto.createNewUserWithNoAssign(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
                     newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password());
 
-            User savedUser = userRepository.save(userMapper.toEntity(newUser));
+         */
 
-            if (savedUser.getId() != null){
-                trackAuditService.logAction(savedUser.getId(), "Created user [ " + savedUser.getWorkNumber() + " ] " + savedUser.getFirstName() + " " + savedUser.getLastName() , "testUsername", "User");
-            }
+        User user = userMapper.toEntity(newUser);
+        User savedUser = userRepository.save(user);
 
-            return newUser;
+        if (savedUser.getId() != null){
+            trackAuditService.logAction(user.getId(), "Created user [ " + user.getWorkNumber() + " ] " + user.getFirstName() + " " + user.getLastName() , "testUsername", "User");
+        }
+
+        return userMapper.toDto(savedUser);
     }
 
     public boolean checkIfGivenWorkNumberExists(int workNumber) {

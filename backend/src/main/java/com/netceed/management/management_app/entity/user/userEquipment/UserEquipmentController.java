@@ -1,7 +1,12 @@
 package com.netceed.management.management_app.entity.user.userEquipment;
 
 import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
+import com.netceed.management.management_app.entity.user.CreationUserAssignEquipmentsRequestDto;
+import com.netceed.management.management_app.entity.user.User;
+import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.service.UserEquipmentService;
+import com.netceed.management.management_app.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +21,7 @@ public class UserEquipmentController {
 
     private final UserEquipmentService userEquipmentService;
     private final TrackAuditService trackAuditService;
+    private final UserService userService;
 
     @GetMapping
     public List<UserEquipmentDto> getAllAssignments(){
@@ -25,6 +31,41 @@ public class UserEquipmentController {
     @GetMapping("/{userId}/equipments")
     public List<UserEquipmentDto> getEquipmentsByUserId(@PathVariable Long userId){
         return userEquipmentService.getEquipmentsByUserId(userId);
+    }
+
+    @PostMapping("/create-with-equipments")
+    @Transactional
+    public List<UserEquipmentDto> createUserWithEquipmentsAssignment(@RequestBody CreationUserAssignEquipmentsRequestDto request){
+        UserDto createdUser = userService.create(request.getUser());
+
+        if (createdUser.id() == null){
+           throw new RuntimeException("User ID is null after creation");
+        }
+
+        if (request.getEquipmentIds() == null || request.getEquipmentIds().isEmpty()){
+            return List.of();
+        }
+
+        List<UserEquipmentDto> assignments = userEquipmentService.assignEquipmentsToUser(
+                createdUser.id(),
+                request.getEquipmentIds()
+        );
+
+        assignments.forEach(assignment -> {
+            trackAuditService.logAction(
+                    assignment.id(),
+                    String.format("Assigned equipment with serial %s to new user [%d] - %s %s",
+                            assignment.equipment().getSerialNumber(),
+                            assignment.user().getWorkNumber(),
+                            assignment.user().getFirstName(),
+                            assignment.user().getLastName()
+                    ),
+                    "testusername",
+                    "UserEquipment"
+            );
+        });
+
+        return assignments;
     }
 
     /*

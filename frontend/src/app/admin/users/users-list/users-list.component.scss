@@ -26,7 +26,7 @@
 
     mat-cell:nth-child(10),
     mat-header-cell:nth-child(10) {
-        flex: 0 0 15%;
+        flex: 0 0 16%;
     }
 }
 
@@ -49,6 +49,11 @@
     mat-cell:nth-child(8),
     mat-header-cell:nth-child(8){
         flex: 0 0 12%;
+    }
+
+    mat-cell:nth-child(10),
+    mat-header-cell:nth-child(10) {
+        flex: 0 0 10%;
     }
 }
 
@@ -73,3 +78,9 @@
     text-align: center;
     width: 100%;
 }
+
+mat-icon {
+    color: black !important;
+    transform: scale(1.2);
+}
+

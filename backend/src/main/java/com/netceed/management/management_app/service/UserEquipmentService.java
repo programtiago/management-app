@@ -7,14 +7,16 @@ import com.netceed.management.management_app.entity.user.userEquipment.UserEquip
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentMapper;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
+import com.netceed.management.management_app.exception.ResourceNotFoundException;
 import com.netceed.management.management_app.repository.EquipmentRepository;
 import com.netceed.management.management_app.repository.UserEquipmentRepository;
 import com.netceed.management.management_app.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,6 +70,42 @@ public class UserEquipmentService{
         return userEquipmentMapper.toDto(assigment);
     }
 
+    @Transactional
+    public List<UserEquipmentDto> assignEquipmentsToUser(Long userId, List<Long> equipmentIds){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
+
+        List<Equipment> equipments = equipmentRepository.findAllById(equipmentIds);
+
+        if (equipments.size() != equipmentIds.size()){
+            throw new ResourceNotFoundException("Some equipment IDs were not found");
+        }
+
+        equipments.forEach(equipment -> {
+            if (!(equipment.getStatusEquipment() == StatusEquipment.AVAILABLE)){
+                try {
+                    throw new BadRequestException("Equipment " + equipment.getSerialNumber() + " is not available");
+                } catch (BadRequestException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
+        List<UserEquipment> assignments = equipments.stream()
+                .map(equipment -> {
+                    equipment.setStatusEquipment(StatusEquipment.IN_USE);
+                    equipmentRepository.save(equipment);
+
+                    return new UserEquipment(user, equipment);
+                }).collect(Collectors.toList());
+
+        return userEquipmentRepository.saveAll(assignments)
+                .stream()
+                .map(userEquipmentMapper::toDto)
+                .toList();
+    }
+
+    /*
     //Assign multiple equipments object to a user object
     public List<UserEquipmentDto> assignEquipmentsToUser(Long userId, List<Long> equipmentsId) {
         Optional<User> userOpt = userRepository.findById(userId);
@@ -98,6 +136,7 @@ public class UserEquipmentService{
 
         return assignmentsUserDto; //save the collection that holds all the user equipment objects
     }
+     */
 
     public void returnEquipmentFromUser(Long userId, Long equipmentId) {
         Equipment equipment = equipmentRepository.findById(equipmentId).orElseThrow();

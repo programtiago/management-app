@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Deactivate account</h2>
-  <mat-dialog-content>
-    <p>{{ data }}</p>
+<h2 mat-dialog-title style="display: flex; justify-content: center; margin-top: 10px; font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: 25px;">Deactivate account</h2>
+  <mat-dialog-content style="margin-top: 10px;">
+    <p style="font-size: 18px; text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif;">{{ data }}</p>
   </mat-dialog-content>
   <mat-dialog-actions style="display: flex; align-content: center; justify-content: center;">
-    <button mat-raised-button (click)="onConfirm(false)" color="warn">No</button>
-    <button (click)="onConfirm(true)" mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Yes</button>
+    <button mat-icon-button (click)="onConfirm(false)" fontSet="material-symbols-outlined"><mat-icon>cancel</mat-icon></button>
+    <button (click)="onConfirm(true)" mat-icon-button fontSet="material-symbols-outlined" mat-dialog-close cdkFocusInitial><mat-icon>check_circle</mat-icon></button>
   </mat-dialog-actions>
   

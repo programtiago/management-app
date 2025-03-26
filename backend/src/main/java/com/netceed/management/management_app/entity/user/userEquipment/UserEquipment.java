@@ -39,4 +39,10 @@ public class UserEquipment {
     @Column(length = 100)
     private String comments;
 
+    public UserEquipment(User user, Equipment equipment){
+        this.user = user;
+        this.equipment = equipment;
+        this.assignedDateTime = LocalDateTime.now();
+    }
+
 }

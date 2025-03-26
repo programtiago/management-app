@@ -1,34 +1,34 @@
-<mat-card  class="user-form-style">
-    <mat-toolbar color="primary">Update User</mat-toolbar>
-    <mat-card-content>
+<mat-card  class="user-form-container">
+    <mat-toolbar style="background-color: black; color: white; border-radius: 10px;">Employee Info</mat-toolbar>
+    <mat-card-content class="form-fields">
         <form [formGroup]="userUpdateForm">
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="First Name" formControlName="firstName" appearance="outline">
             </mat-form-field>
 
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Last Name" formControlName="lastName">
             </mat-form-field>
     
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Work Number" type="number" formControlName="workNumber">
             </mat-form-field>
             
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput [matDatepicker]="picker" placeholder="Birthday Date" formControlName="birthdayDate">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
               
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Nif" formControlName="nif">
             </mat-form-field>
 
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Recruitment Company" formControlName="recruitmentCompany">
             </mat-form-field>
     
-            <mat-form-field appearance="outline" class="full-width">
+            <mat-form-field appearance="fill" class="full-width">
                 <mat-select formControlName="userRole">
                 <mat-option *ngFor="let role of userRoles | keyvalue" [value]="role.value">
                     {{ role.value }}
@@ -36,22 +36,22 @@
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Email" formControlName="email">
             </mat-form-field>
     
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Contact Number" formControlName="contactNumber">
             </mat-form-field>
 
-            <mat-form-field class="full-width" appearance="outline">
+            <mat-form-field class="full-width" appearance="fill">
                 <input matInput placeholder="Password" formControlName="password">
             </mat-form-field>
 
         </form>
         <mat-card-actions style="align-content: center; justify-content: center;">
-            <button mat-raised-button (click)="onCancel()" color="primary">Cancel</button>
-            <button mat-raised-button (click)="onUpdate()" color="accent">Update</button>
+            <button class="cancel-btn" mat-icon-button (click)="onCancel()" ><mat-icon fontSet="material-symbols-outlined">cancel</mat-icon></button>
+            <button class="update-btn" mat-icon-button (click)="onUpdate()" ><mat-icon fontSet="material-symbols-outlined">edit</mat-icon></button>
           </mat-card-actions>
     </mat-card-content>
 </mat-card>

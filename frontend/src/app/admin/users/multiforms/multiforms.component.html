@@ -1,8 +1,5 @@
 <mat-card class="card-container">
-    <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
-    />
+    
     <mat-card-header style="display: flex; align-content: center; justify-content: center;">
         <mat-card-title>Insert a new User</mat-card-title>
     </mat-card-header>
@@ -52,7 +49,7 @@
                         <div class="form-field-search-description">
                             <mat-grid-tile>
                                 <mat-form-field>
-                                        <button mat-icon-button matPrefix style="margin-top: 10px;" [mat-menu-trigger-for]="filterMenu" (click)="setActiveFilter('description')">
+                                        <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenu" (click)="setActiveFilter('description')">
                                             <mat-icon fontSet="material-symbols-outlined">{{filterLogoSymbolChoosedForDescriptionInput}}</mat-icon>
                                         </button>
                                     <input #descriptionInput matInput (input)="applyFilter($event, 'description')">
@@ -63,7 +60,7 @@
                         <div class="form-field-search-serialNumber">
                             <mat-grid-tile>
                                 <mat-form-field>
-                                    <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenu" style="margin-top: 10px;" (click)="setActiveFilter('serialNumber')">
+                                    <button mat-icon-button matPrefix [mat-menu-trigger-for]="filterMenu" (click)="setActiveFilter('serialNumber')">
                                         <mat-icon fontSet="material-symbols-outlined">{{filterLogoSymbolChoosedForSerialNumberInput}}</mat-icon>
                                     </button>
                                     <input #serialNumberInput matInput (input)="applyFilter($event, 'serialNumber')">
@@ -74,7 +71,7 @@
                         <div class="form-field-search-type">
                             <mat-grid-tile>
                                 <mat-form-field>
-                                    <button *ngIf="selectedEquipmentType" matPrefix mat-icon-button style="margin-top: 10px;" (click)="clearSelectTypeEquipmentFilter()" (click)="setActiveFilter('type')">
+                                    <button mat-icon-button  matPrefix *ngIf="selectedEquipmentType" (click)="clearSelectTypeEquipmentFilter()" (click)="setActiveFilter('type')">
                                         <mat-icon fontSet="material-symbols-outlined">clear</mat-icon>
                                     </button>
                                         <mat-select #equipmentTypeSelect (selectionChange)="getEquipmentTypeSelected($event)" [(ngModel)]="selectedEquipmentType">
@@ -86,15 +83,15 @@
                         
                         <mat-grid-tile>
                             <mat-form-field>
-                                <button mat-icon-button matPrefix style="margin-top: 10px;" [matMenuTriggerFor]="filterMenuForDate"
+                                <button mat-icon-button matPrefix [matMenuTriggerFor]="filterMenuForDate"
                                 (click)="setActiveFilter('registryDate')">
                                     <mat-icon fontSet="material-symbols-outlined">{{filterLogoSymbolChoosedForRegistryDateInput}}</mat-icon>
                                 </button>
-                                <input #registryDateInput matInput [matDatepicker]="picker"
+                                <input #registryDateInput matInput [matDatepicker]="picker" [(ngModel)]="formatedDate"
                                 (dateChange)="applyDateFilter($event, 'registryDate')">
                                 
                                 <mat-datepicker-toggle matSuffix [for]="picker">
-                                    <mat-icon matDatepickerToggleIcon fontSet="material-symbols-outlined" style="color: black; margin-top: 5px;">calendar_month></mat-icon>
+                                    <mat-icon matDatepickerToggleIcon fontSet="material-symbols-outlined" style="color: black;">calendar_month></mat-icon>
                                 </mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -103,6 +100,28 @@
                   </div>
             <mat-card-content>
                 <mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? toogleAllRows() : null"
+                                      [checked]="selection.hasValue() && isAllSelected()"
+                                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                      [aria-label]="checkboxLabel()"
+                                      >
+                        </mat-checkbox>
+                    </mat-header-cell>
+
+                    <mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                                      (change)="$event ? selection.toggle(row) : null"
+                                      [checked]="selection.isSelected(row)"
+                                      [aria-label]="checkboxLabel(row)"
+                                      (change)="getEquipmentsSelected($event, row)"
+                                      >
+
+                        </mat-checkbox>
+                    </mat-cell>
+                </ng-container>
 
                 <ng-container matColumnDef="description">
                     <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
@@ -195,7 +214,7 @@
                                 </mat-form-field>
             
                                 <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                    <button mat-icon-button fontSet="material-symbols-outlined" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
                                 </div>
                             </div>
                         </mat-step>
@@ -214,8 +233,8 @@
                                 </mat-form-field>
             
                                 <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                    <button mat-icon-button fontSet="material-symbols-outlined" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+                                    <button mat-icon-button matStepperNext fontSet="material-symbols-outlined"><mat-icon>arrow_forward</mat-icon></button>
                                 </div>
                             </div>
                         </mat-step>
@@ -250,8 +269,8 @@
                                 </mat-form-field>  
 
                                 <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
+                                    <button mat-icon-button matStepperPrevious fontSet="material-symbols-outlined"><mat-icon>arrow_backward</mat-icon></button>
+                                    <button mat-icon-button matStepperNext fontSet="material-symbols-outlined"><mat-icon>arrow_forward</mat-icon></button>
                                 </div>
                             </div>
                         </mat-step>
@@ -287,128 +306,127 @@
         </mat-card-content>
     </mat-card>
 
-        <mat-card *ngIf="typeAssignmentSelected != null && equipmentSelectedId != 0 || departmentSelectedId != 0">
-        <mat-card-content>
-            <div class="form-fill-data">
-            <mat-card>
-                <form [formGroup]="employeeRegister">
-                <mat-stepper [linear]="isLinear" #stepper>
-                        <mat-step>
-                            <div formGroupName="basic">
-                                <ng-template matStepLabel>Fill out personal information</ng-template>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>First Name</mat-label>
-                                <input matInput placeholder="First Name" formControlName="firstName" required>
-                                </mat-form-field>
-            
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Last Name</mat-label>
-                                <input matInput placeholder="Last Name" formControlName="lastName" required>
-                                </mat-form-field>
-            
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Choose Birthday Date</mat-label>
-                                <input matInput placeholder="Birthday Date" [matDatepicker]="picker" formControlName="birthdayDate">
-                                <mat-hint>DD/MM/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="fill">
-                                    <mat-label>NIF</mat-label>
-                                <input matInput type="number" placeholder="NIF" formControlName="nif" required>
-                                </mat-form-field>
-            
-                                <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                                </div>
-                            </div>
-                        </mat-step>
-            
-                        <mat-step>
-                            <div formGroupName="contact">
-                                <ng-template matStepLabel>Fill out contact information</ng-template>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Email</mat-label>
-                                <input matInput placeholder="Email" formControlName="email" required>
-                                </mat-form-field>
-            
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Contact Number</mat-label>
-                                <input matInput placeholder="Contact Number" formControlName="contactNumber" required>
-                                </mat-form-field>
-            
-                                <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                                </div>
-                            </div>
-                        </mat-step>
-            
-                        <mat-step>
-                            <div formGroupName="professionalData">
-                                <ng-template matStepLabel>Fill out professional data</ng-template>
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Work Number</mat-label>
-                                <input matInput type="number" placeholder="Work Number" formControlName="workNumber" required>
-                                </mat-form-field>
-            
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Choose Admission Date</mat-label>
-                                <input matInput placeholder="Admission Date" [matDatepicker]="picker2" formControlName="admissionDate">
-                                <mat-hint>DD/MM/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
-                                </mat-form-field>
-                                
-                                <mat-form-field appearance="fill">
-                                    <mat-label>Recruitment Company</mat-label>
-                                <input matInput placeholder="Recruitment Company" formControlName="recruitmentCompany" required>
-                                </mat-form-field>
-            
-                                <mat-form-field class="full-width" appearance="outline">
-                                    <mat-select placeholder="Select a shift type" formControlName="shiftType">
-                                    @for (shiftType of shiftTypes; track shiftType) {
-                                        <mat-option [value]="shiftType.viewValue">{{shiftType.viewValue}}</mat-option>
-                                    }
-                                    </mat-select>
-                                </mat-form-field>  
-
-                                <div class="btn-navigation-stepper">
-                                    <button mat-raised-button color="primary" matStepperPrevious>Back</button>
-                                    <button mat-raised-button color="primary" matStepperNext>Next</button>
-                                </div>
-                            </div>
-                        </mat-step>
-            
+        <!--<mat-card *ngIf="typeAssignmentSelected != null && isAvailableToProceedToUserCreation">-->
+        <div class="form-fill-data" *ngIf="idEquipments.length >= 1">
+            <mat-card-content>
+                <mat-card>
+                    <form [formGroup]="employeeRegister">
+                    <mat-stepper [linear]="isLinear" #stepper>
                             <mat-step>
-                                <div formGroupName="security">
-                                    <ng-template matStepLabel>Fill out security information</ng-template>
+                                <div formGroupName="basic">
+                                    <ng-template matStepLabel>Fill out personal information</ng-template>
                                     <mat-form-field appearance="fill">
-                                        <mat-label>User Role</mat-label>
-                                        <mat-select formControlName="userRole">
-                                        <mat-option *ngFor="let role of UserRole | keyvalue" [value]="role.value">
-                                            {{ role.value }}
-                                        </mat-option>
-                                        </mat-select>
+                                        <mat-label>First Name</mat-label>
+                                    <input matInput placeholder="First Name" formControlName="firstName" required>
                                     </mat-form-field>
-                        
+                
                                     <mat-form-field appearance="fill">
-                                        <mat-label>Password</mat-label>
-                                    <input matInput placeholder="Password" formControlName="password" required>
+                                        <mat-label>Last Name</mat-label>
+                                    <input matInput placeholder="Last Name" formControlName="lastName" required>
                                     </mat-form-field>
-            
-                                    <div>
-                                        <div class="btn-navigation-stepper">
-                                            <button mat-raised-button (click)="onCancel()" color="primary"><mat-icon color="accent">clear</mat-icon>Cancel</button>
-                                            <button mat-raised-button (click)="onSubmit()" color="primary" matStepperNext><mat-icon>check_circle</mat-icon>Submit</button>
-                                        </div>
+                
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Choose Birthday Date</mat-label>
+                                    <input matInput placeholder="Birthday Date" [matDatepicker]="picker" formControlName="birthdayDate">
+                                    <mat-hint>DD/MM/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>NIF</mat-label>
+                                    <input matInput type="number" placeholder="NIF" formControlName="nif" required>
+                                    </mat-form-field>
+                
+                                    <div class="btn-navigation-stepper">
+                                        <button mat-icon-button fontSet="material-symbols-outlined" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
                                     </div>
                                 </div>
                             </mat-step>
-                </mat-stepper>                
-            </form> 
-        </mat-card>
-        </div>
-        </mat-card-content>
-    </mat-card>
+                
+                            <mat-step>
+                                <div formGroupName="contact">
+                                    <ng-template matStepLabel>Fill out contact information</ng-template>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email" formControlName="email" required>
+                                    </mat-form-field>
+                
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Contact Number</mat-label>
+                                    <input matInput placeholder="Contact Number" formControlName="contactNumber" required>
+                                    </mat-form-field>
+                
+                                    <div class="btn-navigation-stepper">
+                                        <button mat-icon-button fontSet="material-symbols-outlined" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+                                        <button mat-icon-button fontSet="material-symbols-outlined" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+                                    </div>
+                                </div>
+                            </mat-step>
+                
+                            <mat-step>
+                                <div formGroupName="professionalData">
+                                    <ng-template matStepLabel>Fill out professional data</ng-template>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Work Number</mat-label>
+                                    <input matInput type="number" placeholder="Work Number" formControlName="workNumber" required>
+                                    </mat-form-field>
+                
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Choose Admission Date</mat-label>
+                                    <input matInput placeholder="Admission Date" [matDatepicker]="picker2" formControlName="admissionDate">
+                                    <mat-hint>DD/MM/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                                    
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Recruitment Company</mat-label>
+                                    <input matInput placeholder="Recruitment Company" formControlName="recruitmentCompany" required>
+                                    </mat-form-field>
+                
+                                    <mat-form-field class="full-width" appearance="outline">
+                                        <mat-select placeholder="Select a shift type" formControlName="shiftType">
+                                        @for (shiftType of shiftTypes; track shiftType) {
+                                            <mat-option [value]="shiftType.viewValue">{{shiftType.viewValue}}</mat-option>
+                                        }
+                                        </mat-select>
+                                    </mat-form-field>  
+
+                                    <div class="btn-navigation-stepper">
+                                        <button mat-icon-button fontSet="material-symbols-outlined" matStepperPrevious><mat-icon>arrow_backward</mat-icon></button>
+                                        <button mat-icon-button fontSet="material-symbols-outlined" matStepperNext><mat-icon>arrow_forward</mat-icon></button>
+                                    </div>
+                                </div>
+                            </mat-step>
+                
+                                <mat-step>
+                                    <div formGroupName="security">
+                                        <ng-template matStepLabel>Fill out security information</ng-template>
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>User Role</mat-label>
+                                            <mat-select formControlName="userRole">
+                                            <mat-option *ngFor="let role of UserRole | keyvalue" [value]="role.value">
+                                                {{ role.value }}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                            
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Password</mat-label>
+                                        <input matInput placeholder="Password" formControlName="password" required>
+                                        </mat-form-field>
+                
+                                        <div>
+                                            <div class="btn-navigation-stepper">
+                                                <button mat-icon-button (click)="onCancel()" fontSet="material-symbols-outlined"><mat-icon>clear</mat-icon></button>
+                                                <button mat-icon-button (click)="onSubmit()" matStepperNext><mat-icon>assignment</mat-icon></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </mat-step>
+                    </mat-stepper>                
+                </form> 
+            </mat-card>
+            </mat-card-content>
+        </div>   

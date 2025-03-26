@@ -53,6 +53,10 @@ export class AdminService {
     return this.httpClient.post<User>(`${this.BASE_API_URL_USERS}`, userData)
   }
 
+  createUserWithEquipments(data: any): Observable<any>{
+    return this.httpClient.post<any>(`${this.BASE_API_URL_USER_EQUIPMENTS}/create-with-equipments`, data)
+  }
+
   createUserAndAssignToEquipment(newUser: any, equipmentId: number){
     return this.httpClient.post<UserEquipment>(`${this.BASE_API_URL_USERS}/equipment/${equipmentId}`, newUser)
   }

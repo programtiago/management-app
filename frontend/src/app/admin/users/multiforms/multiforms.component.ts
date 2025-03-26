@@ -8,7 +8,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { Equipment } from '../../../model/equipment/equiment';
 import { StatusEquipment } from '../../../model/equipment/status-equipment';
 import { PageEvent } from '@angular/material/paginator';
-import { config, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EquipmentPage } from '../../../model/equipment/equipment-page';
 import { MatTableDataSource } from '@angular/material/table';
 import { Department } from '../../../model/department/department';
@@ -18,6 +18,9 @@ import { IconMapping } from '../../../model/filter/IconMapping';
 import { DateFilterOperation, FilterConfig, FilterOperation } from '../../../model/filter/FilterConfig';
 import { InputField } from '../../../model/filter/InputField';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { FilterState } from '../../../model/filter/FilterState';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-multiforms',
@@ -28,16 +31,27 @@ export class MultiformsComponent implements OnInit{
 
   allEquipments: Equipment[] = []; 
   filteredEquipments: Equipment[] = [];
+  dataSource = new MatTableDataSource<Equipment>([])
+  activeFilters: Map<string, FilterState> = new Map();
+  isFiltering: boolean = false; //track if we are filtering some propertie from table equipments or not
+
+  idEquipments: number[] = []
+
+  pageIndex = 0;
+  pageSize = 10;
+  totalElements = 0;
+
+  isAvailableToProceedToUserCreation: boolean = false;
+
+  selection = new SelectionModel<Equipment>(true, [])
 
   equipmentSelectedId: number = 0;
-
-  isFiltering: boolean = false; //track if we are filtering some propertie from table equipments or not
+  formatedDate: string = ''
+  
   canShowClearFilterForTypeEquipmentCategory: boolean = false;
 
   currentFilterValue: string = ''; //keyword that we are filtering 
   currentFilterOperation: string = ''; //description, type, sn, registryDate
-
-  dataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([])
 
   departments: Department[] = [];
   departmentSelectedId: number = 0;
@@ -56,10 +70,6 @@ export class MultiformsComponent implements OnInit{
   @ViewChild('registryDateInput') registryDateInput!: ElementRef;
 
   selectedEquipmentType: string = '';
-
-  pageIndex = 0;
-  pageSize = 10;
-  totalElements = 0;
 
   //TEMPORARILY. Further we need to catch from the API
   UserRole = UserRole;
@@ -152,11 +162,26 @@ export class MultiformsComponent implements OnInit{
         icon: 'equal',
         operation: 'Equals',
         filterFn: (value: string) => this.adminService.filterEquipmentsEqualsRegistryDate(value)
+      },
+      'Smaller than': {
+        icon: 'equal',
+        operation: 'Equals',
+        filterFn: (value: string) => this.adminService.filterEquipmentsEqualsRegistryDate(value)
+      },
+      'Greater than': {
+        icon: 'equal',
+        operation: 'Equals',
+        filterFn: (value: string) => this.adminService.filterEquipmentsEqualsRegistryDate(value)
+      },
+      'Smaller than or equal': {
+        icon: 'equal',
+        operation: 'Equals',
+        filterFn: (value: string) => this.adminService.filterEquipmentsEqualsRegistryDate(value)
       }
     },
   };
 
-  displayedColumns: string[] = ['description', 'serialNumber', 'type', 'registryDate'];
+  displayedColumns: string[] = ['select', 'description', 'serialNumber', 'type', 'registryDate'];
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService,
     private datePipe: DatePipe, private snackBar: MatSnackBar, private location: Location
@@ -167,8 +192,58 @@ export class MultiformsComponent implements OnInit{
     this.refreshDepartments();    
   }
 
+  private getInputValue(input: ElementRef | MatSelect): string {
+    if (input instanceof ElementRef){
+      return input.nativeElement.value;
+    }else{
+      return input.value
+    }
+  }
+
+  getEquipmentsSelected(select: MatCheckboxChange, row?: Equipment){
+    if (row){
+      if (select.checked){
+        this.idEquipments.push(row.id);
+        console.log(row)
+        console.log(this.idEquipments.length)
+      }else{
+        const index = this.idEquipments.indexOf(row.id);
+        if (index > -1){
+          this.idEquipments.splice(index, 1)
+        }
+      }
+    }  
+  }
+
+  private setInputValue(input: ElementRef | MatSelect, value: string): void {
+    if (input instanceof ElementRef){
+      input.nativeElement.value = value;
+    }else{
+      input.value = value;
+    }
+  }
+
   menuItemClickedDate(item: DateFilterOperation, fieldName: string):void{
     switch(fieldName){
+      case 'description':
+        this.filterLogoSymbolChoosedForDescriptionInput = this.iconMap[item];
+        if (item === 'All'){
+          console.log("hello")
+          this.setInputValue(this.descriptionInput, '')
+        }
+        break;
+      case 'serialNumber':
+        this.filterLogoSymbolChoosedForSerialNumberInput = this.iconMap[item];
+        if (item === 'All'){
+          this.setInputValue(this.serialNumberInput, '')
+        }
+        break;  
+      case 'type':
+        this.filterLogoSymbolChoosedForTypeInput = this.iconMap[item];
+        if (item === 'All'){
+          this.setInputValue(this.equipmentTypeSelect, '')
+        }
+        break;   
       case 'registryDate':
         this.filterLogoSymbolChoosedForRegistryDateInput = this.dateIconMap[item];
         break;
@@ -177,37 +252,84 @@ export class MultiformsComponent implements OnInit{
     if (item === 'All'){
       if (this.currentFilterOperation === fieldName){
         this.resetFilters();
-        this.registryDateInput.nativeElement.value = '';
-        this.refreshEquipments();
+      }
+    }else{
+      const input = this.inputFields[fieldName].input;
+      if (input){
+        const value = this.getInputValue(input);
+        if (value){
+          this.applyFilter({ target: { value } } as any, fieldName)
+        }
       }
     }
+  }
+
+  isAllSelected(){
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  toogleAllRows(){
+    if (this.isAllSelected()){
+      this.selection.clear();
+      this.idEquipments = []
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data)
+    this.idEquipments = this.dataSource.data.map(equipment => equipment.id)
+  }
+
+  checkboxLabel(row?: Equipment): string {
+    if (!row){
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
   clearSelectTypeEquipmentFilter(){
     if (this.equipmentTypeSelect){
       this.equipmentTypeSelect.value = ''
       this.selectedEquipmentType = '';
-      this.isFiltering = false;
+      this.activeFilters.delete('type')
       this.canShowClearFilterForTypeEquipmentCategory = false;
-      this.refreshEquipments();
+      this.executeFilters(); 
     }
   }
 
   resetFilters():void {
-    this.currentFilterValue = ''
-    this.currentFilterOperation = ''
     this.isFiltering = false
     this.pageIndex = 0;
     this.pageSize = 10;
+    this.activeFilters.clear();
+    this.selectedEquipmentType = '';
+    this.canShowClearFilterForTypeEquipmentCategory = false;
+
+    if (this.descriptionInput) this.descriptionInput.nativeElement.value = '';
+    if (this.serialNumberInput) this.serialNumberInput.nativeElement.value = '';
+    if (this.equipmentTypeSelect) this.equipmentTypeSelect.value= '';
+
+    this.filterLogoSymbolChoosedForDescriptionInput = 'filter_alt';
+    this.filterLogoSymbolChoosedForSerialNumberInput = 'filter_alt';
+    this.filterLogoSymbolChoosedForTypeInput = 'filter_alt';
 
     this.refreshEquipments();
   }
 
   updateDataSource(data: Equipment[]):void{
     this.filteredEquipments = data;
+    this.applyPagination();
+  }
+
+  private applyPagination():void {
+    const data = this.isFiltering ? this.filteredEquipments : this.allEquipments
+    const startIndex = this.pageIndex * this.pageSize;
+    const endIndex = Math.min(startIndex + this.pageSize, data.length);
+  
+    this.dataSource.data = data.slice(startIndex, endIndex);
     this.totalElements = data.length
-    this.pageIndex = 0;
-    this.updatePaginator();
   }
 
   refreshDepartments(){
@@ -217,17 +339,17 @@ export class MultiformsComponent implements OnInit{
   }
 
   refreshEquipments(pageEvent: PageEvent = { length: 0, pageIndex: 0, pageSize: 10}){
-      this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
-        this.dataSource.data = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE)
-        
-        this.totalElements = res.totalElements;
-        this.pageSize = pageEvent.pageSize;
-        this.pageIndex = pageEvent.pageIndex;
+    this.adminService.getEquipments(pageEvent.pageIndex, pageEvent.pageSize).subscribe((res) => {
+      this.allEquipments = res.content.filter(e => e.statusEquipment === StatusEquipment.AVAILABLE);
+      this.totalElements = res.totalElements;
+      this.pageSize = pageEvent.pageSize
+      this.pageIndex = pageEvent.pageIndex
 
-        if (this.isFiltering){
-          this.allEquipments = [...this.dataSource.data];
-          this.filteredEquipments = [...this.dataSource.data]
-        }
+      if (this.activeFilters.size > 0){
+        this.executeFilters();
+      } else {
+        this.dataSource.data = this.allEquipments
+      }
       });
   }
 
@@ -279,13 +401,14 @@ export class MultiformsComponent implements OnInit{
     };
 
     if (this.typeAssignmentSelected === 'EQU'){
-      this.adminService.createUserAndAssignToEquipment(employeeRegisterFormData, this.equipmentSelectedId).subscribe(
+      this.adminService.createUserWithEquipments({ user: employeeRegisterFormData, equipmentIds: this.idEquipments }).subscribe(
         (res) => {
           this.onSucess();
-        },
-        (error) => {
+          },
+          (error) => {
           this.onError();
-        })
+          }
+        );
     }else if (this.typeAssignmentSelected === 'DEP'){
       this.adminService.createUserAndAssignToDepartment(employeeRegisterFormData, this.departmentSelectedId).subscribe((res) => {
         this.userDepartment = res;
@@ -333,11 +456,11 @@ export class MultiformsComponent implements OnInit{
     this.pageSize = event.pageSize;
     
     if (this.isFiltering){
-      this.updatePaginator();
+      this.applyPagination();
     }else{
       this.refreshEquipments(event);
     }
-    
+    return event;
   }
 
   menuItemClicked(item: FilterOperation, fieldName: string):void{
@@ -379,44 +502,49 @@ export class MultiformsComponent implements OnInit{
   }}
 
   applyFilter(event: Event, filterProperty: string){
-    this.currentFilterValue = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement).value;
+    this.currentFilterValue = value;
     this.currentFilterOperation = filterProperty;
-    this.pageIndex = 0;
-    this.applyFilterToEquipments();
+    
+    if (value?.trim()){
+      const field = this.inputFields[filterProperty];
+      const currentIcon = (this as any)[field.iconKey];
+      const operation = Object.entries(this.filterConfigs[field.filterProperty])
+        .find(([__dirname,config]) => config.icon === currentIcon)?.[0] || 'Contains';
+
+        this.activeFilters.set(filterProperty, {
+          value: value.trim(),
+          operation,
+          field: filterProperty
+        })
+      
+      this.filterConfigs[field.filterProperty][operation].filterFn(value.trim())
+        .subscribe(res => {
+          this.allEquipments = res;
+          this.executeFilters();
+        });
+    }else{
+      this.activeFilters.delete(filterProperty);
+      if (this.activeFilters.size === 0){
+        this.isFiltering = false;
+        this.refreshEquipments();
+      }else{
+        this.applyExistingFilters();
+      }
+    }
   }
 
   applyDateFilter(event: MatDatepickerInputEvent<any>, field: string) {
-    this.applyFilter(event.value, field);
+    let selectedDate: Date = event.value;
+    this.formatedDate = selectedDate.toLocaleDateString("pt-PT")
+    this.formatedDate = this.formatedDate.replaceAll("/", "-")
   }
 
   applyFilterToEquipments(){
     this.isFiltering = true
     this.pageIndex = 0
 
-    if (this.currentFilterOperation === 'registryDate'){
-      const dateValue = new Date(this.currentFilterValue)
-      const filterIcon = this.filterLogoSymbolChoosedForRegistryDateInput;
-
-      this.filteredEquipments = this.allEquipments.filter(equipment => {
-        const equipmentDate = new Date(equipment.registryDate)
-
-      switch(filterIcon){
-        case this.dateIconMap['Greater Than']:
-          return equipmentDate > dateValue;
-        case this.dateIconMap['Less Than']:
-          return equipmentDate < dateValue;
-        case this.dateIconMap['Greater than or Equal']:
-          return equipmentDate >= dateValue    
-        case this.dateIconMap['Less than or Equal']:
-          return equipmentDate <= dateValue;
-        case this.dateIconMap['Equals']:
-          return equipmentDate.getTime() === dateValue.getTime();
-        default:
-          return true;      
-      }
-    });
-      this.updateDataSource(this.filteredEquipments)
-    }else{
+    
       const field = this.inputFields[this.currentFilterOperation];
       const currentIcon = (this as any)[field.iconKey];
 
@@ -429,22 +557,130 @@ export class MultiformsComponent implements OnInit{
             this.updateDataSource(res);
           })
       }  
-    }  
   }
 
   getEquipmentTypeSelected(event: MatSelectChange){
-    this.selectedEquipmentType = event.value;
-    this.isFiltering = true;
-    this.pageIndex = 0;
+    if (event.value){
+      this.selectedEquipmentType = event.value;
 
-    if (this.selectedEquipmentType){
-      this.adminService.filterEquipmentsByType(this.selectedEquipmentType).subscribe((res) => {
-        this.filteredEquipments = res;
-        this.totalElements = res.length;
-        this.canShowClearFilterForTypeEquipmentCategory = true;
-        this.updatePaginator();
-      })
+      this.activeFilters.set('type', {
+        value: event.value,
+        operation: 'Equals',
+        field: 'type'
+      });
+      this.canShowClearFilterForTypeEquipmentCategory = true;
+
+      this.adminService.filterEquipmentsByType(event.value)
+        .subscribe(res => {
+          this.isFiltering = true;
+          this.allEquipments = res;
+          this.updateFilteredResults(res)
+      });
+    }else{
+      this.selectedEquipmentType = ''
+      this.activeFilters.delete('type')
+      this.canShowClearFilterForTypeEquipmentCategory = false;
+      this.refreshEquipments();
     }
+  }
+
+  private applyExistingFilters(){
+    if (this.activeFilters.size === 0){
+      this.isFiltering = false;
+      this.refreshEquipments();
+      return;
+    }
+
+    const [firstKey, firstFilter] = Array.from(this.activeFilters.entries())[0];
+    const operation = Object.entries(this.filterConfigs[firstKey])
+      .find(([_,config]) => config.icon === (this as any)[this.inputFields[firstKey].iconKey])?.[0];
+    
+    if (operation){
+      this.filterConfigs[firstKey][operation].filterFn(firstFilter.value)
+        .subscribe(res => {
+          let results = res;
+          this.activeFilters.forEach((filter, key) => {
+            if (key !== firstKey){
+              results = this.applyFilterLocally(results, filter);
+            }
+          });
+          this.updateFilteredResults(results)
+        })
+    }
+  }
+
+  private applyFilterLocally(data: Equipment[], filter: FilterState): Equipment[] {
+    switch (filter.field){
+      case 'type':
+        return data.filter(item => 
+            item.type.toLowerCase() === filter.value.toLowerCase());
+      case 'description':
+        return data.filter(item => {
+          const description = item.description.toLowerCase();
+          const searchValue = filter.value.toLowerCase();
+          return filter.operation === 'Contains'
+            ? description.includes(searchValue)
+            : description.startsWith(searchValue)
+        });
+      case 'serialNumber':
+        return data.filter(item => {
+            const serialNumber = item.serialNumber.toLowerCase();
+            const searchValue = filter.value.toLowerCase();
+
+            return filter.operation === 'Contains' 
+                ? serialNumber.includes(searchValue)
+                : serialNumber.startsWith(searchValue);
+        });
+    default:
+        return data;
+    }
+  }
+
+  private executeFilters(){
+    if (this.activeFilters.size === 0){
+      this.isFiltering = false;
+      this.refreshEquipments();
+      return;
+    }
+
+    this.isFiltering = true;
+    let results = [...this.allEquipments];
+
+    this.activeFilters.forEach((filter) => {
+      switch(filter.field){
+        case 'type':
+          results = results.filter(item => 
+            item.type.toLowerCase() === filter.value.toLowerCase()
+          );
+          break;
+        case 'description':
+          results = results.filter(item => {
+            const description = item.description.toLowerCase();
+            const value = filter.value.toLowerCase();
+            return filter.operation === 'Contains'
+              ? description.includes(value)
+              : description.startsWith(value)
+          });
+          break;
+        case 'serialNumber':
+          results = results.filter(item => {
+              const serialNumber = item.serialNumber.toLowerCase();
+              const value = filter.value.toLowerCase();
+              return filter.operation === 'Contains'
+                  ? serialNumber.includes(value)
+                  : serialNumber.startsWith(value);
+          });
+          break;   
+      }
+    });
+    this.updateFilteredResults(results)
+  }
+  
+  private updateFilteredResults(results: Equipment[]) {
+    this.filteredEquipments = results;
+    this.totalElements = results.length;
+    this.pageIndex = 0;
+    this.applyPagination();
   }
 
   setActiveFilter(fieldName: string){
@@ -452,12 +688,9 @@ export class MultiformsComponent implements OnInit{
   }
 
   updatePaginator(){
-      if (this.isFiltering){
-        const startIndex = this.pageIndex * this.pageSize;
-        const endIndex = Math.min(startIndex + this.pageSize, this.filteredEquipments.length);
-        this.dataSource.data = this.filteredEquipments.slice(startIndex, endIndex)
-
-        this.totalElements = this.filteredEquipments.length;
-      }
+    if (this.isFiltering){
+      this.applyPagination();
+      this.totalElements = this.filteredEquipments.length;
+    }
   }
 }

@@ -161,7 +161,7 @@ export class UsersListComponent implements OnInit{
 
   onDelete(userId: number){
     const dialogRef = this.dialog.open(ModalDeleteuserInfoComponent, {
-      height: '180px',
+      height: '210px',
       width: '400px',
       data: 'Are you sure that u want to deactivate this user ?'
     });

@@ -5,28 +5,43 @@
     
 mat-card{
     margin: 2em auto;
-    display: flex;
+    //display: flex;
     align-items: center;
 }
 
-@media only screen and (min-width: 2000px) {
-    mat-card{
-        max-width: 70%;
+@media only screen and (min-width: 400px) and (max-width: 1536px) {
+    .user-form-container{
+        max-width: 65%;
     }
 }
 
-@media only screen and (min-width: 400px) {
-    mat-card{
-        max-width: 35%;
+@media only screen and (min-width: 1537px){
+    .user-form-container{
+        max-width: 45%;
+        margin: 5em auto;
     }
 }
 
+/*
 mat-form-field{
     height: 45px;
     margin: 0.7em;
+}
+*/
+mat-icon{
+    transform: scale(2);
 }
 
 mat-toolbar{
     justify-content: center;
     align-items: center;
+}
+
+.user-form-container{
+    border-radius: 20px;
+    box-shadow: 20px;
+}
+
+.form-fields{
+    margin-top: 20px;
 }

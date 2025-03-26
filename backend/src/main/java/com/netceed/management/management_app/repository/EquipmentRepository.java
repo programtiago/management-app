@@ -26,6 +26,6 @@ import java.util.Optional;
     List<Equipment> findEquipmentsContainsSerialNumber(@Param("serialNumber") String serialNumber);
     @Query("SELECT e FROM Equipment e WHERE e.type = :type")
     List<Equipment> findEquipmentsByType(@Param("type") String type);
-    @Query("SELECT e FROM Equipment e WHERE e.registryDate LIKE %:registryDate%")
+    @Query("SELECT e FROM Equipment e WHERE e.registryDate = REPLACE(:registryDate, '/', '-')")
     List<Equipment> findEquipmentsEqualsRegistryDate(@Param("registryDate") String registryDate);
 }
