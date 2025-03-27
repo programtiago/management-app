@@ -72,7 +72,6 @@ export class UsersListComponent implements OnInit{
     this.router.navigate(['admin/new'])
   }
 
-  /*
   onChangeUserStatus(user: User){
     this.selectedUserId = user.id;
 
@@ -90,8 +89,7 @@ export class UsersListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result){
-        if (user.isActive == false){
-          this.adminService.activateUser(user.id).subscribe(
+          this.adminService.activateUserById(user.id).subscribe(
             () => {
               this.snackBar.open('User activated sucessfully !', 'X', {
                 duration: 5000,
@@ -102,55 +100,6 @@ export class UsersListComponent implements OnInit{
             },
             () => this.onError('Occurred a error. Please try again or check your internet connection')
           )
-        }else if (user.isActive == true){
-          this.adminService.deactivateUser(user.id).subscribe(
-            () => {
-              this.snackBar.open('User deactivated sucessfully !', 'X', {
-                duration: 5000,
-                verticalPosition: 'top',
-                horizontalPosition: 'center'
-              });
-              this.refresh();
-            },
-            () => this.onError('Occurred a error. Please try again or check your internet connection')
-          )
-        }
-      }
-    })
-  }
-  */
-
-  
-  onChangeUserStatus(user: User){
-    this.selectedUserId = user.id;
-
-    if (user.isActive == false){
-      this.questionForChangingStatus = this.questionForActivate;
-    }else if (user.isActive == true){
-      this.questionForChangingStatus = this.questionForDesativate;
-    }
-
-    const dialogRef = this.dialog.open(ModalInformationComponent, {
-      height: '200px',
-      width: '400px',
-      data: [this.questionForChangingStatus, this.selectedUserId]
-    });
-
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result){
-        if (user.isActive == false){
-          this.adminService.activateUser(user.id).subscribe(
-            () => {
-              this.snackBar.open('User activated sucessfully !', 'X', {
-                duration: 5000,
-                verticalPosition: 'top',
-                horizontalPosition: 'center'
-              });
-              this.refresh();
-            },
-            () => this.onError('Occurred a error. Please try again or check your internet connection')
-          )
-        }
       }
     })
   }
@@ -168,7 +117,7 @@ export class UsersListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result){
-          this.adminService.deleteUserById(userId).subscribe(
+          this.adminService.deactivateUserById(userId).subscribe(
             () => {
               this.snackBar.open('User deactivated sucessfully !', 'X', {
                 duration: 5000,

@@ -1,10 +1,7 @@
 package com.netceed.management.management_app.entity.user;
 
-import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 

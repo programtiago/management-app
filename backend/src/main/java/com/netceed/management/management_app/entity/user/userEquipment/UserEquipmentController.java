@@ -2,7 +2,6 @@ package com.netceed.management.management_app.entity.user.userEquipment;
 
 import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
 import com.netceed.management.management_app.entity.user.CreationUserAssignEquipmentsRequestDto;
-import com.netceed.management.management_app.entity.user.User;
 import com.netceed.management.management_app.entity.user.UserDto;
 import com.netceed.management.management_app.service.UserEquipmentService;
 import com.netceed.management.management_app.service.UserService;

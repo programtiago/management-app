@@ -65,11 +65,11 @@ export class AdminService {
     return this.httpClient.post<UserDepartment>(`${this.BASE_API_URL_USERS}/department/${departmentId}`, newUser)
   }
 
-  deactivateUser(userId: number){
+  deactivateUserById(userId: number){
     return this.httpClient.put(`${this.BASE_API_URL_USERS}/deactivate/` + userId, {})
   }
 
-  activateUser(userId: number){
+  activateUserById(userId: number){
     return this.httpClient.put(`${this.BASE_API_URL_USERS}/activate/` + userId, {})
   }
 

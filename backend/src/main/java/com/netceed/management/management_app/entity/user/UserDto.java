@@ -2,7 +2,6 @@ package com.netceed.management.management_app.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.netceed.management.management_app.entity.department.Department;
-import com.netceed.management.management_app.entity.shift.Shift;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import jakarta.persistence.EnumType;
@@ -62,7 +61,7 @@ public record UserDto (
         this.lastName = lastName;
         this.workNumber = workNumber;
         this.birthdayDate = birthdayDate;
-        this.workStatus = workStatus;
+        this.workStatus = WorkStatus.AVAILABLE;
         this.userDepartments = userDepartments;
         this.recruitmentCompany = recruitmentCompany;
         this.registryDate = registryDate;
@@ -79,10 +78,10 @@ public record UserDto (
         this.userAlreadyOnDepartment = userAlreadyOnDepartment;
     }
 
-    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
+    public static UserDto createNewUserAssignEquipment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, boolean isActive, String email, String nif, String contactNumber, String password, String updatedAt, Set<UserEquipment> userEquipments,
                                                        Set<UserDepartment> userDepartments, boolean userAlreadyOnDepartment){
         return new UserDto(null, firstName, lastName, workNumber, birthdayDate, WorkStatus.AVAILABLE, recruitmentCompany, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")),
-                admissionDate, true, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, null, userAlreadyOnDepartment);
+                admissionDate, isActive, UserRole.EMPLOYEE, email, nif, contactNumber, password, false, updatedAt, userEquipments, null, userAlreadyOnDepartment);
     }
 
     public static UserDto createNewUserAssignDepartment(Long id, String firstName, String lastName, int workNumber, LocalDate birthdayDate, String recruitmentCompany, LocalDate admissionDate, String email, String nif, String contactNumber, String password, String updatedAt,

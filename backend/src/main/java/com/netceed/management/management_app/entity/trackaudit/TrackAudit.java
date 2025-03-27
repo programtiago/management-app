@@ -26,12 +26,12 @@ public class TrackAudit {
     @Column(name = "entity_id", nullable = false)
     private Long entityId;
     @NotBlank
-    @Column(name = "action", nullable = false, length = 100)
+    @Column(name = "action", nullable = false, length = 150)
     private String action; //CREATE, UPDATE, DELETE
     @NotNull
-    @JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
+    //@JsonFormat(pattern="dd-MM-yyyy'T'HH:mm:ss")
     @Column(name = "action_date_time", nullable = false, length = 20)
-    private LocalDateTime actionDateTime;
+    private LocalDateTime actionDateTime = LocalDateTime.now();
     @NotBlank
     @Column(name = "username", nullable = false, length = 15)
     private String username;

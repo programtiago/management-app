@@ -26,15 +26,25 @@
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
       <mat-cell *matCellDef="let equipment">
-        <button class="btn_statusEquipment" color="warn" *ngIf="equipment.statusEquipment == 'In Use' || equipment.statusEquipment == 'Not Available'" mat-raised-button>
-          {{equipment.statusEquipment}} 
-        </button>
-        <button class="btn_statusEquipment" color="accent" *ngIf="equipment.statusEquipment == 'On Warranty' || equipment.statusEquipment == 'For Warranty'" mat-raised-button>
-          {{equipment.statusEquipment}} 
-        </button>
-        <button class="btn_statusEquipment" *ngIf="equipment.statusEquipment == 'Available'" mat-raised-button style="background-color: green; color: white;">
-          {{equipment.statusEquipment}} 
-        </button>
+        <div *ngIf="equipment.statusEquipment == 'Available'" style="color:green; font-weight: 600; text-transform: uppercase;">
+          Available
+        </div>
+        
+        <div *ngIf="equipment.statusEquipment == 'In Use'" style="color:orange; font-weight: 600; text-transform: uppercase;">
+          In Use
+        </div>
+
+        <div *ngIf="equipment.statusEquipment == 'Not Available'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+          Not Available
+        </div>
+
+        <div *ngIf="equipment.statusEquipment == 'On Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+          On Warranty
+        </div>
+
+        <div *ngIf="equipment.statusEquipment == 'For Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+          On Warranty
+        </div>
       </mat-cell>
     </ng-container>
 

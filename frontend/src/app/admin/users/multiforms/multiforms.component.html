@@ -294,8 +294,16 @@
             
                                     <div>
                                         <div class="btn-navigation-stepper">
-                                            <button mat-raised-button (click)="onCancel()" color="primary"><mat-icon color="accent">clear</mat-icon>Cancel</button>
-                                            <button mat-raised-button (click)="onSubmit()" color="primary" matStepperNext><mat-icon>check_circle</mat-icon>Submit</button>
+                                            <button mat-icon-button (click)="onCancel()" style="color: black" fontSet="material-symbols-outlined" >
+                                                <mat-icon>
+                                                    cancel
+                                                </mat-icon>
+                                            </button>
+                                            <button mat-icon-button (click)="onSubmit()" style="color: black" fontSet="material-symbols-outlined" matStepperNext>
+                                                <mat-icon>
+                                                    check_circle
+                                                </mat-icon>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -420,7 +428,7 @@
                                         <div>
                                             <div class="btn-navigation-stepper">
                                                 <button mat-icon-button (click)="onCancel()" fontSet="material-symbols-outlined"><mat-icon>clear</mat-icon></button>
-                                                <button mat-icon-button (click)="onSubmit()" matStepperNext><mat-icon>assignment</mat-icon></button>
+                                                <button mat-icon-button (click)="onSubmit()" fontSet="material-symbols-outlined" matStepperNext><mat-icon>assignment</mat-icon></button>
                                             </div>
                                         </div>
                                     </div>

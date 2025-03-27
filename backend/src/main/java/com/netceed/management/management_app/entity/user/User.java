@@ -7,6 +7,7 @@ import com.netceed.management.management_app.entity.user.userEquipment.UserEquip
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +42,7 @@ public class User{
     @Column(name = "work_number", nullable = false, length = 9)
     private int workNumber;
     @Column(name = "birthday_date", nullable = false)
+    @Past
     private LocalDate birthdayDate;
     @Column(name = "nif", nullable = false, length = 9)
     @Length(min = 9, max = 9)
@@ -56,7 +58,7 @@ public class User{
     @Column(name = "admission_date", nullable = false)
     private LocalDate admissionDate;
     @Column(name = "is_active", nullable = false)
-    private boolean isActive = true;
+    private boolean isActive;
     @Enumerated(EnumType.STRING)
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
@@ -83,7 +85,7 @@ public class User{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserDepartment> userDepartments = new HashSet<>();
 
-    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, boolean isActive, UserRole userRole, String nif, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
+    public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, UserRole userRole, String nif, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -92,7 +94,7 @@ public class User{
         this.email = email;
         this.password = password;
         this.admissionDate = admissionDate;
-        this.isActive = isActive;
+        this.isActive = true;
         this.contactNumber = contactNumber;
         this.userRole = userRole;
         this.nif = nif;
@@ -110,7 +112,7 @@ public class User{
         this.email = email;
         this.password = password;
         this.admissionDate = admissionDate;
-        this.isActive = isActive;
+        this.isActive = true;
         this.contactNumber = contactNumber;
         this.userRole = userRole;
         this.nif = nif;

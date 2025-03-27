@@ -141,7 +141,7 @@ public class UserService {
             } catch (Exception e) {
                 new BadRequestException("Something went wrong. Please try again");
             }
-        } else {
+        }else{
             throw new IllegalArgumentException("User already deactivated. Impossible to active with id " + id);
         }
 
@@ -185,7 +185,7 @@ public class UserService {
        User savedUser = new User();
        if (equipmentFound.id() != null){
            UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(), newUser.admissionDate(),
-                   newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments(), newUser.userAlreadyOnDepartment());
+                   newUser.isActive(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments(), newUser.userAlreadyOnDepartment());
 
            savedUser = userRepository.save(userMapper.toEntity(userToSave));
        }
