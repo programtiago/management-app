@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { UserRole } from '../../../model/user/userRole';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatePipe, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDatepickerInput } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-user-form',
@@ -18,6 +17,8 @@ export class UserFormComponent implements OnInit{
   userId!: any
   userSelected: any;
   userUpdateForm!: FormGroup;
+
+  statusUser: string[] = ["Ativo", "Desativo"]
 
   constructor(private fb: FormBuilder, private adminService: AdminService,
     private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class UserFormComponent implements OnInit{
       email: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       contactNumber: ['', [Validators.required, Validators.minLength(9)]],
       password: ['', [Validators.required, Validators.minLength(9)]],
+      isActive: []
     })
   }  
 
@@ -45,7 +47,6 @@ export class UserFormComponent implements OnInit{
       this.userSelected = res;
 
       let birthdayDate: Date = new Date(res.birthdayDate)
-      console.log("Data loadded: ", birthdayDate)
 
       this.userUpdateForm.patchValue({
         firstName: res.firstName,
@@ -57,7 +58,8 @@ export class UserFormComponent implements OnInit{
         userRole: res.userRole,
         email: res.email,
         contactNumber: res.contactNumber,
-        password: res.password
+        password: res.password,
+        isActive: res.isActive
       })
     })
   }

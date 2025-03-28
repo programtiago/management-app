@@ -48,6 +48,13 @@
                 <input matInput placeholder="Password" formControlName="password">
             </mat-form-field>
 
+            <mat-form-field class="full-width" appearance="fill">
+                <!--<input matInput placeholder="Status" formControlName="isActive">-->
+                <mat-select formControlName="isActive">
+                    <mat-option [value]="true">Ativado</mat-option>
+                    <mat-option [value]="false">Desativado</mat-option>
+                    </mat-select>
+            </mat-form-field>
         </form>
         <mat-card-actions style="align-content: center; justify-content: center;">
             <button class="cancel-btn" mat-icon-button (click)="onCancel()" ><mat-icon fontSet="material-symbols-outlined">cancel</mat-icon></button>

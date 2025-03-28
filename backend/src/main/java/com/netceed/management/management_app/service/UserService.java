@@ -89,6 +89,7 @@ public class UserService {
                     user.setBirthdayDate(userUpdate.birthdayDate());
                     user.setRecruitmentCompany(userUpdate.recruitmentCompany());
                     user.setEmail(userUpdate.email());
+                    user.setActive(userUpdate.isActive());
                     user.setUserDepartments(userUpdate.userDepartments());
                     user.setPassword(userUpdate.password());
                     user.setWorkStatus(userUpdate.workStatus());
