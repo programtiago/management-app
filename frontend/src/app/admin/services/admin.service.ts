@@ -31,14 +31,18 @@ export class AdminService {
       .pipe(first());
   }
 
-  listUsersActive(){
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/active`)
+  listUsersActive(page = 0, pageSize = 10){
+    return this.httpClient.get<UserPage>(`${this.BASE_API_URL_USERS}/active`, { params: { page, pageSize }})
       .pipe(first());
   }
 
-  listUsersNotActive(){
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/not-active`)
+  listUsersNotActive(page = 0, pageSize = 10){
+    return this.httpClient.get<UserPage>(`${this.BASE_API_URL_USERS}/not-active`, { params: { page, pageSize }})
     .pipe(first());
+  }
+
+  filterUsersByRole(role: string, page = 0, pageSize = 10){
+    return this.httpClient.get<UserPage>(`${this.BASE_API_URL_USERS}/filterBy/userRole?userRole=${role}`, { params: { page, pageSize }})
   }
 
   listUsersAvailableAssignToDepartment(){
@@ -90,8 +94,8 @@ export class AdminService {
     )
   }
 
-  searchUsers(keyword: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.BASE_API_URL_USERS}/search?keyword=${keyword}`)
+  searchUsers(keyword: string, page = 0, pageSize = 10) {
+    return this.httpClient.get<UserPage>(`${this.BASE_API_URL_USERS}/search?keyword=${keyword}`, { params: { page, pageSize }})
       .pipe(catchError(this.handleError));
   }
 

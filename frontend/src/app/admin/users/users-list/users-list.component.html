@@ -1,7 +1,27 @@
 <mat-form-field appearance="fill" style="width: 100%;">
-  <mat-icon matSuffix>filter_alt</mat-icon>
+  <mat-icon [matMenuTriggerFor]="filterMenuUser" matSuffix>filter_alt</mat-icon>
   <input matInput (keyup)="applyFilter($event)" placeholder="Search users...">
 </mat-form-field>
+<mat-menu #filterMenuUser="matMenu" xPosition="before">
+  <button mat-menu-item [matMenuTriggerFor]="filters">Filter By</button>
+</mat-menu>
+<mat-menu #filters="matMenu">
+  <button mat-menu-item (click)="filterByAll()">All</button>
+  <button mat-menu-item [mat-menu-trigger-for]="status">Status</button>
+  <button mat-menu-item [mat-menu-trigger-for]="role">Role</button>
+</mat-menu>
+
+<mat-menu #status="matMenu" xPosition="before">
+  <button mat-menu-item (click)="filterByStatusActive()">Active</button>
+  <button mat-menu-item (click)="filterByStatusNotActive()">Not Active</button>
+</mat-menu>
+
+
+<mat-menu #role="matMenu" xPosition="before">
+  <button mat-menu-item (click)="filterByRole('EMPLOYEE')">Employee</button>
+  <button mat-menu-item (click)="filterByRole('ADMIN')">Admin</button>
+</mat-menu>
+
 <mat-table [dataSource]="users">
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
@@ -32,11 +52,11 @@
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let user">
           <div *ngIf="user.isActive == true" style="color:green; font-weight: 600; text-transform: uppercase;">
-            Ativo
+            Active
           </div>
 
           <div *ngIf="user.isActive == false" style="color:red; font-weight: 600; text-transform: uppercase;">
-            Desativo
+            Not Active
           </div>
         </mat-cell>
     </ng-container>

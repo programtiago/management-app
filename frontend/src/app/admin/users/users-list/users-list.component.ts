@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from '../../../model/user/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,6 +13,7 @@ import { UserEquipment } from '../../../model/user-equipment/user-equipment';
 import { Equipment } from '../../../model/equipment/equiment';
 import { ModalHistoryLogByuserComponent } from '../modal-history-log-byuser/modal-history-log-byuser.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users-list',
@@ -22,6 +23,12 @@ import { MatTableDataSource } from '@angular/material/table';
 export class UsersListComponent implements OnInit{
 
   @Input() users: User[] = []
+  @Output() filteredUsers = new EventEmitter<{users: User[]; totalElements: number}>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  searchKeyword: string = '';
+
   dataSource = new MatTableDataSource<User>(this.users);
   searchResult: undefined | User[]
 
@@ -37,7 +44,7 @@ export class UsersListComponent implements OnInit{
   questionForActivate: string = "This will activate the account user. Would u like to proceed ?";
   questionForDesativate: string = "This will deactivate the user account. Would u like to proceed ?";
 
-  displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', /*'department',*/ 'registryDate', 'isActive', 
+  displayedColumns: String[] = ['firstName', 'lastName', 'workNumber', 'registryDate', 'isActive', 
     'userRole',  'email', 'contactNumber', 'birthdayDate', 'actions'
   ]
 
@@ -52,7 +59,11 @@ export class UsersListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //this.refresh()
+    this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   onError(errorMsg: string){
@@ -189,9 +200,78 @@ export class UsersListComponent implements OnInit{
 
   applyFilter(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
-    this.adminService.searchUsers(filterValue).subscribe((res) => {
-      this.users = res;
+    this.searchKeyword = filterValue.trim();
+    
+    const pageSize = this.paginator ? this.paginator.pageSize : 10;
+    this.searchUsersByKeyword(0, pageSize)
+  }
+
+  filterByStatusActive(){
+    this.adminService.listUsersActive().subscribe((res) => {
+      this.users = res.content;
       this.dataSource.data = this.users;
+      this.filteredUsers.emit({ users: this.users, totalElements: res.totalElements})
+    });
+  }
+
+  filterByStatusNotActive(){
+    this.adminService.listUsersNotActive().subscribe((res) => {
+      this.users = res.content;
+      this.dataSource.data = this.users;
+      this.filteredUsers.emit({ users: this.users, totalElements: res.totalElements})
+    });
+  }
+
+  filterByAllStatuts(){
+    this.adminService.listAllUsers().subscribe((res) => {
+      this.users = res.content;
+      this.dataSource.data = this.users;
+      this.filteredUsers.emit({ users: this.users, totalElements: res.totalElements})
+    });
+  }
+
+  filterByRole(role: string){
+    this.adminService.filterUsersByRole(role).subscribe((res) => {
+      this.users = res.content
+      this.dataSource.data = this.users;
+      this.filteredUsers.emit({ users: this.users, totalElements: res.totalElements})
+    });
+  }
+
+  filterByAll(){
+    this.adminService.listAllUsers().subscribe((res) => {
+      this.users = res.content
+      this.dataSource.data = this.users;
+      this.filteredUsers.emit({ users: this.users, totalElements: res.totalElements})
     })
+  }
+
+  searchUsersByKeyword(pageIndex: number = 0, pageSize: number = 10){
+    if (this.searchKeyword.trim() !== ''){
+      this.adminService.searchUsers(this.searchKeyword, pageIndex, pageSize)
+        .subscribe((res) => {
+          this.users = res.content;
+          this.dataSource.data = this.users;
+          this.filteredUsers.emit({users: this.users, totalElements: res.totalElements});
+          if (this.paginator){
+            this.paginator.length = res.totalElements;
+            this.paginator.pageIndex = pageIndex;
+          }
+        });
+    }else{
+      this.filterByAll();
+    }
+  }
+
+  onPageChange(event: PageEvent){
+    if (this.searchKeyword.trim() != ''){
+      this.searchUsersByKeyword(event.pageIndex, event.pageSize);
+    }else{
+      this.adminService.listAllUsers(event.pageIndex, event.pageSize).subscribe((res) => {
+        this.users = res.content;
+        this.dataSource.data = this.users;
+        this.filteredUsers.emit({users: this.users, totalElements: res.totalElements})
+      })
+    }
   }
 }

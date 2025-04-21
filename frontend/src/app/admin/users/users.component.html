@@ -9,7 +9,8 @@
           *ngIf="users$ | async as users; else loading;" class="users-list-container mat-elevation-z8">
           
           <app-users-list 
-            [users]="users.content">
+            [users]="users.content"
+            (filteredUsers)="onFilteredResults($event)">
           </app-users-list>
 
         <mat-paginator
@@ -22,6 +23,7 @@
           (page)="refresh($event)"
         >
       </mat-paginator>  
+    
         </div>    
         <ng-template #loading>
           <div class="loading-spinner">

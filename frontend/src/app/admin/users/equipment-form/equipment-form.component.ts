@@ -64,7 +64,7 @@ export class EquipmentFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.adminSerice.listUsersActive().subscribe((res) => {
-      this.users = res;
+      this.users = res.content;
     })
   }
 

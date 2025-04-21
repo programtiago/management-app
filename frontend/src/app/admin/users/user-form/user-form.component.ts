@@ -18,11 +18,10 @@ export class UserFormComponent implements OnInit{
   userSelected: any;
   userUpdateForm!: FormGroup;
 
-  statusUser: string[] = ["Ativo", "Desativo"]
+  statusUser: string[] = ["Active", "Not Active"]
 
   constructor(private fb: FormBuilder, private adminService: AdminService,
-    private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute,
-    private router: Router, private datePipe: DatePipe
+    private location: Location, private matSnackBar: MatSnackBar, private route: ActivatedRoute
   ){
     this.userUpdateForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
