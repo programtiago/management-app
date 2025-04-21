@@ -69,6 +69,35 @@
         margin: 2em auto;
     }
 }
+
+.card-table-equipments{
+    display: flex;
+    flex-direction: column;
+}
+
+.equipments-toolbar{
+    position: sticky;
+    top: 0;
+    z-index: 300;
+    background: #1a1a1a !important;
+    color: white !important;
+}
+
+.search-grid-container{
+    position: sticky;
+    top: 64px;
+    z-index: 250;
+    background: white;
+    padding-bottom: 8px;
+}
+
+.mat-mdc-table-container{
+    flex: 1 1 auto;
+    overflow-y: auto;
+    background: white;
+    max-height: 100%;
+    min-height: 0;
+}
     
 
 .btn-navigation-stepper{
@@ -87,13 +116,25 @@
     vertical-align: middle;
 }
 
+.mat-mdc-header-row,
+mat-header-row{
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 200 !important;
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .mat-mdc-header-cell{
+    background: white !important;
     font-weight: bold;
+    padding: 0 16px;
 }
 
 mat-grid-tile {
     text-align: center;
-    line-height: 100px; /* Center text vertically */
+    line-height: 100px;
     font-size: 20px;
 }
 
@@ -105,3 +146,10 @@ mat-cell:nth-child(1),
     mat-header-cell:nth-child(1) {
         flex: 0 0 10%;
     }
+
+mat-paginator{
+    position: sticky;
+    bottom: 0;
+    z-index: 250;
+    background: white;
+}   

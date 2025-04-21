@@ -1,5 +1,4 @@
 <mat-card class="card-container">
-    
     <mat-card-header style="display: flex; align-content: center; justify-content: center;">
         <mat-card-title>Insert a new User</mat-card-title>
     </mat-card-header>
@@ -19,7 +18,7 @@
     
     <div *ngIf="typeAssignmentSelected == 'EQU'" class="choice-value-assignment">
         <mat-card class="card-table-equipments">
-                <mat-toolbar style="background-color: #1a1a1a; color: white;">
+                <mat-toolbar class="equipments-toolbar">
                     <mat-toolbar-row style="display: flex; align-items: center;">
                         <span style="flex: 1; text-align: center;">Equipments Available</span>
                         <span class="filter-icon">
@@ -99,56 +98,58 @@
                     </mat-grid-list>
                   </div>
             <mat-card-content>
-                <mat-table [dataSource]="dataSource">
+                <div class="mat-mdc-table-container">
+                    <mat-table [dataSource]="dataSource">
 
-                <ng-container matColumnDef="select">
-                    <mat-header-cell *matHeaderCellDef>
-                        <mat-checkbox (change)="$event ? toogleAllRows() : null"
-                                      [checked]="selection.hasValue() && isAllSelected()"
-                                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                                      [aria-label]="checkboxLabel()"
-                                      >
-                        </mat-checkbox>
-                    </mat-header-cell>
-
-                    <mat-cell *matCellDef="let row">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                                      (change)="$event ? selection.toggle(row) : null"
-                                      [checked]="selection.isSelected(row)"
-                                      [aria-label]="checkboxLabel(row)"
-                                      (change)="getEquipmentsSelected($event, row)"
-                                      >
-
-                        </mat-checkbox>
-                    </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="description">
-                    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-                    <mat-cell *matCellDef="let equipment"> {{equipment.description}} </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="serialNumber">
-                    <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
-                    <mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="type">
-                    <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
-                    <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
-                </ng-container>
-
-                <ng-container matColumnDef="registryDate">
-                    <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
-                    <mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-            </mat-table>
-                
+                        <ng-container matColumnDef="select">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox (change)="$event ? toogleAllRows() : null"
+                                              [checked]="selection.hasValue() && isAllSelected()"
+                                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                              [aria-label]="checkboxLabel()"
+                                              >
+                                </mat-checkbox>
+                            </mat-header-cell>
+        
+                            <mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                              (change)="$event ? selection.toggle(row) : null"
+                                              [checked]="selection.isSelected(row)"
+                                              [aria-label]="checkboxLabel(row)"
+                                              (change)="getEquipmentsSelected($event, row)"
+                                              >
+        
+                                </mat-checkbox>
+                            </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="description">
+                            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                            <mat-cell *matCellDef="let equipment"> {{equipment.description}} </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="serialNumber">
+                            <mat-header-cell *matHeaderCellDef> Serial Number </mat-header-cell>
+                            <mat-cell *matCellDef="let equipment"> {{equipment.serialNumber}} </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="type">
+                            <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                            <mat-cell *matCellDef="let equipment"> {{equipment.type}} </mat-cell>
+                        </ng-container>
+        
+                        <ng-container matColumnDef="registryDate">
+                            <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+                            <mat-cell *matCellDef="let equipment"> {{equipment.registryDate}} </mat-cell>
+                        </ng-container>
+        
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+                    </mat-table>
+                </div>
+                    
             <mat-paginator 
-                [pageSizeOptions]="[5,10,15]"
+                [pageSizeOptions]="[5,10,15,30,50,100]"
                 showFirstLastButtons
                 [length]="totalElements"
                 [pageSize]="pageSize"
