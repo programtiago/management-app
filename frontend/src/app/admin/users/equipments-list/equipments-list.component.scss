@@ -3,7 +3,9 @@
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
+        margin-top: 0; 
         display: table;
+        background: white;
     }
 
     .btn_statusEquipment{
@@ -46,6 +48,7 @@
         width: 100%;
         max-width: 100%;
         margin-bottom: 1rem;
+        background: white;
     }
 
     .mat-mdc-cell, .mat-mdc-header{
@@ -93,16 +96,28 @@
     width: 70px;
 }
 
-.mat-mdc-cell, .mat-mdc-header{
-    line-break: unset;
-    overflow: hidden;
-    vertical-align: middle;
-}
 
 .mat-mdc-header-cell{
     font-weight: bold;
+    background-color: white;
+    padding: 0 16px;
 }
 
 mat-icon{
     transform: scale(1.2);
 }
+
+
+mat-header-row{
+    position: sticky;
+    z-index: 100;
+    min-height: 48px;
+    background: white;
+    margin: 0;
+    padding: 0;
+    top: 0;
+}
+
+
+
+
