@@ -1,7 +1,6 @@
 @media only screen and (min-width: 700px) and (max-width: 1920px) {
     .card-equipments{
         margin-top: 1rem;
-        color: red;
     }
 
     .mat-mdc-card-content{
@@ -9,9 +8,19 @@
         font-size: small;
     }
 
+    mat-cell:nth-child(4),
+    mat-header-cell:nth-child(4) {
+        flex: 0 0 8%;
+    }
+
+    mat-cell:nth-child(5),
+    mat-header-cell:nth-child(5) {
+        flex: 0 0 6%;
+    }
+
     mat-cell:nth-child(7),
     mat-header-cell:nth-child(7) {
-        flex: 0 0 19%;
+        flex: 0 0 17%;
     }
 
     mat-cell:nth-child(8),
@@ -19,14 +28,10 @@
         flex: 0 0 8%;
     }
 
-    mat-cell:nth-child(4),
-    mat-header-cell:nth-child(4) {
-        flex: 0 0 8%;
-    }
 
     mat-cell:nth-child(10),
     mat-header-cell:nth-child(10) {
-        flex: 0 0 16%;
+        flex: 0 0 17%;
     }
 }
 

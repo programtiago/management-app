@@ -7,10 +7,7 @@ import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.EquipmentDto;
 import com.netceed.management.management_app.entity.equipment.EquipmentMapper;
 import com.netceed.management.management_app.entity.trackaudit.TrackAuditService;
-import com.netceed.management.management_app.entity.user.User;
-import com.netceed.management.management_app.entity.user.UserDto;
-import com.netceed.management.management_app.entity.user.UserMapper;
-import com.netceed.management.management_app.entity.user.UserPageDto;
+import com.netceed.management.management_app.entity.user.*;
 import com.netceed.management.management_app.entity.user.userDepartment.UserDepartmentDto;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipment;
 import com.netceed.management.management_app.entity.user.userEquipment.UserEquipmentDto;
@@ -56,16 +53,18 @@ public class UserService {
         return new UserPageDto(users, pageUser.getTotalElements(), pageUser.getTotalPages());
     }
 
-    public List<UserDto> getAllUsersActivate() {
-        return userRepository.findByUsersActive()
-                .stream().map(userMapper::toDto).filter(UserDto::isActive)
-                .collect(Collectors.toList());
+    public UserPageDto getAllUsersActivate(int page, int pageSize) {
+        Page<User> pageUsersActive = userRepository.findByUsersActive(PageRequest.of(page, pageSize));
+        List<UserDto> users = pageUsersActive.get().map(userMapper::toDto).toList();
+
+        return new UserPageDto(users, pageUsersActive.getTotalElements(), pageUsersActive.getTotalPages());
     }
 
-    public List<UserDto> getAllUsersNotActivate() {
-        return userRepository.findByUsersNotActive()
-                .stream().map(userMapper::toDto).filter(UserDto::isActive)
-                .collect(Collectors.toList());
+    public UserPageDto getAllUsersNotActivate(int page, int pageSize) {
+        Page<User> pageUsersNotActive = userRepository.findByUsersNotActive(PageRequest.of(page, pageSize));
+        List<UserDto> users = pageUsersNotActive.get().map(userMapper::toDto).toList();
+
+        return new UserPageDto(users, pageUsersNotActive.getTotalElements(), pageUsersNotActive.getTotalPages());
     }
 
     public UserDto getById(Long id){
@@ -101,12 +100,6 @@ public class UserService {
     }
 
     public UserDto create(UserDto newUser){
-        /*
-            newUser = UserDto.createNewUserWithNoAssign(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(),
-                    newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password());
-
-         */
-
         User user = userMapper.toEntity(newUser);
         User savedUser = userRepository.save(user);
 
@@ -231,7 +224,19 @@ public class UserService {
         return userMapper.convertListUserToDto(users);
     }
 
-    public List<UserDto> search(String query){
-        return userMapper.convertListUserToDto(userRepository.findByKeyword(query));
+    public UserPageDto search(String query, int page, int pageSize){
+        Page<User> pageUserSearchedResults = userRepository.findByKeyword(query, PageRequest.of(page, pageSize));
+        List<UserDto> users = pageUserSearchedResults.get().map(userMapper::toDto).toList();
+
+        return new UserPageDto(users, pageUserSearchedResults.getTotalElements(), pageUserSearchedResults.getTotalPages());
     }
+
+    public UserPageDto filterByUserRole(UserRole userRole, int page, int pageSize){
+        Page<User> pageUserFilteredByRole = userRepository.findByUserRole(userRole, PageRequest.of(page, pageSize));
+        List<UserDto> users = pageUserFilteredByRole.get().map(userMapper::toDto).toList();
+
+        return new UserPageDto(users, pageUserFilteredByRole.getTotalElements(), pageUserFilteredByRole.getTotalPages());
+    }
+
+
 }

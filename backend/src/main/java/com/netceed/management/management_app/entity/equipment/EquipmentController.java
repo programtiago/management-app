@@ -84,8 +84,8 @@ public class EquipmentController {
     }
 
     @GetMapping("/search")
-    public List<EquipmentDto> searchEquipment(@RequestParam("keyword") String keyword){
-        return equipmentService.search(keyword);
+    public EquipmentPageDto searchEquipment(@RequestParam("keyword") String keyword, @RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize){
+        return equipmentService.search(keyword, page, pageSize);
     }
 
     @GetMapping("/filter/description/startsWith")

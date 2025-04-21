@@ -26,26 +26,19 @@ public class UserController {
     private final UserService userService;
     private final TrackAuditService trackAuditService;
 
-    /*
-    @GetMapping
-    public List<UserDto> getAllUsers() throws Exception {
-        return userService.getAllUsers();
-    }
-     */
-
     @GetMapping
     public UserPageDto getAllUsers(@RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) throws Exception {
         return userService.getAllUsers(page, pageSize);
     }
 
     @GetMapping("/active")
-    public List<UserDto> getAllUsersActivate() throws Exception {
-        return userService.getAllUsersActivate();
+    public UserPageDto getAllUsersActivate(@RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) throws Exception {
+        return userService.getAllUsersActivate(page, pageSize);
     }
 
     @GetMapping("/not-active")
-    public List<UserDto> getAllUsersNotActivate() throws Exception {
-        return userService.getAllUsersNotActivate();
+    public UserPageDto getAllUsersNotActivate(@RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize) throws Exception {
+        return userService.getAllUsersNotActivate(page, pageSize);
     }
 
     @GetMapping("/{id}")
@@ -132,9 +125,13 @@ public class UserController {
         return userService.getUsersAvailableAssignToDepartment();
     }
 
-
     @GetMapping("/search")
-    public List<UserDto> searchUser(@RequestParam("keyword") String keyword){
-        return userService.search(keyword);
+    public UserPageDto searchUser(@RequestParam("keyword") String keyword, @RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize){
+        return userService.search(keyword, page, pageSize);
+    }
+
+    @GetMapping("/filterBy/userRole")
+    public UserPageDto filterByUserRole(@RequestParam("userRole") UserRole userRole, @RequestParam(defaultValue = "0") @PositiveOrZero int page, @RequestParam(defaultValue = "10") @Positive @Max(100) int pageSize){
+        return userService.filterByUserRole(userRole, page, pageSize);
     }
 }

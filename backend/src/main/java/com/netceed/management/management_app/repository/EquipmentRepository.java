@@ -2,6 +2,8 @@ package com.netceed.management.management_app.repository;
 
 import com.netceed.management.management_app.entity.equipment.Equipment;
 import com.netceed.management.management_app.entity.equipment.StatusEquipment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +17,7 @@ import java.util.Optional;
     Optional<Equipment> findBySerialNumber(String serialNumber);
     List<Equipment> findAllByStatusEquipment(StatusEquipment statusEquipment);
     @Query("SELECT e FROM Equipment e WHERE e.serialNumber LIKE %:value%")
-    List<Equipment> findBKeywordSn(@Param("value") String value);
+    Page<Equipment> findBKeywordSn(@Param("value") String value, Pageable pageable);
     @Query("SELECT e FROM Equipment e WHERE e.description LIKE :description%")
     List<Equipment> findEquipmentsStartsWithDescription(@Param("description") String description);
     @Query("SELECT e FROM Equipment e WHERE e.description LIKE %:description%")

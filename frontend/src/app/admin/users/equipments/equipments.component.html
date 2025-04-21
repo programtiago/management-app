@@ -6,7 +6,9 @@
           *ngIf="equipments$ | async as equipments; else loading;" class="users-list-container mat-elevation-z8">
           
           <app-equipments-list
-            [equipments]="equipments.content">
+            [equipments]="equipments.content"
+            (filteredEquipments)="onFilteredResults($event)"
+          >
           </app-equipments-list>
 
           <mat-paginator

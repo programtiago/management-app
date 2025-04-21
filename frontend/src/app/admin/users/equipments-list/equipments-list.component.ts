@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Equipment } from '../../../model/equipment/equiment';
 import { AdminService } from '../../services/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,27 +9,41 @@ import { ModalViewUserOwnerEquipmentComponent } from '../modal-view-user-owner-e
 import { User } from '../../../model/user/user';
 import { StatusEquipment } from '../../../model/equipment/status-equipment';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-equipments-list',
   templateUrl: './equipments-list.component.html',
   styleUrl: './equipments-list.component.scss'
 })
-export class EquipmentsListComponent implements OnInit{
+export class EquipmentsListComponent implements OnInit, AfterViewInit{
   
   @Input() equipments: Equipment[] = [];
+  @Output() filteredEquipments = new EventEmitter<{equipments: Equipment[]; totalElements: number}>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  searchKeyword: string = '';
+  dataSource = new MatTableDataSource<Equipment>(this.equipments);
+  searchResult: undefined | Equipment[];
+  
   userEquipmentsOfEquipmentSelected: UserEquipment[] = []
   userOwnerEquipment!: User;
+
+  totalElements = 0;
   
   statusEquipment = StatusEquipment;
-
-  dataSource = new MatTableDataSource<Equipment>(this.equipments);
 
   displayedColumns: String[] = ['brand', 'model', 'description', 'serialNumber', 'registryDate', 'status', 'actions']
 
   constructor(private adminService: AdminService, private snackbar: MatSnackBar, private dialog: MatDialog){}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+  
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   onRefresh(){
     this.adminService.getEquipments().subscribe((res) => {
@@ -80,11 +94,37 @@ export class EquipmentsListComponent implements OnInit{
     console.log('clicou')
   }
 
+  filterByAll(){
+    this.adminService.getEquipments().subscribe((res) => {
+      this.equipments = res.content
+      this.dataSource.data = this.equipments;
+      this.filteredEquipments.emit({ equipments: this.equipments, totalElements: res.totalElements})
+    })
+  }
+
+
   applyFilter(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
-    this.adminService.searchEquipments(filterValue).subscribe((res) => {
-      this.equipments = res;
-      this.dataSource.data = this.equipments;
-    })
+    this.searchKeyword = filterValue.trim();
+
+    const pageSize = this.paginator ? this.paginator.pageSize : 10
+    this.searchEquipmentsByKeyword(0, pageSize)
+  }
+
+  searchEquipmentsByKeyword(pageIndex: number = 0, pageSize: number = 10){
+    if (this.searchKeyword.trim() !== ''){
+      this.adminService.searchEquipments(this.searchKeyword, pageIndex, pageSize)
+      .subscribe((res) => {
+        this.equipments = res.content;
+        this.dataSource.data = this.equipments;
+        this.filteredEquipments.emit({equipments: this.equipments, totalElements: res.totalElements})
+        if (this.paginator){
+          this.paginator.length = res.totalElements;
+          this.paginator.pageIndex = pageIndex;
+        }
+      })
+    }else{
+      this.filterByAll();
+    }
   }
 }

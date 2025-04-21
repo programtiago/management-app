@@ -99,8 +99,8 @@ export class AdminService {
       .pipe(catchError(this.handleError));
   }
 
-  searchEquipments(keyword: string): Observable<Equipment[]> {
-    return this.httpClient.get<Equipment[]>(`${this.BASE_API_URL_EQUIPMENTS}/search?keyword=${keyword}`)
+  searchEquipments(keyword: string, page = 0, pageSize = 10) {
+    return this.httpClient.get<EquipmentPage>(`${this.BASE_API_URL_EQUIPMENTS}/search?keyword=${keyword}`, { params: { page, pageSize }})
       .pipe(catchError(this.handleError));
   }
 

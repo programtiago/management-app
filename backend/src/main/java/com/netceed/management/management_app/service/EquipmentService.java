@@ -126,8 +126,11 @@ public class EquipmentService {
        return equipmentMapper.convertListEquipmentToDto(equipments);
     }
 
-    public List<EquipmentDto> search(String query){
-        return equipmentMapper.convertListEquipmentToDto(equipmentRepository.findBKeywordSn(query));
+    public EquipmentPageDto search(String query, int page, int pageSize){
+        Page<Equipment> pageEquipmentSearchedResults = equipmentRepository.findBKeywordSn(query, PageRequest.of(page, pageSize));
+        List<EquipmentDto> equipments = pageEquipmentSearchedResults.get().map(equipmentMapper::toDto).toList();
+
+        return new EquipmentPageDto(equipments, pageEquipmentSearchedResults.getTotalElements(), pageEquipmentSearchedResults.getTotalPages());
     }
 
     public List<EquipmentDto> searchEquipmentsStartsWithDescription(String description){
