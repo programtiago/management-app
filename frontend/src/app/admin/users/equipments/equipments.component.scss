@@ -10,27 +10,36 @@
 @media only screen and (min-width: 1537px) {
     .mat-mdc-card {
         max-width: 60%;
+        max-height: 89%;
         display: flex;
+        flex-direction: column;
         align-content: center;
         justify-content: center;
         margin: 5em auto;
     }
+
+    .equipments-list-container{
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
 }
 
 @media only screen and (min-width: 700px) and (max-width: 1536px) {
-    .users-list-container{
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-    }
-
     .mat-mdc-card {
         display: flex;
+        flex-direction: column;
         align-content: center;
         justify-content: center;
         margin: 2em auto;
         max-width: 95%;
+        max-height: 89%;
+    }
 
+    .equipments-list-container{
+        display: block;
+        width: 100%;
+        overflow-x: auto;
     }
 }
 
@@ -38,3 +47,11 @@
     align-content: center;
     justify-content: center;
 }
+
+.full-height-table{
+    flex: 1;
+    overflow: auto;
+    flex-direction: column;
+}
+
+
