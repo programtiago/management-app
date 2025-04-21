@@ -2,91 +2,93 @@
   <mat-icon matSuffix>filter_alt</mat-icon>
   <input matInput style="text-align: center;" (keyup)="applyFilter($event)" placeholder="Search equipments by S/N...">
 </mat-form-field>
-<mat-table [dataSource]="equipments">
-    <ng-container matColumnDef="brand">
-      <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
-      <mat-cell *matCellDef="let equipment"> {{ equipment.brand }} </mat-cell>
-    </ng-container>
-  
-    <ng-container matColumnDef="model">
-      <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
-      <mat-cell *matCellDef="let equipment"> {{ equipment.model }} </mat-cell>
-    </ng-container>     
+<div class="mat-mdc-table-container">
+  <mat-table [dataSource]="equipments">
+      <ng-container matColumnDef="brand">
+        <mat-header-cell *matHeaderCellDef> Brand </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{ equipment.brand }} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="model">
+        <mat-header-cell *matHeaderCellDef> Model </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{ equipment.model }} </mat-cell>
+      </ng-container>     
 
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-      <mat-cell *matCellDef="let equipment"> {{ equipment.description }} </mat-cell>
-    </ng-container>
-  
-    <ng-container matColumnDef="serialNumber">
-      <mat-header-cell *matHeaderCellDef> S/N </mat-header-cell>
-      <mat-cell *matCellDef="let equipment"> {{ equipment.serialNumber }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{ equipment.description }} </mat-cell>
+      </ng-container>
+    
+      <ng-container matColumnDef="serialNumber">
+        <mat-header-cell *matHeaderCellDef> S/N </mat-header-cell>
+        <mat-cell *matCellDef="let equipment"> {{ equipment.serialNumber }} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let equipment">
-        <div *ngIf="equipment.statusEquipment == 'Available'" style="color:green; font-weight: 600; text-transform: uppercase;">
-          Available
-        </div>
-        
-        <div *ngIf="equipment.statusEquipment == 'In Use'" style="color:orange; font-weight: 600; text-transform: uppercase;">
-          In Use
-        </div>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let equipment">
+          <div *ngIf="equipment.statusEquipment == 'Available'" style="color:green; font-weight: 600; text-transform: uppercase;">
+            Available
+          </div>
+          
+          <div *ngIf="equipment.statusEquipment == 'In Use'" style="color:orange; font-weight: 600; text-transform: uppercase;">
+            In Use
+          </div>
 
-        <div *ngIf="equipment.statusEquipment == 'Not Available'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
-          Not Available
-        </div>
+          <div *ngIf="equipment.statusEquipment == 'Not Available'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+            Not Available
+          </div>
 
-        <div *ngIf="equipment.statusEquipment == 'On Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
-          On Warranty
-        </div>
+          <div *ngIf="equipment.statusEquipment == 'On Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+            On Warranty
+          </div>
 
-        <div *ngIf="equipment.statusEquipment == 'For Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
-          On Warranty
-        </div>
-      </mat-cell>
-    </ng-container>
+          <div *ngIf="equipment.statusEquipment == 'For Warranty'" style="color:crimson; font-weight: 600; text-transform: uppercase;">
+            On Warranty
+          </div>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="registryDate">
-        <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
-        <mat-cell *matCellDef="let equipment"> {{ equipment.registryDate }} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="registryDate">
+          <mat-header-cell *matHeaderCellDef> Registry Date </mat-header-cell>
+          <mat-cell *matCellDef="let equipment"> {{ equipment.registryDate }} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>
-        <button [routerLink]="['../new-equipment']" mat-icon-button aria-label="Add user">
-          <mat-icon fontSet="material-symbols-outlined">add</mat-icon>
-        </button>
-      </mat-header-cell>
-
-      <mat-cell *matCellDef="let equipment">
-        <button mat-icon-button aria-label="Edit equipment">
-          <mat-icon fontSet="material-symbols-outlined">edit</mat-icon>
-        </button>
-
-        <button mat-icon-button aria-label="Delete equipment">
-          <mat-icon fontSet="material-symbols-outlined" (click)="onDelete(equipment.id)">delete</mat-icon>
-        </button>
-
-        <button mat-icon-button aria-label="View equipment history">
-          <mat-icon fontSet="material-symbols-outlined">history</mat-icon>
-        </button>
-
-        <button [matMenuTriggerFor]="menu" mat-icon-button>
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button *ngIf="equipment.statusEquipment == 'In Use'" (click)="openModalViewUserOwner(equipment.id)" mat-menu-item>
-            <span>View User</span>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button [routerLink]="['../new-equipment']" mat-icon-button aria-label="Add user">
+            <mat-icon fontSet="material-symbols-outlined">add</mat-icon>
           </button>
-          <button (click)="openModalToAssignEquipmentToUser()" *ngIf="equipment.statusEquipment == 'Available'" mat-menu-item>
-            <span>Assign User</span>
+        </mat-header-cell>
+
+        <mat-cell *matCellDef="let equipment">
+          <button mat-icon-button aria-label="Edit equipment">
+            <mat-icon fontSet="material-symbols-outlined">edit</mat-icon>
           </button>
-        </mat-menu>
-      </mat-cell>
-  </ng-container>
-  
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
-</mat-table>
+
+          <button mat-icon-button aria-label="Delete equipment">
+            <mat-icon fontSet="material-symbols-outlined" (click)="onDelete(equipment.id)">delete</mat-icon>
+          </button>
+
+          <button mat-icon-button aria-label="View equipment history">
+            <mat-icon fontSet="material-symbols-outlined">history</mat-icon>
+          </button>
+
+          <button [matMenuTriggerFor]="menu" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button *ngIf="equipment.statusEquipment == 'In Use'" (click)="openModalViewUserOwner(equipment.id)" mat-menu-item>
+              <span>View User</span>
+            </button>
+            <button (click)="openModalToAssignEquipmentToUser()" *ngIf="equipment.statusEquipment == 'Available'" mat-menu-item>
+              <span>Assign User</span>
+            </button>
+          </mat-menu>
+        </mat-cell>
+    </ng-container>
+    
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
+  </mat-table>
+</div>
