@@ -1,4 +1,4 @@
-<mat-form-field appearance="fill" style="width: 100%;">
+<mat-form-field appearance="fill" class="search-field" style="width: 100%;">
   <mat-icon [matMenuTriggerFor]="filterMenuUser" matSuffix>filter_alt</mat-icon>
   <input matInput (keyup)="applyFilter($event)" placeholder="Search users...">
 </mat-form-field>
@@ -22,7 +22,8 @@
   <button mat-menu-item (click)="filterByRole('ADMIN')">Admin</button>
 </mat-menu>
 
-<mat-table [dataSource]="users">
+<div class="users-table-container">
+  <mat-table [dataSource]="users">
     <ng-container matColumnDef="firstName">
       <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
       <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
@@ -118,3 +119,4 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="hover-row"></mat-row>
 </mat-table>
+</div>

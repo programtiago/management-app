@@ -1,5 +1,5 @@
 @media only screen and (min-width: 700px) and (max-width: 1920px) {
-    .card-equipments{
+    .mat-mdc-table{
         margin-top: 1rem;
     }
 
@@ -66,14 +66,28 @@
     width: 70px;
 }
 
-.mat-mdc-cell, .mat-mdc-header{
-    line-break: unset;
-    overflow: hidden;
-    vertical-align: middle;
+.mat-mdc-header-row,
+mat-header-row{
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 200 !important;
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 48px !important;
 }
-
-.mat-mdc-header-cell{
+    
+.mat-mdc-header-cell,
+mat-header-cell {
+    background: white !important;
+    z-index: 201 !important;
     font-weight: bold;
+    padding: 0 16px;
+    position: relative !important;
+}
+    
+.mat-mdc-table {
+    margin-top: 0 !important;
 }
 
 .mat-mdc-input-element{
@@ -88,4 +102,24 @@ mat-icon {
     color: black !important;
     transform: scale(1.2);
 }
+
+.search-field {
+    position: sticky;
+    top: 0;
+    z-index: 300;
+    background: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.users-table-container{
+    height: 100%;
+    max-height: 45vh;
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white;
+}
+
 

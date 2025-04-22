@@ -105,13 +105,6 @@
     width: 70px;
 }
 
-
-.mat-mdc-header-cell{
-    font-weight: bold;
-    background-color: white;
-    padding: 0 16px;
-}
-
 mat-icon{
     transform: scale(1.2);
 }
@@ -131,6 +124,9 @@ mat-header-row{
 mat-header-cell {
     background: white !important;
     z-index: 201 !important;
+    font-weight: bold;
+    background-color: white;
+    padding: 0 16px;
 }
 
 .mat-mdc-table {
