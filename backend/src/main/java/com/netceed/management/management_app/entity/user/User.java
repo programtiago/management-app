@@ -84,6 +84,10 @@ public class User{
     private boolean userAlreadyOnDepartment;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserDepartment> userDepartments = new HashSet<>();
+    @Column(name = "perseus_login", nullable = false, length = 5)
+    private int perseusLogIn;
+    @Column(name = "sage_login", nullable = false, length = 15, unique = true)
+    private String sageLogIn;
 
     public User(Long id, String firstName, String lastName, String email, int workNumber, LocalDate birthdayDate, String password, LocalDate admissionDate, UserRole userRole, String nif, String recruitmentCompany, String registryDate, String contactNumber, Set<UserEquipment> equipments) {
         this.id = id;
@@ -102,7 +106,6 @@ public class User{
         this.registryDate = registryDate;
         this.userEquipments = equipments;
     }
-
 
     public User(String firstName, String lastName, int workNumber, LocalDate birthdayDate, String email, String password, LocalDate admissionDate, boolean isActive, String contactNumber, UserRole userRole, String nif, String recruitmentCompany, String registryDate, Set<UserEquipment> equipments) {
         this.firstName = firstName;

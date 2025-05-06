@@ -179,7 +179,8 @@ public class UserService {
        User savedUser = new User();
        if (equipmentFound.id() != null){
            UserDto userToSave = UserDto.createNewUserAssignEquipment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(), newUser.recruitmentCompany(), newUser.admissionDate(),
-                   newUser.isActive(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments(), newUser.userAlreadyOnDepartment());
+                   newUser.isActive(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(), newUser.userEquipments(), newUser.userDepartments(), newUser.userAlreadyOnDepartment(),
+                   newUser.perseusLogIn(), newUser.sageLogIn());
 
            savedUser = userRepository.save(userMapper.toEntity(userToSave));
        }
@@ -206,7 +207,7 @@ public class UserService {
         if (departmentFound.id() != null){
             UserDto userToSave = UserDto.createNewUserAssignDepartment(newUser.id(), newUser.firstName(), newUser.lastName(), newUser.workNumber(), newUser.birthdayDate(),
                     newUser.recruitmentCompany(), newUser.admissionDate(), newUser.email(), newUser.nif(), newUser.contactNumber(), newUser.password(), newUser.updatedAt(),
-                    newUser.userDepartments());
+                    newUser.userDepartments(), newUser.perseusLogIn(), newUser.sageLogIn());
 
             savedUser = userRepository.save(userMapper.toEntity(userToSave));
         }

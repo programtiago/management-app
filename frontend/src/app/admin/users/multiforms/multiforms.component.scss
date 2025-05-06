@@ -133,6 +133,13 @@ mat-header-row{
     padding: 0 16px;
 }
 
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+    &:first-of-type {
+        padding-left: 24px !important;
+    }
+}
+
 mat-grid-tile {
     text-align: center;
     line-height: 100px;

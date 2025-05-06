@@ -16,5 +16,7 @@ CREATE TABLE IF NOT EXISTS TB_USER (
     user_already_on_department BIT NOT NULL,
     user_role VARCHAR(15) NOT NULL,
     work_number INTEGER NOT NULL,
-    work_status VARCHAR(20) NOT NULL
+    work_status VARCHAR(20) NOT NULL,
+    perseus_login INTEGER,
+    sage_login VARCHAR(15)
 );
